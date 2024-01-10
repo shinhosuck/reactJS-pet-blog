@@ -76,13 +76,13 @@ function Topics() {
                                     </div>
                                     <p className='topic-description'>{topic.description}</p>
                                     {topic.total_post > 1 ?
-                                        <Link to={`/posts/topic/?filter=${topic.name.toLowerCase()}`} state={{topic:topic.name}} className='topic-see-all-post-btn'>See Posts</Link>
+                                        <Link to={`/topic/${topic.name}/posts/?filter=${topic.name.toLowerCase()}`} state={{topic:topic.name}} className='topic-see-all-post-btn'>See Posts</Link>
                                     :
                                         <>
                                             {topic.total_post === 0 ?
                                                 <Link className='topic-see-all-post-btn'>No Post to See</Link>
                                             :
-                                                <Link to={`/posts/topic/?filter=${topic.name.toLowerCase()}`} state={{topic:topic.name}} className='topic-see-all-post-btn'>See Post</Link>
+                                                <Link to={`/topic/${topic.name}/posts/?filter=${topic.name.toLowerCase()}`} state={{topic:topic.name}} className='topic-see-all-post-btn'>See Post</Link>
                                             }
                                         </>
                                     }
@@ -139,7 +139,7 @@ function Topics() {
                                     <Link className='topics-side-bar__post-read-more-btn' to={`/post/${post.id}/detail/`}>
                                         Read More
                                     </Link>
-                                    <Link to={`/posts/topic/?filter=${post.topic.toLowerCase()}`} state={{topic:post.topic}} className='topics-side-bar__post-topic'>
+                                    <Link to={`/topic/${post.topic}/posts/?filter=${post.topic.toLowerCase()}`} state={{topic:post.topic}} className='topics-side-bar__post-topic'>
                                         <span>{post.topic}</span>
                                         <i className="fa fa-chevron-right"></i>
                                     </Link>

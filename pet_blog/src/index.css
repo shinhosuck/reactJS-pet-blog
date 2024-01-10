@@ -685,12 +685,16 @@ Topics
   align-items: center;
   gap: 0.3rem;
   color: rgb(160, 160, 160);
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 
+.topic-total-post-count{
+  padding-bottom: 0.2rem;
+}
+
 .topic-total-post-count-text {
-  padding-bottom: 0.3rem;
+  padding-bottom: 0.4rem;
 }
 
 .topic-description {
@@ -2015,6 +2019,7 @@ TOPIC POSTS
   background: none;
   border: none;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 .topic-posts-navbar__topics-btns {
@@ -2041,6 +2046,7 @@ TOPIC POSTS
 
 .topic-posts-container__posts {
   display: grid;
+  gap: 2rem;
   align-content: start;
   width: 90%;
   max-width: 1000px;
@@ -2056,7 +2062,7 @@ TOPIC POSTS
   padding: 1rem;
   border-radius: 8px;
   background: rgb(255, 255, 255);
-  box-shadow: 3px 3px 10px -1px rgb(170, 170, 170);
+  box-shadow: 3px 3px 6px -1px rgb(170, 170, 170);
   transition: transform 200ms linear;
 }
 

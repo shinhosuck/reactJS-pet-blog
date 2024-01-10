@@ -40,6 +40,19 @@ export const getMyData = async(url, token)=> {
 }
 
 
+export const fetchComments = async(url, token)=> {
+    const resp = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
+        }
+    })
+    const data = await resp.json()
+    return data
+}
+
+
 export const updatePost = async(url, body, token)=> {
     const resp = await fetch(url, {
         method: 'PUT',

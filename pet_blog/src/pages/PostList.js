@@ -123,7 +123,7 @@ function PostList() {
                       Read More
                     </Link>
                     <Link
-                      to={`/posts/topic/?filter=${post.topic.toLowerCase()}`} 
+                      to={`/topic/${post.topic}/posts/?filter=${post.topic.toLowerCase()}`} 
                       state={{topic:post.topic}} 
                       className='post-container__post-topic'
                      >

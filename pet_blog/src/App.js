@@ -37,7 +37,7 @@ const router = createBrowserRouter(
         <Route path='my-post' element={<MyPost />}/>
         <Route path='my-comment' element={<MyComment />}/>
         <Route path='update/:id/post' element={<UpdatePost />}/>
-        <Route path='posts/topic' element={<TopicPosts />}/>
+        <Route path='topic/:name/posts' element={<TopicPosts />}/>
         <Route path='register' element={<Register />}/>
         <Route path='login' element={<Login />}/>
         <Route path='error' element={<Error />}/>

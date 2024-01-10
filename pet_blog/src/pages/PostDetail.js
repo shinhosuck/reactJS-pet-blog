@@ -103,6 +103,9 @@ function PostDetail() {
                 const data = await getRepliedPosts(`${url}/api/replied/posts/${id}/`)
                 if(!data.error) {
                     setRepliedPosts(data)
+
+                }else {
+                    console.log(data)
                 }
             } catch (error) {
                 console.log(error.message)
@@ -185,7 +188,7 @@ function PostDetail() {
                             }
                         </div>
                     </div>
-                    <Link to={`/posts/topic/?filter=${post.topic.toLowerCase()}`} state={{topic:post.topic}} className='post-detail-container__post-topic'>
+                    <Link to={`/topic/${post.topic}/posts/?filter=${post.topic.toLowerCase()}`} state={{topic:post.topic}} className='post-detail-container__post-topic'>
                         <span>{post.topic}</span>
                         <i className="fa fa-chevron-right"></i>
                     </Link>
@@ -193,7 +196,7 @@ function PostDetail() {
                 {showReplyForm && authenticated &&
                     <div className="reply-form-container">
                         <form action="" className="reply-form" onSubmit={handleReplyPostSubmit}>
-                            <textarea className='reply-form-textarea' ref={replyContent} rows='10' placeholder="What's on your mind?"/>
+                            <textarea className='reply-form-textarea' ref={replyContent} rows='7' placeholder="What's on your mind?"/>
                             <div className="reply-btns">
                                 <button className='reply-btn-submit' type='submit'>Reply</button>
                                 <button onClick={()=>setShowReplyForm(false)} className='reply-btn-cancel' type='button'>Cancel</button>

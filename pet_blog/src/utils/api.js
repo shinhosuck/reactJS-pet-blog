@@ -40,6 +40,34 @@ export const getMyData = async(url, token)=> {
 }
 
 
+export const removeComment = async(url, token)=> {
+    const resp = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
+        },
+        body: null
+    })
+    const data = await resp.json()
+    return data
+}
+
+
+export const commentUpdate = async(url, body, token)=> {
+    const resp = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
+        },
+        body: JSON.stringify(body)
+    })
+    const data = await resp.json()
+    return data
+}
+
+
 export const fetchComments = async(url, token)=> {
     const resp = await fetch(url, {
         method: 'GET',

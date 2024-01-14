@@ -14,7 +14,7 @@ function PostList() {
   const [isLoading, setIsLoading] = useState(true)
   const {topics} = useOutletContext()
   const {state} = useLocation()
-  const authenticated = localStorage.getItem('auth') || null
+  const authenticated = JSON.parse(localStorage.getItem('auth')) || null
   const navigate = useNavigate()
 
   window.history.replaceState({state:null}, '', '/posts')
@@ -71,9 +71,8 @@ function PostList() {
           <Link to='/create/post/' className="post-container__post-list-create-post">
             <div className='post-container__create-post-image-container'>
               <img className='post-container__create-post-image' src={image} alt="" />
-              <p className='post-container__create-post-text'>What's on your mind?</p>
+              <p className='post-container__create-post-text'>Start a post</p>
             </div>
-            <button className='post-container__create-post-btn'>Create Post</button>
           </Link>
           <div className="post-container__posts">
             {posts.map((post)=>{

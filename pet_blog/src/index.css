@@ -329,7 +329,7 @@ NAVBAR
 
 .navbar-wrapper {
   width: 90%;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -603,7 +603,7 @@ Topics
   align-items: start;
   gap: 5rem;
   width: 90%;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 3rem 0;
 }
@@ -717,7 +717,7 @@ Topics
 /* Topics Side Bar Recent Posts */
 .topics-side-bar-recent-posts {
   display: none;
-  max-width: 350px;
+  max-width: 300px;
 }
 
 .topics-side-bar__header {
@@ -901,7 +901,7 @@ Posts
 ===== */
 .post-container__back-to-posts {
   width: 90%;
-  max-width:1100px;
+  max-width:1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -943,7 +943,7 @@ Posts
   align-items: start;
   gap: 5rem;
   width: 90%;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 0;
 }
@@ -958,37 +958,40 @@ Posts
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.5rem;
-  border-radius: 5px;
+  padding: 1rem;
+  border-radius: 8px;
   background: rgb(255, 255, 255);
 }
 
 .post-container__create-post-image-container {
+  flex: 2;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .post-container__create-post-image {
-  width: 40px;
+  width: 50px;
   height: auto;
   display: block;
 }
 
 .post-container__create-post-text {
+  flex: 2;
+  padding: 0.8rem 1.5rem;
   font-size: 0.9rem;
   letter-spacing: 0.05rem;
-  color: rgb(66, 66, 66);
+  border-radius: 25px;
+  color: rgb(100, 100, 100);
+  border: 1px solid rgb(201, 201, 201);
+  cursor: pointer;
+  transition: background 200ms linear;
 }
 
-.post-container__create-post-btn {
-  padding: 0.5rem 0.5rem;
-  background: orangered;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  letter-spacing: 0.05rem;
+@media (hover) {
+  .post-container__create-post-text:hover {
+    background: rgb(230, 230, 230);
+  }
 }
 
 .post-container__posts {
@@ -1004,8 +1007,6 @@ Posts
   padding: 1rem;
   border-radius: 8px;
   background: rgb(255, 255, 255);
-  box-shadow: 3px 3px 10px -1px rgb(170, 170, 170);
-  transition: transform 200ms linear;
 }
 
 .post-container__post-image-container {
@@ -1101,7 +1102,6 @@ Posts
 .post-reply-text {
   font-size: 0.9rem;
   color: rgb(143, 143, 143);
-  /* padding-top: 0.1rem; */
 }
 
 .post-container__post-title {
@@ -1157,7 +1157,7 @@ Posts
 /* Post List Side-bar Post Topics */
 .post-list-side-bar-topics {
   display: none;
-  max-width: 350px;
+  max-width: 300px;
 }
 
 .post-list-side-bar-topics__header {
@@ -1231,11 +1231,7 @@ Posts
 
 @media screen and (min-width: 470px) {
   .post-container__post-list-create-post {
-    padding: 0.7rem;
-  }
-  
-  .post-container__create-post-image-container {
-    gap: 0.8rem;
+    padding: 1rem;
   }
   
   .post-container__create-post-image {
@@ -1247,28 +1243,14 @@ Posts
   }
   
   .post-container__create-post-btn {
-    padding: 0.7rem 0.8rem;
     font-size: 1rem;
   }
 }
 
 @media screen and (min-width: 600px) {
-
-  .post-container__create-post-image-container {
-    gap: 1.5rem;
-  }
    
   .post-container__create-post-image {
     width: 60px;
-  }
-  
-  .post-container__create-post-text {
-    font-size: 1.2rem;
-  }
-  
-  .post-container__create-post-btn {
-    padding: 0.8rem 1rem;
-    font-size: 1.1rem;
   }
 }
 

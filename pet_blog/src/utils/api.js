@@ -42,7 +42,7 @@ export const getMyData = async(url, token)=> {
 
 export const removeComment = async(url, token)=> {
     const resp = await fetch(url, {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Token ${token}`
@@ -56,7 +56,7 @@ export const removeComment = async(url, token)=> {
 
 export const commentUpdate = async(url, body, token)=> {
     const resp = await fetch(url, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Token ${token}`
@@ -96,7 +96,7 @@ export const updatePost = async(url, body, token)=> {
 
 export const deletePost = async(url, token)=> {
     const resp = await fetch(url, {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
             'Authorization': `Token ${token}`
         },

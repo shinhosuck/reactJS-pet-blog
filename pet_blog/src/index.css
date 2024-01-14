@@ -1868,6 +1868,54 @@ My Comments
 .my-comments__delete-button {
   background: rgb(80, 80, 80)
 }
+
+.update-comment-form-container {
+  display: grid;
+  margin-top: 1rem;
+}
+
+.update-comment-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.update-comment-textarea {
+  width: 100%;
+  resize: none;
+  border-radius: 8px;
+  padding: 1.3rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.07rem;
+  line-height: 1.6;
+  background: rgb(235, 235, 235);
+  border: none;
+}
+
+.update-comment-form-buttons-container {
+  justify-self: end;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.update-comment-submit-btn {
+  padding: 0.5rem 1rem;
+  letter-spacing: 0.05rem;
+  font-size: 1rem;
+  background: rgb(255, 83, 20);
+  border-radius: 5px;
+  color: white;
+  border: none;
+}
+
+.update-comment-cancel-btn {
+  padding: 0.5rem 1rem;
+  letter-spacing: 0.05rem;
+  font-size: 1rem;
+  background: rgb(61, 61, 61);
+  border-radius: 5px;
+  color: white;
+  border: none;
+}
 /* 
 ===========
 Create Post

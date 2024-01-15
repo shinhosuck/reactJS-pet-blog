@@ -135,44 +135,40 @@ function PostList() {
             })}
           </div>
         </div>
+
+        {/* SIDE BAR */}
         <div className="post-list-side-bar-topics">
           <h2 className='post-list-side-bar-topics__header'>Popular Topics</h2>
           {topics.map((topic)=>{
             return (
-              <div key={topic.id} className="post-list-side-bar-topics__topic">
-                  <img className='post-list-side-bar-topics__topic-image' src={topic.image_url} alt={topic.name} />
+              <Link
+                to={!topic.total_post ? '.' : `/topic/${topic.name.toLowerCase()}/posts/?filter=${topic.name.toLowerCase()}`} 
+                key={topic.id} 
+                className="post-list-side-bar-topics__topic"
+                state={{topic:topic.name}}
+              >
                   <div className='post-list-side-bar-topics__topic-title-container'>
                       <h3 className='post-list-side-bar-topics__topic-name'>{topic.name}</h3>
                       {topic.total_post > 1 ? 
-                          <div className='topic-post-count'>
-                            <i className="fa-solid fa-message post-container__num-of-post "></i>
-                            <span className='topic-total-post-count'>{topic.total_post}</span>
-                            <span className='topic-total-post-count-text'>posts</span>
+                          <div className='post-list-side-bar__topic-post-count'>
+                            <i className="fa-solid fa-message post-list-side-bar__num-of-post"></i>
+                            <span className='post-list-side-bar__post-count'>{topic.total_post}</span>
+                            <span className='post-list-side-bar__text'>posts</span>
                           </div>
                       :
-                          <div className='topic-post-count'>
-                            <i className="fa-solid fa-message post-container__num-of-post "></i>
-                            <span className='topic-total-post-count'>{topic.total_post}</span>
-                            <span className='topic-total-post-count-text'>post</span> 
+                          <div className='post-list-side-bar__topic-post-count'>
+                            <i className="fa-solid fa-message post-list-side-bar__num-of-post"></i>
+                            <span className='post-list-side-bar__post-count'>{topic.total_post}</span>
+                            <span className='post-list-side-bar__text'>post</span> 
                           </div>
                       }
                   </div>
-                  <p className='post-list-side-bar-topics__topic-description'>{topic.description}</p>
-                  {topic.total_post > 1 ?
-                      <Link to={`/posts/topic/?filter=${topic.name.toLowerCase()}`} state={{topic:topic.name}} className='post-list-side-bar-topics__topic-see-all-post-btn'>See Posts</Link>
-                  :
-                      <>
-                          {topic.total_post === 0 ?
-                              <Link className='post-list-side-bar-topics__topic-see-all-post-btn'>No Post to See</Link>
-                          :
-                              <Link to={`/posts/topic/?filter=${topic.name.toLowerCase()}`} state={{topic:topic.name}} className='post-list-side-bar-topics__topic-see-all-post-btn'>See Post</Link>
-                          }
-                      </>
-                  }
-              </div>
+                  <p className='post-list-side-bar-topics__topic-description'>{topic.description.substring(0, 50)}...<span>Read more</span></p>
+              </Link>
             )
           })}
         </div>
+        
       </div>
     </React.Fragment>
   )

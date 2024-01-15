@@ -617,10 +617,11 @@ Topics
   display: flex;
   flex-direction: column;
   align-items: start;
+  gap: 0.3rem
 }
 
 .topics-main-container__header {
-  line-height: 1.2;
+  line-height: 1;
   text-wrap: balance;
   font-size: 2rem;
   letter-spacing: 0.02rem;
@@ -644,15 +645,7 @@ Topics
   padding: 1rem;
   border-radius: 8px;
   background: rgb(255, 255, 255);
-  box-shadow: 3px 3px 10px -1px rgb(170, 170, 170);
-  transition: transform 200ms linear;
 }
-
-/* @media (hover) {
-  .topic:hover {
-    transform: scale(1.01);
-  }
-} */
 
 .topic-image {
   width: 100%;
@@ -718,6 +711,9 @@ Topics
 .topics-side-bar-recent-posts {
   display: none;
   max-width: 300px;
+  background: white;
+  border-radius: 8px;
+  padding: 1.3rem;
 }
 
 .topics-side-bar__header {
@@ -727,27 +723,27 @@ Topics
   letter-spacing: 0.03rem;
 }
 
-.topics-side-bar__post {
+.topic-side-bar__position-absolute-container {
   position: relative;
+}
+
+.topics-side-bar__post {
   display: grid;
   align-items: start;
-  gap: 0.8rem;
+  gap: 0.5rem;
+  background: rgb(245, 245, 245);
   padding: 1rem;
   border-radius: 8px;
-  background: rgb(255, 255, 255);
-  box-shadow: 3px 3px 10px -1px rgb(170, 170, 170);
+}
+
+@media (hover) {
+  .topics-side-bar__post:hover {
+    outline: 2px solid rgb(201, 201, 201);
+  }
 }
 
 .topics-side-bar__post-image-container {
   position: relative;
-}
-
-.topics-side-bar__post-image{
-  width: 100%;
-  height: 100;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  display: block;
 }
 
 .topics-side-bar__post-image-color-overlay {
@@ -763,7 +759,7 @@ Topics
 .topics-side-bar__post-text-content {
   display: grid;
   align-items: start;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .topics-side-bar__author-and-date {
@@ -772,8 +768,9 @@ Topics
 
 .topics-side-bar__post-author {
   font-weight: 500;
-  font-size: 1.05rem;
-  color: rgb(75, 75, 75);
+  font-size: 0.9rem;
+  font-size: 0.9rem;
+  color: rgb(61, 61, 61);
 }
 
 .topics-side-bar__date-and-like {
@@ -788,7 +785,7 @@ Topics
   font-size: 0.9rem;
 }
 
-.topics-side-bar__post-like {
+.topics-side-bar__post-like-container {
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -797,6 +794,41 @@ Topics
   background: none;
   border: none;
   cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.topics-side-bar_like-container {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.topics-side-bar__post-like {
+  color: rgb(131, 131, 131);
+  font-size: 1rem;
+}
+
+.topics-side-bar__like-count,
+.topics-side-bar__like-text {
+  font-size: 0.9rem;
+  color: rgb(143, 143, 143);
+}
+
+.topics-side-bar__num-of-replies-container {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.topics-side-bar__num-of-post {
+  color: rgb(158, 158, 158);
+  font-size: 1rem;
+}
+
+.topics-side-bar__reply-count,
+.topics-side-bar__reply-text {
+  font-size: 0.9rem;
+  color: rgb(143, 143, 143);
 }
 
 .topic-side-bar__num-of-post-container {
@@ -806,43 +838,26 @@ Topics
 
 .topics-side-bar__num-of-post {
   color: rgb(158, 158, 158);
-  font-size: 1rem;
-}
-
-.topic-side-bar__num-of-post-container > span {
   font-size: 0.9rem;
-  padding-top: 0.2rem;
-  width: 16px;
-  aspect-ratio:1/1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgb(143, 143, 143);
 }
 
 .topics-side-bar__post-title {
   color: rgb(44, 44, 44);
   line-height: 1.4;
   letter-spacing: 0.04rem;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
 .topics-side-bar__post-content {
-  letter-spacing: 0.07rem;
+  letter-spacing: 0.05rem;
   color: rgb(59, 59, 59);
+  font-size: 0.9rem;
+  text-wrap: pretty;
 }
 
-.topics-side-bar__post-read-more-btn {
-  align-self: end;
-  padding: 0.6rem 1rem;
-  background: orangered;
-  color: white;
-  text-align: center;
-  border-radius: 5px;
-  font-size: 1rem;
-  margin-top: 0.5rem;
-  font-weight: 500;
+.topics-side-bar__post-content > span {
+  color: rgb(255, 30, 0)
 }
 
 .topics-side-bar__post-topic {
@@ -850,22 +865,27 @@ Topics
   z-index: 2;
   top: 16px;
   right: 16px;
-  background: rgb(148, 0, 148);
-  padding: 0.3rem 0.5rem;
-  color: white;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  color: rgb(156, 0, 156);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
 
   display: flex;
-  gap: 0.5rem;
+  gap: 0.3rem;
   align-items: center;
   letter-spacing: 0.05rem;
+  transition: border-bottom 200ms linear;
 }
 
 .topics-side-bar__post-topic > i {
   font-size: 0.8rem;
   margin-top: 0.1rem
+}
+
+@media (hover) {
+  .topics-side-bar__post-topic:hover {
+    border-bottom: 2px solid rgb(182, 0, 182);
+  }
 }
 
 @media screen and (min-width: 600px) {
@@ -891,7 +911,7 @@ Topics
   .topics-side-bar-recent-posts {
     flex: 1;
     display: grid;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 }
 
@@ -1043,7 +1063,7 @@ Posts
 
 .post-container__post-author {
   font-weight: 500;
-  font-size: 1.05rem;
+  font-size: 0.9rem;
   color: rgb(75, 75, 75);
 }
 
@@ -1158,11 +1178,15 @@ Posts
 .post-list-side-bar-topics {
   display: none;
   max-width: 300px;
+
+  padding: 1.3rem;
+  border-radius: 8px;
+  background: white;
 }
 
 .post-list-side-bar-topics__header {
   font-weight: 600;
-  color: rgb(40, 40, 40);
+  color: rgb(30, 30, 30);
   font-size: 1.45rem;
   letter-spacing: 0.03rem;
 }
@@ -1170,38 +1194,70 @@ Posts
 .post-list-side-bar-topics__topic {
   display: grid;
   align-items: start;
-  gap: 1rem;
+  gap: 0.5rem;
   padding: 1rem;
   border-radius: 8px;
-  background: rgb(255, 255, 255);
-  box-shadow: 3px 3px 10px -1px rgb(170, 170, 170);
+  background: rgb(245, 245, 245);
 }
 
-.post-list-side-bar-topics__topic-image {
+@media (hover) {
+  .post-list-side-bar-topics__topic:hover {
+    outline: 2px solid rgb(201, 201, 201);
+  }
+}
+
+/* .post-list-side-bar-topics__topic-image {
   width: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
   display: block;
-}
+} */
 
-.post-list-side-bar-topics__text-container {
+/* .post-list-side-bar-topics__text-container {
   display: grid;
   align-content: start;
   gap: 1rem;
-}
+} */
 
 .post-list-side-bar-topics__topic-title-container {
-  display: grid;
-  align-content: start;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
 .post-list-side-bar-topics__topic-name {
-  color: rgb(44, 44, 44);
+  color: rgb(61, 61, 61);
   line-height: 1.4;
   letter-spacing: 0.04rem;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 600;
+}
+
+.post-list-side-bar__topic-post-count {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem
+}
+
+.post-list-side-bar__num-of-post {
+  font-size: 0.9rem;
+  color: rgb(158, 158, 158);
+
+}
+
+.post-list-side-bar__post-count {
+  color: rgb(160, 160, 160);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.post-list-side-bar__text {
+  color: rgb(160, 160, 160);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding-bottom: 0.4rem;
 }
 
 .post-list-side-bar-topics__topic-post-count {
@@ -1214,19 +1270,21 @@ Posts
 }
 
 .post-list-side-bar-topics__topic-description {
-  letter-spacing: 0.07rem;
-  color: rgb(65, 65, 65);
+  letter-spacing: 0.05rem;
+  color: rgb(99, 99, 99);
+  font-size: 0.9rem;
+  text-wrap: pretty;
+}
+
+.post-list-side-bar-topics__topic-description > span {
+  color: rgb(255, 30, 0)
 }
 
 .post-list-side-bar-topics__topic-see-all-post-btn {
   align-self: end;
-  background: rgb(255, 83, 21);
-  color: white;
+  color: black;
   font-weight: 500;
-  text-align: center;
   letter-spacing: 0.05rem;
-  border-radius: 5px;
-  padding: 0.6rem 1rem;
 }
 
 @media screen and (min-width: 470px) {
@@ -1277,7 +1335,7 @@ Posts
 
   .post-list-side-bar-topics {
     display: grid;
-    gap: 1.5rem;
+    gap: 1rem;
     flex:  1;
   }
 }
@@ -1362,13 +1420,13 @@ Post Detail
 
 .post-detail-container__post-author {
   font-weight: 500;
-  font-size: 1.05rem;
+  font-size: 0.9rem;
   color: rgb(75, 75, 75);
 }
 
 .post-detail-container__date-posted {
   color: rgb(109, 109, 109);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .post-detail-container__post-title {
@@ -1821,11 +1879,37 @@ My Comments
   gap: 1rem;
   background: white;
   padding: 1.3rem;
+  border-radius: 8px;
 }
 
-.my-comments__date-posted {
+.my-comments__date-replied {
   color: rgb(100, 100, 100);
+  font-size: 0.9rem;
 }
+
+.my-comments__post_detail-link {
+  color: rgb(61, 61, 61);
+  letter-spacing: 0.05rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem
+}
+
+.my-comments__post_detail-link > a {
+  text-decoration: underline;
+  color: rgb(114, 0, 114);
+}
+
+.my-comments__post_author {
+  color: rgb(61, 61, 61);
+  letter-spacing: 0.05rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem
+}
+
 .my-comments__content {
   letter-spacing: 0.07rem;
   color: rgb(61, 61, 61);
@@ -2148,7 +2232,7 @@ TOPIC POSTS
 
 .topic-posts-container__post-author {
   font-weight: 500;
-  font-size: 1.05rem;
+  font-size: 0.9rem;
   color: rgb(75, 75, 75);
 }
 

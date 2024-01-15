@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { url } from './PostList'
+import LoadingPage from './LoadingPage'
 import { fetchComments, removeComment, commentUpdate } from '../utils/api'
 
 
@@ -9,6 +11,8 @@ import { fetchComments, removeComment, commentUpdate } from '../utils/api'
 function MyComment() {
   const [comments, setComments] = useState(null)
   const [update, setUpdate] = useState(null)
+  const [isError, setIsError] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const authenticate = JSON.parse(localStorage.getItem('auth'))
 
 
@@ -17,14 +21,16 @@ function MyComment() {
       const data = await removeComment(`${url}/api/comment/${id}/delete/`, authenticate.token)
       if(!data.message){
         setComments(data)
-        console.log(data)
+        setIsLoading(false)
 
       }else{
         setComments(null)
+        setIsLoading(false)
       }
 
     } catch (error) {
       console.log(error.message)
+      setIsLoading(false)
     }
 
   }
@@ -37,6 +43,7 @@ function MyComment() {
       if(!data.error) {
         setComments(data)
         setUpdate(null)
+        setIsLoading(false)
 
       }else {
         console.log(data.error)
@@ -58,6 +65,7 @@ function MyComment() {
         const data = await fetchComments(`${url}/api/my-comment/`, authenticate.token)
         if(!data.error) {
           setComments(data)
+          setIsLoading(false)
 
         }else {
           console.log(data)
@@ -69,15 +77,31 @@ function MyComment() {
     getComments()
   }, [])
 
+  if(isLoading) {
+      return (
+          <LoadingPage />
+      )
+  }
+  if(isError) {
+      return (
+          <h2>There was an error</h2>
+      )
+  }
   return (
     <React.Fragment>
       <div className="bg-img"></div>
       <div className='my-comments-container'>
-        {comments ?
-          comments.map((comment)=> {
+      {comments.map((comment)=> {
             return (
                 <div key={comment.id} className="my-comments-container__my-comment">
-                  <p className='my-comments__date-posted'>{new Date(comment.date_posted).toDateString()}</p>
+                  <div>
+                    <p className='my-comments__date-replied'>{new Date(comment.date_posted).toDateString()}</p>
+                    <p className='my-comments__post_detail-link'>Post: 
+                      <Link className='my-comments__post_detail-link' to={`/post/${comment.post}/detail/`}>{comment.replied_to}</Link>
+                    </p>
+                   
+                    <p className='my-comments__post_author'>By:<span>{comment.post_author}</span></p>
+                  </div>
                   <p className='my-comments__content'>{comment.content}</p>
                   <div className="my-comments-container__buttons">
                     <button onClick={()=>setUpdate({content:comment.content, id:comment.id})} className='my-comments__update-button'>Update</button>
@@ -96,11 +120,7 @@ function MyComment() {
                   }
                 </div>
             )
-          })
-        :
-          <h2>Loading...</h2>
-        }
-        
+          })}
       </div>
     </React.Fragment>
   )

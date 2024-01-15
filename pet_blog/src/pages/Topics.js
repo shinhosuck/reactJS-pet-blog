@@ -91,63 +91,61 @@ function Topics() {
                         )
                     })}
                 </div>
+                {/* SIDE BAR */}
                 <div className="topics-side-bar-recent-posts">
                     <h2 className='topics-side-bar__header'>Latest Posts</h2>
                     {objs.map((post)=>{
                         return (
-                            <div key={post.id} className="topics-side-bar__post">
-                                <div className="topics-side-bar__post-image-container">
-                                    <img className='topics-side-bar__post-image' src={post.image_url} alt={post.title} />
-                                    <div className="topics-side-bar__post-image-color-overlay"></div>
-                                </div>
-                                <div className='topics-side-bar__post-text-content'>
-                                    <div className='topics-side-bar__author-and-date'>
-                                        <h4 className='topics-side-bar__post-author'>{post.author}</h4>
-                                        <p className='topics-side-bar__date-posted'>{post.date_posted}</p>
+                            <div key={post.id} className='topic-side-bar__position-absolute-container'>
+                                <Link to={`/post/${post.id}/detail/`} className="topics-side-bar__post">
+                                    <div className='topics-side-bar__post-text-content'>
+                                        <div className='topics-side-bar__author-and-date'>
+                                            <h4 className='topics-side-bar__post-author'>{post.author}</h4>
+                                            <p className='topics-side-bar__date-posted'>{post.date_posted}</p>
+                                        </div>
+                                        <h3 className='topics-side-bar__post-title'>{post.title}</h3>
+                                        <p className='topics-side-bar__post-content'>{post.content.substring(0, 50)}...<span>Read more</span></p>
                                         <div className="topics-side-bar__date-and-like">
                                             {post.like.length > 1 ? 
-                                                <div className='topics-side-bar__post-like'>
-                                                    <div className='post-like-container'>
-                                                        <i className="fa-solid fa-hands-clapping post-like"></i>
-                                                        <span className='post-like-count'>{post.like.length}</span>
-                                                        <span className='post-like-text'>likes</span>
+                                                <div className='topics-side-bar__post-like-container'>
+                                                    <div className='topics-side-bar_like-container'>
+                                                        <i className="fa-solid fa-hands-clapping topics-side-bar__post-like"></i>
+                                                        <span className='topics-side-bar__like-count'>{post.like.length}</span>
+                                                        <span className='topics-side-bar__like-text'>likes</span>
                                                     </div>
-                                                    <div className='post-container__num-of-replies-container'>
-                                                        <i className="fa-solid fa-message post-container__num-of-post"></i>
-                                                        <span className='post-reply-count'>{post.num_of_replies}</span>
-                                                        <span className='post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
+                                                    <div className='topics-side-bar__num-of-replies-container'>
+                                                        <i className="fa-solid fa-message topics-side-bar__num-of-post"></i>
+                                                        <span className='topics-side-bar__reply-count'>{post.num_of_replies}</span>
+                                                        <span className='topics-side-bar__reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
                                                     </div>
                                                 </div>
                                             : 
-                                                <div className='topics-side-bar__post-like'>
-                                                    <div className='post-like-container'>
-                                                        <i className="fa-solid fa-hands-clapping post-like"></i>
-                                                        <span className='post-like-count'>{post.like.length}</span>
-                                                        <span className='post-like-text'>like</span>
+                                                <div className='topics-side-bar__post-like-container'>
+                                                    <div className='topics-side-bar_like-container'>
+                                                        <i className="fa-solid fa-hands-clapping topics-side-bar__post-like"></i>
+                                                        <span className='topics-side-bar__like-count'>{post.like.length}</span>
+                                                        <span className='topics-side-bar__like-text'>like</span>
                                                     </div>
-                             
-                                                    <div className='topic-side-bar__num-of-post-container'>
+                                
+                                                    <div className='topics-side-bar__num-of-replies-container'>
                                                         <i className="fa-solid fa-message topics-side-bar__num-of-post"></i>
-                                                        <span>{post.num_of_replies}</span>
+                                                        <span className='topics-side-bar__reply-count'>{post.num_of_replies}</span>
+                                                        <span className='topics-side-bar__reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
                                                     </div>
                                                 </div>
                                             }
                                         </div>
                                     </div>
-                                    <h3 className='topics-side-bar__post-title'>{post.title}</h3>
-                                    <p className='topics-side-bar__post-content'>{post.content.substring(0, 100)}...</p>
-                                    <Link className='topics-side-bar__post-read-more-btn' to={`/post/${post.id}/detail/`}>
-                                        Read More
-                                    </Link>
-                                    <Link to={`/topic/${post.topic}/posts/?filter=${post.topic.toLowerCase()}`} state={{topic:post.topic}} className='topics-side-bar__post-topic'>
-                                        <span>{post.topic}</span>
-                                        <i className="fa fa-chevron-right"></i>
-                                    </Link>
-                                </div>
+                                </Link>
+                                <Link to={`/topic/${post.topic}/posts/?filter=${post.topic.toLowerCase()}`} state={{topic:post.topic}} className='topics-side-bar__post-topic'>
+                                    <span>{post.topic}</span>
+                                    <i className="fa fa-chevron-right"></i>
+                                </Link>
                             </div>
                         )
                     })}
                 </div>
+
             </div>
         </React.Fragment>
     )

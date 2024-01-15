@@ -14,7 +14,6 @@ function TopicPosts() {
     const [isLoading, setIsLoading] = useState(true)
     const [topicMenuOpen, setTopicMenuOpen] = useState(false)
     
-
     const getPosts =  async()=> {
         try {
             const data = await getPostData(`${url}/api/posts`)
@@ -48,8 +47,8 @@ function TopicPosts() {
         }
     }
 
-    const posts = postArray && state.topic && postArray.filter((post)=> post.topic === state.topic)
-   
+    const posts = postArray && state && postArray.filter((post)=> post.topic === state.topic)
+    
     useEffect(()=> {
         getPosts()
     }, [])
@@ -99,7 +98,6 @@ function TopicPosts() {
                                     <i className="fa fa-chevron-up"></i>
                                 </button>
                             }
-                            
                         </div>
                         {topicMenuOpen && 
                             <div className="topic-posts-navbar__topics-btns">
@@ -120,7 +118,7 @@ function TopicPosts() {
                         }
                     </div>
                 </div>
-                {!posts.length ? 
+                {!posts ? 
                     <div>
                         <h2 style={{textAlign:'center',padding:'5rem 0',color:'rgb(50, 50, 50)',}}>Posts not available!</h2>
                     </div>

@@ -5,9 +5,6 @@ import LoadingPage from './LoadingPage'
 import { fetchComments, removeComment, commentUpdate } from '../utils/api'
 
 
-
-
-
 function MyComment() {
   const [comments, setComments] = useState(null)
   const [update, setUpdate] = useState(null)

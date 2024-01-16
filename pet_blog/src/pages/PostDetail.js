@@ -114,8 +114,6 @@ function PostDetail() {
         fetchRepliedPosts()
     }, [post])
 
-    console.log(repliedPosts && repliedPosts)
-
     if(isLoading) {
         return (
             <LoadingPage />

@@ -34,8 +34,6 @@ function Topics() {
         getTopics()
     }, [])
 
-    console.log(topics && topics)
-
     if(isLoading) {
         return (
             <LoadingPage />

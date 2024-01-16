@@ -13,7 +13,11 @@ function Topics() {
     const {posts} = useOutletContext()
     const {pathname} = useLocation()
 
-    const objs = posts && posts.map((post)=>({...post, date_posted:new Date().toDateString()}))
+    const objs = posts ? posts.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()})) : null
+
+    topics && topics.map((topic)=> {
+        console.log(topic.image_url)
+    })
 
     const getTopics = async()=> {
         try {
@@ -32,6 +36,8 @@ function Topics() {
     useEffect(()=> {
         getTopics()
     }, [])
+
+    console.log(topics)
 
     if(isLoading) {
         return (
@@ -94,7 +100,7 @@ function Topics() {
                 {/* SIDE BAR */}
                 <div className="topics-side-bar-recent-posts">
                     <h2 className='topics-side-bar__header'>Latest Posts</h2>
-                    {objs.map((post)=>{
+                    {objs && objs.map((post)=>{
                         return (
                             <div key={post.id} className='topic-side-bar__position-absolute-container'>
                                 <Link to={`/post/${post.id}/detail/`} className="topics-side-bar__post">

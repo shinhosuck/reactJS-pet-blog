@@ -2,13 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
 import { getTopicData, getPostData } from '../utils/api'
+import { url } from '../pages/PostList'
 
 
-
-
-
-const postsUrl = 'http://127.0.0.1:8000/api/posts/'
-const topicsurl = 'http://127.0.0.1:8000/api/topics/'
 
 function ContentLayout() {
   const [topics, setTopics] = useState(null)
@@ -17,7 +13,7 @@ function ContentLayout() {
 
   const getTopics = async()=> {
     try {
-      const data = await getTopicData(topicsurl)
+      const data = await getTopicData(`${url}/api/topics/`)
       setTopics(data)
     } catch (error) {
       console.log(error.message)
@@ -26,7 +22,7 @@ function ContentLayout() {
 
   const getPosts = async()=> {
     try {
-      const data = await getPostData(postsUrl)
+      const data = await getPostData(`${url}/api/posts/`)
       setPosts(data)
     } catch ({message}) {
       console.log(message)

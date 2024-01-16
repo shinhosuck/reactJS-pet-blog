@@ -15,10 +15,7 @@ function Topics() {
 
     const objs = posts ? posts.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()})) : null
 
-    topics && topics.map((topic)=> {
-        console.log(topic.image_url)
-    })
-
+    
     const getTopics = async()=> {
         try {
             const data = await getTopicData(`${url}/api/topics/`)
@@ -37,7 +34,7 @@ function Topics() {
         getTopics()
     }, [])
 
-    console.log(topics)
+    console.log(topics && topics)
 
     if(isLoading) {
         return (

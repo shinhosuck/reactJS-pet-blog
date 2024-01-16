@@ -5,8 +5,8 @@ import { passwordCheck, newUserInfoCheck } from '../utils/utils'
 
 
 
-export const url = window.location.host === 'pawpals.pythonanywhere.com' ?
-'https://pawpals.pythonanywhere.com':'http://127.0.0.1:8000'
+export const url = window.localStorage.host === '127.0.0.1:8000' ? 
+'http://127.0.0.1:8000' : 'https://pawpals.pythonanywhere.com'
 
 localStorage.setItem('url', url)
 

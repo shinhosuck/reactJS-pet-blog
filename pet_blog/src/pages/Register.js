@@ -5,8 +5,10 @@ import { passwordCheck, newUserInfoCheck } from '../utils/utils'
 
 
 
-export const url = window.location.host === 'https://pawpals.pythonanywhere.com' ?
+export const url = window.location.host === 'pawpals.pythonanywhere.com' ?
 'https://pawpals.pythonanywhere.com':'http://127.0.0.1:8000'
+
+localStorage.setItem('url', url)
 
 function Register() {
     const [newUser, setNewUser] = useState({username:'',password:'',passwordConfirmation:''})

@@ -6,9 +6,10 @@ import image from '../images/default.png'
 
 
 
-export const url = window.localStorage.host === 'https://pawpals.pythonanywhere.com' ? 
+export const host = window.localStorage.host === 'pawpals.pythonanywhere.com' ? 
 'https://pawpals.pythonanywhere.com' : 'http://127.0.0.1:8000'
 
+localStorage.setItem('url', url)
 
 function PostList() {
   const [posts, setPosts] = useState(null)

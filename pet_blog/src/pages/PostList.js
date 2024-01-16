@@ -10,6 +10,7 @@ export const host = window.localStorage.host === 'pawpals.pythonanywhere.com' ?
 'https://pawpals.pythonanywhere.com' : 'http://127.0.0.1:8000'
 
 localStorage.setItem('url', url)
+console.log('hello world')
 
 function PostList() {
   const [posts, setPosts] = useState(null)

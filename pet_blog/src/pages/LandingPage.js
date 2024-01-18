@@ -12,7 +12,7 @@ function LandingPage() {
 
     useEffect(()=>{
         if(auth) {
-            navigate('forum', {replace:true})
+            navigate('forums', {replace:true})
         }
     }, [auth])
 

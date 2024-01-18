@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate, useNavigate, useLocation} from 'react-router-dom'
+import { Navigate, useNavigate, useLocation, Link} from 'react-router-dom'
 import LoadingPage from './LoadingPage'
 import { getTopicData, createPost, updatePost } from '../utils/api'
 import { validatePost } from '../utils/utils'
@@ -23,8 +23,8 @@ function CreatePost(props) {
     const [missingValue, setMissingValue] = useState(null)
     const authenticated = JSON.parse(localStorage.getItem('auth')) || null
     const navigate = useNavigate()
-    const {state} = useLocation()
-    
+    const {state, pathname} = useLocation()
+
     const handleSubmit = async(e)=> {
         e.preventDefault()
         setMissingValue(null)
@@ -71,7 +71,10 @@ function CreatePost(props) {
 
     function handleChange(e) {
         const {name, value} = e.target 
-        name === 'image' ? setPost((prev)=>({...prev, [name]:e.target.files})) : setPost((prev)=>({...prev, [name]:value}))
+        name === 'image' ? 
+            setPost((prev)=>({...prev, [name]:e.target.files})) 
+        : 
+            setPost((prev)=>({...prev, [name]:value}))
     }
 
     const getData = async()=> {
@@ -97,7 +100,7 @@ function CreatePost(props) {
 
     if(!authenticated) {
         return (
-            <Navigate to='/posts' replace={true} state={{error:'You must login to create post!'}}/>
+            <Navigate to='/login' replace={true} state={{error:'You must login to create post!', redirect:pathname}}/>
         )
     }
     if(isLoading) {
@@ -112,6 +115,14 @@ function CreatePost(props) {
     }
     return (
         <div className='create-post-container'>
+            {state && state.redirect && 
+                <div className="create-post-container__redirect-btn">
+                    <i className="fa fa-arrow-left"></i>
+                    <Link to={`${state.redirect}`}>
+                        Back to {state.redirect.split('/').filter((obj)=>obj!=='').join('')}
+                    </Link>
+                </div>
+            }
             <div className="create-post__form-container">
                 <h2 className='create-post__header'>{text ? 'Update Post' : 'Create Post'}</h2>
                 <form className="create-post__form" onSubmit={handleSubmit}>
@@ -137,10 +148,12 @@ function CreatePost(props) {
                         name="topic"
                         value={post.topic}
                     >
-                    <option className='create-post__option' value="">--------</option>
+                    <option className='create-post__option' value=''>--------</option>
                         {topics.map((topic)=>{
                             return (
-                                <option className='create-post__option' key={topic} value={topic}>{topic}</option>
+                                <option className='create-post__option' key={topic} value={topic}>
+                                    {topic}
+                                </option>
                             )
                         })}
                     </select>
@@ -162,7 +175,7 @@ function CreatePost(props) {
                         name="content" 
                         className='create-post__textarea'
                         cols="30" 
-                        rows="8"
+                        rows="5"
                         value= {post.content}
                     />
                     <button className='create-post__btn' type='submit'>Submit</button>

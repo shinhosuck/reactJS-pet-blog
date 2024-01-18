@@ -1,8 +1,7 @@
-import { Link, NavLink, useNavigate, Navigate } from 'react-router-dom'
+import { Link, NavLink, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import paw from '../images/paw.webp'
 import profileImage from '../images/default.png'
-
 
 
 export function Navbar() {
@@ -11,6 +10,7 @@ export function Navbar() {
     const [navbarWidth, setNabarWidth] = useState('')
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     let isAuthenticated = JSON.parse(localStorage.getItem('auth')) || null
+
     const navigate = useNavigate()
 
     const windowResizeEvent = function(e) {
@@ -30,11 +30,10 @@ export function Navbar() {
     }, [windowWidth])
 
     const logout = function() {
-        isAuthenticated = null
         setShowUserMenu(false)
         setShowNavLinks(true)
         localStorage.removeItem('auth')
-        navigate('/login', {replace:true})
+        navigate('/posts', {replace:true, state:{message:'Successfully logged out!'}})
     }
 
     const hideUserMenu = function() {
@@ -44,7 +43,7 @@ export function Navbar() {
     return (
         <div className="navbar-container">
             <nav className="navbar-wrapper">
-                <Link to='/home' className='navbar-brand-link'>
+                <Link to='/forums' className='navbar-brand-link'>
                     <img className='navbar-brand-logo' src={paw} alt="paw" />
                     <div className="navbar-brand-verticla-line"></div>
                     <div className='navbar-brand-name-container'>
@@ -88,14 +87,14 @@ export function Navbar() {
                             </div>
                             <div className={showUserMenu?'navbar-user-account-menu show-navbar-user-account-menu':'navbar-user-account-menu'}>
                                 <NavLink
-                                    to='/my-post'
+                                    to='/my-posts'
                                     onClick={()=>setShowNavLinks(true)} 
                                     className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                                 >
                                     My Posts
                                 </NavLink>
                                 <NavLink 
-                                    to='/my-comment'
+                                    to='/my-comments'
                                     className={({isActive})=>isActive ? 'navbar-active-navlink navbar-navlink' : 'navbar-navlink'}
                                     onClick={()=>setShowNavLinks(true)}
                                 >
@@ -117,9 +116,9 @@ export function Navbar() {
                     }
                     <NavLink 
                         onClick={()=>setShowNavLinks(true)} 
-                        to='/home' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                        to='/forums' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
-                        Home
+                        Forums
                     </NavLink>
                     <NavLink 
                         onClick={()=>setShowNavLinks(true)}
@@ -155,9 +154,9 @@ export function Navbar() {
                     
                     <NavLink 
                         onClick={hideUserMenu}
-                        to='/home' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                        to='/forums' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
-                        Home
+                        Forums
                     </NavLink>
                     <NavLink 
                        onClick={hideUserMenu}
@@ -208,13 +207,13 @@ export function Navbar() {
                                 <NavLink 
                                     onClick={hideUserMenu}
                                     style={{right:`calc((100vw - ${navbarWidth}) / 2)`}}
-                                    to='/my-post'
+                                    to='/my-posts'
                                     className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                                 >
-                                    My Post
+                                    My Posts
                                 </NavLink>
                                 <NavLink 
-                                    to='/my-comment'
+                                    to='/my-comments'
                                     className={({isActive})=>isActive ? 'navbar-active-navlink navbar-navlink' : 'navbar-navlink'}
                                     onClick={hideUserMenu}
                                 >

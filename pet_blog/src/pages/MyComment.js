@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useLocation } from 'react-router-dom'
 import { url } from './PostList'
 import LoadingPage from './LoadingPage'
 import { fetchComments, removeComment, commentUpdate } from '../utils/api'
@@ -11,6 +11,8 @@ function MyComment() {
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const authenticate = JSON.parse(localStorage.getItem('auth'))
+
+  const {state, pathname} = useLocation()
 
 
   const deleteComment = async(id)=> {
@@ -73,6 +75,12 @@ function MyComment() {
     }
     getComments()
   }, [])
+
+  if(!authenticate) {
+    return (
+      <Navigate to='/login'  replace={true} state={{error:'Please login to see your comment!', redirect:pathname}}/>
+    )
+  }
 
   if(isLoading) {
       return (

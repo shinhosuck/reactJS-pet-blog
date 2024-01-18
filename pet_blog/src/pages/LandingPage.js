@@ -12,7 +12,7 @@ function LandingPage() {
 
     useEffect(()=>{
         if(auth) {
-            navigate('home', {replace:true})
+            navigate('forum', {replace:true})
         }
     }, [auth])
 
@@ -20,7 +20,7 @@ function LandingPage() {
         <header className='landing-page-header'>
             <div className="landing-page-navbar-container">
                 <nav className="landing-page-navbar-wrapper">
-                    <Link to='/home' className='landing-page-navbar-brand-link'>
+                    <Link to='/forums' className='landing-page-navbar-brand-link'>
                         <img className='landing-page-navbar-brand-logo' src={paw} alt="paw" />
                         <div className="landing-page-navbar-brand-verticla-line"></div>
                         <div className='landing-page-navbar-brand-name-container'>
@@ -41,7 +41,7 @@ function LandingPage() {
                         }
                     </div>
                     <div className={!showNavLinks?"show-landing-page-nav-links landing-page-navlinks":"landing-page-navlinks"}>
-                        <Link to='/home' className='landing-page-navlink'>Home</Link>
+                        <Link to='/forums' className='landing-page-navlink'>Forums</Link>
                         <Link to='/login' className='landing-page-navlink'>Login</Link>
                         <Link to='/register' className='landing-page-navlink'>Register</Link>
                     </div>

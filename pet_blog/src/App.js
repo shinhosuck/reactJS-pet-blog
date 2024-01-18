@@ -30,14 +30,14 @@ const router = createBrowserRouter(
     <Route element={<RootLayout />}>
       <Route path='/' element={<LandingPage />}/>
       <Route element={<ContentLayout/>} >
-        <Route path='home' element={<Topics />}/>
+        <Route path='forums' element={<Topics />}/>
         <Route path='posts' element={<PostList/>} />
         <Route path='post/:id/detail' element={<PostDetail/>} />
         <Route path='create/post' element={<CreatePost />}/>
-        <Route path='my-post' element={<MyPost />}/>
-        <Route path='my-comment' element={<MyComment />}/>
-        <Route path='update/:id/post' element={<UpdatePost />}/>
+        <Route path='my-posts' element={<MyPost />}/>
+        <Route path='my-comments' element={<MyComment />}/>
         <Route path='topic/:name/posts' element={<TopicPosts />}/>
+        <Route path='update/:id/post' element={<UpdatePost />}/>
         <Route path='register' element={<Register />}/>
         <Route path='login' element={<Login />}/>
         <Route path='error' element={<Error />}/>

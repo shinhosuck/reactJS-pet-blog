@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef} from 'react'
-import { useParams, Link, useLocation, useNavigate } from 'react-router-dom'
+import { useParams, Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { getPostData, addLikes, replyPost, hasReplied, getRepliedPosts } from '../utils/api'
 import LoadingPage from './LoadingPage'
 import UpdateReplyPost from './UpdateReplyPost'
@@ -20,6 +20,7 @@ function PostDetail() {
     const replyContent = useRef()
     const navigate = useNavigate()
 
+    const {state, pathname} = useLocation()
 
     const handleReplyPostSubmit = async(e)=> {
         e.preventDefault()
@@ -127,6 +128,12 @@ function PostDetail() {
     return (
         <React.Fragment>
             <div className="bg-img"></div>
+            <div className="topic-posts-container__redirect-btn">
+                <i className="fa fa-arrow-left"></i>
+                <Link to={`${state.redirect}`}>
+                    Back to {state.redirect.split('/').filter((obj)=>obj!=='').join('')}
+                </Link>
+            </div>
             <div className='post-detail-container'>
                 <div className="post-detail-container__post-detail">
                     <div className="post-detail-container__post-image-container">
@@ -187,10 +194,6 @@ function PostDetail() {
                             }
                         </div>
                     </div>
-                    <Link to={`/topic/${post.topic}/posts/?filter=${post.topic.toLowerCase()}`} state={{topic:post.topic}} className='post-detail-container__post-topic'>
-                        <span>{post.topic}</span>
-                        <i className="fa fa-chevron-right"></i>
-                    </Link>
                 </div>
                 {showReplyForm && authenticated &&
                     <div className="reply-form-container">
@@ -206,7 +209,7 @@ function PostDetail() {
                 {showUpdateReplyForm && authenticated &&
                     <UpdateReplyPost updateReplyPost={updateReplyPost} showUpdateReplyForm={setShowUpdateReplyForm}/>
                 }
-                <div className="replied-posts-container">
+                <>
                     {repliedPosts ? 
                         <div className="replied-posts">
                             {repliedPosts.map((post)=> {
@@ -225,9 +228,12 @@ function PostDetail() {
                             })}
                         </div>
                     :
-                        <h2>Be the first one to leave a comment!</h2>
+                        
+                        <div className="no-replied-post-container">
+                            <h4>Be the first one to leave a comment!</h4>
+                        </div>
                     }
-                </div>
+                </>
             </div>
         </React.Fragment>
     )

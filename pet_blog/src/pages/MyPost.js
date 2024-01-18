@@ -68,7 +68,7 @@ function MyPost() {
 
   if(!authenticated) {
     return (
-      <Navigate to='/posts' replace={true} state={{error:'Please login to see your post!'}}/>
+      <Navigate to='/login' replace={true} state={{redirect:pathname ,error:'Please login to see your post!'}}/>
     )
   }
   if(isLoading) {
@@ -86,7 +86,6 @@ function MyPost() {
       <div className="bg-img"></div>
       <div className="my-posts-main-container">
         <div className='my-posts-container'>
-            {state && <p className='my-posts-container__message'>{state.message}</p>}
             <div className="my-posts-container__posts">
               {posts.map((post)=> {
                 return (

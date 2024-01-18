@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation, Navigate, Link, useNavigate } from 'react-router-dom'
+import { useLocation, Navigate, Link } from 'react-router-dom'
 import { getPostData, getTopicData } from '../utils/api'
 import LoadingPage from './LoadingPage'
 import { url } from './PostList'
@@ -7,12 +7,14 @@ import { url } from './PostList'
 
 
 function TopicPosts() {
-    const {state} = useLocation()
+    const {state, pathname, search} = useLocation()
     const [postArray, setPostArray] = useState(null)
     const [topicsArray, setTopicsArray] = useState(null)
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [topicMenuOpen, setTopicMenuOpen] = useState(false)
+
+    const location = useLocation()
     
     const getPosts =  async()=> {
         try {
@@ -83,12 +85,18 @@ function TopicPosts() {
     return (
         <React.Fragment>
             <div className="bg-img"></div>
+            <div className="topic-posts-container__redirect-btn">
+                <i className="fa fa-arrow-left"></i>
+                {state && state.redirect && 
+                    <Link to={`${state.redirect}`}>Back to {state.redirect.split('/').filter((obj)=>obj!=='').join('')}</Link>
+                }
+            </div>
             <div className="topic-posts-container">
                 <div className='topic-posts-navbar'>
                     <div className='topic-posts-navbar__toggle-btns-container'>
-                        <p className='topic-posts-navbar__nav-bar-text'>Choose Topic:</p>
-                        <p className='topic-change-input' >{state && state.topic}</p>
+                        <p className='topic-posts-navbar__nav-bar-text'>Choose Forum:</p>
                         <div className='topic-posts-navbar__toggle-btns'>
+                            <p className='topic-change-input' >{state && state.topic}</p>
                             {!topicMenuOpen ?
                                 <button onClick={()=>setTopicMenuOpen(true)} className='topic-post-toggle-btn'>
                                     <i className="fa fa-chevron-down"></i>
@@ -106,7 +114,7 @@ function TopicPosts() {
                                         <Link
                                             onClick={()=> setTopicMenuOpen(false)}
                                             to={`.?filter=${obj}`} 
-                                            state={{topic:obj}} 
+                                            state={{topic:obj, redirect:state.redirect}} 
                                             className='topic-btn' 
                                             key={obj}
                                         >
@@ -167,16 +175,12 @@ function TopicPosts() {
                                         </div>
                                         <h3 className='post-container__post-title'>{post.title}</h3>
                                         <p className='post-container__post-content'>{post.content.substring(0, 100)}...</p>
-                                        <Link to={`/post/${post.id}/detail/`} className='post-container__post-read-more-btn'>
-                                            Read More
-                                        </Link>
-                                        <Link
-                                            to={`/topic/${post.topic}/posts/?filter=${post.topic.toLowerCase()}`} 
-                                            state={{topic:post.topic}} 
-                                            className='post-container__post-topic'
+                                        <Link 
+                                            to={`/post/${post.id}/detail/`} 
+                                            className='post-container__post-read-more-btn'
+                                            state={{redirect:'/posts'}}
                                         >
-                                            <span>{post.topic}</span>
-                                            <i className="fa fa-chevron-right"></i>
+                                            Read More
                                         </Link>
                                     </div>
                                 </div>

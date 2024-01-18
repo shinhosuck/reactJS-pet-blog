@@ -17,6 +17,8 @@ function Login() {
 
     const authenticated = localStorage.getItem('auth') || null
 
+    window.history.replaceState({state:null}, '', '/login')
+
     const handleForm = async function(e) {
         e.preventDefault()
         setBackendAuthError(null)
@@ -33,9 +35,8 @@ function Login() {
                     setBackendAuthError({error:data.error})
 
                 }else {
-                    const userAuth = {token:data.token, username:data.username}
-                    localStorage.setItem('auth', JSON.stringify(userAuth))
-                    navigate('/posts', {replace:true, state:{message:data.message}})
+                    localStorage.setItem('auth', JSON.stringify(data))
+                    navigate(`${state && state.redirect?state.redirect:'/posts'}`, {replace:true, state:{message:data.message}})
                 }
             } catch ({message}) {
                 console.log(message)
@@ -50,14 +51,24 @@ function Login() {
     }
 
     useEffect(()=> {
-        state && setSuccessMessage({registered:state.message})
+        state && state.message && setSuccessMessage({registered:state.message})
         const timeoutID = setTimeout(()=>{
-            setSuccessMessage(null)
-            window.history.replaceState({state:null}, '', '/login')
+            if(state && state.message) {
+                const message = document.querySelector('.user-login__message')
+                setSuccessMessage(null)
+                if(message) {
+                    message.style.disply = 'none'
+                }
+            }else if(state && state.error) {
+                const error = document.querySelector('.user-login__error-message')
+                if(error) {
+                    error.style.display = 'none'
+                }
+            }
             clearTimeout(timeoutID)
         }, 5000)
 
-    }, [])
+    }, [state])
 
     if(authenticated) {
         return (

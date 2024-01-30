@@ -1,64 +1,245 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import paw from '../images/paw.webp'
-
-
+import landingPageImg from '../images/landing_page.webp'
+import { getPostData, getTopicData} from '../utils/api'
+import LoadingPage from './LoadingPage'
+import { url } from './PostList'
+import Footer from './Footer'
 
 
 function LandingPage() {
-    const [showNavLinks, setShowNavLinks] = useState(true)
-    const auth = localStorage.getItem('auth') || null
-    const navigate = useNavigate()
+    const [showNavLinks, setShowNavLinks] = useState(false)
+    const [posts, setPosts] = useState(null)
+    const [topics, setTopics] = useState(null)
+    const [isError, setIsError] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+    const {pathname, state} = useLocation()
+
+    useEffect(()=> {
+        const getData = async()=> {
+            try {
+                const data = await getPostData(`${url}/api/posts/`)
+                const objs = data.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()}))
+                console.log(data)
+                setPosts(objs.slice(0,6))
+                setTimeout(()=>{
+                    setIsLoading(false)
+                }, 500)
+            } catch ({message}) {
+                console.log(message)
+                setIsError(message)
+                setIsLoading(false)
+            }
+        }
+        getData()
+    }, [])
+
+    useEffect(()=> {
+        const getTopics = async()=> {
+            try {
+                const data = await getTopicData(`${url}/api/topics`)
+                console.log(data)
+                setTopics(data.slice(0,6))
+                setTimeout(()=>{
+                    setIsLoading(false)
+                }, 500)
+               
+            } catch ({message}) {
+                setIsLoading(false)
+                setIsError({error:message})
+                console.log(message)
+            }
+        }
+        getTopics()
+    }, [])
 
     useEffect(()=>{
-        if(auth) {
-            navigate('forums', {replace:true})
+        const root = document.querySelector('#root')
+        if(showNavLinks) {
+            window.scrollTo({top:0})
+            document.body.style.overflowY = 'hidden'
+
+        }else {
+            document.body.style.overflowY = 'scroll'
         }
-    }, [auth])
+    }, [showNavLinks, !showNavLinks])
+
+
+    if(isLoading) {
+        return (
+          <LoadingPage />
+        )
+    }
+    if(isError) {
+        return (
+            <h2>There was an error {window.location.host}</h2>
+        )
+    }
 
     return (
-        <header className='landing-page-header'>
-            <div className="landing-page-navbar-container">
-                <nav className="landing-page-navbar-wrapper">
-                    <Link to='/forums' className='landing-page-navbar-brand-link'>
-                        <img className='landing-page-navbar-brand-logo' src={paw} alt="paw" />
-                        <div className="landing-page-navbar-brand-verticla-line"></div>
-                        <div className='landing-page-navbar-brand-name-container'>
-                            <span className='landing-page-navbar-brand-name-lg-text'>PawPals</span>
-                            <span className='landing-page-navbar-brand-name-sm-text'>BlogForum</span>
-                        </div>
-                    </Link>
-                    <div className="landing-page-navlinks-toggle-btns">
-                        {showNavLinks ?
-                            <button onClick={()=>setShowNavLinks(!showNavLinks)} className='landing-page-toggle-btn landing-page-show-navlink-btn'>
+        <React.Fragment>
+            <header>
+                <div className="landing-page-navbar-container">
+                    <nav className="landing-page-navbar-wrapper">
+                        <Link to='/forums' className='landing-page-navbar-brand-link'>
+                            <img className='landing-page-navbar-brand-logo' src={paw} alt="paw" />
+                            <div className="landing-page-navbar-brand-verticla-line"></div>
+                            <div className='landing-page-navbar-brand-name-container'>
+                                <span className='landing-page-navbar-brand-name-lg-text'>PawPals</span>
+                                <span className='landing-page-navbar-brand-name-sm-text'>BlogForum</span>
+                            </div>
+                        </Link>
+                        <div className="landing-page-navlinks-toggle-btns">
+                            <button onClick={()=>setShowNavLinks(true)} className='landing-page-toggle-btn landing-page-show-navlink-btn'>
                                 <i className="fa fa-bars"></i>
                             </button>
-                    
-                         :
-                            <button onClick={()=>setShowNavLinks(!showNavLinks)} className='landing-page-toggle-btn landing-page-hide-navlink-btn'>
+                        </div>
+                        <div className={showNavLinks?"show-landing-page-nav-links landing-page-navlinks":"landing-page-navlinks"}>
+                            <button onClick={()=>setShowNavLinks(false)} className='landing-page-toggle-btn landing-page-hide-navlink-btn'>
                                 <i className="fa fa-times"></i>
                             </button>
-                        }
-                    </div>
-                    <div className={!showNavLinks?"show-landing-page-nav-links landing-page-navlinks":"landing-page-navlinks"}>
-                        <Link to='/forums' className='landing-page-navlink'>Forums</Link>
-                        <Link to='/login' className='landing-page-navlink'>Login</Link>
-                        <Link to='/register' className='landing-page-navlink'>Register</Link>
-                    </div>
-                </nav>
-                <div className="landing-page-hero-text-container">
-                    <div className="landing-page-hero-text-wrapper">
-                        <h1 className='landing-page-hero-header'>Love Me, Love My Dog</h1>
-                        <p className='landing-page-hero-paragraph'>
-                            Please join to share your expertise, issues, concerns, and thoughts. 
-                        </p>
-                        <Link to='/register' className='landing-page-join-btn'>Register</Link>
-                        <p className='landing-page-already-registered'>Already registered? <Link to='/login'>Login</Link></p>
-                    </div>
-                    
+                            <Link to='/forums' className='landing-page-navlink'>Forums</Link>
+                            <Link to='/posts' className='landing-page-navlink'>Posts</Link>
+                            <Link to='/login' className='landing-page-navlink landing-page-login-btn'>Login</Link>
+                        </div>
+                    </nav>
                 </div>
-            </div>
-        </header>
+                <div className='landing-page-hero-wrapper'>
+                    <div className="landing-page-hero-container">
+                        <div className="landing-page-hero-img">
+                            <img src={landingPageImg} alt="" />
+                        </div>
+                        <div className="landing-page-hero-text-wrapper">
+                            <h1 className='landing-page-hero-header'>Love Me, Love My Dog</h1>
+                            <p className='landing-page-hero-paragraph'>
+                                Please join to share your expertise, issues, concerns, and thoughts. 
+                            </p>
+                            <Link to='/register' className='landing-page-join-btn'>Join now</Link>
+                            <div className="landing-page-already-registered">
+                                <p>Already registered?</p>
+                                <Link to='/login'>Login</Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main className='landing-page-main'>
+                <div className="landing-page-topics-container">
+                    <div className="landing-page-topic-header-container">
+                        <h1 className='landing-page-topic-header'>Forums</h1>
+                        <Link to='/forums' className='landing-page-topic-see-all-forums'>
+                            See all forums
+                            <i className="fa fa-arrow-right"></i>
+                        </Link>
+                    </div>
+                    <div className="landing-page-topics">
+                        {topics.map((topic)=> {
+                            return (
+                                <Link
+                                    to={topic.total_post ? `/topic/${topic.name}/posts/?filter=${topic.name.toLowerCase()}` :''} 
+                                    state={{topic:topic.name, redirect:pathname}} 
+                                    key={topic.id} 
+                                    className="landing-page-topic"
+                                >
+                                    <img className='landing-page-topic-image' src={topic.image_url} alt={topic.name} />
+                                    <div className='landing-page-topic-text-container'>
+                                        <h3 className='landing-page-topic-name'>{topic.name}</h3>
+                                        <p className='landing-page-topic-description'>{topic.description}... <span style={{color:'#F01C00', textDecoration:'underline'}}>Read more</span></p>
+                                        {topic.total_post > 1 ? 
+                                            <div className='landing-page-topic-post-count'>
+                                                <i className="fa-regular fa-message landing-page-topic-num-of-post"></i>
+                                                <span className='landing-page-topic-total-post-count'>{topic.total_post}</span>
+                                            </div>
+                                        :
+                                            <div className='landing-page-topic-post-count'>
+                                                <i className="fa-regular fa-message landing-page-topic-num-of-post"></i>
+                                                <span className='landing-page-topic-total-post-count'>{topic.total_post}</span>
+                                            </div>
+                                        }
+                                    </div>
+                                </Link>
+                            )
+                        })}
+                    </div>
+                </div>
+                <div className="landing-page-posts-container">
+                    <div className="landing-page-posts-wrapper">
+                        <h1 className='landing-page-posts-header'>Latest Posts</h1>
+                        <div className="landing-page-posts">
+                            {posts.map((post)=> {
+                                return (
+                                    <div
+                                        key={post.id} 
+                                        className="landing-page-post"
+                                    >
+                                        {/* <div className="landing-page-post-image-container">
+                                            <img className='landing-page-post-image' src={post.image_url} alt={post.title} />
+                                        </div> */}
+                                        <div className='landing-page-post-text-content'>
+                                            <div className="landing-page-post-author-and-date">
+                                                <h4 className='landing-page-post-author'>{post.author}</h4>
+                                                <p className='landing-page-post-date-posted'>{post.date_posted}</p>
+                                            </div>
+                                            <h3 className='landing-page-post-title'>{post.title}</h3>
+                                            <p className='landing-page-post-content'>
+                                                {post.content.substring(0, 100)}... 
+                                                <Link 
+                                                    to={`/post/${post.id}/detail/`} 
+                                                    state={{redirect:pathname}} 
+                                                    className='landing-page-post-read-more'
+                                                >
+                                                    Read more
+                                                </Link>
+                                            </p>
+                                            <div className="landing-page-post-date-and-like">
+                                                {post.like.length > 1 ? 
+                                                    <div className='landing-page-post-like'>
+                                                        <div className='landing-page-post-like-container'>
+                                                            <i className="fa-solid fa-hands-clapping landing-page-post-like"></i>
+                                                            <span className='landing-page-post-like-count'>{post.like.length}</span>
+                                                            <span className='landing-page-post-like-text'>likes</span>
+                                                        </div>
+                                                        <div className='landing-page-post-num-of-replies-container'>
+                                                            <i className="fa-solid fa-message landing-page-post-num-of-post"></i>
+                                                            <span className='landing-page-post-reply-count'>{post.num_of_replies}</span>
+                                                            <span className='landing-page-post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
+                                                        </div>
+                                                    </div>
+                                                : 
+                                                    <div className='landing-page-post-like'>
+                                                        <div className='landing-page-post-like-container'>
+                                                            <i className="fa-solid fa-hands-clapping landing-page-post-like"></i>
+                                                            <span className='landing-page-post-like-count'>{post.like.length}</span>
+                                                            <span className='landing-page-post-like-text'>like</span>
+                                                        </div>
+                                                        <div className='landing-page-post-num-of-replies-container'>
+                                                            <i className="fa-solid fa-message landing-page-post-num-of-post"></i>
+                                                            <span className='landing-page-post-reply-count'>{post.num_of_replies}</span>
+                                                            <span className='landing-page-post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                        <div className="landing-page-post-see-all-posts-container">
+                            <Link to='/posts' className='landing-page-post-see-all-posts'>
+                                See all posts
+                                <i className="fa fa-arrow-right"></i>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <div className={showNavLinks ? 'bg-overlay' : 'hide-bg-overlay'}></div>
+            <footer>
+                <Footer />
+            </footer>
+        </React.Fragment>
     )
 }
 

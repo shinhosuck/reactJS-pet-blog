@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Link, NavLink, useOutletContext, useLocation, useNavigate} from 'react-router-dom'
 import { getPostData} from '../utils/api'
 import LoadingPage from './LoadingPage'
-import image from '../images/default.png'
 
 
 export const url = window.location.host === 'localhost:3000' ? 
 'http://127.0.0.1:8000' : 'https://pawpals.pythonanywhere.com'
+
 
 
 function PostList() {
@@ -67,7 +67,7 @@ function PostList() {
   }
   if(isError) {
     return (
-      <h2>There was an error</h2>
+      <h2>There was an error {window.location.host}</h2>
     )
   }
   return (

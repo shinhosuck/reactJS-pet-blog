@@ -21,7 +21,6 @@ function LandingPage() {
             try {
                 const data = await getPostData(`${url}/api/posts/`)
                 const objs = data.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()}))
-                console.log(data)
                 setPosts(objs.slice(0,6))
                 setTimeout(()=>{
                     setIsLoading(false)
@@ -39,7 +38,6 @@ function LandingPage() {
         const getTopics = async()=> {
             try {
                 const data = await getTopicData(`${url}/api/topics`)
-                console.log(data)
                 setTopics(data.slice(0,6))
                 setTimeout(()=>{
                     setIsLoading(false)
@@ -145,7 +143,7 @@ function LandingPage() {
                                     <img className='landing-page-topic-image' src={topic.image_url} alt={topic.name} />
                                     <div className='landing-page-topic-text-container'>
                                         <h3 className='landing-page-topic-name'>{topic.name}</h3>
-                                        <p className='landing-page-topic-description'>{topic.description}... <span style={{color:'#F01C00', textDecoration:'underline'}}>Read more</span></p>
+                                        <p className='landing-page-topic-description'>{topic.description}... <span style={{color:'#E73E27', textDecoration:'underline'}}>Read more</span></p>
                                         {topic.total_post > 1 ? 
                                             <div className='landing-page-topic-post-count'>
                                                 <i className="fa-regular fa-message landing-page-topic-num-of-post"></i>

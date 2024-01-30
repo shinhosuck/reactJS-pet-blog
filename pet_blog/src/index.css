@@ -274,7 +274,7 @@ Landing Page
 .landing-page-join-btn {
   padding: 0.7rem 2rem ;
   text-align: center;
-  background: #F01C00;
+  background: #E73E27;
   color: hsl(0, 0%, 100%);
   border-radius: 5px;
   letter-spacing: 0.05rem;
@@ -292,7 +292,7 @@ Landing Page
 }
 
 .landing-page-already-registered > a {
-  color: #F01C00;
+  color: #E73E27;
   text-decoration: underline;
   font-weight: 500;
 }
@@ -334,7 +334,7 @@ Landing Page
   color: white;
   padding: 0.4rem 0.8rem;
   border-radius: 5px;
-  background: var(--orange-57)
+  background: #E73E27
 }
 
 .landing-page-topics {
@@ -478,7 +478,7 @@ Landing Page
 }
 
 .landing-page-post-read-more {
-  color:#F01C00;
+  color:#E73E27;
   text-decoration:underline;
   letter-spacing: 0.05rem;
   margin-left: 0.3rem;
@@ -547,7 +547,7 @@ Landing Page
   color: white;
   padding: 0.4rem 0.8rem;
   border-radius: 5px;
-  background: var(--orange-57)
+  background: #E73E27
 }
 
 /* end */
@@ -598,7 +598,7 @@ Landing Page
   }
 
   .landing-page-login-btn {
-    border: 1px solid red;
+    border: 1px solid #E73E27;
     padding: 0.3rem 1.5rem;
     border-radius: 5px;
     background: var(--orange-57);

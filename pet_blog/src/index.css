@@ -339,7 +339,8 @@ Landing Page
 
 .landing-page-topics {
   display: grid;
-  gap: 3rem;
+  align-self: start;
+  gap: 2rem;
 }
 
 .landing-page-topic {
@@ -406,10 +407,19 @@ Landing Page
 
 .landing-page-posts-wrapper {
   width: 90%;
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   gap: 3rem;
+}
+
+.landing-page-post-see-all-posts-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  text-align: center;
 }
 
 .landing-page-posts-header {
@@ -417,127 +427,6 @@ Landing Page
   color: var(--black-15);
   text-align: center;
   font-size: clamp(2rem, 5vw + 1rem, 2.6rem);
-}
-
-.landing-page-posts {
-  display: grid;
-  align-content: start;
-  gap: 2rem;
-}
-
-.landing-page-post {
-  display: grid;
-  align-items: center;
-  gap: 1rem;
-  padding-bottom: 2rem;
-  border-bottom: 2px solid var(--black-80);
-}
-
-.landing-page-post-image{
-  width: 100%;
-  height: 100;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  display: block;
-}
-
-.landing-page-post-text-content {
-  display: grid;
-  align-items: start;
-  gap: 1rem;
-}
-
-.landing-page-post-author-and-date {
-  display: grid;
-  gap: 0.2rem
-}
-
-.landing-page-post-author {
-  font-weight: 500;
-  font-size: 0.9rem;
-  color: var(--black-30);
-}
-
-.landing-page-post-date-posted {
-  color: var(--black-50);
-  font-size: 0.9rem;
-}
-
-.landing-page-post-title {
-  color: var(--black-15);
-  line-height: 1.3;
-  font-size: clamp(1.3rem, 3vw + 1rem , 1.8rem);
-  font-weight: 600;
-}
-
-.landing-page-post-content {
-  letter-spacing: 0.07rem;
-  color: var(--black-30);
-  line-height: 1.5;
-  text-wrap: pretty;
-}
-
-.landing-page-post-read-more {
-  color:#E73E27;
-  text-decoration:underline;
-  letter-spacing: 0.05rem;
-  margin-left: 0.3rem;
-}
-
-.landing-page-post-date-and-like {
-  display: flex;
-  align-items: center;
-}
-
-.landing-page-post-like {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  letter-spacing: 0.05rem;
-  background: none;
-  border: none;
-}
-
-.landing-page-post-like-container {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-.landing-page-post-like {
-  color: var(--black-60);
-  font-size: 1rem;
-  transition: 300ms color linear;
-}
-
-.landing-page-post-like-count,
-.landing-page-post-like-text {
-  font-size: 0.9rem;
-  padding-top: 0.2rem;
-  color: var(--black-70);
-}
-
-.post-container__num-of-replies-container {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-.post-container__num-of-post {
-  color: var(--black-60);
-  font-size: 1rem;
-}
-
-.landing-page-post-reply-count,
-.landing-page-post-reply-text {
-  font-size: 0.9rem;
-  color: var(--black-70);
-}
-
-.landing-page-post-see-all-posts-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .landing-page-post-see-all-posts {
@@ -550,6 +439,127 @@ Landing Page
   background: #E73E27
 }
 
+.landing-page-posts {
+  display: grid;
+  align-content: start;
+  gap: 2rem;
+}
+
+.landing-page-post {
+  position: relative;
+  display: grid;
+  align-items: center;
+  gap: 1rem;
+}
+
+.landing-page-post-image{
+  width: 100%;
+  height: 100;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+}
+.landing-page-post-color-overlay {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top,
+   rgb(0, 0, 0), 
+   rgba(0, 0, 0, 0.55),
+   rgba(0, 0, 0, 0)
+   )
+}
+
+.landing-page-post-text-content {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-content: end;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.landing-page-post-author-and-date {
+  display: grid;
+  gap: 0rem
+}
+
+.landing-page-post-author {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--black-90);
+}
+
+.landing-page-post-date-posted {
+  color: var(--black-90);
+  font-size: 0.95rem;
+}
+
+.landing-page-post-title {
+  color: hsl(0, 0%, 100%);
+  line-height: 1.3;
+  font-size: clamp(1.3rem, 3vw + 1rem , 1.8rem);
+  font-weight: 600;
+}
+
+.landing-page-post-content {
+  letter-spacing: 0.07rem;
+  color: hsl(0, 0%, 90%);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.landing-page-post-read-more {
+  color:#ff7676;
+  text-decoration:underline;
+  letter-spacing: 0.05rem;
+  margin-left: 0.3rem;
+}
+
+.landing-page-post-like {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.landing-page-post-like-container {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--black-80);
+}
+
+.landing-page-post-clap {
+  font-size: 1.2rem;
+}
+
+.landing-page-post-like-count,
+.landing-page-post-like-text {
+  font-size: 0.9rem;
+}
+
+.landing-page-post-num-of-replies-container {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--black-80);
+}
+
+.landing-page-post-num-of-post {
+  font-size: 1.1rem;
+}
+
+.landing-page-post-reply-count,
+.landing-page-post-reply-text {
+  font-size: 0.9rem;
+}
 /* end */
 
 .bg-overlay {
@@ -614,6 +624,7 @@ Landing Page
 
   .landing-page-topics {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 3rem
   }
 
   .landing-page-posts-container {
@@ -622,6 +633,13 @@ Landing Page
 
   .landing-page-posts-wrapper {
     gap: 4rem;
+  }
+}
+
+@media screen and (min-width: 835px) {
+  .landing-page-posts {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
   }
 }
 

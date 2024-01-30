@@ -164,7 +164,7 @@ function LandingPage() {
                 <div className="landing-page-posts-container">
                     <div className="landing-page-posts-wrapper">
                         <div className="landing-page-post-see-all-posts-container">
-                            <h1 className='landing-page-posts-header'>Latest Posts</h1>
+                            <h1 className='landing-page-posts-header'>Posts</h1>
                             <Link to='/posts' className='landing-page-post-see-all-posts'>
                                 See all posts
                                 <i className="fa fa-arrow-right"></i>

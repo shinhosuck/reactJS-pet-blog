@@ -324,6 +324,7 @@ Landing Page
   text-wrap: pretty;
   color: var(--black-15);
   line-height: 1;
+  font-weight: 600;
   font-size: clamp(2rem, 5vw + 1rem, 2.6rem);
 }
 
@@ -426,6 +427,8 @@ Landing Page
   text-wrap: pretty;
   color: var(--black-15);
   text-align: center;
+  font-weight: 600;
+  line-height: 1;
   font-size: clamp(2rem, 5vw + 1rem, 2.6rem);
 }
 
@@ -620,6 +623,7 @@ Landing Page
 
   .landing-page-topics-container {
     padding: 4rem 0;
+    padding-bottom: 5rem;
   }
 
   .landing-page-topics {
@@ -629,10 +633,7 @@ Landing Page
 
   .landing-page-posts-container {
     padding: 4rem 0;
-  }
-
-  .landing-page-posts-wrapper {
-    gap: 4rem;
+    padding-bottom: 5rem;
   }
 }
 

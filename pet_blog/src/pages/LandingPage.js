@@ -122,15 +122,11 @@ function LandingPage() {
                 <div className="landing-page-topics-container">
                     <div className="landing-page-topic-header-container">
                         <h1 className='landing-page-topic-header'>Forums</h1>
-                        <Link to='/forums' className='landing-page-topic-see-all-forums'>
-                            See all forums
-                            <i className="fa fa-arrow-right"></i>
-                        </Link>
                     </div>
                     <div className="landing-page-topics">
                         {topics.map((topic)=> {
                             return (
-                                <Link
+                                <div
                                     to={topic.total_post ? `/topic/${topic.name}/posts/?filter=${topic.name.toLowerCase()}` :''} 
                                     state={{topic:topic.name, redirect:pathname}} 
                                     key={topic.id} 
@@ -139,7 +135,16 @@ function LandingPage() {
                                     <img className='landing-page-topic-image' src={topic.image_url} alt={topic.name} />
                                     <div className='landing-page-topic-text-container'>
                                         <h3 className='landing-page-topic-name'>{topic.name}</h3>
-                                        <p className='landing-page-topic-description'>{topic.description}... <span className='landing-page-topic-read-more'>Read more</span></p>
+                                        <p className='landing-page-topic-description'>
+                                            {topic.description}... 
+                                            <Link 
+                                                className='landing-page-topic-read-more'
+                                                to={topic.total_post ? `/topic/${topic.name}/posts/?filter=${topic.name.toLowerCase()}` :''} 
+                                                state={{topic:topic.name, redirect:pathname}} 
+                                            >
+                                                Read more
+                                            </Link>
+                                        </p>
                                         {topic.total_post > 1 ? 
                                             <div className='landing-page-topic-post-count'>
                                                 <i className="fa-regular fa-message landing-page-topic-num-of-post"></i>
@@ -152,19 +157,21 @@ function LandingPage() {
                                             </div>
                                         }
                                     </div>
-                                </Link>
+                                </div>
                             )
                         })}
+                    </div>
+                    <div className="landing-page-topic-see-all-forums-container">
+                        <Link to='/forums' className='landing-page-topic-see-all-forums'>
+                            See all forums
+                            <i className="fa fa-arrow-right"></i>
+                        </Link>
                     </div>
                 </div>
                 <div className="landing-page-posts-container">
                     <div className="landing-page-posts-wrapper">
-                        <div className="landing-page-post-see-all-posts-container">
+                        <div className="landing-page-post-header-container">
                             <h1 className='landing-page-posts-header'>Posts</h1>
-                            <Link to='/posts' className='landing-page-post-see-all-posts'>
-                                See all posts
-                                <i className="fa fa-arrow-right"></i>
-                            </Link>
                         </div>
                         <div className="landing-page-posts">
                             {posts.map((post)=> {
@@ -217,6 +224,12 @@ function LandingPage() {
                                     </div>
                                 )
                             })}
+                        </div>
+                        <div className="landing-page-post-see-all-posts-container">
+                            <Link to='/posts' className='landing-page-post-see-all-posts'>
+                                See all posts
+                                <i className="fa fa-arrow-right"></i>
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -25,10 +25,12 @@
 
   /* Error text */
   --red-45: hsl(9, 100%, 45%);
+
+  /* Orange */
+  --orange-10: hsl(8, 29%, 15%);
+  --orange-20: hsl(10, 30%, 20%);
+  --orange-30: hsl(10, 30%, 30%);
 }
-
-
-
 
 html {
   scroll-behavior: smooth;
@@ -212,7 +214,7 @@ Landing Page
 }
 
 .landing-page-navlink {
-  color: var(--black-30);
+  color: var(--orange-20);
   font-weight: 500;
   letter-spacing: 0.05rem;
   font-size: 1rem;
@@ -224,7 +226,7 @@ Landing Page
 /* Hero section */
 
 .landing-page-hero-wrapper {
-  background: #fff1e8;
+  background: #f0e3da;
   padding: 4rem 0;
 }
 
@@ -258,14 +260,14 @@ Landing Page
 }
 
 .landing-page-hero-header {
-  color:#0a0a0a;
+  color: var(--orange-10);
   text-wrap: pretty;
   line-height: 1.2;
   font-size: clamp(2rem, 5vw + 1rem, 3.8rem);
 }
 
 .landing-page-hero-paragraph {
-  color: #363636;
+  color: var(--orange-20);
   letter-spacing: 0.05rem;
   line-height: 1.5;
   text-wrap: pretty;
@@ -280,6 +282,7 @@ Landing Page
   border-radius: 5px;
   letter-spacing: 0.05rem;
   margin-top: 1rem;
+  font-weight: 500;
 }
 
 /* Main section */
@@ -299,7 +302,7 @@ Landing Page
 .landing-page-topic-header-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1.5rem;
   text-align: center;
@@ -307,20 +310,9 @@ Landing Page
 
 .landing-page-topic-header {
   text-wrap: pretty;
-  color: var(--black-15);
+  color: var(--orange-10);
   line-height: 1;
-  font-weight: 600;
   font-size: clamp(2rem, 5vw + 1rem, 2.6rem);
-}
-
-.landing-page-topic-see-all-forums {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #ff452d;
-  padding: 0.4rem 1rem;
-  border-radius: 5px;
-  outline: 2px solid #ff452d;
 }
 
 .landing-page-topics {
@@ -350,7 +342,7 @@ Landing Page
 }
 
 .landing-page-topic-name {
-  color: var(--black-15);
+  color: var(--orange-10);
   line-height: 1.4;
   letter-spacing: 0.04rem;
   font-size: 1.25rem;
@@ -359,7 +351,7 @@ Landing Page
 
 .landing-page-topic-description {
   letter-spacing: 0.07rem;
-  color: var(--black-30);
+  color: var(--orange-20);
   line-height: 1.5;
   text-wrap: pretty;
 }
@@ -390,12 +382,30 @@ Landing Page
   justify-content: center;
   line-height: 1;
 }
+.landing-page-topic-see-all-forums-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  text-align: center;
+}
 
+.landing-page-topic-see-all-forums {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ff452d;
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+  outline: 2px solid #ff452d;
+  font-weight: 500;
+}
 /* end */
 
 /* Landing page posts */
 .landing-page-posts-container {
-  background: #fff1e8;
+  background: #f0e3da;
   padding: 3rem 0;
 }
 
@@ -407,10 +417,10 @@ Landing Page
   gap: 3rem;
 }
 
-.landing-page-post-see-all-posts-container {
+.landing-page-post-header-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1.5rem;
   text-align: center;
@@ -418,21 +428,10 @@ Landing Page
 
 .landing-page-posts-header {
   text-wrap: pretty;
-  color: var(--black-15);
+  color: var(--orange-10);
   text-align: center;
-  font-weight: 600;
   line-height: 1;
   font-size: clamp(2rem, 5vw + 1rem, 2.6rem);
-}
-
-.landing-page-post-see-all-posts {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #ff381e;
-  padding: 0.4rem 1rem;
-  border-radius: 5px;
-  outline: 2px solid #ff381e;
 }
 
 .landing-page-posts {
@@ -471,7 +470,7 @@ Landing Page
   height: 100%;
   background: linear-gradient(to top,
    rgb(0, 0, 0), 
-   rgba(0, 0, 0, 0.8),
+   rgba(0, 0, 0, 0.6),
    rgba(0, 0, 0, 0)
    );
    border-radius: 8px;
@@ -487,7 +486,7 @@ Landing Page
   display: grid;
   align-content: end;
   gap: 1rem;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 8px;
 }
 
@@ -548,6 +547,26 @@ Landing Page
 .landing-page-post-reply-count,
 .landing-page-post-reply-text {
   font-size: 0.9rem;
+}
+
+.landing-page-post-see-all-posts-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.landing-page-post-see-all-posts {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ff381e;
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+  outline: 2px solid #ff381e;
+  font-weight: 500;
 }
 /* end */
 
@@ -614,6 +633,10 @@ Landing Page
     background: var(--orange-57);
     color: white;
   }
+
+  .landing-page-post-text-content {
+    padding: 1.5rem;
+  }
 }
 
 @media screen and (min-width: 676px) {
@@ -635,9 +658,15 @@ Landing Page
 }
 
 @media screen and (min-width: 835px) {
+
   .landing-page-posts {
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
+  }
+
+  .landing-page-post-see-all-posts-container,
+  .landing-page-topic-see-all-forums-container {
+    margin-top: 1rem;
   }
 }
 

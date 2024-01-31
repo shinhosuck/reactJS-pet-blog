@@ -456,11 +456,12 @@ Landing Page
 .landing-page-post-image{
   width: 100%;
   height: 100;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1/1;
   object-fit: cover;
   display: block;
   border-radius: 8px;
 }
+
 .landing-page-post-color-overlay {
   position: absolute;
   z-index: 2;
@@ -565,6 +566,10 @@ Landing Page
 }
 
 @media screen and (min-width: 500px) {
+
+  .landing-page-post-image{
+    aspect-ratio: 4/3;
+  }
 
   .landing-page-post-title {
     font-size: clamp(1.3rem, 3vw + 1rem , 1.8rem);

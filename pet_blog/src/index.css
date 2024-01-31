@@ -226,7 +226,7 @@ Landing Page
 /* Hero section */
 
 .landing-page-hero-wrapper {
-  background: #f1e6e5;
+  background: #e7ded5;
   padding-bottom: 3rem;
 }
 
@@ -405,7 +405,7 @@ Landing Page
 
 /* Landing page posts */
 .landing-page-posts-container {
-  background: #f1e6e5;
+  background: #e7ded5;
   padding: 3rem 0;
 }
 
@@ -2973,7 +2973,7 @@ FOOTER
 ====== */
 .footer-container {
   height: 50vh;
-  background: #664b48
+  background: #5c4939
 }
 
 

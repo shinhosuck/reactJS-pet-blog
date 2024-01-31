@@ -27,9 +27,9 @@
   --red-45: hsl(9, 100%, 45%);
 
   /* Orange */
-  --orange-10: hsl(8, 29%, 15%);
-  --orange-20: hsl(10, 30%, 20%);
-  --orange-30: hsl(10, 30%, 30%);
+  --orange-10: hsl(10, 30%, 20%);
+  --orange-20: hsl(10, 30%, 30%);
+  --orange-30: hsl(10, 30%, 40%);
 }
 
 html {
@@ -227,18 +227,13 @@ Landing Page
 
 .landing-page-hero-wrapper {
   background: #f0e1e0;
-  padding: 4rem 0;
+  padding-bottom: 3rem;
 }
 
 .lg-landing-page-hero-wrapper {
   display: none;
 }
-
 .landing-page-hero-container {
-  height: 100%;
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
 
   display: grid;
   align-items: start;
@@ -252,7 +247,6 @@ Landing Page
   object-fit: cover;
   display: block;
   object-position: right;
-  border-radius: 8px;
 }
 
 .landing-page-hero-text-wrapper {
@@ -260,6 +254,7 @@ Landing Page
   align-content: start;
   gap: 2rem;
   text-align: center;
+  width: 90%;
   max-width: 450px;
   margin: 0 auto;
 }
@@ -410,7 +405,6 @@ Landing Page
 
 /* Landing page posts */
 .landing-page-posts-container {
-  /* background: #f0e3da; */
   background: #f0e1e0;
   padding: 3rem 0;
 }
@@ -648,7 +642,6 @@ Landing Page
 @media screen and (min-width: 676px) {
 
   .landing-page-topics-container {
-    padding: 4rem 0;
     padding-bottom: 5rem;
   }
 
@@ -658,7 +651,6 @@ Landing Page
   }
 
   .landing-page-posts-container {
-    padding: 4rem 0;
     padding-bottom: 5rem;
   }
 }
@@ -678,11 +670,16 @@ Landing Page
 
 @media screen and (min-width: 900px) {
   .landing-page-hero-wrapper {
+    padding-bottom: 0;
+  }
+
+  .landing-page-hero-wrapper {
     display: none;
   }
+
   .lg-landing-page-hero-wrapper {
     display: block;
-    min-height: 80vh;
+    min-height: 75vh;
     background: linear-gradient(to bottom, hsla(0, 0%, 0%, 0.5), hsla(22, 61%, 7%, 0.5)),
     url('./images/hero_img1.webp');
     background-position: center right;
@@ -694,16 +691,16 @@ Landing Page
 
   .landing-page-hero-container {
     align-items: center;
-  }
-
-  .landing-page-hero-text-wrapper {
-    width: 50%;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
   }
   
   .landing-page-hero-text-wrapper {
     text-align: start;
     max-width: initial;
     margin: 0;
+    width: 50%;
   }
 
   .landing-page-hero-header {
@@ -729,6 +726,10 @@ Landing Page
 
   .landing-page-hero-header {
     font-size: clamp(2rem, 5vw + 1rem, 3.7rem);
+  }
+
+  .landing-page-hero-text-wrapper {
+    width: 45%;
   }
 }
 

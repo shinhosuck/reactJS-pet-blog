@@ -109,15 +109,11 @@ function LandingPage() {
                             <img src={landingPageImg} alt="" />
                         </div>
                         <div className="landing-page-hero-text-wrapper">
-                            <h1 className='landing-page-hero-header'>Love Me, Love My Dog</h1>
+                            <h1 className='landing-page-hero-header'>We are Canine Blog Site</h1>
                             <p className='landing-page-hero-paragraph'>
-                                Please join to share your expertise, issues, concerns, and thoughts. 
+                                Here, you can seek suggestions about your canine's health issues or share your expertise on various canines's health problems.
                             </p>
                             <Link to='/register' className='landing-page-join-btn'>Join now</Link>
-                            <div className="landing-page-already-registered">
-                                <p>Already registered?</p>
-                                <Link to='/login'>Login</Link>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -143,7 +139,7 @@ function LandingPage() {
                                     <img className='landing-page-topic-image' src={topic.image_url} alt={topic.name} />
                                     <div className='landing-page-topic-text-container'>
                                         <h3 className='landing-page-topic-name'>{topic.name}</h3>
-                                        <p className='landing-page-topic-description'>{topic.description}... <span style={{color:'#E73E27', textDecoration:'underline'}}>Read more</span></p>
+                                        <p className='landing-page-topic-description'>{topic.description}... <span className='landing-page-topic-read-more'>Read more</span></p>
                                         {topic.total_post > 1 ? 
                                             <div className='landing-page-topic-post-count'>
                                                 <i className="fa-regular fa-message landing-page-topic-num-of-post"></i>
@@ -179,10 +175,6 @@ function LandingPage() {
                                         </div>
                                         <div className="landing-page-post-color-overlay"></div>
                                         <div className='landing-page-post-text-content'>
-                                            <div className="landing-page-post-author-and-date">
-                                                <h4 className='landing-page-post-author'>{post.author}</h4>
-                                                <p className='landing-page-post-date-posted'>{post.date_posted}</p>
-                                            </div>
                                             <h3 className='landing-page-post-title'>{post.title}</h3>
                                             <p className='landing-page-post-content'>
                                                 {post.content.substring(0, 100)}... 

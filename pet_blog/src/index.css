@@ -662,6 +662,10 @@ Landing Page
     gap: 3rem;
   }
 
+  .landing-page-post-title {
+    font-size: clamp(1.3rem, 2vw + 1rem , 1.5rem);
+  }
+
   .landing-page-post-see-all-posts-container,
   .landing-page-topic-see-all-forums-container {
     margin-top: 1rem;

@@ -58,7 +58,18 @@ function Topics() {
     }
     return (
         <React.Fragment>
-            <div className="bg-img"></div>
+            <div className="bg-img">
+                <div className="bg-img-header-container">
+                    <div className="bg-img-contents">
+                        <h1 className='bg-img-header'>Forums</h1>
+                        <p className='bg-img-text'>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                        Ducimus cupiditate ipsum provident saepe libero eum voluptatibus 
+                        deserunt quisquam placeat maiores!
+                        </p>
+                    </div>
+                </div>
+            </div>
             {state && state.error && <p className='topics-error-message'>{state.error}</p>}
             <div className="topics-main-container">
                 <div className="topics-container">

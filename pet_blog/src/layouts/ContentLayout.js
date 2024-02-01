@@ -10,7 +10,7 @@ import { url } from '../pages/PostList'
 function ContentLayout() {
   const [topics, setTopics] = useState(null)
   const [posts, setPosts] = useState(null)
-
+  const [loaded, setLoaded] = useState(false)
 
   const getTopics = async()=> {
     try {
@@ -38,6 +38,12 @@ function ContentLayout() {
     getPosts()
   }, [])
 
+  useEffect(()=> {
+    window.addEventListener('load', ()=> {
+      setLoaded(true)
+    })
+  }, [])
+
   return (
     <React.Fragment>
         <header>
@@ -52,8 +58,9 @@ function ContentLayout() {
             }/>
         </main>
         <footer>
-            <Footer />
+          <Footer />
         </footer>
+        <div className='bg-overlay hide-bg-overlay'></div>
     </React.Fragment>
   )
 }

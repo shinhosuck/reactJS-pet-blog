@@ -5,21 +5,23 @@ import profileImage from '../images/default.png'
 
 
 export function Navbar() {
-    const [showNavLinks, setShowNavLinks] = useState(true)
-    const [showUserMenu, setShowUserMenu] = useState(false)
+    const [showNavLinks, setShowNavLinks] = useState(false)
     const [navbarWidth, setNabarWidth] = useState('')
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     let isAuthenticated = JSON.parse(localStorage.getItem('auth')) || null
 
     const navigate = useNavigate()
 
-    const windowResizeEvent = function(e) {
-        setShowUserMenu(false)
-        setShowNavLinks(true)
-        setWindowWidth(e.target.innerWidth)
 
-        const navbarWrapper = document.querySelector('.navbar-wrapper ')
-        navbarWrapper && setNabarWidth(navbarWrapper.offsetWidth)
+    const windowResizeEvent = function(e) {
+        setShowNavLinks(false)
+        setWindowWidth(e.target.innerWidth)
+        const bgOverlay = document.querySelector('.bg-overlay')
+        if(bgOverlay) {
+            bgOverlay.classList.add('hide-bg-overlay')
+            document.body.style.overflow = 'scroll'
+        }
+        
         window.removeEventListener('resize', windowResizeEvent)
     }
    
@@ -30,14 +32,9 @@ export function Navbar() {
     }, [windowWidth])
 
     const logout = function() {
-        setShowUserMenu(false)
         setShowNavLinks(true)
         localStorage.removeItem('auth')
         navigate('/posts', {replace:true, state:{message:'Successfully logged out!'}})
-    }
-
-    const hideUserMenu = function() {
-        setShowUserMenu(false)
     }
 
     return (
@@ -51,131 +48,175 @@ export function Navbar() {
                         <span className='navbar-brand-name-sm-text'>BlogForum</span>
                     </div>
                 </Link>
-                <div className='navbar-navlinks-toggle-btns'>
-                    {showNavLinks ?
-                        <button onClick={()=>setShowNavLinks(!showNavLinks)} className='navbar-toggle-btn navbar-show-navlink-btn'>
-                            <i className="fa fa-bars"></i>
-                        </button>
-                
-                        :
-                        <button onClick={()=>setShowNavLinks(!showNavLinks)} className='navbar-toggle-btn navbar-hide-navlink-btn'>
-                            <i className="fa fa-times"></i>
-                        </button>
-                    }
-                </div>
+                <button
+                    onClick={()=> {
+                        setShowNavLinks(true)
+                        document.querySelector('.bg-overlay').classList.remove('hide-bg-overlay')
+                        document.body.style.overflow = 'hidden'
+                        window.scrollTo({top:0})
+                    }} 
+                    className='navbar-show-navlink-btn'
+                >
+                    <i className="fa fa-bars"></i>
+                </button>
 
                 {/* MOBILE NAVLINKS */}
-                <div className={!showNavLinks?"navbar-show-navlinks navbar-navlinks":"navbar-navlinks"}>
-                    { isAuthenticated &&
-                        <div className="navbar-user-account">
-                            <div onClick={()=>setShowUserMenu(!showUserMenu)} className="navbar-user-account-image-container">
-                                <div className='nav-bar-user-image'>
-                                    <img className='navbar-user-profile-image' src={profileImage} alt="" />
-                                    <span className='navbar-user-useranme'>{isAuthenticated.username}</span>
-                                </div>
-                                <div className="navbar-user-account-menu-toggle-btns">
-                                    {!showUserMenu ? 
-                                        <button onClick={()=>setShowUserMenu(true)} className='navbar-user-menu-tobble-btn'>
-                                            <i className="fa fa-chevron-down"></i>
-                                        </button>
-                                    : 
-                                        <button onClick={()=>setShowUserMenu(false)} className='navbar-user-menu-tobble-btn'>
-                                            <i className="fa fa-chevron-up"></i>
-                                        </button>
-                                    }
-                                </div>
-                            </div>
-                            <div className={showUserMenu?'navbar-user-account-menu show-navbar-user-account-menu':'navbar-user-account-menu'}>
-                                <NavLink
-                                    to='/my-posts'
-                                    onClick={()=>setShowNavLinks(true)} 
-                                    className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
-                                >
-                                    My Posts
-                                </NavLink>
-                                <NavLink 
-                                    to='/my-comments'
-                                    className={({isActive})=>isActive ? 'navbar-active-navlink navbar-navlink' : 'navbar-navlink'}
-                                    onClick={()=>setShowNavLinks(true)}
-                                >
-                                    Comments
-                                </NavLink>
-                                <NavLink 
-                                    onClick={()=>setShowNavLinks(true)}
-                                    to='/create/post'
-                                    className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
-                                >
-                                    Create Post
-                                </NavLink>
-                                <button onClick={logout} className='navbar-navlink' style={{border:'none',background:'none'}}>
-                                    Logout
-                                </button>
-                            </div>
-                        
-                        </div>
-                    }
+                <div className={showNavLinks?"navbar-show-navlinks navbar-navlinks":"navbar-navlinks"}>
+                    <button
+                        onClick={()=> {
+                            setShowNavLinks(false)
+                            document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                            document.body.style.overflow = 'scroll'
+                        }} 
+                        className='navbar-hide-navlink-btn'
+                    >
+                        <i className="fa fa-times"></i>
+                    </button>
+                   {/* {isAuthenticated && 
+                        <Link className="navbar-user-account-image-container">
+                            <img className='navbar-user-profile-image' src={profileImage} alt="" />
+                            <span className='navbar-user-useranme'>{isAuthenticated.username}</span>
+                        </Link>
+                    } */}
                     <NavLink 
-                        onClick={()=>setShowNavLinks(true)} 
+                        onClick={()=> {
+                            setShowNavLinks(false)
+                            document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                        }} 
                         to='/forums' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
                         Forums
                     </NavLink>
                     <NavLink 
-                        onClick={()=>setShowNavLinks(true)}
+                        onClick={()=> {
+                            setShowNavLinks(false)
+                            document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                        }}
                         to='/posts' 
                         className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
                         Posts
                     </NavLink>
-
-                    {!isAuthenticated &&
+                    {isAuthenticated ?
+                        <>
+                            <NavLink
+                                to='/my-posts'
+                                onClick={()=> {
+                                    setShowNavLinks(false)
+                                    document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                }} 
+                                className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                            >
+                                My Posts
+                            </NavLink>
+                            <NavLink 
+                                to='/my-comments'
+                                className={({isActive})=>isActive ? 'navbar-active-navlink navbar-navlink' : 'navbar-navlink'}
+                                onClick={()=> {
+                                    setShowNavLinks(false)
+                                    document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                }}
+                            >
+                                My Comments
+                            </NavLink>
+                            <NavLink 
+                                onClick={()=> {
+                                    setShowNavLinks(false)
+                                    document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                }}
+                                to='/create/post'
+                                className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                            >
+                                Create Post
+                            </NavLink>
+                            <div className='navbar-navlink-logout-btn-container'>
+                                <button onClick={logout} className='navbar-navlink-logout-btn'>
+                                    Logout
+                                </button>
+                            </div>
+                        </>
+                        
+                    :
                         <>
                             <NavLink 
-                                onClick={()=>setShowNavLinks(true)}
+                                onClick={()=> {
+                                    setShowNavLinks(false)
+                                }}
                                 to='/login' 
                                 className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                             >
                                 Login
                             </NavLink>
                             <NavLink 
-                                onClick={()=>setShowNavLinks(true)}
+                                onClick={()=> {
+                                    setShowNavLinks(false)
+                                }}
                                 to='/register' 
                                 className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                             >
                                 Register
                             </NavLink>
-                        </>
+                        </>   
                     }
                 </div>
                 {/* END */}
 
                 {/* LARGE NAVLINKS */}
                 <div className='lg-navbar-navlinks' >
-                    
-                    <NavLink 
-                        onClick={hideUserMenu}
+                    <NavLink
                         to='/forums' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
                         Forums
                     </NavLink>
-                    <NavLink 
-                       onClick={hideUserMenu}
+                    <NavLink
                         to='/posts' 
                         className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
                         Posts
                     </NavLink>
-                    {!isAuthenticated &&
+                    {isAuthenticated ?
                         <>
+                            {/* <div className="navbar-user-account-image-container">
+                                <div className='nav-bar-user-image'>
+                                    <img className='navbar-user-profile-image' src={profileImage} alt="" />
+                                    <span className='navbar-user-useranme'>{isAuthenticated.username}</span>
+                                </div>
+                            </div> */}
                             <NavLink 
-                                onClick={hideUserMenu}
+                                to='/my-posts'
+                                className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                            >
+                                My Posts
+                            </NavLink>
+                            <NavLink 
+                                to='/my-comments'
+                                className={({isActive})=>isActive ? 'navbar-active-navlink navbar-navlink' : 'navbar-navlink'}
+                            >
+                                My Comments
+                            </NavLink>
+                            <NavLink 
+                                to='/create/post'
+                                className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                            >
+                                Create Post
+                            </NavLink>
+                            <button 
+                                onClick={()=>logout()} 
+                                className='navbar-navlink navbar-button' 
+                                style={{border:'none',background:'none'}}
+                            >
+                                Logout
+                            </button>
+                        </>
+                    :
+                        <>
+                            <NavLink
                                 to='/login' 
                                 className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                             >
                                 Login
                             </NavLink>
-                            <NavLink 
-                                onClick={hideUserMenu}
+                            <NavLink
                                 to='/register' 
                                 className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                             >
@@ -183,59 +224,6 @@ export function Navbar() {
                             </NavLink>
                         </>
                     }
-                    {isAuthenticated &&
-                        <div className="lg-navbar-user-account">
-                            <div onClick={()=>setShowUserMenu(!showUserMenu)} className="navbar-user-account-image-container">
-                                <div className='nav-bar-user-image'>
-                                    <img className='navbar-user-profile-image' src={profileImage} alt="" />
-                                    <span className='navbar-user-useranme'>{isAuthenticated.username}</span>
-                                </div>
-                                
-                                <div className="navbar-user-account-menu-toggle-btns">
-                                    {!showUserMenu ? 
-                                        <button onClick={()=>setShowUserMenu(true)} className='navbar-user-menu-tobble-btn'>
-                                            <i className="fa fa-chevron-down"></i>
-                                        </button>
-                                    : 
-                                        <button onClick={()=>setShowUserMenu(false)} className='navbar-user-menu-tobble-btn'>
-                                            <i className="fa fa-chevron-up"></i>
-                                        </button>
-                                    }
-                                </div>
-                            </div>
-                            <div className={showUserMenu?'navbar-user-account-menu show-navbar-user-account-menu':'navbar-user-account-menu'}>
-                                <NavLink 
-                                    onClick={hideUserMenu}
-                                    style={{right:`calc((100vw - ${navbarWidth}) / 2)`}}
-                                    to='/my-posts'
-                                    className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
-                                >
-                                    My Posts
-                                </NavLink>
-                                <NavLink 
-                                    to='/my-comments'
-                                    className={({isActive})=>isActive ? 'navbar-active-navlink navbar-navlink' : 'navbar-navlink'}
-                                    onClick={hideUserMenu}
-                                >
-                                    Comments
-                                </NavLink>
-                                <NavLink 
-                                    onClick={hideUserMenu}
-                                    to='/create/post'
-                                    className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
-                                >
-                                    Create Post
-                                </NavLink>
-                                <button 
-                                    onClick={()=>logout()} 
-                                    className='navbar-navlink navbar-button' 
-                                    style={{border:'none',background:'none'}}
-                                >
-                                    Logout
-                                </button>
-                            </div>
-                        </div>
-                     }
 
                 </div>
                 {/* END */}

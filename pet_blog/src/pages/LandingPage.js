@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
-import paw from '../images/paw.webp'
-import landingPageImg from '../images/hero_img1.webp'
+import { Link, useLocation } from 'react-router-dom'
+import landingPageImg from '../images/landing_page.webp'
 import { getPostData, getTopicData} from '../utils/api'
 import LoadingPage from './LoadingPage'
 import { url } from './PostList'
 import Footer from './Footer'
+import paw from '../images/paw.webp'
+
 
 
 function LandingPage() {
@@ -15,6 +16,8 @@ function LandingPage() {
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const {pathname, state} = useLocation()
+
+
 
     useEffect(()=> {
         const getData = async()=> {
@@ -137,24 +140,23 @@ function LandingPage() {
                     <div className="landing-page-topics">
                         {topics.map((topic)=> {
                             return (
-                                <div
-                                    to={topic.total_post ? `/topic/${topic.name}/posts/?filter=${topic.name.toLowerCase()}` :''} 
-                                    state={{topic:topic.name, redirect:pathname}} 
-                                    key={topic.id} 
-                                    className="landing-page-topic"
-                                >
+                                <div key={topic.id} className="landing-page-topic">
                                     <img className='landing-page-topic-image' src={topic.image_url} alt={topic.name} />
                                     <div className='landing-page-topic-text-container'>
                                         <h3 className='landing-page-topic-name'>{topic.name}</h3>
                                         <p className='landing-page-topic-description'>
-                                            {topic.description}... 
-                                            <Link 
-                                                className='landing-page-topic-read-more'
-                                                to={topic.total_post ? `/topic/${topic.name}/posts/?filter=${topic.name.toLowerCase()}` :''} 
-                                                state={{topic:topic.name, redirect:pathname}} 
-                                            >
-                                                Read more
-                                            </Link>
+                                            {topic.description}
+                                            {topic.total_post ?
+                                                <Link 
+                                                    className='landing-page-topic-read-more'
+                                                    to={topic.total_post ? `/topic/${topic.name}/posts/?filter=${topic.name.toLowerCase()}` :'.'} 
+                                                    state={{topic:topic.name, redirect:pathname}} 
+                                                >
+                                                    {topic.total_post > 1 ? 'Read posts' : 'Read post'}
+                                                </Link>
+                                            :
+                                                <Link className='landing-page-topic-read-more'>No post to see</Link>
+                                            }
                                         </p>
                                         {topic.total_post > 1 ? 
                                             <div className='landing-page-topic-post-count'>
@@ -247,7 +249,10 @@ function LandingPage() {
             </main>
             <div className={showNavLinks ? 'bg-overlay' : 'hide-bg-overlay'}></div>
             <footer>
-                <Footer />
+                {posts && topics && 
+                    <Footer />
+                }
+                
             </footer>
         </React.Fragment>
     )

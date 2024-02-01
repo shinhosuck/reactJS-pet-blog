@@ -72,7 +72,18 @@ function PostList() {
   }
   return (
     <React.Fragment>
-      <div className="bg-img"></div>
+      <div className="bg-img">
+        <div className="bg-img-header-container">
+          <div className="bg-img-contents">
+            <h1 className='bg-img-header'>Latest Posts</h1>
+            <p className='bg-img-text'>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+              Ducimus cupiditate ipsum provident saepe libero eum voluptatibus 
+              deserunt quisquam placeat maiores!
+            </p>
+          </div>
+        </div>
+      </div>
       {message && <p className='post-list-message'>{message}</p>}
       <div className="post-list-main-container">
         <div className='post-container'>

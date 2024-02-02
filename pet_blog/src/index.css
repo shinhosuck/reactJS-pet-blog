@@ -327,8 +327,11 @@ Landing Page
   color: hsl(0, 0%, 100%);
   border-radius: 5px;
   letter-spacing: 0.05rem;
-  margin-top: 1rem;
   font-weight: 500;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  margin-top: 1rem;
 }
 
 /* Main section */

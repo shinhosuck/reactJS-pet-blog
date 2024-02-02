@@ -106,18 +106,13 @@ function LandingPage() {
                         </div>
                     </nav>
                 </div>
-                <div className='landing-page-hero-wrapper'>
-                    <div className="landing-page-hero-container">
-                        <div className="landing-page-hero-img">
-                            <img src={landingPageImg} alt="" />
-                        </div>
-                        <div className="landing-page-hero-text-wrapper">
-                            <h1 className='landing-page-hero-header'>We are Canine Blog Site</h1>
-                            <p className='landing-page-hero-paragraph'>
-                                Here, you can seek suggestions about your canine's health issues or share your expertise on various canines's health problems.
-                            </p>
-                            <Link to='/register' className='landing-page-join-btn'>Join now</Link>
-                        </div>
+                <div className='mobile-landing-page-hero-wrapper'>
+                    <div className="mobile-landing-page-hero-text-wrapper">
+                        <h1 className='mobile-landing-page-hero-header'>We are Canine Blog Site</h1>
+                        <p className='mobile-landing-page-hero-paragraph'>
+                            Here, you can seek suggestions about your canine's health issues or share your expertise on various canines's health problems.
+                        </p>
+                        <Link to='/register' className='mobile-landing-page-join-btn'>Join now</Link>
                     </div>
                 </div>
                 <div className='lg-landing-page-hero-wrapper'>

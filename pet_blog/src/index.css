@@ -279,56 +279,48 @@ Landing Page
 }
 
 /* Hero section */
-.landing-page-hero-wrapper {
-  background: #e7ded5;
-  padding-bottom: 3rem;
-}
-
 .lg-landing-page-hero-wrapper {
   display: none;
 }
-.landing-page-hero-container {
 
+.mobile-landing-page-hero-wrapper {
+  background: linear-gradient(
+    to bottom, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), 
+    url('./images/mobile_landing_page.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: grid;
-  align-items: start;
-  gap: 2rem;
+  height: calc(90vh - 77px);
+  padding-bottom: 3rem;
 }
 
-.landing-page-hero-img > img {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  display: block;
-  object-position: right;
-}
-
-.landing-page-hero-text-wrapper {
-  display: grid;
-  align-content: start;
-  gap: 2rem;
-  text-align: center;
+.mobile-landing-page-hero-text-wrapper {
   width: 90%;
-  max-width: 450px;
+  max-width: 500px;
   margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  align-content: end;
+  text-align: center;
 }
 
-.landing-page-hero-header {
-  color: var(--orange-10);
+.mobile-landing-page-hero-header {
+  font-size: clamp(2rem, 5vw + 1rem, 3.5rem);
   text-wrap: pretty;
   line-height: 1.2;
-  font-size: clamp(2rem, 5vw + 1rem, 3.8rem);
+  color: white;
 }
 
-.landing-page-hero-paragraph {
-  color: var(--orange-20);
+.mobile-landing-page-hero-paragraph {
+  color: var(--black-80);
   letter-spacing: 0.05rem;
   line-height: 1.5;
   text-wrap: pretty;
   font-size: clamp(1.05rem, 1vw + 0.5rem, 1.2rem);
 }
 
-.landing-page-join-btn {
+.mobile-landing-page-join-btn {
   padding: 0.8rem 2rem ;
   text-align: center;
   background: hsl(7, 100%, 54%);
@@ -717,16 +709,16 @@ Landing Page
     padding-bottom: 0;
   }
 
-  .landing-page-hero-wrapper {
+  .mobile-landing-page-hero-wrapper {
     display: none;
   }
 
   .lg-landing-page-hero-wrapper {
     display: block;
     min-height: 75vh;
-    background: linear-gradient(to bottom, hsla(0, 0%, 0%, 0.5), hsla(22, 61%, 7%, 0.5)),
+    background: linear-gradient(to bottom, hsla(0, 0%, 0%, 0.55), hsla(22, 61%, 7%, 0.55)),
     url('./images/landing_page.webp');
-    background-position: center right;
+    background-position: right;
     background-repeat: no-repeat;
     background-size: cover;
     display: grid;
@@ -734,6 +726,7 @@ Landing Page
   }
 
   .landing-page-hero-container {
+    display: grid;
     align-items: center;
     width: 90%;
     max-width: 1200px;
@@ -741,6 +734,8 @@ Landing Page
   }
   
   .landing-page-hero-text-wrapper {
+    display: grid;
+    gap: 1rem;
     text-align: start;
     max-width: initial;
     margin: 0;
@@ -749,16 +744,29 @@ Landing Page
 
   .landing-page-hero-header {
     font-size: clamp(2rem, 5vw + 1rem, 3.3rem);
-    color: white;
+    color: hsl(0, 0%, 100%);
+    line-height: 1.2;
+    text-wrap: pretty;
   }
 
   .landing-page-hero-paragraph {
-    color: var(--black-80)
+    color: var(--black-80);
+    letter-spacing: 0.05rem;
+    line-height: 1.5;
+    text-wrap: pretty;
+    font-size: clamp(1.05rem, 1vw + 0.5rem, 1.2rem);
   }
 
   .landing-page-join-btn {
     justify-self: start;
     padding: 0.7rem 3rem;
+    text-align: center;
+    background: hsl(7, 100%, 54%);
+    color: hsl(0, 0%, 100%);
+    border-radius: 5px;
+    letter-spacing: 0.05rem;
+    margin-top: 1rem;
+    font-weight: 500;
   }
 
   .landing-page-already-registered {

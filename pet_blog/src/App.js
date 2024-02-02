@@ -12,7 +12,7 @@ import RootLayout from './layouts/RootLayout';
 import ContentLayout from './layouts/ContentLayout';
 
 // Pages
-import Topics from './pages/Topics';
+import Forums from './pages/Forums';
 import PostList from './pages/PostList';
 import CreatePost from './pages/CreatePost';
 import PostDetail from './pages/PostDetail';
@@ -30,7 +30,7 @@ const router = createBrowserRouter(
     <Route element={<RootLayout />}>
       <Route path='/' element={<LandingPage />}/>
       <Route element={<ContentLayout/>} >
-        <Route path='forums' element={<Topics />}/>
+        <Route path='forums' element={<Forums />}/>
         <Route path='posts' element={<PostList/>} />
         <Route path='post/:id/detail' element={<PostDetail/>} />
         <Route path='create/post' element={<CreatePost />}/>

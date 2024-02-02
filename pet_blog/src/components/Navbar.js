@@ -20,7 +20,7 @@ export function Navbar() {
         if(bgOverlay) {
             if(!bgOverlay.classList.contains('hide-bg-overlay')) {
                 bgOverlay.classList.add('hide-bg-overlay')
-                document.body.style.overflow = 'scroll'
+                // document.body.style.overflow = 'scroll'
             }
         }
         window.removeEventListener('resize', windowResizeEvent)
@@ -71,16 +71,11 @@ export function Navbar() {
                     >
                         <i className="fa fa-times"></i>
                     </button>
-                   {/* {isAuthenticated && 
-                        <Link className="navbar-user-account-image-container">
-                            <img className='navbar-user-profile-image' src={profileImage} alt="" />
-                            <span className='navbar-user-useranme'>{isAuthenticated.username}</span>
-                        </Link>
-                    } */}
                     <NavLink 
                         onClick={()=> {
                             setShowNavLinks(false)
                             document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                            document.body.style.overflow = 'scroll'
                         }} 
                         to='/forums' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
@@ -90,6 +85,7 @@ export function Navbar() {
                         onClick={()=> {
                             setShowNavLinks(false)
                             document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                            document.body.style.overflow = 'scroll'
                         }}
                         to='/posts' 
                         className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
@@ -103,6 +99,7 @@ export function Navbar() {
                                 onClick={()=> {
                                     setShowNavLinks(false)
                                     document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                    document.body.style.overflow = 'scroll'
                                 }} 
                                 className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                             >
@@ -114,6 +111,7 @@ export function Navbar() {
                                 onClick={()=> {
                                     setShowNavLinks(false)
                                     document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                    document.body.style.overflow = 'scroll'
                                 }}
                             >
                                 My Comments
@@ -122,6 +120,7 @@ export function Navbar() {
                                 onClick={()=> {
                                     setShowNavLinks(false)
                                     document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                    document.body.style.overflow = 'scroll'
                                 }}
                                 to='/create/post'
                                 className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
@@ -140,6 +139,8 @@ export function Navbar() {
                             <NavLink 
                                 onClick={()=> {
                                     setShowNavLinks(false)
+                                    document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                    document.body.style.overflow = 'scroll'
                                 }}
                                 to='/login' 
                                 className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
@@ -149,6 +150,8 @@ export function Navbar() {
                             <NavLink 
                                 onClick={()=> {
                                     setShowNavLinks(false)
+                                    document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                    document.body.style.overflow = 'scroll'
                                 }}
                                 to='/register' 
                                 className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}

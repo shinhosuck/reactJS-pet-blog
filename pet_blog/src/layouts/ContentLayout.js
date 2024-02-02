@@ -11,7 +11,7 @@ function ContentLayout() {
   const [topics, setTopics] = useState(null)
   const [posts, setPosts] = useState(null)
 
-  
+
   const getTopics = async()=> {
     try {
       const data = await getTopicData(`${url}/api/topics/`)
@@ -36,10 +36,6 @@ function ContentLayout() {
 
   useEffect(()=> {
     getPosts()
-  }, [])
-
-  useEffect(()=> {
-    document.body.style.overflow = 'scroll'
   }, [])
 
   return (

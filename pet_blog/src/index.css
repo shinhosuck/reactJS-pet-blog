@@ -36,6 +36,12 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 a {
   text-decoration: none;
   display: inline-block;
@@ -57,16 +63,6 @@ input[type='email'] {
 button,
 textarea {
   font-family: 'Poppins', sans-serif;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-main {
-  /* background: var(--black-95); */
 }
 
 /* loading */
@@ -298,7 +294,7 @@ Landing Page
 
 .mobile-landing-page-hero-text-wrapper {
   width: 90%;
-  max-width: 450px;
+  max-width: 500px;
   margin: 0 auto;
   display: grid;
   gap: 1rem;
@@ -307,7 +303,7 @@ Landing Page
 }
 
 .mobile-landing-page-hero-header {
-  font-size: clamp(2rem, 5vw + 1rem, 3.5rem);
+  font-size: clamp(2rem, 5vw + 1rem, 4rem);
   text-wrap: pretty;
   line-height: 1.2;
   color: white;
@@ -336,25 +332,24 @@ Landing Page
 }
 
 /* Main section */
-.landing-page-main {
+/* .landing-page-main {
   background: white;
-}
+} */
 
 .landing-page-topics-container {
-  padding: 3rem 0;
-  width: 90%;
+  padding: 2rem 0;
+  padding-bottom: 3rem;
+  width: 85%;
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 .landing-page-topic-header-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
   text-align: center;
 }
 
@@ -374,7 +369,7 @@ Landing Page
 .landing-page-topic {
   display: grid;
   align-content: start;
-  gap: 1.5rem;
+  gap: 0.8rem;
 }
 
 .landing-page-topic-image {
@@ -410,7 +405,6 @@ Landing Page
   color:#ff3d24;
   text-decoration:underline;
   letter-spacing: 0.05rem;
-  /* margin-left: 0.5rem; */
 }
 
 .landing-page-topic-post-count {
@@ -440,6 +434,7 @@ Landing Page
   flex-wrap: wrap;
   gap: 1.5rem;
   text-align: center;
+  margin-top: 1rem
 }
 
 .landing-page-topic-see-all-forums {
@@ -457,15 +452,16 @@ Landing Page
 /* Landing page posts */
 .landing-page-posts-container {
   background: #e7ded5;
-  padding: 3rem 0;
+  padding: 2rem 0;
+  padding-bottom: 3rem;
 }
 
 .landing-page-posts-wrapper {
-  width: 90%;
+  width: 85%;
   max-width: 1000px;
   margin: 0 auto;
   display: grid;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 .landing-page-post-header-container {
@@ -607,6 +603,7 @@ Landing Page
   flex-wrap: wrap;
   gap: 1.5rem;
   text-align: center;
+  margin-top: 1rem
 }
 
 .landing-page-post-see-all-posts {
@@ -679,7 +676,9 @@ Landing Page
 @media screen and (min-width: 676px) {
 
   .landing-page-topics-container {
-    padding-bottom: 5rem;
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+    gap: 3rem;
   }
 
   .landing-page-topics {
@@ -687,8 +686,14 @@ Landing Page
   }
 
   .landing-page-posts-container {
-    padding-bottom: 5rem;
+    padding-top: 3rem;
+    padding-bottom: 4rem;
   }
+
+  .landing-page-posts-wrapper {
+    gap: 3rem;
+  }
+
 }
 
 @media screen and (min-width: 835px) {

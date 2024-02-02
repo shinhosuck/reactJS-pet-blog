@@ -60,8 +60,8 @@ function LandingPage() {
             window.scrollTo({top:0})
             document.body.style.overflowY = 'hidden'
 
-        }else {
-            document.body.style.overflowY = 'scroll'
+        // }else if(!showNavLinks) {
+        //     document.body.style.overflowY = 'scroll'
         }
     }, [showNavLinks, !showNavLinks])
 
@@ -99,9 +99,36 @@ function LandingPage() {
                             <button onClick={()=>setShowNavLinks(false)} className='landing-page-toggle-btn landing-page-hide-navlink-btn'>
                                 <i className="fa fa-times"></i>
                             </button>
-                            <Link to='/forums' className='landing-page-navlink'>Forums</Link>
-                            <Link to='/posts' className='landing-page-navlink'>Posts</Link>
-                            <Link to='/login' className='landing-page-navlink landing-page-login-btn'>Login</Link>
+                            <Link
+                                to='/forums' 
+                                className='landing-page-navlink'
+                                onClick={()=> {
+                                    document.body.style.overflowY = 'scroll'
+                                    setShowNavLinks(false)
+                                }}
+                            >
+                                Forums
+                            </Link>
+                            <Link
+                                to='/posts' 
+                                className='landing-page-navlink'
+                                onClick={()=> {
+                                    document.body.style.overflowY = 'scroll'
+                                    setShowNavLinks(false)
+                                }}
+                            >
+                                Posts
+                            </Link>
+                            <Link
+                                to='/login' 
+                                className='landing-page-navlink landing-page-login-btn'
+                                onClick={()=> {
+                                    document.body.style.overflowY = 'scroll'
+                                    setShowNavLinks(false)
+                                }}
+                            >
+                                Login
+                            </Link>
                         </div>
                     </nav>
                 </div>

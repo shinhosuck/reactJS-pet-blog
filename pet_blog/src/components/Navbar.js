@@ -6,7 +6,6 @@ import profileImage from '../images/default.png'
 
 export function Navbar() {
     const [showNavLinks, setShowNavLinks] = useState(false)
-    const [navbarWidth, setNabarWidth] = useState('')
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     let isAuthenticated = JSON.parse(localStorage.getItem('auth')) || null
 
@@ -17,17 +16,17 @@ export function Navbar() {
         setShowNavLinks(false)
         setWindowWidth(e.target.innerWidth)
         const bgOverlay = document.querySelector('.bg-overlay')
+
         if(bgOverlay) {
-            bgOverlay.classList.add('hide-bg-overlay')
-            document.body.style.overflow = 'scroll'
+            if(!bgOverlay.classList.contains('hide-bg-overlay')) {
+                bgOverlay.classList.add('hide-bg-overlay')
+                document.body.style.overflow = 'scroll'
+            }
         }
-        
         window.removeEventListener('resize', windowResizeEvent)
     }
    
     useEffect(()=> {
-        const navbarWrapper = document.querySelector('.navbar-wrapper ')
-        navbarWrapper && setNabarWidth(navbarWrapper.offsetWidth)
         window.addEventListener('resize', windowResizeEvent)
     }, [windowWidth])
 

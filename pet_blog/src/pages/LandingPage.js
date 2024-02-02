@@ -56,7 +56,6 @@ function LandingPage() {
     }, [])
 
     useEffect(()=>{
-        const root = document.querySelector('#root')
         if(showNavLinks) {
             window.scrollTo({top:0})
             document.body.style.overflowY = 'hidden'
@@ -242,13 +241,13 @@ function LandingPage() {
                     </div>
                 </div>
             </main>
-            <div className={showNavLinks ? 'bg-overlay' : 'hide-bg-overlay'}></div>
             <footer>
                 {posts && topics && 
                     <Footer />
                 }
                 
             </footer>
+            <div className={showNavLinks ? 'bg-overlay' : 'hide-bg-overlay'}></div>
         </React.Fragment>
     )
 }

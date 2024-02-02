@@ -10,8 +10,8 @@ import { url } from '../pages/PostList'
 function ContentLayout() {
   const [topics, setTopics] = useState(null)
   const [posts, setPosts] = useState(null)
-  const [loaded, setLoaded] = useState(false)
 
+  
   const getTopics = async()=> {
     try {
       const data = await getTopicData(`${url}/api/topics/`)
@@ -39,9 +39,7 @@ function ContentLayout() {
   }, [])
 
   useEffect(()=> {
-    window.addEventListener('load', ()=> {
-      setLoaded(true)
-    })
+    document.body.style.overflow = 'scroll'
   }, [])
 
   return (

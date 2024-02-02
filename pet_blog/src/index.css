@@ -291,7 +291,7 @@ Landing Page
   background-repeat: no-repeat;
   background-size: cover;
   display: grid;
-  height: calc(90vh - 77px);
+  height: calc(80vh - 77px);
   padding-bottom: 3rem;
 }
 

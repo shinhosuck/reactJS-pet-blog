@@ -358,7 +358,7 @@ Landing Page
   text-wrap: pretty;
   color: var(--orange-10);
   line-height: 1;
-  font-size: clamp(2rem, 5vw + 1rem, 2.5rem);
+  font-size: clamp(2rem, 4vw + 1rem, 2.5rem);
 }
 
 .landing-featured-posts-text {
@@ -488,7 +488,7 @@ Landing Page
   text-wrap: pretty;
   color: var(--orange-10);
   line-height: 1;
-  font-size: clamp(2rem, 5vw + 1rem, 2.5rem);
+  font-size: clamp(2rem, 4vw + 1rem, 2.5rem);
 }
 
 .landing-page-topic-text {
@@ -613,7 +613,7 @@ Landing Page
   color: var(--orange-10);
   text-align: center;
   line-height: 1;
-  font-size: clamp(2rem, 5vw + 1rem, 2.6rem);
+  font-size: clamp(2rem, 4vw + 1rem, 2.6rem);
 }
 
 .landing-page-posts {

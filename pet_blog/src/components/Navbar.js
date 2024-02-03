@@ -39,7 +39,7 @@ export function Navbar() {
     return (
         <div className="navbar-container">
             <nav className="navbar-wrapper">
-                <Link to='/forums' className='navbar-brand-link'>
+                <Link to='/posts' className='navbar-brand-link'>
                     <img className='navbar-brand-logo' src={paw} alt="paw" />
                     <div className="navbar-brand-verticla-line"></div>
                     <div className='navbar-brand-name-container'>
@@ -77,9 +77,9 @@ export function Navbar() {
                             document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
                             document.body.style.overflow = 'scroll'
                         }} 
-                        to='/forums' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                        to='/topics' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
-                        Forums
+                        Topics
                     </NavLink>
                     <NavLink 
                         onClick={()=> {
@@ -166,9 +166,9 @@ export function Navbar() {
                 {/* LARGE NAVLINKS */}
                 <div className='lg-navbar-navlinks' >
                     <NavLink
-                        to='/forums' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                        to='/topics' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
-                        Forums
+                        Topics
                     </NavLink>
                     <NavLink
                         to='/posts' 

@@ -14,7 +14,7 @@ function Topics() {
 
     const authenticated = JSON.parse(localStorage.getItem('auth')) || null
 
-    window.history.replaceState({state:null}, '', '/forums')
+    window.history.replaceState({state:null}, '', '/topics')
 
     const objs = posts ? posts.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()})) : null
 
@@ -61,7 +61,7 @@ function Topics() {
             <div className="bg-img">
                 <div className="bg-img-header-container">
                     <div className="bg-img-contents">
-                        <h1 className='bg-img-header'>Forums</h1>
+                        <h1 className='bg-img-header'>Topics</h1>
                         <p className='bg-img-text'>
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
                         Ducimus cupiditate ipsum provident saepe libero eum voluptatibus 
@@ -74,7 +74,7 @@ function Topics() {
             <div className="topics-main-container">
                 <div className="topics-container">
                     <div className='topics-header-container'>
-                        <h1 className='topics-main-container__header'>Forums</h1>
+                        <h1 className='topics-main-container__header'>Topics</h1>
                         <h4 className='topics-sub-header'>8 Common Dog Health Problems</h4>
                     </div>
                     {authenticated &&

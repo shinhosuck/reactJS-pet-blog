@@ -78,8 +78,7 @@ function PostList() {
             <h1 className='bg-img-header'>Latest Posts</h1>
             <p className='bg-img-text'>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-              Ducimus cupiditate ipsum provident saepe libero eum voluptatibus 
-              deserunt quisquam placeat maiores!
+              Ducimus cupiditate deserunt quisquam placeat maiores!
             </p>
           </div>
         </div>

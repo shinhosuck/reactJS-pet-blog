@@ -13,8 +13,7 @@ function LandingPageTopics(props) {
                 <div className="landing-page-topic-header-container">
                     <h1 className='landing-page-topic-header'>Topics</h1>
                     <p className='landing-page-topic-text'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        At cumque voluptatum cupiditate.
+                        Ask questions, share your experiences, and discuss topics of mutual interest.
                     </p>
                     <div className="landing-page-topic-see-all-forums-container">
                         <Link to='/topics' className='landing-page-topic-see-all-forums'>

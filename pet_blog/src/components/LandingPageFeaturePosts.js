@@ -15,8 +15,9 @@ function LandingPageFeaturePosts(props) {
                 <div className="landing-page-featured-post-header-container">
                     <h1 className='landing-page-featured-posts-header'>Featured Posts</h1>
                     <p className='landing-featured-posts-text'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        At cumque voluptatum cupiditate.
+                        You'll find valuable information, 
+                        advice, and entertaining stories to help you better 
+                        understand and care for your furry friend. 
                     </p>
                 </div>
                 <div className="landing-page-featured-posts">

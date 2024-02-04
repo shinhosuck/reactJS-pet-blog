@@ -11,7 +11,11 @@ function LandingPagePosts(props) {
         <div className="landing-page-posts-container">
             <div className="landing-page-posts-wrapper">
                 <div className="landing-page-post-header-container">
-                    <h1 className='landing-page-posts-header'>Posts</h1>
+                    <h1 className='landing-page-posts-header'>Recent Posts</h1>
+                    <p className='landing-page-posts-text'>
+                        You'll find a wealth of information about caring for your canine companion, 
+                        from best practices to advice against.
+                    </p>
                 </div>
                 <div className="landing-page-posts">
                     {posts.map((post)=> {
@@ -20,7 +24,6 @@ function LandingPagePosts(props) {
                                 <div className="landing-page-post-image-container">
                                     <img className='landing-page-post-image' src={post.image_url} alt={post.title} />
                                 </div>
-                                <div className="landing-page-post-color-overlay"></div>
                                 <div className='landing-page-post-text-content'>
                                     <h3 className='landing-page-post-title'>{post.title}</h3>
                                     <p className='landing-page-post-content'>

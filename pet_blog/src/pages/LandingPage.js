@@ -9,16 +9,16 @@ import paw from '../images/paw.webp'
 import LandingPageTopics from '../components/LandingPageTopics'
 import LandingPagePosts from '../components/LandingPagePosts'
 import LandingPageFeaturePosts from '../components/LandingPageFeaturePosts'
+import LandingPageHeader from '../components/LandingPageHeader'
+import LandingPageEmailSub from '../components/LandingPageEmailSub'
+
 
 function LandingPage() {
-    const [showNavLinks, setShowNavLinks] = useState(false)
     const [posts, setPosts] = useState(null)
     const [topics, setTopics] = useState(null)
     const [featured, setFeatured] = useState(null)
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
-    const {pathname, state} = useLocation()
-
 
 
     useEffect(()=> {
@@ -59,17 +59,6 @@ function LandingPage() {
         getTopics()
     }, [])
 
-    useEffect(()=>{
-        if(showNavLinks) {
-            window.scrollTo({top:0})
-            document.body.style.overflowY = 'hidden'
-
-        }else if(!showNavLinks) {
-            document.body.style.overflowY = 'scroll'
-        }
-    }, [showNavLinks, !showNavLinks])
-
-
     if(isLoading) {
         return (
           <LoadingPage />
@@ -84,92 +73,19 @@ function LandingPage() {
     return (
         <React.Fragment>
             <header>
-                <div className="landing-page-navbar-container">
-                    <nav className="landing-page-navbar-wrapper">
-                        <Link to='/posts' className='landing-page-navbar-brand-link'>
-                            <img className='landing-page-navbar-brand-logo' src={paw} alt="paw" />
-                            <div className="landing-page-navbar-brand-verticla-line"></div>
-                            <div className='landing-page-navbar-brand-name-container'>
-                                <span className='landing-page-navbar-brand-name-lg-text'>PawPals</span>
-                                <span className='landing-page-navbar-brand-name-sm-text'>BlogForum</span>
-                            </div>
-                        </Link>
-                        <div className="landing-page-navlinks-toggle-btns">
-                            <button onClick={()=>setShowNavLinks(true)} className='landing-page-toggle-btn landing-page-show-navlink-btn'>
-                                <i className="fa fa-bars"></i>
-                            </button>
-                        </div>
-                        <div className={showNavLinks?"show-landing-page-nav-links landing-page-navlinks":"landing-page-navlinks"}>
-                            <button onClick={()=>setShowNavLinks(false)} className='landing-page-toggle-btn landing-page-hide-navlink-btn'>
-                                <i className="fa fa-times"></i>
-                            </button>
-                            <Link
-                                to='/topics' 
-                                className='landing-page-navlink'
-                                onClick={()=> {
-                                    document.body.style.overflowY = 'scroll'
-                                    setShowNavLinks(false)
-                                }}
-                            >
-                                Topics
-                            </Link>
-                            <Link
-                                to='/posts' 
-                                className='landing-page-navlink'
-                                onClick={()=> {
-                                    document.body.style.overflowY = 'scroll'
-                                    setShowNavLinks(false)
-                                }}
-                            >
-                                Posts
-                            </Link>
-                            <Link
-                                to='/login' 
-                                className='landing-page-navlink landing-page-login-btn'
-                                onClick={()=> {
-                                    document.body.style.overflowY = 'scroll'
-                                    setShowNavLinks(false)
-                                }}
-                            >
-                                Login
-                            </Link>
-                        </div>
-                    </nav>
-                </div>
-                <div className='mobile-landing-page-hero-wrapper'>
-                    <div className="mobile-landing-page-hero-text-wrapper">
-                        <h1 className='mobile-landing-page-hero-header'>We are Canine Blog Site</h1>
-                        <p className='mobile-landing-page-hero-paragraph'>
-                            Here, you can seek suggestions about your canine's health issues or share your expertise on various canines's health problems.
-                        </p>
-                        <Link to='/register' className='mobile-landing-page-join-btn'>Join now</Link>
-                    </div>
-                </div>
-                <div className='lg-landing-page-hero-wrapper'>
-                    <div className="landing-page-hero-container">
-                        <div className="landing-page-hero-text-wrapper">
-                            <h1 className='landing-page-hero-header'>We are Canine Blog Site</h1>
-                            <p className='landing-page-hero-paragraph'>
-                                Request suggestions about your canine's health issues or 
-                                share your experience and expertise on various canines's health problems.
-                            </p>
-                            <Link to='/register' className='landing-page-join-btn'>Join now</Link>
-                        </div>
-                    </div>
-                </div>
+                <LandingPageHeader />
             </header>
             <main className='landing-page-main'>
-                {featured && <LandingPageFeaturePosts featured={featured} />       }        
+                {featured && <LandingPageFeaturePosts featured={featured} />}        
                 {topics && <LandingPageTopics topics={topics}/>}
                 {posts && <LandingPagePosts posts={posts} />}
+                <LandingPageEmailSub />
             </main>
             <footer>
                 {posts && topics && 
                     <Footer />
                 }
-                
             </footer>
-            <div className={showNavLinks ? 'bg-overlay' : 'hide-bg-overlay'}></div>
         </React.Fragment>
     )
 }

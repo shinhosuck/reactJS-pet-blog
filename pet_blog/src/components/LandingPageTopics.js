@@ -32,7 +32,7 @@ function LandingPageTopics(props) {
                                 state={{topic:topic.name, redirect:pathname}} 
                             >
                                 <img className='landing-page-topic-image' src={topic.image_url} alt={topic.name} />
-                                <div className="landing-page-bg-overlay"></div>
+                                <div className="landing-page-topic-bg-overlay"></div>
                                 <h3 className='landing-page-topic-name'>{topic.name}</h3>
                             </Link>
                         )

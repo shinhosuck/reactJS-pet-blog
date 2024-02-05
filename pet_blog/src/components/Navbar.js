@@ -41,11 +41,7 @@ export function Navbar() {
             <nav className="navbar-wrapper">
                 <Link to='/posts' className='navbar-brand-link'>
                     <img className='navbar-brand-logo' src={paw} alt="paw" />
-                    <div className="navbar-brand-verticla-line"></div>
-                    <div className='navbar-brand-name-container'>
-                        <span className='navbar-brand-name-lg-text'>PawPals</span>
-                        <span className='navbar-brand-name-sm-text'>BlogForum</span>
-                    </div>
+                    <h2 className='navbar-brand-name'>PawPals</h2>
                 </Link>
                 <button
                     onClick={()=> {

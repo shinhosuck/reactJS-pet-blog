@@ -27,11 +27,7 @@ function LandingPageHeader() {
                 <nav className="landing-page-navbar-wrapper">
                     <Link to='/posts' className='landing-page-navbar-brand-link'>
                         <img className='landing-page-navbar-brand-logo' src={paw} alt="paw" />
-                        <div className="landing-page-navbar-brand-verticla-line"></div>
-                        <div className='landing-page-navbar-brand-name-container'>
-                            <span className='landing-page-navbar-brand-name-lg-text'>PawPals</span>
-                            <span className='landing-page-navbar-brand-name-sm-text'>BlogForum</span>
-                        </div>
+                        <h2 className='landing-page-navbar-brand-name'>PawPals</h2>
                     </Link>
                     <div className="landing-page-navlinks-toggle-btns">
                         <button onClick={()=>setShowNavLinks(true)} className='landing-page-toggle-btn landing-page-show-navlink-btn'>

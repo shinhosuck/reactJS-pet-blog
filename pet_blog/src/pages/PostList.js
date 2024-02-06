@@ -6,6 +6,8 @@ import PostListPosts from '../components/PostListPosts'
 import PostListSidebar from '../components/PostListSidebar'
 
 
+import userImg from '../images/default.png'
+
 export const url = window.location.host === 'localhost:3000' ? 
 'http://127.0.0.1:8000' : 'https://pawpals.pythonanywhere.com'
 
@@ -88,20 +90,7 @@ function PostList() {
       </div>
 
       {message && <p className='post-list-message'>{message}</p>}
-
-      {/* {user && 
-        <Link 
-          to='/create/post/' 
-          state={{redirect:pathname}}
-          className="post-container__post-list-create-post"
-        >
-          <div className='post-container__create-post-image-container'>
-            <img className='post-container__create-post-image' src={user.profile_image_url} alt="" />
-            <p className='post-container__create-post-text'>Start a post</p>
-          </div>
-        </Link>
-      } */}
-
+      
       <div className="post-list-main-container">
         {posts && <PostListPosts posts={posts} user={user} />}
         {topics && <PostListSidebar topics={topics.slice(0,4)} />}

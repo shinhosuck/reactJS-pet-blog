@@ -20,7 +20,7 @@ export function Navbar() {
         if(bgOverlay) {
             if(!bgOverlay.classList.contains('hide-bg-overlay')) {
                 bgOverlay.classList.add('hide-bg-overlay')
-                // document.body.style.overflow = 'scroll'
+                document.body.style.overflow = 'scroll'
             }
         }
         window.removeEventListener('resize', windowResizeEvent)

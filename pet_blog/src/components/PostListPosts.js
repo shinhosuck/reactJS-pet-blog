@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-
+import userImg from '../images/default.png'
 
 
 function PostListPosts(props) {
@@ -12,17 +12,18 @@ function PostListPosts(props) {
     
     const getWindowWidth = (e)=> {
         setWidth(window.innerWidth)
-        
         const textContents = [...document.querySelectorAll('.post-container__post-text-content')]
         textContents.forEach((content)=> {
             const contentHeight = content.offsetHeight
             const element = content.previousElementSibling.firstElementChild
             if(width >= 700) {
+                element.parentElement.parentElement.style.display = 'flex'
                 element.style.height = `${contentHeight + 15}px`
                 element.style.width = 'auto'
                 element.style.display = 'block'
 
             }else {
+                element.parentElement.parentElement.style.display = 'grid'
                 element.style.height = '100%'
                 element.style.width = '100%'
                 element.style.aspectRatio = '4/3'
@@ -42,16 +43,6 @@ function PostListPosts(props) {
 
     return (
         <div className="post-container__posts">
-            {user && 
-                <Link 
-                    to='/create/post/' 
-                    state={{redirect:pathname}}
-                    className="post-container__post-list-create-post"
-                >
-                    <img className='post-container__create-post-image' src={user.profile_image_url} alt="" />
-                    <p className='post-container__create-post-text'>Start a post</p>
-                </Link>
-            }
             {posts.map((post)=>{
                 return (
                     <div key={post.id} className="post-container__post">

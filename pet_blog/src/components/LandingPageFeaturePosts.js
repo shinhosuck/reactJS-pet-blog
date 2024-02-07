@@ -9,6 +9,8 @@ import { Link, useLocation } from 'react-router-dom'
 function LandingPageFeaturePosts(props) {
     const {pathname, state} = useLocation()
     const {featured} = props
+
+
     return (
        <div className="landing-page-featured-posts-container">
             <div className="landing-page-featured-posts-wrapper">

@@ -4,7 +4,7 @@ import { getPostData, addLikes, replyPost, hasReplied, getRepliedPosts } from '.
 import LoadingPage from './LoadingPage'
 import UpdateReplyPost from './UpdateReplyPost'
 import { url } from './PostList'
-
+import userImg from '../images/default.png'
 
 
 function PostDetail() {
@@ -19,8 +19,23 @@ function PostDetail() {
     const { id } = useParams()
     const replyContent = useRef()
     const navigate = useNavigate()
-
     const {state, pathname} = useLocation()
+    const [width, seWidth] = useState(window.innerWidth)
+
+    
+
+    const getWindowWidth = (e)=> {
+        const content = document.querySelector('.post-detail-container__text-contents')
+        const img = content && content.previousElementSibling
+        if(width >= 700 && img) {
+            img.style.height = `${content.offsetHeight}px`
+
+        }else if(width < 700 && img) {
+            img.style.height = '100%'
+        }
+        seWidth(window.innerWidth)
+        window.removeEventListener('resize', getWindowWidth)
+    }
 
     const handleReplyPostSubmit = async(e)=> {
         e.preventDefault()
@@ -89,6 +104,7 @@ function PostDetail() {
     
                     }else {
                         console.log(data)
+
                     }
                 } catch (error) {
                     console.log(error)
@@ -107,6 +123,7 @@ function PostDetail() {
 
                 }else {
                     console.log(data)
+                    setRepliedPosts(null)
                 }
             } catch (error) {
                 console.log(error.message)
@@ -115,11 +132,26 @@ function PostDetail() {
         fetchRepliedPosts()
     }, [post])
 
+
+    useEffect(()=> {
+        window.addEventListener('resize', getWindowWidth)
+    }, [width])
+
+
+    // if(document.querySelector('.post-detail-container__text-contents')){
+    //     const content = document.querySelector('.post-detail-container__text-contents')
+
+    //     console.log('CONTENT:', content.offsetHeight)
+    //     content.previousElementSibling.style.height = `${content.clientHeight}px`
+    //     console.log('IMAGE:', content.previousElementSibling.offsetHeight)
+    // }
+    
     if(isLoading) {
         return (
             <LoadingPage />
         )
     }
+
     if(isError) {
         return (
             <h2>There was an error</h2>
@@ -127,24 +159,26 @@ function PostDetail() {
     }
     return (
         <React.Fragment>
-            <div className="bg-img"></div>
-            <div className="topic-posts-container__redirect-btn">
-                <i className="fa fa-arrow-left"></i>
-                <Link to={`${state.redirect}`}>
-                    Back to {state.redirect.split('/').filter((obj)=>obj!=='').join('')}
-                </Link>
+            <div className="bg-img">
+            <div className="bg-img-header-container">
+                <div className="bg-img-contents">
+                    <div className="post-detail-author-profile">
+                        <img className='post-detail-author-img' src={userImg} alt="" />
+                        <h4 className='post-detail-post-author'>{post.author}</h4>
+                    </div>
+                    <p className='post-detail-date-posted'>Posted on {post.date_posted}</p>
+                    <h1 className='post-detail-post-title'>{post.title}</h1>
+                </div>
+            </div>
             </div>
             <div className='post-detail-container'>
+                <Link to={`${state.redirect}`} className='post-detail-back-to-btn'>
+                    <i className="fa fa-arrow-left"></i>
+                    <span>Back to {state.redirect === '/' ? 'home':state.redirect.split('/').filter((obj)=>obj!=='').join('')   }</span>
+                </Link>
                 <div className="post-detail-container__post-detail">
-                    <div className="post-detail-container__post-image-container">
-                        <img className='post-detail-container__post-image' src={post.image_url} alt="" />
-                        <div className="post-detail-container__post-image-color-overlay"></div>
-                    </div>
+                    <img className='post-detail-container__post-image' src={post.image_url} alt="" />
                     <div className="post-detail-container__text-contents">
-                        <div className="post-detail-container__author-and-date">
-                            <h4 className='post-detail-container__post-author'>{post.author}</h4>
-                            <p className='post-detail-container__date-posted'>{post.date_posted}</p>
-                        </div>
                         <h3 className='post-detail-container__post-title'>{post.title}</h3>
                         <p className='post-detail-container__post-content'>{post.content}</p>
                         <div className="post-detail-container__like-and-reply">

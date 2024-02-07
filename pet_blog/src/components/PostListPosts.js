@@ -9,38 +9,6 @@ function PostListPosts(props) {
     const {state, pathname} = useLocation()
     const {posts, user} = props
 
-    
-    const getWindowWidth = (e)=> {
-        setWidth(window.innerWidth)
-        const textContents = [...document.querySelectorAll('.post-container__post-text-content')]
-        textContents.forEach((content)=> {
-            const contentHeight = content.offsetHeight
-            const element = content.previousElementSibling.firstElementChild
-            if(width >= 700) {
-                element.parentElement.parentElement.style.display = 'flex'
-                element.style.height = `${contentHeight + 15}px`
-                element.style.width = 'auto'
-                element.style.display = 'block'
-
-            }else {
-                element.parentElement.parentElement.style.display = 'grid'
-                element.style.height = '100%'
-                element.style.width = '100%'
-                element.style.aspectRatio = '4/3'
-                element.style.objectFit = 'cover'
-                element.style.display = 'block'
-            }
-        })
-        window.removeEventListener('resize', getWindowWidth)
-    }
-
-    useEffect(()=> {
-        if(width >= 700) {
-            getWindowWidth()
-        }
-        window.addEventListener('resize', getWindowWidth)
-    }, [width])
-
     return (
         <div className="post-container__posts">
             {posts.map((post)=>{

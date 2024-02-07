@@ -15,6 +15,7 @@ function TopicListSidebar(props) {
             {objs&& objs.slice(0, 4).map((post)=>{
                 return (
                     <div 
+                        key={post.id}
                         className="topics-side-bar__post"
                         to={`/post/${post.id}/detail/`} 
                         state={{redirect:pathname}}

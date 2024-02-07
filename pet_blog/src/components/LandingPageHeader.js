@@ -9,7 +9,18 @@ import paw from '../images/paw.webp'
 
 function LandingPageHeader() {
     const [showNavLinks, setShowNavLinks] = useState(false)
+    const [width, setWidth] = useState(window.innerWidth)
 
+    
+    const getWindowWidth = ()=> {
+        setWidth(window.innerWidth)
+        setShowNavLinks(false)
+        window.removeEventListener('resize', getWindowWidth)
+    }
+
+    useEffect(()=> {
+        window.addEventListener('resize', getWindowWidth)
+    }, [width])
 
     useEffect(()=>{
         if(showNavLinks) {

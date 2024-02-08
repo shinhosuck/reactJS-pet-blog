@@ -149,7 +149,7 @@ export const replyPost = async(url, body, token)=> {
 }
 
 
-export const getRepliedPosts = async(url)=> {
+export const getPostComments = async(url)=> {
     const resp = await fetch(url, {
         method: 'GET',
         headers: {

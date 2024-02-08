@@ -7,7 +7,7 @@ import React, { useState } from 'react'
 
 
 
-function UpdateReplyPost(props) {
+function UpdateCommentForm(props) {
     const [updateReplyPost, setUpdateReplyPost] = useState(props.updateReplyPost)
     const {showUpdateReplyForm} = props
     
@@ -32,4 +32,4 @@ function UpdateReplyPost(props) {
     )
 }
 
-export default UpdateReplyPost
+export default UpdateCommentForm

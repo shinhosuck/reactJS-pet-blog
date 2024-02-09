@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import { updatePost } from '../utils/api'
 
 
 
@@ -7,16 +7,15 @@ function UpdatePostForm(props) {
     const [updatePost, setUpdatePost] = useState(props.updatePost)
     const {showUpdatePostForm} = props
 
-    const handleSubmit = async()=> {
-
+    const handleSubmit = async(e)=> {
+        e.preventDefault()
+        console.log('hello world')
     }
 
     const handleChange = (e)=> {
         const {name, value} = e.target
         setUpdatePost((prev)=> ({...prev, [name]:value}))
     }
-
-    console.log(updatePost)
 
     return (
         <form action="" className="post-detail-post-edit-form" onSubmit={handleSubmit}>

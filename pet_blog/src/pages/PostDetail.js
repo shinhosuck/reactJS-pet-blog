@@ -8,7 +8,7 @@ import Comments from '../components/Comments'
 import { url } from './PostList'
 import userImg from '../images/default.png'
 import ScrollToTop from '../components/ScrollToTop'
-
+import PostDetailPost from '../components/PostDetailPost'
 
 function PostDetail() {
     const [post, setPost] = useState(null)
@@ -173,90 +173,27 @@ function PostDetail() {
             </div>
             <div className="post-detail-main-container">
                 <div className='post-detail-container'>
-                    <Link to={`${state.redirect}`} className='post-detail-back-to-btn'>
+                    <Link to={`${state && state.redirect && state.redirect}`} className='post-detail-back-to-btn'>
                         <i className="fa fa-arrow-left"></i>
-                        <span>Back to {state.redirect === '/' ? 'home':state.redirect.split('/').filter((obj)=>obj!=='').join('')   }</span>
+                        <span>Back to {
+                                state && state.redirect && state.redirect === '/' 
+                            ? 
+                                'home'
+                            :   
+                                state && state.redirect && state.redirect.split('/').filter((obj)=>obj!=='').join('')}</span>
                     </Link>
-                    <div className="post-detail-container__post-detail">
-                        <div className='post-detail-container__post-image-container'>
-                            <img className='post-detail-container__post-image' src={post.image_url} alt="" />
-                        </div>
-                        <div className="post-detail-container__text-contents">
-                            <h3 className='post-detail-container__post-title'>{post.title}</h3>
-                            <p className='post-detail-container__post-content'>{post.content}</p>
-                            <div className="post-detail-container__like-and-reply">
-                                {post.like.length > 1 ? 
-                                    <>
-                                        <div className='post-detail-container__num-of-replies-container'>
-                                            <i className="fa-solid fa-message post-detail-container__num-of-post"></i>
-                                            <span className='post-detail-container__reply-count'>{post.num_of_replies}</span>
-                                            <span className='post-detail-container__reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
-                                        </div>
-                                        <button 
-                                            onClick={(e)=>authenticated ? updateLike(e, post): navigate('/login', {state:{error:'You must login!'}})} 
-                                            className='post-detail-container__post-like' 
-                                        >
-                                            <i className="fa-solid fa-hands-clapping post-detail-like"></i>
-                                            <span className='post-detail-like-count'>{post.like.length}</span>
-                                            <span className='post-detail-like-count-text'>likes</span>
-                                        </button>
-                                        {authenticated && 
-                                            <button 
-                                                onClick={()=> {
-                                                    setShowCommentForm(true)
-                                                    setShowUpdatePostForm(false)
-                                                }} 
-                                                className='post-detail-reply'
-                                            >
-                                                <i className="fa fa-reply post-detail-reply-btn" title='reply'></i>
-                                                <span className='post-detail-reply-text'>reply</span>
-                                            </button>
-                                        }
-                                    </>
-                                : 
-                                    <>
-                                        <div className='post-detail-container__num-of-replies-container'>
-                                            <i className="fa-solid fa-message post-detail-container__num-of-post"></i>
-                                            <span className='post-detail-container__reply-count'>{post.num_of_replies}</span>
-                                            <span className='post-detail-container__reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
-                                        </div>
-                                        <button
-                                            onClick={(e)=>authenticated ? updateLike(e, post): navigate('/login', {state:{error:'You must login!'}})} 
-                                            className='post-detail-container__post-like'
-                                        >
-                                            <i className="fa-solid fa-hands-clapping post-detail-like"></i>
-                                            <span className='post-detail-like-count'>{post.like.length}</span>
-                                            <span className='post-detail-like-count-text'>like</span>
-                                        </button>
-                                        {authenticated && 
-                                            <button 
-                                                onClick={()=> {
-                                                    setShowCommentForm(true)
-                                                    setShowUpdatePostForm(false)
-                                                }} 
-                                                className='post-detail-reply'
-                                            >
-                                                <i className="fa fa-reply post-detail-reply-btn" title='reply'></i>
-                                                <span className='post-detail-reply-text'>reply</span>
-                                            </button>
-                                        }
-                                    </>
-                                }
-                                {updatePost && 
-                                    <button
-                                        className='post-detail-edit' 
-                                        onClick={()=> {
-                                            setShowUpdatePostForm(true)
-                                            setShowCommentForm(false)
-                                        }}
-                                    >
-                                        <i className="fas fa-edit post-detail-edit-btn"></i>
-                                        <span className='post-detail-edit-text'>edit post</span>
-                                    </button> 
-                                }
-                            </div>
-                        </div>
-                    </div>
+                    {post && 
+                        <PostDetailPost 
+                            setShowUpdatePostForm = {setShowUpdatePostForm} 
+                            setShowCommentForm = {setShowCommentForm} 
+                            authenticated = {authenticated} 
+                            navigate = {navigate} 
+                            post = {post} 
+                            updatePost = {updatePost} 
+                            updateLike = {updateLike}
+                        />
+                    }
+                    
                     {showCommentForm && authenticated &&
                         <CommentForm 
                             handleCommentSubmit={handleCommentSubmit} 

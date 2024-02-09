@@ -25,6 +25,7 @@ function CreatePost(props) {
     const navigate = useNavigate()
     const {state, pathname} = useLocation()
 
+
     const handleSubmit = async(e)=> {
         e.preventDefault()
         setMissingValue(null)
@@ -61,7 +62,7 @@ function CreatePost(props) {
                         title:'',
                         content:''
                     })
-                    navigate('/my-post', {state:{message:data.message}})
+                    navigate('/my-posts', {state:{message:data.message}})
                 }
             } catch (error) {
                 console.log(error)

@@ -1970,9 +1970,65 @@ Post Detail
 }
 
 .post-detail-container__like-and-reply {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.post-detail-lg-btns {
+  display: none;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.post-detail-btns-ellipsis {
+  text-align: end;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.post-detail-btns-ellipsis > button {
+  background: none;
+  border: none;
+}
+
+.post-detail-btns-ellipsis > button > i {
+  font-size: 1.5rem;
+  color: var(--orange-20)
+}
+
+.post-detail-mobile-btns {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  z-index: 3;
+
+  max-height: 0;
+  overflow: hidden;
+  white-space: nowrap;
+
+  display: grid;
+  align-items: start;
+  gap: 0rem;
+  background: white;
+  border-radius: 8px;
+}
+
+.post-detail-mobile-btn {
+  padding: 1rem 2rem;
+  padding-bottom: 0.5rem;
+}
+
+.post-detail-mobile-btn:last-child {
+  padding-bottom: 1rem;
+}
+
+.show-post-detail-mobile-btns {
+  max-height: 500px;
+  border: 1px solid var(--black-70);
 }
 
 /* Post detail like */
@@ -2192,7 +2248,7 @@ Post Detail
 
 /* comments */
 
-.replied-posts {
+.post-detail-comments {
   display: grid;
   gap: 1rem;
   background: #e7d2bc;
@@ -2200,7 +2256,7 @@ Post Detail
   border-radius: 8px;
 }
 
-.replied-post {
+.post-detail-comments__comment {
   display: grid;
   gap: 1rem;
   background: #ebded1;
@@ -2208,34 +2264,34 @@ Post Detail
   border-radius: 8px;
 }
 
-.replied-post-user-date {
+.post-detail-comments__user-profile {
   display: grid;
   gap: 0.5rem
 }
 
-.replied-post-user-image-container {
+.post-detail-comments__user-image-container {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.replied-post-user-image {
-  width: 35px;
+.post-detail-comments__user-image {
+  width: 40px;
   height: auto;
   display: block;
 }
 
-.replied-post-user {
+.post-detail-comments__username {
   color: var(--black-30);
   font-size: 0.9rem;
 }
 
-.replied-post-date-posted {
+.post-detail-comments__date-posted {
   color: var(--black-30);
   font-size: 0.9rem;
 }
 
-.replied-post-content {
+.post-detail-comments__content {
   line-height: 1.6;
   letter-spacing: 0.07rem;
   color: var(--orange-10);
@@ -2271,6 +2327,20 @@ Post Detail
   line-height: 1.5;
   text-wrap: pretty;
   color: var(--orange-20);
+}
+
+@media screen and (min-width: 421px) {
+  .post-detail-lg-btns {
+    display: flex;
+  }
+
+  .post-detail-btns-ellipsis {
+    display: none;
+  }
+  
+  .post-detail-mobile-btns {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 700px) {

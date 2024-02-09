@@ -12,6 +12,7 @@ function ContentLayout() {
   const [posts, setPosts] = useState(null)
 
 
+  
   const getTopics = async()=> {
     try {
       const data = await getTopicData(`${url}/api/topics/`)

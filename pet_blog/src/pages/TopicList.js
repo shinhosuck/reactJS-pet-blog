@@ -5,7 +5,7 @@ import LoadingPage from './LoadingPage'
 import { url } from './PostList'
 import TopicListTopics from '../components/TopicListTopics'
 import TopicListSidebar from '../components/TopicListSidebar'
-
+import ScrollToTop from '../components/ScrollToTop'
 
 
 
@@ -22,9 +22,10 @@ function TopicList() {
         try {
             const data = await getTopicData(`${url}/api/topics/`)
             setTopics(data)
-            setTimeout(()=>{
+            const timeoutID = setTimeout(()=>{
                 setIsLoading(false)
-            }, 500)
+                clearTimeout(timeoutID)
+            }, 100)
         } catch ({message}) {
             setIsError(message)
             setIsLoading(false)
@@ -41,7 +42,7 @@ function TopicList() {
             const timeoutID = setTimeout(()=>{
                 const errorMessage = document.querySelector('.topics-error-message')
                 errorMessage.style.display = 'none'
-                clearInterval(timeoutID)
+                clearTimeout(timeoutID)
             }, 5000)
         }
     }, [state])
@@ -60,6 +61,7 @@ function TopicList() {
 
     return (
         <React.Fragment>
+            <ScrollToTop />
             <div className="bg-img">
                 <div className="bg-img-header-container">
                     <div className="bg-img-contents">

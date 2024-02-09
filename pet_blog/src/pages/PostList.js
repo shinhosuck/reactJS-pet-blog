@@ -4,9 +4,7 @@ import { getPostData} from '../utils/api'
 import LoadingPage from './LoadingPage'
 import PostListPosts from '../components/PostListPosts'
 import PostListSidebar from '../components/PostListSidebar'
-
-
-import userImg from '../images/default.png'
+import ScrollToTop from '../components/ScrollToTop'
 
 export const url = window.location.host === 'localhost:3000' ? 
 'http://127.0.0.1:8000' : 'https://pawpals.pythonanywhere.com'
@@ -31,9 +29,10 @@ function PostList() {
       const data = await getPostData(`${url}/api/posts/`)
       const objs = data.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()}))
       setPosts(objs)
-      setTimeout(()=>{
+      const timeoutID = setTimeout(()=>{
         setIsLoading(false)
-      }, 500)
+        clearTimeout(timeoutID)
+      }, 100)
     } catch ({message}) {
       setIsError(message)
       setIsLoading(false)
@@ -59,7 +58,7 @@ function PostList() {
         if(element) {
           element.style.display = 'none'
         }
-        clearInterval(timeoutID)
+        clearTimeout(timeoutID)
       }, 5000)
     }
   }, [state])
@@ -76,7 +75,7 @@ function PostList() {
   }
   return (
     <React.Fragment>
-
+      <ScrollToTop />
       <div className="bg-img">
         <div className="bg-img-header-container">
           <div className="bg-img-contents">

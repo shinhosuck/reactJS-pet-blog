@@ -163,18 +163,18 @@ export const getPostComments = async(url)=> {
 }
 
 
-export const hasReplied = async(url, token) => {
-    const resp = await fetch(url, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${token}`
-        },
-        body: null
-    })
-    const data = await resp.json()
-    return data
-}
+// export const hasReplied = async(url, token) => {
+//     const resp = await fetch(url, {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': `Token ${token}`
+//         },
+//         body: null
+//     })
+//     const data = await resp.json()
+//     return data
+// }
 
 
 export const register = async(url, body)=> {

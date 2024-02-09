@@ -3,11 +3,11 @@ import { useParams, Link, NavLink, useLocation, useNavigate } from 'react-router
 import { getPostData, addLikes, replyPost, hasReplied, getPostComments } from '../utils/api'
 import CommentForm from '../components/CommentForm'
 import LoadingPage from './LoadingPage'
-import UpdateCommentForm from '../components/UpdateCommentForm'
+import UpdatePostForm from '../components/UpdatePostForm'
 import Comments from '../components/Comments'
 import { url } from './PostList'
 import userImg from '../images/default.png'
-import dog from '../images/dog.png'
+import ScrollToTop from '../components/ScrollToTop'
 
 
 function PostDetail() {
@@ -16,8 +16,8 @@ function PostDetail() {
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [showCommentForm, setShowCommentForm] = useState(false)
-    const [showUpdateReplyForm, setShowUpdateReplyForm] = useState(false)
-    const [updateReplyPost, setUpdateReplyPost] = useState(null)
+    const [showUpdatePostForm, setShowUpdatePostForm] = useState(false)
+    const [updatePost, setUpdatePost] = useState(null)
     const authenticated = JSON.parse(localStorage.getItem('auth')) || null
     const { id } = useParams()
     const replyContent = useRef()
@@ -102,27 +102,13 @@ function PostDetail() {
     }, [id])
     
 
-    // useEffect(()=> {
-    //     if(authenticated) {
-    //         const updateCommentOrComment = async()=> {
-    //             try {
-    //                 const data = await hasReplied(`${url}/api/post/${id}/has-reply/`, authenticated.token)
-    //                 if(!data.message){
-    //                     setUpdateReplyPost(data)
+    useEffect(()=> {
+        if(authenticated && post && authenticated.username === post.author) {
+            setUpdatePost(post)
+        }
+    }, [post])
+
     
-    //                 }else {
-    //                     console.log(data)
-
-    //                 }
-    //             } catch (error) {
-    //                 console.log(error)
-    //             }
-    //         }
-    //         updateCommentOrComment()
-    //     }
-    // }, [post])
-
-
     useEffect(()=> {
         const fetchpostComments = async()=> {
             try {
@@ -172,6 +158,7 @@ function PostDetail() {
     }
     return (
         <React.Fragment>
+            <ScrollToTop />
             <div className="bg-img">
                 <div className="bg-img-header-container">
                     <div className="bg-img-contents">
@@ -200,68 +187,73 @@ function PostDetail() {
                             <div className="post-detail-container__like-and-reply">
                                 {post.like.length > 1 ? 
                                     <>
-                                        <button onClick={(e)=>updateLike(e, post)} className='post-detail-container__post-like' title='give it a clap'>
+                                        <div className='post-detail-container__num-of-replies-container'>
+                                            <i className="fa-solid fa-message post-detail-container__num-of-post"></i>
+                                            <span className='post-detail-container__reply-count'>{post.num_of_replies}</span>
+                                            <span className='post-detail-container__reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
+                                        </div>
+                                        <button 
+                                            onClick={(e)=>authenticated ? updateLike(e, post): navigate('/login', {state:{error:'You must login!'}})} 
+                                            className='post-detail-container__post-like' 
+                                        >
                                             <i className="fa-solid fa-hands-clapping post-detail-like"></i>
                                             <span className='post-detail-like-count'>{post.like.length}</span>
                                             <span className='post-detail-like-count-text'>likes</span>
                                         </button>
+                                        {authenticated && 
+                                            <button 
+                                                onClick={()=> {
+                                                    setShowCommentForm(true)
+                                                    setShowUpdatePostForm(false)
+                                                }} 
+                                                className='post-detail-reply'
+                                            >
+                                                <i className="fa fa-reply post-detail-reply-btn" title='reply'></i>
+                                                <span className='post-detail-reply-text'>reply</span>
+                                            </button>
+                                        }
+                                    </>
+                                : 
+                                    <>
                                         <div className='post-detail-container__num-of-replies-container'>
                                             <i className="fa-solid fa-message post-detail-container__num-of-post"></i>
                                             <span className='post-detail-container__reply-count'>{post.num_of_replies}</span>
                                             <span className='post-detail-container__reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
                                         </div>
-                                        <button 
-                                            onClick={()=> {
-                                                authenticated ? setShowCommentForm(true):
-                                                navigate('/login', {replace:true, state:{error:'You must login first.'}})
-                                            }} 
-                                            className='post-detail-reply'
+                                        <button
+                                            onClick={(e)=>authenticated ? updateLike(e, post): navigate('/login', {state:{error:'You must login!'}})} 
+                                            className='post-detail-container__post-like'
                                         >
-                                            <i className="fa fa-reply post-detail-reply-btn" title='reply'></i>
-                                            <span className='post-detail-reply-text'>reply</span>
-                                        </button>
-                                    </>
-                                : 
-                                    <>
-                                        <button onClick={(e)=>updateLike(e, post)} className='post-detail-container__post-like' title='give it a clap'>
                                             <i className="fa-solid fa-hands-clapping post-detail-like"></i>
                                             <span className='post-detail-like-count'>{post.like.length}</span>
                                             <span className='post-detail-like-count-text'>like</span>
                                         </button>
-                                        <div className='post-detail-container__num-of-replies-container'>
-                                            <i className="fa-solid fa-message post-detail-container__num-of-post"></i>
-                                            <span className='post-detail-container__reply-count'>{post.num_of_replies}</span>
-                                            <span className='post-detail-container__reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
-                                        </div>
-                                        <button 
-                                            onClick={()=> {
-                                                authenticated ? setShowCommentForm(true):
-                                                navigate('/login', {replace:true, state:{error:'You must login first.'}})
-                                            }} 
-                                            className='post-detail-reply'
-                                        >
-                                            <i className="fa fa-reply post-detail-reply-btn" title='reply'></i>
-                                            <span className='post-detail-reply-text'>reply</span>
-                                        </button>
+                                        {authenticated && 
+                                            <button 
+                                                onClick={()=> {
+                                                    setShowCommentForm(true)
+                                                    setShowUpdatePostForm(false)
+                                                }} 
+                                                className='post-detail-reply'
+                                            >
+                                                <i className="fa fa-reply post-detail-reply-btn" title='reply'></i>
+                                                <span className='post-detail-reply-text'>reply</span>
+                                            </button>
+                                        }
                                     </>
                                 }
-                                {/* {updateReplyPost ? 
-                                    <button className='post-detail-edit' onClick={()=>setShowUpdateReplyForm(true)}>
-                                        <i className="fas fa-edit post-detail-edit-btn"></i>
-                                        <span className='post-detail-edit-text'>update</span>
-                                    </button> 
-                                :
-                                    <button 
+                                {updatePost && 
+                                    <button
+                                        className='post-detail-edit' 
                                         onClick={()=> {
-                                            authenticated ? setShowReplyForm(true):
-                                            navigate('/login', {replace:true, state:{error:'You must login first.'}})
-                                        }} 
-                                        className='post-detail-reply'
+                                            setShowUpdatePostForm(true)
+                                            setShowCommentForm(false)
+                                        }}
                                     >
-                                        <i className="fa fa-reply post-detail-reply-btn" title='reply'></i>
-                                        <span className='post-detail-reply-text'>reply</span>
-                                    </button>
-                                } */}
+                                        <i className="fas fa-edit post-detail-edit-btn"></i>
+                                        <span className='post-detail-edit-text'>edit post</span>
+                                    </button> 
+                                }
                             </div>
                         </div>
                     </div>
@@ -272,10 +264,10 @@ function PostDetail() {
                             replyContent={replyContent}
                         />
                     }
-                    {showUpdateReplyForm && authenticated &&
-                        <UpdateCommentForm 
-                            updateReplyPost={updateReplyPost} 
-                            showUpdateReplyForm={setShowUpdateReplyForm}
+                    {showUpdatePostForm && authenticated &&
+                        <UpdatePostForm 
+                            updatePost={updatePost} 
+                            showUpdatePostForm={setShowUpdatePostForm}
                         />
                     }
                     <>
@@ -283,7 +275,7 @@ function PostDetail() {
                             <Comments comments={comments}/>
                         :
                             !showCommentForm &&
-                            <div className="no-replied-post-container">
+                            <div className="no-comments-container">
                                 <div className="no-comment-text-container">
                                     <h3>Be the first to comment!</h3>
                                     <p>

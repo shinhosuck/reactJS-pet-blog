@@ -15,6 +15,8 @@ function Login() {
     const {state} = useLocation()
     const navigate = useNavigate()
 
+
+    
     const authenticated = localStorage.getItem('auth') || null
 
     window.history.replaceState({state:null}, '', '/login')

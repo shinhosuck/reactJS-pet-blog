@@ -30,6 +30,9 @@
   --orange-10: hsl(10, 30%, 20%);
   --orange-20: hsl(10, 30%, 30%);
   --orange-30: hsl(10, 30%, 40%);
+
+  /* input && textarea focus */
+  --focus: hsl(240, 100%, 82%);
 }
 
 html {
@@ -1931,29 +1934,11 @@ Post Detail
   padding: 2rem 0;
 }
 
-.post-detail-container__back-to-posts {
-  justify-self: start;
-  display: flex;
-  gap: 0.3rem;
-  align-items: center;
-}
-
-.post-detail-container__back-to-posts > a {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: rgb(226, 80, 26);
-  border-bottom: 3px solid orangered;
-  padding-bottom: 0.3rem;
-  line-height: 1;
-  text-transform: capitalize;
-}
-
 .post-detail-container__post-detail {
   display: grid;
   align-items: start;
   padding: 1rem;
   gap: 1rem;
-  margin-top: 1rem;
   border: 1px solid var(--black-80);
   border-radius: 8px;
 }
@@ -1971,7 +1956,7 @@ Post Detail
 }
 
 .post-detail-container__post-title {
-  color: rgb(44, 44, 44);
+  color: var(--orange-10);
   line-height: 1.4;
   letter-spacing: 0.04rem;
   font-size: 1.25rem;
@@ -1980,13 +1965,14 @@ Post Detail
 
 .post-detail-container__post-content {
   letter-spacing: 0.07rem;
-  color: rgb(59, 59, 59);
+  line-height: 1.5;
+  color: var(--orange-20);
 }
 
 .post-detail-container__like-and-reply {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 /* Post detail like */
@@ -1994,22 +1980,23 @@ Post Detail
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  color: var(--black-40);
+  color: var(--black-50);
   border: none;
   background: none;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
   transition: color 100ms  linear;
 }
 
 .post-detail-like {
   font-size: 1.2rem;
+  font-size: clamp(1rem, 1vw + 0.5rem, 1.2rem);
   
 }
 
 .post-detail-like-count,
 .post-detail-like-count-text {
   font-size: 0.9rem;
+  font-size: clamp(0.8rem, 1vw + 0.5rem, 0.9rem);
 }
 /* end */
 
@@ -2018,17 +2005,18 @@ Post Detail
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  color: var(--black-40);
-  border-bottom: 2px solid transparent;
+  color: var(--black-50);
 }
 
 .post-detail-container__num-of-post {
   font-size: 1.1rem;
+  font-size: clamp(1rem, 1vw + 0.5rem, 1.1rem);
 }
 
 .post-detail-container__reply-count,
 .post-detail-container__reply-text {
   font-size: 0.9rem;
+  font-size: clamp(0.8rem, 1vw + 0.5rem, 0.9rem);
 }
 /* end */
 
@@ -2037,22 +2025,42 @@ Post Detail
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  color: var(--black-40);
+  color: var(--black-50);
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.05rem;
   transition: color 100ms  linear;
-  border-bottom: 2px solid transparent;
 }
 
 .post-detail-reply-btn {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 1vw + 0.5rem, 1.1rem);
 }
 
 .post-detail-reply-text {
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 1vw + 0.5rem, 0.9rem);
 }
+
+/* Edit post btns */
+.post-detail-edit {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--black-50);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 100ms  linear;
+}
+
+.post-detail-edit-btn {
+  font-size: clamp(1rem, 1vw + 0.5rem, 1.1rem);
+}
+
+.post-detail-edit-text {
+  font-size: clamp(0.8rem, 1vw + 0.5rem, 0.9rem);
+}
+
+/* end */
 
 @media (hover) {
   .post-detail-container__post-like:hover {
@@ -2061,46 +2069,83 @@ Post Detail
   .post-detail-reply:hover {
     color: var(--orange-57);
   }
-  /* .post-detail-edit:hover {
-    color: rgb(206, 16, 206);
-    background: rgb(253, 228, 253)
-  } */
+  .post-detail-edit:hover {
+    color: var(--orange-57);
+  }
 }
 
-/* end */
-
-/* .post-detail-edit {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  letter-spacing: 0.05rem;
-  margin-bottom: 0.2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.post-detail-edit-btn {
-  font-size: 1rem;
-  color: rgb(143, 143, 143);
-}
-
-.post-detail-edit-text {
-  font-size: 0.9rem;
-  color: rgb(143, 143, 143);
-} */
-
-.comment-form-container {
+/* post edit */
+.post-detail-post-edit-form {
+  width: 100%;
   display: grid;
+  gap: 1rem;
   padding: 1.3rem;
   border-radius: 8px;
   border: 1px solid var(--black-80);
 }
 
+.post-detail-post-edit-form > input {
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--black-80);
+  color: var(--orange-10);
+  font-size: 1rem
+}
+
+.post-detail-post-edit-form > textarea {
+  resize: vertical;
+  border-radius: 8px;
+  font-size: 1rem;
+  letter-spacing: 0.07rem;
+  line-height: 1.5;
+  overflow-y: scroll;
+  padding: 0.8rem 1rem;
+  color: var(--orange-20);
+  border: 1px solid var(--black-80);
+}
+
+.post-detail-post-edit-btns {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem
+}
+
+.post-detail-post-edit-btn-submit {
+  padding: 0.4rem 1rem;
+  background: var(--orange-57);
+  color: white;
+  border-radius: 5px;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+  border: none;
+}
+
+.post-detail-post-edit-btn-cancel {
+  padding: 0.4rem 1rem;
+  background: none;
+  color: white;
+  background: var(--black-40);
+  border-radius: 5px;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+  border: none
+}
+
+.post-detail-post-edit-form > textarea:focus,
+.post-detail-post-edit-form > input:focus{
+  outline: 2px solid var(--focus);
+  border: 1px solid transparent
+}
+/* end */
+
 .comment-form {
   width: 100%;
   display: grid;
   gap: 1rem;
+  padding: 1.3rem;
+  border-radius: 8px;
+  border: 1px solid var(--black-80);
 }
 
 .comment-form-textarea {
@@ -2108,9 +2153,10 @@ Post Detail
   border-radius: 8px;
   font-size: 1rem;
   letter-spacing: 0.07rem;
-  line-height: 1.6;
+  line-height: 1.5;
   overflow-y: scroll;
   border: none;
+  color: var(--orange-20)
 }
 
 .comment-form-textarea:focus {
@@ -2125,7 +2171,7 @@ Post Detail
 }
 .comment-btn-submit {
   padding: 0.4rem 1rem;
-  background: orangered;
+  background: var(--orange-57);
   color: white;
   border-radius: 5px;
   font-size: 1rem;
@@ -2135,13 +2181,16 @@ Post Detail
 
 .comment-btn-cancel {
   padding: 0.4rem 1rem;
-  background: rgb(71, 71, 71);
+  background: none;
   color: white;
+  background: var(--black-40);
   border-radius: 5px;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  border: none;
+  border: none
 }
+
+/* comments */
 
 .replied-posts {
   display: grid;
@@ -2177,23 +2226,24 @@ Post Detail
 }
 
 .replied-post-user {
-  color: rgb(32, 32, 32);
-  font-weight: 500;
+  color: var(--black-30);
   font-size: 0.9rem;
 }
 
 .replied-post-date-posted {
-  color: rgb(70, 70, 70);
+  color: var(--black-30);
   font-size: 0.9rem;
 }
 
 .replied-post-content {
   line-height: 1.6;
   letter-spacing: 0.07rem;
-  color: rgb(70, 70, 70);
+  color: var(--orange-10);
 }
 
-.no-replied-post-container {
+/* end */
+
+.no-comments-container {
   display: flex;
   align-items: start;
   width: 90%;
@@ -2242,6 +2292,10 @@ Post Detail
 
   .post-detail-container__text-contents {
       flex: 2
+  }
+
+  .post-detail-container__like-and-reply {
+    gap: 1.5rem;
   }
 }
 

@@ -1,9 +1,44 @@
-import React, { useState } from 'react'
-
+import React, { useState, useEffect } from 'react'
 
 
 
 function PostDetailPost(props) {
+    const [width, seWidth] = useState(window.innerWidth)
+
+    // match post img height to the post content height on window resize
+    const getWindowWidth = (e)=> {
+        const content = document.querySelector('.post-detail-container__text-contents')
+        const img = content && content.previousElementSibling
+        if(width >= 700 && img) {
+            img.style.height = `${content.offsetHeight}px`
+            img.style.minHeight = '180px'
+
+        }else if(img) {
+            img.style.height = 'auto'
+        }
+        seWidth(window.innerWidth)
+        window.removeEventListener('resize', getWindowWidth)
+    }
+
+    useEffect(()=> {
+        window.addEventListener('resize', getWindowWidth)
+    }, [width])
+    // end
+
+    // match post image height the post content height
+    if(document.querySelector('.post-detail-container__text-contents')){
+        const content = document.querySelector('.post-detail-container__text-contents')
+        const img = content && content.previousElementSibling
+        if(width >= 700 && img) {
+            img.style.height = `${content.offsetHeight}px`
+            img.style.minHeight = '180px'
+
+        }else {
+            img.style.height = 'auto'
+        }
+    }
+    // end
+
     const {
         setShowUpdatePostForm, 
         setShowCommentForm, 
@@ -14,6 +49,7 @@ function PostDetailPost(props) {
         updateLike
     } = props
 
+    
     return (
         <div className="post-detail-container__post-detail">
             <div className='post-detail-container__post-image-container'>
@@ -31,10 +67,14 @@ function PostDetailPost(props) {
                         </span>
                     </div>
                     <button 
-                        onClick={(e)=>authenticated ? updateLike(e, post): navigate('/login', {state:{error:'You must login!'}})} 
-                        className='post-detail-container__post-like' 
+                        onClick={(e)=>authenticated ? updateLike(e, post): ''} 
+                        className={authenticated ?
+                                'post-detail-container__post-like'
+                            :
+                                'post-detail-container__post-like-not-authenticated'
+                        } 
                     >
-                        <i className="fa-solid fa-hands-clapping post-detail-like"></i>
+                        <i className='fa-solid fa-hands-clapping post-detail-like'></i>
                         <span className='post-detail-like-count'>{post.like.length}</span>
                         <span className='post-detail-like-count-text'>
                             {post.like.length > 1 ? 'likes': 'like'}
@@ -97,11 +137,13 @@ function MobileButtons(props) {
 
     return (
         <>
-            <div className='post-detail-btns-ellipsis'>
-                <button onClick={()=>setShowBtns(!showBtns)}>
-                    <i className="fa-solid fa-ellipsis"></i>
-                </button>
-            </div>
+            {authenticated &&
+                <div className='post-detail-btns-ellipsis'>
+                    <button onClick={()=>setShowBtns(!showBtns)}>
+                        <i className="fa-solid fa-ellipsis"></i>
+                    </button>
+                </div>
+             }
             {showBtns && 
                 <div className='post-detail-mobile-btns show-post-detail-mobile-btns'>
                     {authenticated && 

@@ -9,6 +9,7 @@ import React from 'react'
 
 function Comments(props) {
     const {comments} = props
+
     return (
         <div className="post-detail-comments">
             {comments.map((post)=> {
@@ -22,6 +23,20 @@ function Comments(props) {
                             <p className='post-detail-comments__date-posted'>{new Date(post.date_posted).toDateString()}</p>
                         </div>
                         <p className='post-detail-comments__content'>{post.content}</p>
+                        <div className="post-detail-comment-btns">
+                            <button className='post-detail-comment-reply-btn'>
+                                <i className="fa fa-reply post-detail-comment-reply-icon" title='reply'></i>
+                                <span className='post-detail-comment-reply-text'>reply</span>
+                            </button>
+                            <button className='post-detail-comment-edit-btn'>
+                                <i className="fas fa-edit post-detail-comment-edit-icon"></i>
+                                <span className='post-detail-comment-edit-text'>edit</span>
+                            </button>
+                            <button className='post-detail-comment-remove-btn'>
+                                <i className="fa-solid fa-trash post-detail-comment-remove-icon"></i>
+                                <span className='post-detail-comment-remove-text'>remove</span>
+                            </button>
+                        </div>
                     </div>
                 )
             })}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef} from 'react'
-import { useParams, Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { getPostData, addLikes, replyPost, hasReplied, getPostComments } from '../utils/api'
+import { useParams, Link, useLocation, useNavigate } from 'react-router-dom'
+import { getPostData, addLikes, replyPost, getPostComments } from '../utils/api'
 import CommentForm from '../components/CommentForm'
 import LoadingPage from './LoadingPage'
 import UpdatePostForm from '../components/UpdatePostForm'
@@ -9,46 +9,62 @@ import { url } from './PostList'
 import userImg from '../images/default.png'
 import ScrollToTop from '../components/ScrollToTop'
 import PostDetailPost from '../components/PostDetailPost'
+import { v4 as uuidv4} from "uuid"
+import TopPosts from '../components/TopPosts'
+
 
 function PostDetail() {
     const [post, setPost] = useState(null)
     const [comments, setComments] = useState(null)
+
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+
     const [showCommentForm, setShowCommentForm] = useState(false)
     const [showUpdatePostForm, setShowUpdatePostForm] = useState(false)
+
     const [updatePost, setUpdatePost] = useState(null)
-    const authenticated = JSON.parse(localStorage.getItem('auth')) || null
-    const { id } = useParams()
-    const replyContent = useRef()
-    const navigate = useNavigate()
-    const {state, pathname} = useLocation()
     const [width, seWidth] = useState(window.innerWidth)
 
+    const authenticated = JSON.parse(localStorage.getItem('auth')) || null
+    const { id } = useParams()
+    const commentContent = useRef()
+    const navigate = useNavigate()
+    const {state, pathname} = useLocation()
     
-
-    const getWindowWidth = (e)=> {
-        const content = document.querySelector('.post-detail-container__text-contents')
-        const img = content && content.previousElementSibling
-        if(width >= 700 && img) {
-            img.style.height = `${content.offsetHeight}px`
-            img.style.minHeight = '180px'
-
-        }else if(img) {
-            img.style.height = 'auto'
-        }
-        seWidth(window.innerWidth)
-        window.removeEventListener('resize', getWindowWidth)
-    }
-
 
     const handleCommentSubmit = async(e)=> {
         e.preventDefault()
-        const content = {content:replyContent.current.value}
+        const content = {content:commentContent.current.value}
+        const obj = {
+            id:uuidv4,
+            content:content.content,
+            user:authenticated.username, 
+            date_posted:new Date().toDateString(),
+            user_img_url: authenticated.profile_img_url
+        }
+
+        if(content) {
+            setComments((prev)=> {
+                return ([
+                    ...prev, 
+                    {
+                        id:uuidv4,
+                        content:content.content,
+                        user:authenticated.username, 
+                        date_posted:new Date().toDateString(),
+                        user_image_url: authenticated.profile_image_url
+                    }
+                ])
+            })
+            e.target.reset()
+            setShowCommentForm(!showCommentForm)
+            setPost((prev)=> ({...prev, num_of_replies:prev.num_of_replies + 1}))
+        }
         try {
-            const data = await replyPost(`${url}/api/post/${post.id}/reply/`, content, authenticated.token)
+            const data = await replyPost(`${url}/api/post/${post.id}/create/comment/`, content, authenticated.token)
             if(data.message) {
-                navigate('/posts')
+                console.log(data)
 
             }else {
                 console.log(data.detail)
@@ -127,24 +143,6 @@ function PostDetail() {
         fetchpostComments()
     }, [post])
 
-
-    useEffect(()=> {
-        window.addEventListener('resize', getWindowWidth)
-    }, [width])
-
-
-    if(document.querySelector('.post-detail-container__text-contents')){
-        const content = document.querySelector('.post-detail-container__text-contents')
-        const img = content && content.previousElementSibling
-        if(width >= 700 && img) {
-            img.style.height = `${content.offsetHeight}px`
-            img.style.minHeight = '180px'
-
-        }else {
-            img.style.height = 'auto'
-        }
-    }
-
     if(isLoading) {
         return (
             <LoadingPage />
@@ -198,7 +196,7 @@ function PostDetail() {
                         <CommentForm 
                             handleCommentSubmit={handleCommentSubmit} 
                             showCommentForm={setShowCommentForm} 
-                            replyContent={replyContent}
+                            commentContent={commentContent}
                         />
                     }
                     {showUpdatePostForm && authenticated &&
@@ -224,6 +222,7 @@ function PostDetail() {
                         }
                     </>
                 </div>
+                <TopPosts />
             </div>
         </React.Fragment>
     )

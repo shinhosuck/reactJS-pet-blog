@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, NavLink, useOutletContext, useLocation, useNavigate} from 'react-router-dom'
+import { useOutletContext, useLocation } from 'react-router-dom'
 import { getPostData} from '../utils/api'
 import LoadingPage from './LoadingPage'
 import PostListPosts from '../components/PostListPosts'

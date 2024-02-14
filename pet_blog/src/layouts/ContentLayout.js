@@ -41,7 +41,7 @@ function ContentLayout() {
 
   return (
     <React.Fragment>
-        <header>
+        <header className='main-header'>
             <Navbar />
         </header>
         <main>

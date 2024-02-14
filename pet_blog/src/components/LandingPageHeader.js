@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import paw from '../images/paw.webp'
 
 
@@ -10,6 +10,15 @@ import paw from '../images/paw.webp'
 function LandingPageHeader() {
     const [showNavLinks, setShowNavLinks] = useState(false)
     const [width, setWidth] = useState(window.innerWidth)
+    const authenticated = window.localStorage.getItem('auth')
+    const navigate = useNavigate()
+
+
+    const logout = function() {
+        setShowNavLinks(false)
+        localStorage.removeItem('auth')
+        navigate('/login', {replace:true, state:{message:'Successfully logged out!'}})
+    }
 
     
     const getWindowWidth = ()=> {
@@ -69,38 +78,28 @@ function LandingPageHeader() {
                         >
                             Posts
                         </Link>
-                        <Link
-                            to='/login' 
-                            className='landing-page-navlink landing-page-login-btn'
-                            onClick={()=> {
-                                document.body.style.overflowY = 'scroll'
-                                setShowNavLinks(false)
-                            }}
-                        >
-                            Login
-                        </Link>
+                        {!authenticated ?
+                            <Link
+                                to='/login' 
+                                className='landing-page-navlink landing-page-login-btn'
+                                onClick={()=> {
+                                    document.body.style.overflowY = 'scroll'
+                                    setShowNavLinks(false)
+                                }}
+                            >
+                                Login
+                            </Link>
+                        :
+                            <button 
+                                onClick={()=>logout()} 
+                                className='landing-page-navlink navbar-button' 
+                                style={{border:'none',background:'none'}}
+                            >
+                                Logout
+                            </button>
+                         }
                     </div>
                 </nav>
-            </div>
-            <div className='mobile-landing-page-hero-wrapper'>
-                <div className="mobile-landing-page-hero-text-wrapper">
-                    <h1 className='mobile-landing-page-hero-header'>We are Canine Blog Site</h1>
-                    <p className='mobile-landing-page-hero-paragraph'>
-                        Request suggestions and share your experience and expertise on various canines's health issues.
-                    </p>
-                    <Link to='/register' className='mobile-landing-page-join-btn'>Join now</Link>
-                </div>
-            </div>
-            <div className='lg-landing-page-hero-wrapper'>
-                <div className="landing-page-hero-container">
-                    <div className="landing-page-hero-text-wrapper">
-                        <h1 className='landing-page-hero-header'>We are Canine Blog Site</h1>
-                        <p className='landing-page-hero-paragraph'>
-                            Request suggestions and share your experience and expertise on various canines's health issues.
-                        </p>
-                        <Link to='/register' className='landing-page-join-btn'>Join now</Link>
-                    </div>
-                </div>
             </div>
             <div className={showNavLinks ? 'bg-overlay' : 'hide-bg-overlay'}></div>
         </React.Fragment>

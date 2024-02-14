@@ -19,6 +19,7 @@ function LandingPage() {
     const [featured, setFeatured] = useState(null)
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+    const authenticated = window.localStorage.getItem('auth')
 
 
     useEffect(()=> {
@@ -72,10 +73,30 @@ function LandingPage() {
 
     return (
         <React.Fragment>
-            <header>
+            <header className='landing-page-header'>
                 <LandingPageHeader />
             </header>
             <main className='landing-page-main'>
+                <div className='mobile-landing-page-hero-wrapper'>
+                    <div className="mobile-landing-page-hero-text-wrapper">
+                        <h1 className='mobile-landing-page-hero-header'>We are Canine Blog Site</h1>
+                        <p className='mobile-landing-page-hero-paragraph'>
+                            Request suggestions and share your experience and expertise on various canines's health issues.
+                        </p>
+                        <Link to={!authenticated ? '/register':'/posts'} className='mobile-landing-page-join-btn'>{authenticated?'Explore':'Join now'}</Link>
+                    </div>
+                </div>
+                <div className='lg-landing-page-hero-wrapper'>
+                    <div className="landing-page-hero-container">
+                        <div className="landing-page-hero-text-wrapper">
+                            <h1 className='landing-page-hero-header'>We are Canine Blog Site</h1>
+                            <p className='landing-page-hero-paragraph'>
+                                Request suggestions and share your experience and expertise on various canines's health issues.
+                            </p>
+                            <Link to={!authenticated ? '/register':'/posts'} className='landing-page-join-btn'>{authenticated?'Explore':'Join now'}</Link>
+                        </div>
+                    </div>
+                </div>
                 {featured && <LandingPageFeaturePosts featured={featured} />}        
                 {topics && <LandingPageTopics topics={topics}/>}
                 {posts && <LandingPagePosts posts={posts} />}

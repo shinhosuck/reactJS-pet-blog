@@ -60,7 +60,7 @@ function TopicList() {
     }
 
     return (
-        <React.Fragment>
+        <>
             <ScrollToTop />
             <div className="bg-img">
                 <div className="bg-img-header-container">
@@ -74,13 +74,13 @@ function TopicList() {
                 </div>
             </div>
 
-            {state && state.error && <p className='topics-error-message'>{state.error}</p>}
+            {/* {state && state.error && <p className='topics-error-message'>{state.error}</p>} */}
 
             <div className="topics-main-container">
                 {topics && <TopicListTopics topics={topics} />}
                 {posts && <TopicListSidebar posts={posts} />}
             </div>
-        </React.Fragment>
+        </>
     )
 }
 

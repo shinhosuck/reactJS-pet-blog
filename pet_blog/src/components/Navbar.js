@@ -73,6 +73,16 @@ export function Navbar() {
                             document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
                             document.body.style.overflow = 'scroll'
                         }} 
+                        to='/' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                    >
+                        Home
+                    </NavLink>
+                    <NavLink 
+                        onClick={()=> {
+                            setShowNavLinks(false)
+                            document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                            document.body.style.overflow = 'scroll'
+                        }} 
                         to='/topics' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
                         Topics
@@ -162,6 +172,11 @@ export function Navbar() {
                 {/* LARGE NAVLINKS */}
                 <div className='lg-navbar-navlinks' >
                     <NavLink
+                        to='/' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                    >
+                        Home
+                    </NavLink>
+                    <NavLink
                         to='/topics' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
                         Topics
@@ -174,12 +189,6 @@ export function Navbar() {
                     </NavLink>
                     {isAuthenticated ?
                         <>
-                            {/* <div className="navbar-user-account-image-container">
-                                <div className='nav-bar-user-image'>
-                                    <img className='navbar-user-profile-image' src={profileImage} alt="" />
-                                    <span className='navbar-user-useranme'>{isAuthenticated.username}</span>
-                                </div>
-                            </div> */}
                             <NavLink 
                                 to='/my-posts'
                                 className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}

@@ -3316,43 +3316,59 @@ TOPIC POSTS
 USER REGISTER
 ============= */
 .user-register-main-container {
-  min-height: 100vh;
-  padding: 5rem 0;
+  min-height: calc(100dvh - 63px);
+  background: linear-gradient(hsla(0, 0%, 0%, 0.95),rgba(0, 0, 0, 0.15)),
+   url('images/bg_img.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  display: grid;
+}
+
+.user-register-container {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1200px;
+
+  display: grid;
+  align-content: center;
+  
 }
 
 .user-register {
   display: grid;
   align-content: start;
-  gap: 1.5rem;
-  width: 90%;
-  max-width: 480px;
-  margin: 0 auto;
+  gap: 2rem;
   padding: 1.3rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 3px 3px 10px -1px rgb(190, 190, 190);;
+  max-width: 450px;
+  border-radius: 10px;
+  background: hsla(9, 52%, 68%, 0.158);
+  backdrop-filter: blur(8px);
 }
 
 .user-register__header {
   letter-spacing: 0.05rem;
-  color: rgb(39, 39, 39);
+  color: white;
   font-weight: 600;
   font-size: 1.5rem;
 }
 
 .user-register__form {
   display: grid;
-  gap: 1.2rem;
+  gap: 1rem;
+  
 }
 
 .user-register__input {
   width: 100%;
   box-sizing: border-box;
-  padding: 0.8rem 1rem;
+  padding: 0.7rem 1rem;
   border: 1px solid lightgray;
   font-size: 1rem;
   letter-spacing: 0.05rem;
   border-radius: 5px;
+  
 }
 
 .user-register__input:focus {
@@ -3380,12 +3396,12 @@ USER REGISTER
 
 .user-register__already-registered > p {
   letter-spacing: 0.07rem;
-  color: rgb(87, 87, 87);
+  color: white;
   font-weight: 500;
 }
 
 .user-register__already-registered > a {
-  color: purple;
+  color: rgb(255, 30, 0);
   letter-spacing: 0.05rem;
   font-weight: 500;
   text-decoration: underline;
@@ -3403,26 +3419,38 @@ USER REGISTER
 USER LOGIN
 ========== */
 .user-login-main-container {
-  min-height: 100vh;
-  padding: 5rem 0;
+  min-height: calc(100dvh - 63px);
+  background: linear-gradient(hsla(0, 0%, 0%, 0.95),rgba(0, 0, 0, 0.15)), 
+    url('images/bg_img.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  display: grid;
+}
+
+.user-login-container {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1200px;
+
+  display: grid;
+  align-items: center;
 }
 
 .user-login {
   display: grid;
   align-content: start;
-  gap: 1.5rem;
-  width: 90%;
-  max-width: 480px;
-  margin: 0 auto;
+  gap: 2rem;
+  max-width: 450px;
   padding: 1.3rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 3px 3px 10px -1px rgb(190, 190, 190);;
+  background: hsla(9, 52%, 68%, 0.158);
+  border-radius: 10px;
 }
 
 .user-login__header {
   letter-spacing: 0.05rem;
-  color: rgb(39, 39, 39);
+  color: white;
   font-weight: 600;
   font-size: 1.5rem;
 }
@@ -3449,13 +3477,13 @@ USER LOGIN
 
 .user-login__form {
   display: grid;
-  gap: 1.2rem;
+  gap: 1rem;
 }
 
 .user-login__input {
   width: 100%;
   box-sizing: border-box;
-  padding: 0.8rem 1rem;
+  padding: 0.7rem 1rem;
   border: 1px solid lightgray;
   font-size: 1rem;
   letter-spacing: 0.05rem;
@@ -3487,12 +3515,12 @@ USER LOGIN
 
 .user-login__not-yet-registered > p {
   letter-spacing: 0.07rem;
-  color: rgb(87, 87, 87);
+  color: white;
   font-weight: 500;
 }
 
 .user-login__not-yet-registered > a {
-  color: purple;
+  color: rgb(255, 51, 0);
   letter-spacing: 0.05rem;
   font-weight: 500;
   text-decoration: underline;

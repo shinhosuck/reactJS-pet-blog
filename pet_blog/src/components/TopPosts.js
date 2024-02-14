@@ -11,12 +11,7 @@ import ScrollToTop from './ScrollToTop'
 function TopPosts() {
     const [posts, setPosts] = useState(null)
 
-    const date = new Date()
-    const dateAndYear = date.toDateString()
-    const hour = date.getHours()
-    const minute = date.getMinutes()
-    console.log(`${dateAndYear} ${hour}:${minute}`)
-
+    
     useEffect(()=> {
         const getPosts = async()=> {
             const data = await getPostData(`${url}/api/posts/`)

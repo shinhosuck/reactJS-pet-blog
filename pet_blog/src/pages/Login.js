@@ -79,35 +79,37 @@ function Login() {
     }
     return (
         <div className="user-login-main-container">
-            {successMessage && successMessage.registered && <p className='user-login__message'>{successMessage.registered}</p>}
-            {state && state.error && <p className='user-login__error-message'>{state.error}</p>}
-            <div className='user-login'>
-                <h2 className='user-login__header'>Login</h2>
-                {backendAuthError && <p className='user-register__error'>{backendAuthError.error}</p>}
-                <form className='user-login__form' onSubmit={handleForm}>
-                    {frontendErrorMessage && frontendErrorMessage.username === 'null' && <p className='user-register__error'>This field is required.</p>}
-                    <input 
-                        onChange={handleChange} 
-                        value={user.username} 
-                        className='user-login__input' 
-                        name='username' 
-                        type="text" 
-                        placeholder='Username'
-                    />
-                    {frontendErrorMessage && frontendErrorMessage.password === 'null' && <p className='user-register__error'>This field is required.</p>}
-                    <input 
-                        onChange={handleChange} 
-                        value={user.password} 
-                        className='user-login__input' 
-                        name='password' 
-                        type="password" 
-                        placeholder='Password'
-                    />
-                    <button className='user-login__btn' type='submit'>Login</button>
-                </form>
-                <div className="user-login__not-yet-registered">
-                    <p>Not yet registered? </p>
-                    <Link to='/register'>Register</Link>
+            <div className="user-login-container">
+                {successMessage && successMessage.registered && <p className='user-login__message'>{successMessage.registered}</p>}
+                {state && state.error && <p className='user-login__error-message'>{state.error}</p>}
+                <div className='user-login'>
+                    <h2 className='user-login__header'>Login</h2>
+                    {backendAuthError && <p className='user-register__error'>{backendAuthError.error}</p>}
+                    <form className='user-login__form' onSubmit={handleForm}>
+                        {frontendErrorMessage && frontendErrorMessage.username === 'null' && <p className='user-register__error'>This field is required.</p>}
+                        <input 
+                            onChange={handleChange} 
+                            value={user.username} 
+                            className='user-login__input' 
+                            name='username' 
+                            type="text" 
+                            placeholder='Username'
+                        />
+                        {frontendErrorMessage && frontendErrorMessage.password === 'null' && <p className='user-register__error'>This field is required.</p>}
+                        <input 
+                            onChange={handleChange} 
+                            value={user.password} 
+                            className='user-login__input' 
+                            name='password' 
+                            type="password" 
+                            placeholder='Password'
+                        />
+                        <button className='user-login__btn' type='submit'>Login</button>
+                    </form>
+                    <div className="user-login__not-yet-registered">
+                        <p>Not yet registered? </p>
+                        <Link to='/register'>Register</Link>
+                    </div>
                 </div>
             </div>
         </div>

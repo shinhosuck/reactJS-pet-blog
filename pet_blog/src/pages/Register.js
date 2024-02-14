@@ -60,56 +60,58 @@ function Register() {
     }
     return (
         <div className="user-register-main-container">
-            <div className='user-register'>
-                <h2 className='user-register__header'>Register</h2>
-                <form className='user-register__form' onSubmit={handleForm}>
-                    {backendAuthError && <p className='user-register__error'>{backendAuthError.error}</p>}
-                    {!passwordValidated && <p className='user-register__error'>Password must contain number, upper and lower case characters. </p>}
-                    {userInfoError && Object.keys(userInfoError).includes('username') &&
-                        <p className='user-register__error'>{userInfoError.username}</p>
-                    }
-                    <input
-                        className='user-register__input' 
-                        onChange={handleChange} 
-                        name='username' 
-                        value={newUser.username.replaceAll(' ', '')} 
-                        type="text" 
-                        placeholder='Username'
-                    />
-                    {userInfoError && Object.keys(userInfoError).includes('password') &&
-                        <p className='user-register__error'>{userInfoError.password}</p>
-                    }
-                    <input
-                        className='user-register__input' 
-                        onChange={handleChange} 
-                        name='password' 
-                        value={newUser.password} 
-                        type="password" 
-                        placeholder='Password'
-                    />
-                    {userInfoError && 
-                        <div>
-                            {userInfoError && Object.keys(userInfoError).includes('passwordConfirmation') &&
-                                <p className='user-register__error'>{userInfoError.passwordConfirmation}</p>
-                            }
-                            {userInfoError && Object.keys(userInfoError).includes('passwordMismatch') &&
-                                <p className='user-register__error'>{userInfoError.passwordMismatch}</p>
-                            }
-                        </div>
-                     }
-                    <input
-                        className='user-register__input' 
-                        onChange={handleChange} 
-                        name='passwordConfirmation' 
-                        value={newUser.passwordConfirmation} 
-                        type="password" 
-                        placeholder='Confirm password'
-                    />
-                    <button className='user-register__btn' type='submit'>Regster</button>
-                </form>
-                <div className="user-register__already-registered">
-                    <p>Already registered? </p>
-                    <Link to='/login'>Login</Link>
+            <div className="user-register-container">
+                <div className='user-register'>
+                    <h2 className='user-register__header'>Register</h2>
+                    <form className='user-register__form' onSubmit={handleForm}>
+                        {backendAuthError && <p className='user-register__error'>{backendAuthError.error}</p>}
+                        {!passwordValidated && <p className='user-register__error'>Password must contain number, upper and lower case characters. </p>}
+                        {userInfoError && Object.keys(userInfoError).includes('username') &&
+                            <p className='user-register__error'>{userInfoError.username}</p>
+                        }
+                        <input
+                            className='user-register__input' 
+                            onChange={handleChange} 
+                            name='username' 
+                            value={newUser.username.replaceAll(' ', '')} 
+                            type="text" 
+                            placeholder='Username'
+                        />
+                        {userInfoError && Object.keys(userInfoError).includes('password') &&
+                            <p className='user-register__error'>{userInfoError.password}</p>
+                        }
+                        <input
+                            className='user-register__input' 
+                            onChange={handleChange} 
+                            name='password' 
+                            value={newUser.password} 
+                            type="password" 
+                            placeholder='Password'
+                        />
+                        {userInfoError && 
+                            <div>
+                                {userInfoError && Object.keys(userInfoError).includes('passwordConfirmation') &&
+                                    <p className='user-register__error'>{userInfoError.passwordConfirmation}</p>
+                                }
+                                {userInfoError && Object.keys(userInfoError).includes('passwordMismatch') &&
+                                    <p className='user-register__error'>{userInfoError.passwordMismatch}</p>
+                                }
+                            </div>
+                        }
+                        <input
+                            className='user-register__input' 
+                            onChange={handleChange} 
+                            name='passwordConfirmation' 
+                            value={newUser.passwordConfirmation} 
+                            type="password" 
+                            placeholder='Confirm password'
+                        />
+                        <button className='user-register__btn' type='submit'>Regster</button>
+                    </form>
+                    <div className="user-register__already-registered">
+                        <p>Already registered? </p>
+                        <Link to='/login'>Login</Link>
+                    </div>
                 </div>
             </div>
         </div>

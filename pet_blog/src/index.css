@@ -37,9 +37,9 @@
   --focus: hsl(240, 100%, 82%);
 }
 
-html {
+/* html {
   scroll-behavior: smooth;
-}
+} */
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -2739,6 +2739,7 @@ My Posts
 }
 
 @media screen and (min-width: 700px) {
+  
   .my-posts-container__post {
     display: flex;
     gap: 2rem;

@@ -15,7 +15,7 @@ function MyPost() {
   const navigate = useNavigate()
 
 
-  window.history.replaceState({state:null}, '', '/my-post')
+  window.history.replaceState({state:null}, '', '/my-posts')
 
   const getMyPosts = async()=> {
     try {

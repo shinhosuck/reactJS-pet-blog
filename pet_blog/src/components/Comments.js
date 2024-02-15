@@ -9,10 +9,10 @@ import React from 'react'
 
 function Comments(props) {
     const {comments} = props
-
+    
     return (
         <div className="post-detail-comments">
-            {comments.map((post)=> {
+            {comments && comments.map((post)=> {
                 return (
                     <div key={post.id} className="post-detail-comments__comment">
                         <div className='post-detail-comments__user-profile'>

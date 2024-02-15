@@ -8,14 +8,15 @@ import ScrollToTop from './ScrollToTop'
 
 
 
-function TopPosts() {
+function TopPosts(props) {
+    const { comments } = props
     const [posts, setPosts] = useState(null)
 
     
     useEffect(()=> {
         const getPosts = async()=> {
             const data = await getPostData(`${url}/api/posts/`)
-            const filtered = data.filter((post)=> {
+            const filtered = data.slice(0, 4).filter((post)=> {
                 if(post.num_of_replies >= 4) {
                     const date = new Date(post.date_posted).toDateString()
                     post.date_posted = date
@@ -25,7 +26,7 @@ function TopPosts() {
             setPosts(filtered)
         }
         getPosts()
-    }, [])
+    }, [comments])
 
     return (
         <>

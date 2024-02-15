@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef} from 'react'
 import { useParams, Link, useLocation, useNavigate } from 'react-router-dom'
-import { getPostData, addLikes, replyPost, getPostComments } from '../utils/api'
+import { getPostData, addLikes, createComment, getPostComments } from '../utils/api'
 import CommentForm from '../components/CommentForm'
 import LoadingPage from './LoadingPage'
 import UpdatePostForm from '../components/UpdatePostForm'
@@ -36,46 +36,21 @@ function PostDetail() {
     const handleCommentSubmit = async(e)=> {
         e.preventDefault()
         const content = {content:commentContent.current.value}
-        const obj = {
-            id:uuidv4,
-            content:content.content,
-            user:authenticated.username, 
-            date_posted:new Date().toDateString(),
-            user_img_url: authenticated.profile_img_url
-        }
-
         if(content) {
-            setComments((prev)=> {
-                return ([
-                    ...prev, 
-                    {
-                        id:uuidv4,
-                        content:content.content,
-                        user:authenticated.username, 
-                        date_posted:new Date().toDateString(),
-                        user_image_url: authenticated.profile_image_url
-                    }
-                ])
-            })
-            e.target.reset()
-            setShowCommentForm(!showCommentForm)
-            setPost((prev)=> ({...prev, num_of_replies:prev.num_of_replies + 1}))
-        }
-        try {
-            const data = await replyPost(`${url}/api/post/${post.id}/create/comment/`, content, authenticated.token)
-            if(data.message) {
-                console.log(data)
+            try {
+                const data = await createComment(`${url}/api/post/${post.id}/create/comment/`, content, authenticated.token)
+                const obj = {...data, user:authenticated.username, user_image_url:authenticated.profile_image_url}
+                setComments((prev)=> [...prev, obj])
+                setPost((prev)=> ({...prev, num_of_replies:data.comment_count}))
+                e.target.reset()
+                setShowCommentForm(false)
 
-            }else {
-                console.log(data.detail)
-
+            } catch (error) {
+                console.log(error.message)
             }
-        } catch (error) {
-            console.log(error.message)
         }
     }
-
-
+    
     const updateLike = async(e)=> {
         if(!authenticated) {
             navigate('/login', {replace:true, state:{error:'You must login first.'}})
@@ -97,7 +72,6 @@ function PostDetail() {
             }
         }
     }
-
 
     useEffect(()=>{
         const getData = async()=> {
@@ -222,7 +196,7 @@ function PostDetail() {
                         }
                     </>
                 </div>
-                <TopPosts />
+                <TopPosts comments={comments}/>
             </div>
         </React.Fragment>
     )

@@ -135,7 +135,7 @@ export const addLikes = async(url, token)=> {
 }
 
 
-export const replyPost = async(url, body, token)=> {
+export const createComment = async(url, body, token)=> {
     const resp = await fetch(url, {
         method: 'POST',
         headers: {

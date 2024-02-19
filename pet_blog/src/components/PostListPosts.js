@@ -20,7 +20,7 @@ function PostListPosts(props) {
                         <div className='post-container__post-text-content'>
                             <h3 className='post-container__post-title'>{post.title}</h3>
                             <p className='post-container__post-content'>
-                                {post.content.substring(0, 150)}...
+                                {post.content.substring(0, 70)}...
                                 <Link 
                                     className='post-container__post-read-more-btn'
                                     to={`/post/${post.id}/detail/`}
@@ -34,12 +34,12 @@ function PostListPosts(props) {
                                     <div className='post-container__post-like-container'>
                                         <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
                                         <span className='post-container__post-like-count'>{post.like.length}</span>
-                                        <span className='post-container__post-like-text'>likes</span>
+                                        {/* <span className='post-container__post-like-text'>likes</span> */}
                                     </div>
                                     <div className='post-container__num-of-replies-container'>
-                                        <i className="fa-regular fa-message post-container__num-of-post"></i>
+                                        <i className="fa-solid fa-message post-container__num-of-post"></i>
                                         <span className='post-container__post-reply-count'>{post.num_of_replies}</span>
-                                        <span className='post-container__post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
+                                        {/* <span className='post-container__post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span> */}
                                     </div>
                                 </div>
                             : 
@@ -47,12 +47,12 @@ function PostListPosts(props) {
                                     <div className='post-container__post-like-container'>
                                         <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
                                         <span className='post-container__post-like-count'>{post.like.length}</span>
-                                        <span className='post-container__post-like-text'>like</span>
+                                        {/* <span className='post-container__post-like-text'>like</span> */}
                                     </div>
                                     <div className='post-container__num-of-replies-container'>
-                                        <i className="fa-regular fa-message post-container__num-of-post"></i>
+                                        <i className="fa-solid fa-message post-container__num-of-post"></i>
                                         <span className='post-container__post-reply-count'>{post.num_of_replies}</span>
-                                        <span className='post-container__post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
+                                        {/* <span className='post-container__post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span> */}
                                     </div>
                                 </div>
                             }

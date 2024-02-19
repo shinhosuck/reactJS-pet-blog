@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { updatePost } from '../utils/api'
+import { url } from '../pages/PostList'
 
 
 
 function UpdatePostForm(props) {
-    const [updatePost, setUpdatePost] = useState(props.updatePost)
-    const {showUpdatePostForm} = props
+    const [post, setPost] = useState(props.post)
+    const {showUpdatePostForm, authenticated} = props
 
     const handleSubmit = async(e)=> {
         e.preventDefault()
@@ -14,13 +15,13 @@ function UpdatePostForm(props) {
 
     const handleChange = (e)=> {
         const {name, value} = e.target
-        setUpdatePost((prev)=> ({...prev, [name]:value}))
+        setPost((prev)=> ({...prev, [name]:value}))
     }
 
     return (
         <form id='post-edit-form' action="" className="post-detail-post-edit-form" onSubmit={handleSubmit}>
-            <input id='post-edit-form-input' name='title' onChange={handleChange} value={updatePost.title} type="text" />
-            <textarea id='post-edit-form-textarea' name='content' onChange={handleChange} value={updatePost.content} className='reply-form-textarea' rows='7'/>
+            <input id='post-edit-form-input' name='title' onChange={handleChange} value={post.title} type="text" />
+            <textarea id='post-edit-form-textarea' name='content' onChange={handleChange} value={post.content} className='reply-form-textarea' rows='7'/>
             <div className="post-detail-post-edit-btns">
                 <button className='post-detail-post-edit-btn-submit' type='submit'>Submit</button>
                 <button onClick={()=>showUpdatePostForm(false)} className='post-detail-post-edit-btn-cancel' type='button'>Cancel</button>

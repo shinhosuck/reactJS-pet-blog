@@ -42,7 +42,7 @@ function ContentLayout() {
   return (
     <React.Fragment>
         <header className='main-header'>
-            <Navbar />
+            <Navbar topics={topics} />
         </header>
         <main>
             <Outlet context={

@@ -9,10 +9,11 @@ import ScrollToTop from './ScrollToTop'
 
 
 function TopPosts(props) {
-    const { comments } = props
+    const { comments, state} = props
     const [posts, setPosts] = useState(null)
 
     
+
     useEffect(()=> {
         const getPosts = async()=> {
             const data = await getPostData(`${url}/api/posts/`)
@@ -43,7 +44,13 @@ function TopPosts(props) {
                                 <h4 className='top-posts__post-title'>{post.title}</h4>
                                 <p className='top-posts__post-content'>
                                     {post.content.substring(0, 50)}...
-                                    <Link className='top-posts__read-more' to={`/post/${post.id}/detail/`}>Read more</Link>
+                                    <Link
+                                        className='top-posts__read-more' 
+                                        to={`/post/${post.id}/detail/`}
+                                        state={{redirect:state.redirect}}
+                                    >
+                                        Read more
+                                    </Link>
                                 </p>
                             </div>
                             <div className="top-posts__btns-wrapper">

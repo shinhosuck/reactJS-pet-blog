@@ -9,7 +9,6 @@ import { url } from './PostList'
 import userImg from '../images/default.png'
 import ScrollToTop from '../components/ScrollToTop'
 import PostDetailPost from '../components/PostDetailPost'
-import { v4 as uuidv4} from "uuid"
 import TopPosts from '../components/TopPosts'
 
 
@@ -22,15 +21,15 @@ function PostDetail() {
 
     const [showCommentForm, setShowCommentForm] = useState(false)
     const [showUpdatePostForm, setShowUpdatePostForm] = useState(false)
-
-    const [updatePost, setUpdatePost] = useState(null)
-    const [width, seWidth] = useState(window.innerWidth)
+    const {state, pathname} = useLocation()
 
     const authenticated = JSON.parse(localStorage.getItem('auth')) || null
     const { id } = useParams()
     const commentContent = useRef()
     const navigate = useNavigate()
-    const {state, pathname} = useLocation()
+    
+
+    
     
 
     const handleCommentSubmit = async(e)=> {
@@ -40,7 +39,7 @@ function PostDetail() {
             try {
                 const data = await createComment(`${url}/api/post/${post.id}/create/comment/`, content, authenticated.token)
                 const obj = {...data, user:authenticated.username, user_image_url:authenticated.profile_image_url}
-                setComments((prev)=> [...prev, obj])
+                comments ? setComments((prev)=> [...prev, obj]) : setComments([obj])
                 setPost((prev)=> ({...prev, num_of_replies:data.comment_count}))
                 e.target.reset()
                 setShowCommentForm(false)
@@ -93,14 +92,7 @@ function PostDetail() {
     
 
     useEffect(()=> {
-        if(authenticated && post && authenticated.username === post.author) {
-            setUpdatePost(post)
-        }
-    }, [post])
-
-    
-    useEffect(()=> {
-        const fetchpostComments = async()=> {
+        const fetchPostComments = async()=> {
             try {
                 const data = await getPostComments(`${url}/api/post/${id}/comments/`)
                 if(!data.error) {
@@ -114,8 +106,9 @@ function PostDetail() {
                 console.log(error.message)
             }
         }
-        fetchpostComments()
+        fetchPostComments()
     }, [post])
+
 
     if(isLoading) {
         return (
@@ -123,11 +116,14 @@ function PostDetail() {
         )
     }
 
+
     if(isError) {
         return (
             <h2>There was an error</h2>
         )
     }
+
+
     return (
         <React.Fragment>
             <ScrollToTop />
@@ -161,7 +157,6 @@ function PostDetail() {
                             authenticated = {authenticated} 
                             navigate = {navigate} 
                             post = {post} 
-                            updatePost = {updatePost} 
                             updateLike = {updateLike}
                         />
                     }
@@ -175,28 +170,34 @@ function PostDetail() {
                     }
                     {showUpdatePostForm && authenticated &&
                         <UpdatePostForm 
-                            updatePost={updatePost} 
+                            post={post} 
                             showUpdatePostForm={setShowUpdatePostForm}
+                            authenticated={authenticated}
                         />
                     }
                     <>
                         {comments ? 
-                            <Comments comments={comments}/>
+                            <Comments 
+                                comments={comments} 
+                                authenticated={authenticated} 
+                                setComments={setComments} 
+                                setPost={setPost}
+                            />
                         :
                             !showCommentForm &&
-                            <div className="no-comments-container">
-                                <div className="no-comment-text-container">
-                                    <h3>Be the first to comment!</h3>
-                                    <p>
-                                        Nobody's responded to this post yet.
-                                        Add your thoughts and get the conversation going.
-                                    </p>
+                                <div className="no-comments-container">
+                                    <div className="no-comment-text-container">
+                                        <h3>Be the first to comment!</h3>
+                                        <p>
+                                            Nobody's responded to this post yet.
+                                            Add your thoughts and get the conversation going.
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
                         }
                     </>
                 </div>
-                <TopPosts comments={comments}/>
+                <TopPosts comments={comments} state={state}/>
             </div>
         </React.Fragment>
     )

@@ -40,21 +40,22 @@ export const getMyData = async(url, token)=> {
 }
 
 
-export const removeComment = async(url, token)=> {
+export const removeComment = async(url, token, obj=null)=> {
+    console.log(obj)
     const resp = await fetch(url, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Token ${token}`
         },
-        body: null
+        body: obj ? JSON.stringify(obj) : null
     })
     const data = await resp.json()
     return data
 }
 
 
-export const commentUpdate = async(url, body, token)=> {
+export const editComment = async(url, body, token)=> {
     const resp = await fetch(url, {
         method: 'PUT',
         headers: {

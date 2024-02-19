@@ -29,7 +29,7 @@ function LandingPage() {
                 const objs = data.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()}))
                 // const filtered = objs.filter((post)=>post.num_of_replies >= 1)
                 setPosts(objs.slice(0,6))
-                setFeatured(objs.slice(0,4))
+                setFeatured(objs.slice(0,6))
                 setTimeout(()=>{
                     setIsLoading(false)
                 }, 500)
@@ -46,7 +46,7 @@ function LandingPage() {
         const getTopics = async()=> {
             try {
                 const data = await getTopicData(`${url}/api/topics`)
-                setTopics(data.slice(0,4))
+                setTopics(data)
                 setTimeout(()=>{
                     setIsLoading(false)
                 }, 500)
@@ -97,7 +97,7 @@ function LandingPage() {
                         </div>
                     </div>
                 </div>
-                {featured && <LandingPageFeaturePosts featured={featured} />}        
+                {featured && <LandingPageFeaturePosts featured={featured} />} 
                 {topics && <LandingPageTopics topics={topics}/>}
                 {posts && <LandingPagePosts posts={posts} />}
                 <LandingPageEmailSub />

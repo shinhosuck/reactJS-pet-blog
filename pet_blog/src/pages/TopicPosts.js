@@ -3,7 +3,7 @@ import { useLocation, Navigate, Link } from 'react-router-dom'
 import { getPostData, getTopicData } from '../utils/api'
 import LoadingPage from './LoadingPage'
 import { url } from './PostList'
-
+import ScrollToTop from '../components/ScrollToTop'
 
 
 function TopicPosts() {
@@ -84,6 +84,7 @@ function TopicPosts() {
     }
     return (
         <React.Fragment>
+            <ScrollToTop />
             <div className="bg-img"></div>
             <div className="topic-posts-container__redirect-btn">
                 <i className="fa fa-arrow-left"></i>

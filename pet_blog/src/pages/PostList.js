@@ -19,6 +19,7 @@ function PostList() {
   const [user, setUser] = useState(null)
   const {topics} = useOutletContext()
   const {state, pathname} = useLocation()
+
   
   const authenticated = JSON.parse(localStorage.getItem('auth')) || null
 

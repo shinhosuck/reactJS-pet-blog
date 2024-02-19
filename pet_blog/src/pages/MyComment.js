@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, Navigate, useLocation } from 'react-router-dom'
 import { url } from './PostList'
 import LoadingPage from './LoadingPage'
-import { fetchComments, removeComment, commentUpdate } from '../utils/api'
+import { fetchComments, removeComment, editComment } from '../utils/api'
 
 
 function MyComment() {
@@ -16,8 +16,10 @@ function MyComment() {
 
 
   const deleteComment = async(id)=> {
+    const obj = {message:'my comment'}
     try {
-      const data = await removeComment(`${url}/api/comment/${id}/delete/`, authenticate.token)
+      const data = await removeComment(`${url}/api/comment/${id}/delete/`, authenticate.token, obj)
+      console.log(data)
       if(!data.message){
         setComments(data)
         setIsLoading(false)
@@ -36,9 +38,9 @@ function MyComment() {
 
   const updateComment = async(e, id)=> {
     e.preventDefault()
-    const body = {content:update.content}
+    const body = {content:update.content, user:authenticate.username}
     try {
-      const data = await commentUpdate(`${url}/api/comment/${id}/update/`, body, authenticate.token)
+      const data = await editComment(`${url}/api/comment/${id}/update/`, body, authenticate.token)
       if(!data.error) {
         setComments(data)
         setUpdate(null)
@@ -76,6 +78,7 @@ function MyComment() {
     getComments()
   }, [])
 
+
   if(!authenticate) {
     return (
       <Navigate to='/login'  replace={true} state={{error:'Please login to see your comment!', redirect:pathname}}/>
@@ -96,13 +99,13 @@ function MyComment() {
     <React.Fragment>
       <div className="bg-img"></div>
       <div className='my-comments-container'>
-      {comments.map((comment)=> {
+      {comments && comments.map((comment)=> {
             return (
                 <div key={comment.id} className="my-comments-container__my-comment">
                   <div>
                     <p className='my-comments__date-replied'>{new Date(comment.date_posted).toDateString()}</p>
-                    <p className='my-comments__post_detail-link'>Post: 
-                      <Link className='my-comments__post_detail-link' to={`/post/${comment.post}/detail/`}>{comment.replied_to}</Link>
+                    <p className='my-comments__post_detail-link'>Post title: 
+                      <Link className='my-comments__post_detail-link' to={`/post/${comment.post}/detail/`}>{comment.post_title}</Link>
                     </p>
                    
                     <p className='my-comments__post_author'>By:<span>{comment.post_author}</span></p>

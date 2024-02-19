@@ -1,16 +1,49 @@
-import { Link, NavLink, Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import paw from '../images/paw.webp'
-import profileImage from '../images/default.png'
 
 
-export function Navbar() {
+
+
+
+
+export function Navbar(props) {
+    const [topics, setTopics] = useState(props.topics)
     const [showNavLinks, setShowNavLinks] = useState(false)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     let isAuthenticated = JSON.parse(localStorage.getItem('auth')) || null
-
     const navigate = useNavigate()
 
+
+    const handleMobileTopics = ()=> {
+        const mobileTopics = document.querySelector('#mobile-topics > .navbar-topics')
+        const mobileTopicsChevronDown = document.querySelector('.mobile-topics-chevron-down')
+
+        mobileTopics.classList.contains('show-navbar-topics') ?
+        mobileTopics.classList.remove('show-navbar-topics') :
+        mobileTopics.classList.add('show-navbar-topics')
+
+        if(mobileTopics.classList.contains('show-navbar-topics')){
+            mobileTopicsChevronDown.style.transform = 'rotate(180deg)'
+        }else{
+            mobileTopicsChevronDown.style.transform = 'rotate(0deg)'
+        }
+    }
+
+    const handleAuthenticatedUserNavLinks = ()=> {
+        const chevronDown = document.querySelector('.mobile-navlinks-authenticated-user-chevron')
+        const linksContainer = document.querySelector('.mobile-authenticated-user-links')
+        
+        linksContainer.classList.contains('show-mobile-authenticated-user-links') ?
+        linksContainer.classList.remove('show-mobile-authenticated-user-links'):
+        linksContainer.classList.add('show-mobile-authenticated-user-links')
+
+        if(linksContainer.classList.contains('show-mobile-authenticated-user-links')){
+            chevronDown.style.transform = 'rotate(180deg)'
+        }else{
+            chevronDown.style.transform = 'rotate(0deg)'
+        }
+    }
 
     const windowResizeEvent = function(e) {
         setShowNavLinks(false)
@@ -25,16 +58,20 @@ export function Navbar() {
         }
         window.removeEventListener('resize', windowResizeEvent)
     }
-   
-    useEffect(()=> {
-        window.addEventListener('resize', windowResizeEvent)
-    }, [windowWidth])
 
     const logout = function() {
         setShowNavLinks(true)
         localStorage.removeItem('auth')
         navigate('/posts', {replace:true, state:{message:'Successfully logged out!'}})
     }
+   
+    useEffect(()=> {
+        window.addEventListener('resize', windowResizeEvent)
+    }, [windowWidth])
+
+    useEffect(()=> {
+        setTopics(props.topics)
+    }, [props])
 
     return (
         <div className="navbar-container">
@@ -67,6 +104,52 @@ export function Navbar() {
                     >
                         <i className="fa fa-times"></i>
                     </button>
+                    {/* Authenticated user container */}
+                        {isAuthenticated &&
+                            <div className="mobile-navlinks-authenticated-user-container">
+                                <button onClick={handleAuthenticatedUserNavLinks} className="mobile-navlinks-authenticated-user">
+                                    <img src={isAuthenticated.profile_image_url} alt="" />
+                                    <span>{isAuthenticated.username}</span>
+                                    <i className="fa fa-chevron-down mobile-navlinks-authenticated-user-chevron"></i>
+                                </button>
+                                <div className='mobile-authenticated-user-links'>
+                                    <NavLink
+                                        to='/my-posts'
+                                        onClick={()=> {
+                                            setShowNavLinks(false)
+                                            document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                            document.body.style.overflow = 'scroll'
+                                        }} 
+                                        className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                                    >
+                                        My Posts
+                                    </NavLink>
+                                    <NavLink 
+                                        to='/my-comments'
+                                        className={({isActive})=>isActive ? 'navbar-active-navlink navbar-navlink' : 'navbar-navlink'}
+                                        onClick={()=> {
+                                            setShowNavLinks(false)
+                                            document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                            document.body.style.overflow = 'scroll'
+                                        }}
+                                    >
+                                        My Comments
+                                    </NavLink>
+                                    <NavLink 
+                                        onClick={()=> {
+                                            setShowNavLinks(false)
+                                            document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                            document.body.style.overflow = 'scroll'
+                                        }}
+                                        to='/create/post'
+                                        className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                                    >
+                                        Create Post
+                                    </NavLink>
+                                </div>
+                            </div>
+                        }
+                    {/*  */}
                     <NavLink 
                         onClick={()=> {
                             setShowNavLinks(false)
@@ -77,16 +160,18 @@ export function Navbar() {
                     >
                         Home
                     </NavLink>
-                    <NavLink 
-                        onClick={()=> {
-                            setShowNavLinks(false)
-                            document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
-                            document.body.style.overflow = 'scroll'
-                        }} 
-                        to='/topics' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                    <div 
+                        id='mobile-topics'
+                        className='navbar-navlink'
+                        onClick={handleMobileTopics} 
                     >
-                        Topics
-                    </NavLink>
+                        <div style={{display:'flex', alignItems:'center', gap:'0.5rem'}}>
+                            <span>Topics</span>
+                            <i style={{fontSize:'0.9rem', marginTop:'0.25rem'}} className="fa fa-chevron-down mobile-topics-chevron-down"></i>
+                        </div>
+                        {<NavbarTopics topics={topics} setShowNavLinks={setShowNavLinks} />}
+
+                    </div>
                     <NavLink 
                         onClick={()=> {
                             setShowNavLinks(false)
@@ -99,47 +184,11 @@ export function Navbar() {
                         Posts
                     </NavLink>
                     {isAuthenticated ?
-                        <>
-                            <NavLink
-                                to='/my-posts'
-                                onClick={()=> {
-                                    setShowNavLinks(false)
-                                    document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
-                                    document.body.style.overflow = 'scroll'
-                                }} 
-                                className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
-                            >
-                                My Posts
-                            </NavLink>
-                            <NavLink 
-                                to='/my-comments'
-                                className={({isActive})=>isActive ? 'navbar-active-navlink navbar-navlink' : 'navbar-navlink'}
-                                onClick={()=> {
-                                    setShowNavLinks(false)
-                                    document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
-                                    document.body.style.overflow = 'scroll'
-                                }}
-                            >
-                                My Comments
-                            </NavLink>
-                            <NavLink 
-                                onClick={()=> {
-                                    setShowNavLinks(false)
-                                    document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
-                                    document.body.style.overflow = 'scroll'
-                                }}
-                                to='/create/post'
-                                className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
-                            >
-                                Create Post
-                            </NavLink>
-                            <div className='navbar-navlink-logout-btn-container'>
-                                <button onClick={logout} className='navbar-navlink-logout-btn'>
-                                    Logout
-                                </button>
-                            </div>
-                        </>
-                        
+                        <div className='navbar-navlink-logout-btn-container'>
+                            <button onClick={logout} className='navbar-navlink-logout-btn'>
+                                Logout
+                            </button>
+                        </div>
                     :
                         <>
                             <NavLink 
@@ -176,11 +225,14 @@ export function Navbar() {
                     >
                         Home
                     </NavLink>
-                    <NavLink
-                        to='/topics' className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
-                    >
-                        Topics
-                    </NavLink>
+                    <div id='topics'className='navbar-navlink'>
+                        <div style={{display:'flex', alignItems:'center', gap:'0.5rem'}}>
+                            <span>Topics</span>
+                            <i style={{fontSize:'0.9rem', marginTop:'0.25rem'}} className="fa fa-chevron-down"></i>
+                        </div>
+                        {<NavbarTopics topics={topics} />}
+                    </div>
+                    
                     <NavLink
                         to='/posts' 
                         className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
@@ -236,5 +288,34 @@ export function Navbar() {
                 {/* END */}
             </nav>
         </div>
+    )
+}
+
+
+
+
+function NavbarTopics(props) {
+    const { topics, setShowNavLinks } = props
+
+    return (
+        <>
+            <div className='navbar-topics'>
+                {topics && topics.map((topic)=> {
+                    return (
+                        <NavLink 
+                            onClick={()=> {
+                                setShowNavLinks && setShowNavLinks(false)
+                                document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                document.body.style.overflow = 'scroll'
+                            }}
+                            className={({isActive})=>isActive?'active-navbar-topic-link navbar-topic-link':'navbar-topic-link'}
+                            to={`/topic/${topic.name}/posts/?filter=${topic.name}`} state={{topic:topic.name}} key={topic.id}
+                        >
+                            {topic.name}
+                        </NavLink>
+                    )
+                })}
+            </div>
+        </>
     )
 }

@@ -35,7 +35,6 @@ const UpdatePost= ()=> {
         setUpdate(obj)
     }, [state.post])
 
-
     return (
         <CreatePost text='Update Post' update={update}/>
     )

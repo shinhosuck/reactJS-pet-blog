@@ -1344,6 +1344,12 @@ NAVBAR
   padding: 1.3rem 1.3rem 0 1.3rem;
 }
 
+@media (hover) {
+  .navbar-topic-link:hover {
+    color: var(--orange-57);
+  }
+}
+
 .navbar-topic-link:last-child {
   padding-bottom: 1.3rem;
 }
@@ -1448,7 +1454,7 @@ NAVBAR
   letter-spacing: 0.05rem;
 }
 
-@media screen and (min-width: 930px) {
+@media screen and (min-width: 800px) {
   .navbar-container {
     position: initial;
   }
@@ -1472,8 +1478,70 @@ NAVBAR
   .lg-navbar-navlinks {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.8rem;
   }
+  /* Lg authenticated user container  */
+  .lg-authenticated-user-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .lg-authenticated-user-container > img {
+    width: 35px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+  }
+
+
+  .lg-authenticated-user {
+    position: absolute;
+    z-index: 2;
+    top: 67px;
+    left: 0;
+    max-height: 0;
+    width: 200px;
+    overflow: hidden;
+
+    display: grid;
+    align-content: start;
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    opacity: 0;
+    background: var(--black-90);
+    transition: max-height 200ms linear;
+  }
+
+  .lg-authenticated-user > 
+  .navbar-navlink {
+    color: var(--orange-10);
+    padding: 1.3rem 1.3rem 0 1.3rem;
+    height: initial;
+  }
+
+  @media (hover) {
+    .lg-authenticated-user > 
+    .navbar-navlink:hover {
+      color: var(--orange-57) !important
+    }
+  }
+
+  .lg-authenticated-user > 
+  .navbar-navlink:last-child {
+    padding-bottom: 1.3rem;
+  }
+
+  @media (hover) {
+    .lg-authenticated-user-container:hover .lg-authenticated-user{
+      max-height: 250px;
+      opacity: 1;
+      overflow-y: scroll;
+    }
+  }
+  /* end */
 
   /* navbar topics */
   #topics {
@@ -1483,7 +1551,7 @@ NAVBAR
   .navbar-topics {
     position: absolute;
     z-index: 2;
-    top: 50px;
+    top: 67px;
     left: 0;
     max-height: 0;
     width: 200px;
@@ -1526,18 +1594,22 @@ NAVBAR
   .navbar-navlink {
     text-wrap: nowrap !important;
     white-space: nowrap;
-    padding: 0.8rem 0;
+    padding: 0;
+    height: 67px;
     color: white;
+
+    display: flex;
+    align-items: center;
   }
 
   .navbar-active-navlink {
-    color: rgb(255, 107, 62) !important;
+    color: rgb(255, 91, 41) !important;
     font-weight: 600;
   }
 
   @media (hover) {
     .navbar-navlink:hover {
-      color: rgb(255, 107, 62);
+      color: rgb(255, 91, 41);
     }
   }
 }

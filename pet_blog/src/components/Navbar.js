@@ -218,6 +218,9 @@ export function Navbar(props) {
                 </div>
                 {/* END */}
 
+
+
+
                 {/* LARGE NAVLINKS */}
                 <div className='lg-navbar-navlinks' >
                     <NavLink
@@ -241,24 +244,32 @@ export function Navbar(props) {
                     </NavLink>
                     {isAuthenticated ?
                         <>
-                            <NavLink 
-                                to='/my-posts'
-                                className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
-                            >
-                                My Posts
-                            </NavLink>
-                            <NavLink 
-                                to='/my-comments'
-                                className={({isActive})=>isActive ? 'navbar-active-navlink navbar-navlink' : 'navbar-navlink'}
-                            >
-                                My Comments
-                            </NavLink>
-                            <NavLink 
-                                to='/create/post'
-                                className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
-                            >
-                                Create Post
-                            </NavLink>
+
+                            <div className="lg-authenticated-user-container navbar-navlink">
+                                <img src={isAuthenticated.profile_image_url} alt="" />
+                                <span>{isAuthenticated.username}</span>
+                                <i className="fa fa-chevron-down"></i>
+                                <div className="lg-authenticated-user">
+                                    <NavLink 
+                                        to='/my-posts'
+                                        className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                                    >
+                                        My Posts
+                                    </NavLink>
+                                    <NavLink 
+                                        to='/my-comments'
+                                        className={({isActive})=>isActive ? 'navbar-active-navlink navbar-navlink' : 'navbar-navlink'}
+                                    >
+                                        My Comments
+                                    </NavLink>
+                                    <NavLink 
+                                        to='/create/post'
+                                        className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
+                                    >
+                                        Create Post
+                                    </NavLink>
+                                </div>
+                            </div>
                             <button 
                                 onClick={()=>logout()} 
                                 className='navbar-navlink navbar-button' 
@@ -286,6 +297,9 @@ export function Navbar(props) {
 
                 </div>
                 {/* END */}
+
+
+
             </nav>
         </div>
     )

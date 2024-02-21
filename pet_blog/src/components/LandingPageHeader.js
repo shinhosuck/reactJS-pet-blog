@@ -58,7 +58,7 @@ function LandingPageHeader() {
                         <button onClick={()=>setShowNavLinks(false)} className='landing-page-toggle-btn landing-page-hide-navlink-btn'>
                             <i className="fa fa-times"></i>
                         </button>
-                        <Link
+                        {/* <Link
                             to='/topics' 
                             className='landing-page-navlink'
                             onClick={()=> {
@@ -67,7 +67,7 @@ function LandingPageHeader() {
                             }}
                         >
                             Topics
-                        </Link>
+                        </Link> */}
                         <Link
                             to='/posts' 
                             className='landing-page-navlink'

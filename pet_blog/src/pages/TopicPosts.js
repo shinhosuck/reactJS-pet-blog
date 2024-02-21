@@ -72,42 +72,52 @@ function TopicPosts() {
             <Navigate to='/posts'/>
         )
     }
+
     if(isLoading) {
         return (
             <LoadingPage />
         )
     }
+
     if(isError) {
         return (
             <Navigate to='/error' replace={true} state={{message:isError.error}} />
         )
     }
+
+    console.log(posts)
+
     return (
         <React.Fragment>
             <ScrollToTop />
             <div className="bg-img"></div>
-            <div className="topic-posts-container__redirect-btn">
+
+            {/* <div className="topic-posts-container__redirect-btn">
                 <i className="fa fa-arrow-left"></i>
                 {state && state.redirect && 
                     <Link to={`${state.redirect}`}>Back to {state.redirect.split('/').filter((obj)=>obj!=='').join('')}</Link>
                 }
-            </div>
+            </div> */}
+            
             <div className="topic-posts-container">
                 <div className='topic-posts-navbar'>
                     <div className='topic-posts-navbar__toggle-btns-container'>
-                        <p className='topic-posts-navbar__nav-bar-text'>Choose Forum:</p>
-                        <div className='topic-posts-navbar__toggle-btns'>
+                        <p className='topic-posts-navbar__nav-bar-text'>Topic:</p>
+                        <button 
+                            onClick={()=>setTopicMenuOpen(!topicMenuOpen)}
+                            className='topic-posts-navbar__toggle-btns'
+                        >
                             <p className='topic-change-input' >{state && state.topic}</p>
                             {!topicMenuOpen ?
-                                <button onClick={()=>setTopicMenuOpen(true)} className='topic-post-toggle-btn'>
+                                <div className='topic-post-toggle-btn'>
                                     <i className="fa fa-chevron-down"></i>
-                                </button>
+                                </div>
                             :
-                                <button onClick={()=>setTopicMenuOpen(false)} className='topic-post-toggle-btn'>
+                                <div className='topic-post-toggle-btn'>
                                     <i className="fa fa-chevron-up"></i>
-                                </button>
+                                </div>
                             }
-                        </div>
+                        </button>
                         {topicMenuOpen && 
                             <div className="topic-posts-navbar__topics-btns">
                                 {topicsArray && topicsArray.map((obj)=> {
@@ -127,9 +137,15 @@ function TopicPosts() {
                         }
                     </div>
                 </div>
-                {!posts ? 
-                    <div>
-                        <h2 style={{textAlign:'center',padding:'5rem 0',color:'rgb(50, 50, 50)',}}>Posts not available!</h2>
+                {!posts.length ? 
+                    <div className="no-comments-container" style={{marginTop: '4rem'}}>
+                        <div className="no-comment-text-container">
+                            <h3>Be the first to post on "{state && state.topic}"!</h3>
+                            <p>
+                                Nobody's posted yet on this topic.
+                                Create a post and get the conversation going.
+                            </p>
+                        </div>
                     </div>
                 :
                     <div className="topic-posts-container__posts">

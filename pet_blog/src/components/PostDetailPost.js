@@ -4,10 +4,11 @@ import { url } from '../pages/PostList'
 
 
 function PostDetailPost(props) {
+    const [textContainer, setTextContainer] = useState(null)
+    const [showBtns, setShowBtns] = useState(false)
     const [width, seWidth] = useState(window.innerWidth)
     const {setShowUpdatePostForm, setShowCommentForm, authenticated, 
-            navigate, post, updateLike} = props
-
+            documentReady, navigate, post, updateLike} = props
 
     const removePost = async()=> {
         console.log(post.id)
@@ -24,35 +25,34 @@ function PostDetailPost(props) {
     // match post img height to the post content height on window resize
     const getWindowWidth = (e)=> {
         const content = document.querySelector('.post-detail-container__text-contents')
-        const img = content && content.previousElementSibling
-        if(width >= 700 && img) {
-            img.style.height = `${content.offsetHeight}px`
-            img.style.minHeight = '180px'
+        const imgContainer = content && content.previousElementSibling
 
-        }else if(img) {
-            img.style.height = 'auto'
+        if(width >= 700 && imgContainer) {
+            imgContainer.style.height = `${content.offsetHeight}px`
+            imgContainer.style.minHeight = '180px'
+
+        }else if(imgContainer) {
+            imgContainer.style.height = 'auto'
         }
         seWidth(window.innerWidth)
-        window.removeEventListener('resize', getWindowWidth)
     }
 
     useEffect(()=> {
-        window.addEventListener('resize', getWindowWidth)
+        window.onresize = getWindowWidth
     }, [width])
+
     // end
 
-    // match post image height the post content height
-    if(document.querySelector('.post-detail-container__text-contents')){
+    // window onload sets the post image
+    useEffect(()=> {
         const content = document.querySelector('.post-detail-container__text-contents')
-        const img = content && content.previousElementSibling
-        if(width >= 700 && img) {
-            img.style.height = `${content.offsetHeight}px`
-            img.style.minHeight = '180px'
+        content && setTextContainer(true)
 
-        }else {
-            img.style.height = 'auto'
+        if(textContainer) {
+            getWindowWidth()
         }
-    }
+
+    }, [textContainer])
     // end
 
     return (
@@ -64,13 +64,7 @@ function PostDetailPost(props) {
                 <h3 className='post-detail-container__post-title'>{post.title}</h3>
                 <p className='post-detail-container__post-content'>{post.content}</p>
                 <div className="post-detail-container__like-and-reply">
-                    <div className='post-detail-container__num-of-replies-container'>
-                        <i className="fa-solid fa-message post-detail-container__num-of-post"></i>
-                        <span className='post-detail-container__reply-count'>{post.num_of_replies}</span>
-                        <span className='post-detail-container__reply-text'>
-                            {post.num_of_replies > 1 ? 'comments':'comment'}
-                        </span>
-                    </div>
+                    
                     <button 
                         onClick={(e)=>authenticated ? updateLike(e, post): ''} 
                         className={authenticated ?
@@ -81,13 +75,15 @@ function PostDetailPost(props) {
                     >
                         <i className='fa-solid fa-hands-clapping post-detail-like'></i>
                         <span className='post-detail-like-count'>{post.like.length}</span>
-                        <span className='post-detail-like-count-text'>
-                            {post.like.length > 1 ? 'likes': 'like'}
-                        </span>
                     </button>
+                    <div className='post-detail-container__num-of-replies-container'>
+                        <i className="fa-solid fa-message post-detail-container__num-of-post"></i>
+                        <span className='post-detail-container__reply-count'>{post.num_of_replies}</span>
+                    </div>
                     <div className="post-detail-lg-btns">
                         {authenticated && 
                             <>
+                                
                                 <button 
                                     onClick={()=> {
                                         setShowCommentForm(true)
@@ -96,40 +92,44 @@ function PostDetailPost(props) {
                                     className='post-detail-reply'
                                 >
                                     <i className="fa fa-reply post-detail-reply-btn" title='reply'></i>
-                                    <span className='post-detail-reply-text'>reply</span>
                                 </button>
-                    
-                                {authenticated.username === post.author && 
+                                {authenticated.username === post.author &&
                                     <>
-                                        <button
-                                            className='post-detail-edit' 
-                                            onClick={()=> {
-                                                setShowUpdatePostForm(true)
-                                                setShowCommentForm(false)
-                                            }}
-                                        >
-                                            <i className="fa-solid fa-pen post-detail-edit-btn"></i>
-                                            <span className='post-detail-edit-text'>edit post</span>
-                                        </button> 
-                                        <button onClick={removePost}>
-                                            <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
-                                            <span className='post-detail-remove-text'>remove</span>
-                                        </button>
+                                        <div className='post-detail-btns-ellipsis'>
+                                            <button onClick={()=>setShowBtns(!showBtns)}>
+                                                <i className="fa-solid fa-ellipsis"></i>
+                                            </button>
+                                        </div>
+                                        {showBtns &&
+                                            <div className='post-detail-edit-and-delete-btns'>
+                                                <button
+                                                    className='post-detail-edit' 
+                                                    onClick={()=> {
+                                                        setShowUpdatePostForm(true)
+                                                        setShowCommentForm(false)
+                                                        setShowBtns(false)
+                                                    }}
+                                                >
+                                                    <i className="fa-solid fa-pen post-detail-edit-btn"></i>
+                                                    <span className='post-detail-edit-text'>edit</span>
+                                                </button> 
+                                                <button
+                                                    onClick={()=> {
+                                                        removePost()
+                                                        setShowBtns(false)
+                                                    }}
+                                                    className='post-detail-delete'
+                                                >
+                                                    <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
+                                                    <span className='post-detail-remove-text'>delete</span>
+                                                </button>
+                                            </div>
+                                        }
                                     </>
                                 }
-                                    
-                            
                             </>
                         }
                     </div>
-                    <MobileButtons 
-                        setShowUpdatePostForm = {setShowUpdatePostForm}
-                        setShowCommentForm = {setShowCommentForm}
-                        authenticated = {authenticated}
-                        navigate = {navigate}
-                        post = {post}
-                        updateLike = {updateLike}
-                    />
                 </div>
             </div>
         </div>
@@ -139,68 +139,6 @@ function PostDetailPost(props) {
 export default PostDetailPost
 
 
-function MobileButtons(props) {
 
-    const [showBtns, setShowBtns] = useState(false)
-
-    const {
-        setShowUpdatePostForm, 
-        setShowCommentForm, 
-        authenticated, 
-        post
-    } = props
-
-    return (
-        <>
-            {authenticated &&
-                <div className='post-detail-btns-ellipsis'>
-                    <button onClick={()=>setShowBtns(!showBtns)}>
-                        <i className="fa-solid fa-ellipsis"></i>
-                    </button>
-                </div>
-             }
-            {showBtns && 
-                <div className='post-detail-mobile-btns show-post-detail-mobile-btns'>
-                    {authenticated && 
-                        <>
-                            <button 
-                                onClick={()=> {
-                                    setShowCommentForm(true)
-                                    setShowUpdatePostForm(false)
-                                    setShowBtns(!showBtns)
-                                }} 
-                                className='post-detail-reply post-detail-mobile-btn'
-                            >
-                                <i className="fa fa-reply post-detail-reply-btn" title='reply'></i>
-                                <span className='post-detail-reply-text'>reply</span>
-                            </button>
-                    
-                            {authenticated.username === post.author && 
-                                <>
-                                    <button
-                                        className='post-detail-edit post-detail-mobile-btn' 
-                                        onClick={()=> {
-                                            setShowUpdatePostForm(true)
-                                            setShowCommentForm(false)
-                                            setShowBtns(!showBtns)
-                                        }}
-                                    >
-                                        <i className="fa-solid fa-pen post-detail-edit-btn"></i>
-                                        <span className='post-detail-edit-text'>edit post</span>
-                                    </button> 
-                                
-                                    <button>
-                                        <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
-                                        <span className='post-detail-remove-text'>remove</span>
-                                    </button>
-                                </>
-                            }
-                        </>
-                    }
-                </div>
-            }
-        </>
-    )
-}
 
 

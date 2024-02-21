@@ -99,7 +99,7 @@ function MyComment() {
     <React.Fragment>
       <div className="bg-img"></div>
       <div className='my-comments-container'>
-      {comments && comments.map((comment)=> {
+        {comments && comments.map((comment)=> {
             return (
                 <div key={comment.id} className="my-comments-container__my-comment">
                   <div>
@@ -128,7 +128,7 @@ function MyComment() {
                   }
                 </div>
             )
-          })}
+        })}
       </div>
     </React.Fragment>
   )

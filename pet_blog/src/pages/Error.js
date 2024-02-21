@@ -5,7 +5,7 @@ import { useLocation, Link } from 'react-router-dom'
 
 
 const error = {
-    minHeight: '100vh',
+    minHeight: '100dvh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'start',

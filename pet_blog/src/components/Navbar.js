@@ -4,6 +4,7 @@ import paw from '../images/paw.webp'
 
 
 
+import {v4 as uuidv4} from 'uuid'
 
 
 
@@ -13,7 +14,6 @@ export function Navbar(props) {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     let isAuthenticated = JSON.parse(localStorage.getItem('auth')) || null
     const navigate = useNavigate()
-
 
     const handleMobileTopics = ()=> {
         const mobileTopics = document.querySelector('#mobile-topics > .navbar-topics')
@@ -217,9 +217,6 @@ export function Navbar(props) {
                     }
                 </div>
                 {/* END */}
-
-
-
 
                 {/* LARGE NAVLINKS */}
                 <div className='lg-navbar-navlinks' >

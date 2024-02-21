@@ -9,7 +9,7 @@ import UpdateCommentForm from './UpdateCommentForm'
 function Comments(props) {
     const { comments, setComments, authenticated, setPost} = props
     const [showCommentEditForm, setShowCommentEditForm] = React.useState(false)
-
+    const [showBtns, setShowBtns] = React.useState({show:false,id:null})
     
     const deleteComment = async(id)=> {
         try {
@@ -45,18 +45,40 @@ function Comments(props) {
                                 <>
                                     <button className='post-detail-comment-reply-btn'>
                                         <i className="fa fa-reply post-detail-comment-reply-icon" title='reply'></i>
-                                        <span className='post-detail-comment-reply-text'>reply</span>
                                     </button>
-                                    {comment.user === authenticated.username &&
+                                     {comment.user === authenticated.username &&
                                         <>
-                                            <button onClick={()=> setShowCommentEditForm({id:comment.id})} className='post-detail-comment-edit-btn'>
-                                                <i className="fa-solid fa-pen post-detail-comment-edit-icon"></i>
-                                                <span className='post-detail-comment-edit-text'>edit</span>
-                                            </button>
-                                            <button onClick={()=> deleteComment(comment.id)} className='post-detail-comment-remove-btn'>
-                                                <i className="fa-solid fa-trash-can post-detail-comment-remove-icon"></i>
-                                                <span className='post-detail-comment-remove-text'>remove</span>
-                                            </button>
+                                            <div className='post-detail-btns-ellipsis'>
+                                                <button onClick={()=> {
+                                                    setShowBtns({show:showBtns.show?false:true, id:showBtns.id?null:comment.id})
+                                                }}>
+                                                    <i className="fa-solid fa-ellipsis"></i>
+                                                </button>
+                                            </div>
+                                            {showBtns && showBtns.show && showBtns.id === comment.id &&
+                                                <div className='post-detail-comment-edit-and-delete'>
+                                                    <button 
+                                                        onClick={()=> {
+                                                            setShowCommentEditForm({id:comment.id})
+                                                            setShowBtns({show:false, id:null})
+                                                        }} 
+                                                        className='post-detail-comment-edit-btn'
+                                                    >
+                                                        <i className="fa-solid fa-pen post-detail-comment-edit-icon"></i>
+                                                        <span className='post-detail-comment-edit-text'>edit</span>
+                                                    </button>
+                                                    <button 
+                                                        onClick={()=> {
+                                                            deleteComment(comment.id)
+                                                            setShowBtns({show:false, id:null})
+                                                        }} 
+                                                        className='post-detail-comment-remove-btn'
+                                                    >
+                                                        <i className="fa-solid fa-trash-can post-detail-comment-remove-icon"></i>
+                                                        <span className='post-detail-comment-remove-text'>delete</span>
+                                                    </button>
+                                                </div>
+                                            }
                                         </>
                                     }
                                 </>

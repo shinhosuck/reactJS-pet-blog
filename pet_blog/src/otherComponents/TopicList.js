@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useOutletContext, useLocation } from 'react-router-dom'
 import { getTopicData } from '../utils/api'
-import LoadingPage from './LoadingPage'
-import { url } from './PostList'
-import TopicListTopics from '../components/TopicListTopics'
-import TopicListSidebar from '../components/TopicListSidebar'
+import LoadingPage from '../pages/LoadingPage'
+import { url } from '../pages/PostList'
+import TopicListTopics from './TopicListTopics'
+import TopicListSidebar from './TopicListSidebar'
 import ScrollToTop from '../components/ScrollToTop'
 
 

@@ -49,7 +49,7 @@ function LandingPage() {
                 setTopics(data)
                 setTimeout(()=>{
                     setIsLoading(false)
-                }, 500)
+                }, 100)
                
             } catch ({message}) {
                 setIsLoading(false)

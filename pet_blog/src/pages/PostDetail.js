@@ -78,7 +78,10 @@ function PostDetail() {
                 const data = await getPostData(`${url}/api/post/${id}/detail/`)
                 const objs = {...data, date_posted:new Date(data.date_posted).toDateString()}
                 setPost(objs)
-                setIsLoading(false)
+                const timeOutId = setTimeout(()=>{
+                    setIsLoading(false)
+                    clearTimeout(timeOutId)
+                }, 100)
 
             } catch ({message}) {
                 console.log('Error:',message)

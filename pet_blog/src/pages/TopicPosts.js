@@ -64,7 +64,7 @@ function TopicPosts() {
         const timeOutID = setTimeout(()=> {
             setIsLoading(false)
             clearTimeout(timeOutID)
-        }, 1000)
+        }, 100)
     }
 
     if(state && state.topic.toLowerCase().replaceAll(' ', '') === 'allposts') {

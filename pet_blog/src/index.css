@@ -83,7 +83,7 @@ textarea {
 
 /* loading */
 .page-loading-container {
-  min-height: 100ddvh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,10 +91,10 @@ textarea {
 }
 
 .page-loading {
-  width: 45px;
+  width: 43px;
   aspect-ratio: 1/1;
-  border: 0.8rem solid rgb(39, 39, 39);
-  border-top: 0.8rem solid blue;
+  border: 0.7rem solid rgb(39, 39, 39);
+  border-top: 0.7rem solid blue;
   border-radius: 50%;
 
   animation-name: loading;

@@ -90,15 +90,7 @@ function TopicPosts() {
     return (
         <React.Fragment>
             <ScrollToTop />
-            <div className="bg-img"></div>
-
-            {/* <div className="topic-posts-container__redirect-btn">
-                <i className="fa fa-arrow-left"></i>
-                {state && state.redirect && 
-                    <Link to={`${state.redirect}`}>Back to {state.redirect.split('/').filter((obj)=>obj!=='').join('')}</Link>
-                }
-            </div> */}
-            
+            <div className="bg-img"></div>            
             <div className="topic-posts-container">
                 <div className='topic-posts-navbar'>
                     <div className='topic-posts-navbar__toggle-btns-container'>

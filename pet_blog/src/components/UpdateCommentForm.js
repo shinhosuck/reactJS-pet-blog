@@ -38,11 +38,11 @@ function UpdateCommentForm(props) {
     }
 
     return (
-        <form className='update-comment-form' onSubmit={handleSubmit}>
-            <textarea onChange={handleChange} name="content" value={comment.content} rows="6"></textarea>
-            <div className="update-comment-form-btns">
-                <button className='update-comment-update-btn' type='submit'>Update</button>
-                <button className='update-comment-cancel-btn' onClick={()=>setShowCommentEditForm(false)} type='button'>Cancel</button>
+        <form className='post-detail-update-comment-form' onSubmit={handleSubmit}>
+            <textarea className='post-detail-update-comment-textarea' onChange={handleChange} name="content" value={comment.content} rows="6"></textarea>
+            <div className="post-detail-update-comment-form-btns">
+                <button className='post-detail-update-comment-update-btn' type='submit'>Submit</button>
+                <button className='post-detail-update-comment-cancel-btn' onClick={()=>setShowCommentEditForm(false)} type='button'>Cancel</button>
             </div>
         </form>
     )

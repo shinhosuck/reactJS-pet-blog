@@ -12,7 +12,6 @@ import RootLayout from './layouts/RootLayout';
 import ContentLayout from './layouts/ContentLayout';
 
 // Pages
-// import TopicList from './pages/TopicList';
 import PostList from './pages/PostList';
 import CreatePost from './pages/CreatePost';
 import PostDetail from './pages/PostDetail';

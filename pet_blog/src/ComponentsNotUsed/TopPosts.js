@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { url } from '../pages/PostList'
 import { getPostData} from '../utils/api'
-import ScrollToTop from './ScrollToTop'
+import ScrollToTop from '../components/ScrollToTop'
 
 
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate, Navigate } from 'react-router-dom'
 import { register } from '../utils/api'
 import { passwordCheck, newUserInfoCheck } from '../utils/utils'
-
+import ScrollToTop from '../components/ScrollToTop'
 
 
 export const url = window.location.host === 'localhost:3000' ? 
@@ -60,6 +60,7 @@ function Register() {
     }
     return (
         <div className="user-register-main-container">
+            <ScrollToTop />
             <div className="user-register-container">
                 <div className='user-register'>
                     <h2 className='user-register__header'>Register</h2>

@@ -9,7 +9,8 @@ import { url } from './PostList'
 import userImg from '../images/default.png'
 import ScrollToTop from '../components/ScrollToTop'
 import PostDetailPost from '../components/PostDetailPost'
-import TopPosts from '../components/TopPosts'
+
+
 
 
 function PostDetail() {
@@ -200,7 +201,6 @@ function PostDetail() {
                         }
                     </>
                 </div>
-                <TopPosts comments={comments} state={state}/>
             </div>
         </React.Fragment>
     )

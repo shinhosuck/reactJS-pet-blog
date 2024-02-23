@@ -43,10 +43,6 @@ function LandingPageTopics(props) {
                         )
                     })}
                 </div>
-                <Link to='/topics' className='landing-page-topic-see-all-forums'>
-                    View all
-                    <i className="fa fa-arrow-right"></i>
-                </Link>
             </div>
         </div>
     )

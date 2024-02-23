@@ -3,7 +3,7 @@ import { Link, useLocation, Navigate, useNavigate } from 'react-router-dom'
 import { loginInfoValidation  } from '../utils/utils'
 import { login } from '../utils/api'
 import { url } from './Register'
-
+import ScrollToTop from '../components/ScrollToTop'
 
 
 function Login() {
@@ -79,6 +79,7 @@ function Login() {
     }
     return (
         <div className="user-login-main-container">
+            <ScrollToTop />
             <div className="user-login-container">
                 {successMessage && successMessage.registered && <p className='user-login__message'>{successMessage.registered}</p>}
                 {state && state.error && <p className='user-login__error-message'>{state.error}</p>}

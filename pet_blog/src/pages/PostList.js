@@ -3,7 +3,6 @@ import { useOutletContext, useLocation } from 'react-router-dom'
 import { getPostData} from '../utils/api'
 import LoadingPage from './LoadingPage'
 import PostListPosts from '../components/PostListPosts'
-import PostListSidebar from '../components/PostListSidebar'
 import ScrollToTop from '../components/ScrollToTop'
 
 export const url = window.location.host === 'localhost:3000' ? 
@@ -90,11 +89,7 @@ function PostList() {
       </div>
 
       {message && <p className='post-list-message'>{message}</p>}
-      
-      <div className="post-list-main-container">
-        {posts && <PostListPosts posts={posts} user={user} />}
-        {topics && <PostListSidebar topics={topics.slice(0,4)} />}
-      </div>
+      {posts && <PostListPosts posts={posts} user={user} />}
     </React.Fragment>
   )
 }

@@ -22,7 +22,7 @@ function PostDetail() {
 
     const [showCommentForm, setShowCommentForm] = useState(false)
     const [showUpdatePostForm, setShowUpdatePostForm] = useState(false)
-    const {state, pathname} = useLocation()
+    // const {state, pathname} = useLocation()
 
     const authenticated = JSON.parse(localStorage.getItem('auth')) || null
     const { id } = useParams()
@@ -145,7 +145,7 @@ function PostDetail() {
             </div>
             <div className="post-detail-main-container">
                 <div className='post-detail-container'>
-                    <Link to={`${state && state.redirect && state.redirect}`} className='post-detail-back-to-btn'>
+                    {/* <Link to={`${state && state.redirect && state.redirect}`} className='post-detail-back-to-btn'>
                         <i className="fa fa-arrow-left"></i>
                         <span>Back to {
                                 state && state.redirect && state.redirect === '/' 
@@ -153,53 +153,55 @@ function PostDetail() {
                                 'home'
                             :   
                                 state && state.redirect && state.redirect.split('/').filter((obj)=>obj!=='').join('')}</span>
-                    </Link>
-                    {post && 
-                        <PostDetailPost 
-                            setShowUpdatePostForm = {setShowUpdatePostForm} 
-                            setShowCommentForm = {setShowCommentForm} 
-                            authenticated = {authenticated} 
-                            navigate = {navigate} 
-                            post = {post} 
-                            updateLike = {updateLike}
-                        />
-                    }
-                    
-                    {showCommentForm && authenticated &&
-                        <CommentForm 
-                            handleCommentSubmit={handleCommentSubmit} 
-                            showCommentForm={setShowCommentForm} 
-                            commentContent={commentContent}
-                        />
-                    }
-                    {showUpdatePostForm && authenticated &&
-                        <UpdatePostForm 
-                            post={post} 
-                            showUpdatePostForm={setShowUpdatePostForm}
-                            authenticated={authenticated}
-                        />
-                    }
-                    <>
-                        {comments ? 
-                            <Comments 
-                                comments={comments} 
-                                authenticated={authenticated} 
-                                setComments={setComments} 
-                                setPost={setPost}
+                    </Link> */}
+                    <div className='post-detail-container-contents'>
+                        {post && 
+                            <PostDetailPost 
+                                setShowUpdatePostForm = {setShowUpdatePostForm} 
+                                setShowCommentForm = {setShowCommentForm} 
+                                authenticated = {authenticated} 
+                                navigate = {navigate} 
+                                post = {post} 
+                                updateLike = {updateLike}
                             />
-                        :
-                            !showCommentForm &&
-                                <div className="no-comments-container">
-                                    <div className="no-comment-text-container">
-                                        <h3>Be the first to comment!</h3>
-                                        <p>
-                                            Nobody's responded to this post yet.
-                                            Add your thoughts and get the conversation going.
-                                        </p>
-                                    </div>
-                                </div>
                         }
-                    </>
+                        
+                        {showCommentForm && authenticated &&
+                            <CommentForm 
+                                handleCommentSubmit={handleCommentSubmit} 
+                                showCommentForm={setShowCommentForm} 
+                                commentContent={commentContent}
+                            />
+                        }
+                        {showUpdatePostForm && authenticated &&
+                            <UpdatePostForm 
+                                post={post} 
+                                showUpdatePostForm={setShowUpdatePostForm}
+                                authenticated={authenticated}
+                            />
+                        }
+                        <>
+                            {comments ? 
+                                <Comments 
+                                    comments={comments} 
+                                    authenticated={authenticated} 
+                                    setComments={setComments} 
+                                    setPost={setPost}
+                                />
+                            :
+                                !showCommentForm &&
+                                    <div className="no-comments-container">
+                                        <div className="no-comment-text-container">
+                                            <h3>Be the first to comment!</h3>
+                                            <p>
+                                                Nobody's responded to this post yet.
+                                                Add your thoughts and get the conversation going.
+                                            </p>
+                                        </div>
+                                    </div>
+                            }
+                        </>
+                    </div>
                 </div>
             </div>
         </React.Fragment>

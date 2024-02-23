@@ -14,10 +14,10 @@ function PostList() {
   const [posts, setPosts] = useState(null)
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [message, setMessage] = useState(null)
-  const [user, setUser] = useState(null)
-  const {topics} = useOutletContext()
-  const {state, pathname} = useLocation()
+  // const [message, setMessage] = useState(null)
+  // const [user, setUser] = useState(null)
+  // const {topics} = useOutletContext()
+  // const {state, pathname} = useLocation()
 
   
   const authenticated = JSON.parse(localStorage.getItem('auth')) || null
@@ -43,25 +43,25 @@ function PostList() {
     getData()
   }, [])
 
-  useEffect(()=> {
-    if(authenticated) {
-      setUser(authenticated)
-    }
-  }, [])
+  // useEffect(()=> {
+  //   if(authenticated) {
+  //     setUser(authenticated)
+  //   }
+  // }, [])
 
-  useEffect(()=>{
-    state && state.message && setMessage(state.message)
-    if(state) {
-      !authenticated && setUser(null)
-      const timeoutID = setTimeout(()=>{
-        const element = document.querySelector('.post-list-message')
-        if(element) {
-          element.style.display = 'none'
-        }
-        clearTimeout(timeoutID)
-      }, 5000)
-    }
-  }, [state])
+  // useEffect(()=>{
+  //   state && state.message && setMessage(state.message)
+  //   if(state) {
+  //     !authenticated && setUser(null)
+  //     const timeoutID = setTimeout(()=>{
+  //       const element = document.querySelector('.post-list-message')
+  //       if(element) {
+  //         element.style.display = 'none'
+  //       }
+  //       clearTimeout(timeoutID)
+  //     }, 5000)
+  //   }
+  // }, [state])
 
   if(isLoading) {
     return (
@@ -88,8 +88,13 @@ function PostList() {
         </div>
       </div>
 
-      {message && <p className='post-list-message'>{message}</p>}
-      {posts && <PostListPosts posts={posts} user={user} />}
+      {/* {message && <p className='post-list-message'>{message}</p>} */}
+      {posts && 
+        <PostListPosts 
+          posts={posts} 
+          // user={user} 
+        />
+      }
     </React.Fragment>
   )
 }

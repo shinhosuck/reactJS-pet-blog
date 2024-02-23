@@ -27,6 +27,29 @@ function LandingPageFeaturePosts(props) {
                             <div key={post.id} className="landing-page-featured-post">
                                 <div className="landing-page-featured-post-image-container">
                                     <img className='landing-page-featured-post-image' src={post.image_url} alt={post.title} />
+                                    {post.like.length > 1 ? 
+                                        <div className='landing-page-featured-post-like mobile-landing-page-featured-post-like'>
+                                            <div className='landing-page-featured-post-like-container'>
+                                                <i className="fa-solid fa-hands-clapping landing-page-featured-post-clap"></i>
+                                                <span className='landing-page-featured-post-like-count'>{post.like.length}</span>
+                                            </div>
+                                            <div className='landing-page-featured-post-num-of-replies-container'>
+                                                <i className="fa-solid fa-message landing-page-featured-post-num-of-post"></i>
+                                                <span className='landing-page-featured-post-reply-count'>{post.num_of_replies}</span>
+                                            </div>
+                                        </div>
+                                    : 
+                                        <div className='landing-page-featured-post-like mobile-landing-page-featured-post-like'>
+                                            <div className='landing-page-featured-post-like-container'>
+                                                <i className="fa-solid fa-hands-clapping landing-page-featured-post-clap"></i>
+                                                <span className='landing-page-featured-post-like-count'>{post.like.length}</span>
+                                            </div>
+                                            <div className='landing-page-featured-post-num-of-replies-container'>
+                                                <i className="fa-solid fa-message landing-page-featured-post-num-of-post"></i>
+                                                <span className='landing-page-featured-post-reply-count'>{post.num_of_replies}</span>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                                 <div className='landing-page-featured-post-text-content'>
                                     <h3 className='landing-page-featured-post-title'>{post.title}</h3>
@@ -40,29 +63,25 @@ function LandingPageFeaturePosts(props) {
                                         </Link>
                                     </p>
                                     {post.like.length > 1 ? 
-                                        <div className='landing-page-featured-post-like'>
+                                        <div className='landing-page-featured-post-like lg-landing-page-featured-post-like'>
                                             <div className='landing-page-featured-post-like-container'>
                                                 <i className="fa-solid fa-hands-clapping landing-page-featured-post-clap"></i>
                                                 <span className='landing-page-featured-post-like-count'>{post.like.length}</span>
-                                                {/* <span className='landing-page-featured-post-like-text'>likes</span> */}
                                             </div>
                                             <div className='landing-page-featured-post-num-of-replies-container'>
                                                 <i className="fa-solid fa-message landing-page-featured-post-num-of-post"></i>
                                                 <span className='landing-page-featured-post-reply-count'>{post.num_of_replies}</span>
-                                                {/* <span className='landing-page-featured-post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span> */}
                                             </div>
                                         </div>
                                     : 
-                                        <div className='landing-page-featured-post-like'>
+                                        <div className='landing-page-featured-post-like lg-landing-page-featured-post-like'>
                                             <div className='landing-page-featured-post-like-container'>
                                                 <i className="fa-solid fa-hands-clapping landing-page-featured-post-clap"></i>
                                                 <span className='landing-page-featured-post-like-count'>{post.like.length}</span>
-                                                {/* <span className='landing-page-featured-post-like-text'>like</span> */}
                                             </div>
                                             <div className='landing-page-featured-post-num-of-replies-container'>
                                                 <i className="fa-solid fa-message landing-page-featured-post-num-of-post"></i>
                                                 <span className='landing-page-featured-post-reply-count'>{post.num_of_replies}</span>
-                                                {/* <span className='landing-page-featured-post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span> */}
                                             </div>
                                         </div>
                                     }

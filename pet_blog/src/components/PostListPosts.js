@@ -56,19 +56,6 @@ function PostListPosts(props) {
                                                     <div className="post-container__post">
                                                         <div className="post-container__post-image-container">
                                                             <img className='post-container__post-image' src={post.image_url} alt={post.title} />
-                                                        </div>
-                                                        <div className='post-container__post-text-content'>
-                                                            <h3 className='post-container__post-title'>{post.title}</h3>
-                                                            <p className='post-container__post-content'>
-                                                                {post.content.substring(0, 70)}...
-                                                                <Link 
-                                                                    className='post-container__post-read-more-btn'
-                                                                    to={`/post/${post.id}/detail/`}
-                                                                    state={{redirect:pathname}} 
-                                                                >
-                                                                    Read more
-                                                                </Link>
-                                                            </p>
                                                             {post.like.length > 1 ? 
                                                                 <div className='post-container__post-like'>
                                                                     <div className='post-container__post-like-container'>
@@ -92,6 +79,19 @@ function PostListPosts(props) {
                                                                     </div>
                                                                 </div>
                                                             }
+                                                        </div>
+                                                        <div className='post-container__post-text-content'>
+                                                            <h3 className='post-container__post-title'>{post.title}</h3>
+                                                            <p className='post-container__post-content'>
+                                                                {post.content.substring(0, 70)}...
+                                                                <Link 
+                                                                    className='post-container__post-read-more-btn'
+                                                                    to={`/post/${post.id}/detail/`}
+                                                                    state={{redirect:pathname}} 
+                                                                >
+                                                                    Read more
+                                                                </Link>
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 :

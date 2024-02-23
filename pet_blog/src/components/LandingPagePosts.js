@@ -23,6 +23,29 @@ function LandingPagePosts(props) {
                             <div key={post.id} className="landing-page-post">
                                 <div className="landing-page-post-image-container">
                                     <img className='landing-page-post-image' src={post.image_url} alt={post.title} />
+                                    {post.like.length > 1 ? 
+                                        <div className='landing-page-post-like'>
+                                            <div className='landing-page-post-like-container'>
+                                                <i className="fa-solid fa-hands-clapping landing-page-post-clap"></i>
+                                                <span className='landing-page-post-like-count'>{post.like.length}</span>
+                                            </div>
+                                            <div className='landing-page-post-num-of-replies-container'>
+                                                <i className="fa-solid fa-message landing-page-post-num-of-post"></i>
+                                                <span className='landing-page-post-reply-count'>{post.num_of_replies}</span>
+                                            </div>
+                                        </div>
+                                    : 
+                                        <div className='landing-page-post-like'>
+                                            <div className='landing-page-post-like-container'>
+                                                <i className="fa-solid fa-hands-clapping landing-page-post-clap"></i>
+                                                <span className='landing-page-post-like-count'>{post.like.length}</span>
+                                            </div>
+                                            <div className='landing-page-post-num-of-replies-container'>
+                                                <i className="fa-solid fa-message landing-page-post-num-of-post"></i>
+                                                <span className='landing-page-post-reply-count'>{post.num_of_replies}</span>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                                 <div className='landing-page-post-text-content'>
                                     <h3 className='landing-page-post-title'>{post.title}</h3>
@@ -36,33 +59,6 @@ function LandingPagePosts(props) {
                                             Read more
                                         </Link>
                                     </p>
-                                    {post.like.length > 1 ? 
-                                        <div className='landing-page-post-like'>
-                                            <div className='landing-page-post-like-container'>
-                                                <i className="fa-solid fa-hands-clapping landing-page-post-clap"></i>
-                                                <span className='landing-page-post-like-count'>{post.like.length}</span>
-                                                {/* <span className='landing-page-post-like-text'>likes</span> */}
-                                            </div>
-                                            <div className='landing-page-post-num-of-replies-container'>
-                                                <i className="fa-solid fa-message landing-page-post-num-of-post"></i>
-                                                <span className='landing-page-post-reply-count'>{post.num_of_replies}</span>
-                                                {/* <span className='landing-page-post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span> */}
-                                            </div>
-                                        </div>
-                                    : 
-                                        <div className='landing-page-post-like'>
-                                            <div className='landing-page-post-like-container'>
-                                                <i className="fa-solid fa-hands-clapping landing-page-post-clap"></i>
-                                                <span className='landing-page-post-like-count'>{post.like.length}</span>
-                                                {/* <span className='landing-page-post-like-text'>like</span> */}
-                                            </div>
-                                            <div className='landing-page-post-num-of-replies-container'>
-                                                <i className="fa-solid fa-message landing-page-post-num-of-post"></i>
-                                                <span className='landing-page-post-reply-count'>{post.num_of_replies}</span>
-                                                {/* <span className='landing-page-post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span> */}
-                                            </div>
-                                        </div>
-                                    }
                                 </div>
                             </div>
                         )

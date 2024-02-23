@@ -37,7 +37,7 @@ function LandingPageHeader() {
             document.body.style.overflowY = 'hidden'
 
         }else if(!showNavLinks) {
-            document.body.style.overflowY = 'scroll'
+            document.body.style.overflowY = 'auto'
         }
     }, [showNavLinks, !showNavLinks])
 
@@ -72,7 +72,7 @@ function LandingPageHeader() {
                             to='/posts' 
                             className='landing-page-navlink'
                             onClick={()=> {
-                                document.body.style.overflowY = 'scroll'
+                                document.body.style.overflowY = 'auto'
                                 setShowNavLinks(false)
                             }}
                         >
@@ -83,7 +83,7 @@ function LandingPageHeader() {
                                 to='/login' 
                                 className='landing-page-navlink landing-page-login-btn'
                                 onClick={()=> {
-                                    document.body.style.overflowY = 'scroll'
+                                    document.body.style.overflowY = 'auto'
                                     setShowNavLinks(false)
                                 }}
                             >

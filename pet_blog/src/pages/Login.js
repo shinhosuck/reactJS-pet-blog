@@ -12,11 +12,9 @@ function Login() {
     const [backendAuthError, setBackendAuthError] = useState(null)
     const [auth, setAuth] = useState(null)
     const [successMessage, setSuccessMessage] = useState(null) 
-    const {state} = useLocation()
+    const {state, pathname} = useLocation()
     const navigate = useNavigate()
 
-
-    
     const authenticated = localStorage.getItem('auth') || null
 
     window.history.replaceState({state:null}, '', '/login')
@@ -72,6 +70,16 @@ function Login() {
 
     }, [state])
 
+
+    // useEffect(()=> {
+    //     const path = pathname.split('/').filter((i)=> i !== '').join()
+    //     if(path === 'login') {
+    //         document.body.style.overflow = 'hidden'
+    //     }else {
+    //         document.body.style.overflow = 'scroll'
+    //     }
+    // }, [])
+
     if(authenticated) {
         return (
             <Navigate to='/posts' replace={true} state={{error:'You are logged in already!'}} />
@@ -84,7 +92,7 @@ function Login() {
                 {successMessage && successMessage.registered && <p className='user-login__message'>{successMessage.registered}</p>}
                 {state && state.error && <p className='user-login__error-message'>{state.error}</p>}
                 <div className='user-login'>
-                    <h2 className='user-login__header'>Login</h2>
+                    <h2 className='user-login__header'>Sign In</h2>
                     {backendAuthError && <p className='user-register__error'>{backendAuthError.error}</p>}
                     <form className='user-login__form' onSubmit={handleForm}>
                         {frontendErrorMessage && frontendErrorMessage.username === 'null' && <p className='user-register__error'>This field is required.</p>}

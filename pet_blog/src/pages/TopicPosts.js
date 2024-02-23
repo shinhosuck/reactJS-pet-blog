@@ -7,7 +7,7 @@ import ScrollToTop from '../components/ScrollToTop'
 
 
 function TopicPosts() {
-    const {state, pathname, search} = useLocation()
+    const {state} = useLocation()
     const [postArray, setPostArray] = useState(null)
     const [topicsArray, setTopicsArray] = useState(null)
     const [isError, setIsError] = useState(false)
@@ -85,8 +85,6 @@ function TopicPosts() {
         )
     }
 
-    console.log(posts)
-
     return (
         <React.Fragment>
             <ScrollToTop />
@@ -145,55 +143,46 @@ function TopicPosts() {
                             return (
                                 <div key={post.id} className="topic-posts-container__post">
                                     <div className="topic-posts-container__post-image-container">
-                                        <img className='topic-posts-container__post-image' src={post.image_url} alt={post.title} />
-                                        <div className="topic-posts-container__post-image-color-overlay"></div>
-                                    </div>
-                                    <div className='topic-posts-container__post-text-content'>
-                                        <div className='topic-posts-container__author-and-date'>
-                                            <h4 className='topic-posts-container__post-author'>{post.author}</h4>
-                                            <p className='topic-posts-container__date-posted'>{post.date_posted}</p>
-                                            <div className="topic-posts-container__date-and-like">
-                                                {post.like.length > 1 ? 
-                                                    <div className='topic-posts-container__post-like'>
-                                                        <div className='post-like-container'>
-                                                            <i className="fa-solid fa-hands-clapping post-like"></i>
-                                                            <span className='post-like-count'>{post.like.length}</span>
-                                                            <span className='post-like-text'>likes</span>
-                                                        </div>
-                                                        <div className='topic-posts-container__num-of-replies-container'>
-                                                            <i className="fa-solid fa-message topic-posts-container__num-of-post"></i>
-                                                            <span className='post-reply-count'>{post.num_of_replies}</span>
-                                                            <span className='post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
-                                                        </div>
-                                                    </div>
-                                                    : 
-                                                    <div className='topic-posts-container__post-like'>
-                                                        <div className='post-like-container'>
-                                                            <i className="fa-solid fa-hands-clapping post-like"></i>
-                                                            <span className='post-like-count'>{post.like.length}</span>
-                                                            <span className='post-like-text'>like</span>
-                                                        </div>
-                                                        <div className='topic-posts-container__num-of-replies-container'>
-                                                            <i className="fa-solid fa-message topic-posts-container__num-of-post "></i>
-                                                            <span className='post-reply-count'>{post.num_of_replies}</span>
-                                                            <span className='post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
-                                                        </div>
-                                                    </div>
-                                                }
+                                        <img className='topic-posts-container__post-image' src={post.image_url} alt={post.title}/>
+                                        {post.like.length > 1 ? 
+                                            <div className='topic-posts-container__post-like'>
+                                                <div className='topic-post-like-container'>
+                                                    <i className="fa-solid fa-hands-clapping topic-post-like"></i>
+                                                    <span className='topic-post-like-count'>{post.like.length}</span>
+                                                </div>
+                                                <div className='topic-posts-container__num-of-replies-container'>
+                                                    <i className="fa-solid fa-message topic-posts-container__num-of-post"></i>
+                                                    <span className='topic-post-reply-count'>{post.num_of_replies}</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <h3 className='post-container__post-title'>{post.title}</h3>
-                                        <p className='post-container__post-content'>{post.content.substring(0, 100)}...</p>
-                                        <Link 
-                                            to={`/post/${post.id}/detail/`} 
-                                            className='post-container__post-read-more-btn'
-                                            state={{redirect:'/posts'}}
-                                        >
-                                            Read More
-                                        </Link>
+                                            : 
+                                            <div className='topic-posts-container__post-like'>
+                                                <div className='topic-post-like-container'>
+                                                    <i className="fa-solid fa-hands-clapping topic-post-like"></i>
+                                                    <span className='topic-post-like-count'>{post.like.length}</span>
+                                                </div>
+                                                <div className='topic-posts-container__num-of-replies-container'>
+                                                    <i className="fa-solid fa-message topic-posts-container__num-of-post "></i>
+                                                    <span className='topic-post-reply-count'>{post.num_of_replies}</span>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div className="topic-posts-text-container">
+                                        <h3 className='topic-posts-container__post-title'>{post.title}</h3>
+                                        <p className='topic-posts-container__post-content'>{post.content.substring(0, 100)}...
+                                            <Link 
+                                                to={`/post/${post.id}/detail/`} 
+                                                className='topic-post-container__post-read-more-btn'
+                                                state={{redirect:'/posts'}}
+                                            >
+                                                Read More
+                                            </Link>
+                                        </p>
                                     </div>
                                 </div>
                             )
+                            
                         })}
                     </div>
                 }

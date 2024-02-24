@@ -28,10 +28,10 @@
   --section-header: hsl(19, 100%, 47%);
 
   /* Error text */
-  --red-45: hsl(9, 100%, 45%);
+  --error-text: hsl(9, 100%, 64%);
 
   /* Success text */
-  --green-10: rgb(10, 105, 10);
+  --success-text: rgb(57, 187, 57);
 
   /* Orange */
   --orange-10: hsl(10, 30%, 20%);
@@ -3330,12 +3330,11 @@ TOPIC POSTS
 USER REGISTER
 ============= */
 .user-register-main-container {
-  min-height: calc(100dvh - 63px);
-  background: linear-gradient(to right, hsla(0, 0%, 0%, 0.9),rgba(0, 0, 0, 0.2)),
-   url('images/bg_img.webp');
-  background-position: center;
-  background-repeat: no-repeat;
+  min-height: calc(100dvh - 57.19px);
+  background:  linear-gradient(to top,rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url('images/bg_img.webp');
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 
   display: grid;
 }
@@ -3432,26 +3431,46 @@ USER REGISTER
 ==========
 USER LOGIN
 ========== */
-.user-login-main-container {
+.user-login__message {
+  color: var(--success-text);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.user-login__error-message {
+  color: var(--error-text);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.user-login__error-message,
+.user-login__message {
+  position: absolute;
+  z-index: 2;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.user-login-container {
+  position: relative;
   min-height: calc(100dvh - 57.19px);
-  background:  url('images/bg_img.webp');
+  background:  linear-gradient(to top,rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url('images/bg_img.webp');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 
   display: grid;
-}
-
-.user-login-container {
-  display: grid;
+  align-items: stretch;
 }
 
 .user-login {
   display: grid;
   align-content: center;
   gap: 2rem;
+
   background: linear-gradient(to top,rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2));
-  backdrop-filter: blur(4px);
+  /* backdrop-filter: blur(2px); */
   padding: 1.3rem;
   padding-top: 5rem;
 }
@@ -3460,27 +3479,7 @@ USER LOGIN
   letter-spacing: 0.05rem;
   color: white;
   font-weight: 600;
-  font-size: 1.5rem;
-}
-
-.user-login__message {
-  color: green;
-  letter-spacing: 0.07rem;
-  font-weight: 600;
-  width: 90%;
-  max-width: 480px;
-  margin: 0 auto;
-  margin-bottom: 1rem;
-}
-
-.user-login__error-message {
-  color: rgb(224, 52, 8);
-  letter-spacing: 0.07rem;
-  font-weight: 600;
-  width: 90%;
-  max-width: 480px;
-  margin: 0 auto;
-  margin-bottom: 1rem;
+  font-size: 1.7rem;
 }
 
 .user-login__form {
@@ -3491,21 +3490,22 @@ USER LOGIN
 .user-login__input {
   width: 100%;
   box-sizing: border-box;
-  padding: 0.7rem 1rem;
-  border: 1px solid lightgray;
+  padding: 0.8rem 1rem;
+  border: none;
   font-size: 1rem;
   letter-spacing: 0.05rem;
   border-radius: 5px;
+  background: var(--black-95)
 }
 
 .user-login__input:focus {
-  outline: 2px solid rgb(164, 164, 255);
+  outline: 2px solid var(--focus);
   border: 1px solid transparent
 }
 
 .user-login__btn {
   padding: 0.8rem 1rem;
-  background: orangered;
+  background: var(--orange-57);
   color: white;
   font-size: 1rem;
   border-radius: 5px;
@@ -3528,25 +3528,45 @@ USER LOGIN
 }
 
 .user-login__not-yet-registered > a {
-  color: rgb(255, 51, 0);
+  color: var(--orange-57);
   letter-spacing: 0.05rem;
   font-weight: 500;
   text-decoration: underline;
 }
 
 @media screen and (min-width: 600px) {
+
+  .user-login-main-container {
+    position: relative;
+    min-height: calc(100dvh - 57.19px);
+    background:  linear-gradient(to top,rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('images/bg_img.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
   .user-login-container {
     width: 90%;
     max-width: 1000px;
     margin: 0 auto;
     align-items: center;
+    background: none;
   }
+
+  .user-login__error-message,
+  .user-login__message {
+    position: absolute;
+    z-index: 2;
+    top: 10%;
+    left: calc((1000px - (1000px - 450px)) / 2);
+    transform: translateY(calc(-(1000px - (1000px - 450px)) / 2));
+}
   
   .user-login {
-    background: linear-gradient(to top,rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4));
     max-width: 450px;
-    padding-top: 1.3rem;
+    padding: 1.3rem;
     border-radius: 10px;
+    background: linear-gradient(to top,rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
   }
 }
 /* 

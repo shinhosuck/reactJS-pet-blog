@@ -62,7 +62,7 @@ export function Navbar(props) {
         setShowNavLinks(true)
         localStorage.removeItem('auth')
         navigate(
-            '/posts', 
+            '/login', 
             {
                 replace:true, 
                 // state:{message:'Successfully logged out!'}

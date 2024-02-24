@@ -70,16 +70,6 @@ function Login() {
 
     }, [state])
 
-
-    // useEffect(()=> {
-    //     const path = pathname.split('/').filter((i)=> i !== '').join()
-    //     if(path === 'login') {
-    //         document.body.style.overflow = 'hidden'
-    //     }else {
-    //         document.body.style.overflow = 'scroll'
-    //     }
-    // }, [])
-
     if(authenticated) {
         return (
             <Navigate to='/posts' replace={true} state={{error:'You are logged in already!'}} />

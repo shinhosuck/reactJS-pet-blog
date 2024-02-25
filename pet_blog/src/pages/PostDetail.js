@@ -30,8 +30,6 @@ function PostDetail() {
     const navigate = useNavigate()
     
 
-    
-    
 
     const handleCommentSubmit = async(e)=> {
         e.preventDefault()
@@ -135,7 +133,7 @@ function PostDetail() {
                 <div className="bg-img-header-container">
                     <div className="bg-img-contents">
                         <div className="post-detail-author-profile">
-                            <img className='post-detail-author-img' src={userImg} alt="" />
+                            <img className='post-detail-author-img' src={post.author_profile_image} alt="" />
                             <h4 className='post-detail-post-author'>{post.author}</h4>
                         </div>
                         <p className='post-detail-date-posted'>Posted on {post.date_posted}</p>

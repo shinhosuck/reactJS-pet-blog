@@ -83,7 +83,26 @@ function MyPost() {
   }
   return (
     <React.Fragment>
-      <div className="bg-img"></div>
+      <div className="bg-img">
+        <div className="my-posts-hero-container">
+            <div className="my-posts-header-contents">
+                <div className="my-posts-author-profile">
+                    <img className='my-posts-profile-img' src={authenticated.profile_image_url} alt="" />
+                    <h4 className='my-posts-username'>{authenticated.username}</h4>
+                </div>
+                <h1 className='my-posts-hero-header'>My Posts</h1>
+                <div>
+                  <p className='my-posts-num-of-posts'>{posts.length > 1 ? `${posts.length} posts`:`${posts.length} posts`}</p>
+                  <Link to='/my-comments' className='my-posts-num-of-comments'>
+                    {authenticated.num_of_comments > 1 ? 
+                      `${authenticated.num_of_comments} comments`
+                    :
+                      `${authenticated.num_of_comments} comments`}
+                  </Link>
+                </div>
+            </div>
+        </div>
+      </div>
       <div className="my-posts-main-container">
         <div className='my-posts-container'>
             <div className="my-posts-container__posts">
@@ -92,49 +111,73 @@ function MyPost() {
                   <div key={post.id} className="my-posts-container__post">
                     <div className="my-posts-container__post-image-container">
                       <img className='my-posts-container__post-image' src={post.image_url} alt={post.title} />
-                      <div className="my-posts-container__post-image-color-overlay"></div>
+                      {post.like.length > 1 ? 
+                        <div className='post-container__post-like'>
+                          <div className='post-container__post-like-container'>
+                              <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
+                              <span className='post-container__post-like-count'>{post.like.length}</span>
+                          </div>
+                          <div className='post-container__num-of-replies-container'>
+                              <i className="fa-solid fa-message post-container__num-of-post"></i>
+                              <span className='post-container__post-reply-count'>{post.num_of_replies}</span>
+                          </div>
+                          <div className="my-posts-container__btns">
+                            <Link 
+                              to={`/update/${post.id}/post`} state={{update:post, redirect:pathname}} 
+                              className='my-posts-container__post-update'
+                            >
+                              <i className="fa-solid fa-pen post-detail-edit-btn"></i>
+                              <span className='post-detail-edit-text'>edit</span>
+                            </Link>
+                            <button onClick={(e)=>removePost(e, post)} className='my-posts-container__post-delete'>
+                              <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
+                              <span className='post-detail-remove-text'>delete</span>
+                            </button>
+                          </div>
+                        </div>
+                      : 
+                        <div className='post-container__post-like'>
+                          <div className='post-container__post-like-container'>
+                              <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
+                              <span className='post-container__post-like-count'>{post.like.length}</span>
+                          </div>
+                          <div className='post-container__num-of-replies-container'>
+                              <i className="fa-solid fa-message post-container__num-of-post"></i>
+                              <span className='post-container__post-reply-count'>{post.num_of_replies}</span>
+                          </div>
+                          <div className="my-posts-container__btns">
+                            <Link 
+                              to={`/update/${post.id}/post`} state={{update:post, redirect:pathname}} 
+                              className='my-posts-container__post-update'
+                            >
+                              <i className="fa-solid fa-pen post-detail-edit-btn"></i>
+                              <span className='post-detail-edit-text'>edit</span>
+                            </Link>
+                            <button onClick={(e)=>removePost(e, post)} className='my-posts-container__post-delete'>
+                              <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
+                              <span className='post-detail-remove-text'>delete</span>
+                            </button>
+                          </div>
+                        </div>
+                      }
                     </div>
                     <div className='my-posts-container__post-text-content'>
-                      <div className='my-posts-container__author-and-date'>
-                        <div className="my-posts-container__date-and-like">
-                          <p className='my-posts-container__date-posted'>{post.date_posted}</p>
-                          {post.like.length > 1 ? 
-                            <div className='post-container__post-like'>
-                              <div className='post-like-container'>
-                                <i className="fa-solid fa-hands-clapping post-like"></i>
-                                <span className='post-like-count'>{post.like.length}</span>
-                                <span className='post-like-text'>likes</span>
-                              </div>
-                              <div className='post-container__num-of-replies-container'>
-                                <i className="fa-solid fa-message post-container__num-of-post"></i>
-                                <span className='post-reply-count'>{post.num_of_replies}</span>
-                                <span className='post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
-                              </div>
-                            </div>
-                          : 
-                            <div className='post-container__post-like'>
-                              <div className='post-like-container'>
-                                <i className="fa-solid fa-hands-clapping post-like"></i>
-                                <span className='post-like-count'>{post.like.length}</span>
-                                <span className='post-like-text'>like</span>
-                              </div>
-                              <div className='post-container__num-of-replies-container'>
-                                <i className="fa-solid fa-message post-container__num-of-post "></i>
-                                <span className='post-reply-count'>{post.num_of_replies}</span>
-                                <span className='post-reply-text'>{post.num_of_replies > 1 ? 'comments': 'comment'}</span>
-                              </div>
-                            </div>
-                          }
-                        </div>
-                      </div>
+                      <p className='my-posts-container__date-posted'>Posted on {post.date_posted}</p>
                       <h3 className='my-posts-container__post-title'>{post.title}</h3>
                       <p className='my-posts-container__post-content'>{post.content}</p>
-                      <div className="my-posts-container__btns">
-                        <Link to={`/update/${post.id}/post`} state={{update:post, redirect:pathname}} className='my-posts-container__post-update'>
-                          Update Post
+                      {/* <div className="my-posts-container__btns">
+                        <Link 
+                          to={`/update/${post.id}/post`} state={{update:post, redirect:pathname}} 
+                          className='my-posts-container__post-update'
+                        >
+                          <i className="fa-solid fa-pen post-detail-edit-btn"></i>
+                          <span className='post-detail-edit-text'>edit</span>
                         </Link>
-                        <button onClick={(e)=>removePost(e, post)} className='my-posts-container__post-delete'>Delete Post</button>
-                      </div>
+                        <button onClick={(e)=>removePost(e, post)} className='my-posts-container__post-delete'>
+                          <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
+                          <span className='post-detail-remove-text'>delete</span>
+                        </button>
+                      </div> */}
                     </div>
                   </div>
                 )

@@ -2838,6 +2838,10 @@ My Posts
 }
 
 @media screen and (min-width: 600px) {
+  .my-posts-main-container {
+    width: 90%;
+  }
+
   .my-posts-container__posts {
     grid-template-columns: repeat(2, 1fr);
     row-gap: 2.5rem;
@@ -2850,8 +2854,8 @@ My Posts
 
 @media screen and (min-width: 1000px) {
   .my-posts-main-container {
-    padding: 4rem 0;
-    padding-bottom: 5rem;
+    padding: 3rem 0;
+    padding-bottom: 4rem;
   }
 }
 
@@ -2861,76 +2865,75 @@ My Comments
 =========== */
 .my-comments-container {
   min-height: 100dvh;
-  width: 90%;
+  width: 95%;
   max-width: 1000px;
   margin: 0 auto;
 
   display: grid;
-  gap: 1rem;
+  gap: 2rem;
   align-content: start;
   padding: 2rem 0;
 }
 
 .my-comments-container__my-comment {
   display: grid;
-  gap: 1rem;
+  gap: 0.8rem;
   background: white;
-  padding: 1.3rem;
-  border-radius: 8px;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--black-90);
 }
 
-.my-comments__date-replied {
-  color: rgb(100, 100, 100);
-  font-size: 0.9rem;
+.my-comments-container__my-comment:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
-.my-comments__post_detail-link {
-  color: rgb(61, 61, 61);
-  letter-spacing: 0.05rem;
-  font-size: 0.9rem;
+.my-comments-date-and-time {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.my-comments__date-replied,
+.my-comments__post_name{
+  color: var(--black-40);
+  font-size: 0.95rem;
+}
+
+.my-comments__post_name {
   display: flex;
   align-items: center;
   gap: 0.3rem
 }
 
-.my-comments__post_detail-link > a {
+.my-comments__post-name-link {
   text-decoration: underline;
-  color: rgb(114, 0, 114);
-}
-
-.my-comments__post_author {
-  color: rgb(61, 61, 61);
-  letter-spacing: 0.05rem;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem
+  color: var(--black-15);
+  font-weight: 500;
 }
 
 .my-comments__content {
   letter-spacing: 0.07rem;
-  color: rgb(61, 61, 61);
-  line-height: 1.6;
+  color: var(--purplish-brown-20);
+  line-height: 1.5;
 }
 
 .my-comments-container__buttons {
   display: flex;
-  gap: 0.5rem
+  gap: 1rem;
+  align-items: center;
 }
 
 .my-comments__update-button,
 .my-comments__delete-button {
-  padding: 0.5rem 1rem;
-  letter-spacing: 0.05rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  color: white;
+  font-size: 0.9rem;
+  color: var(--black-50);
   border: none;
-  background: rgb(255, 83, 21)
-}
+  background: none;
+  cursor: pointer;
 
-.my-comments__delete-button {
-  background: rgb(80, 80, 80)
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
 .update-comment-form-container {
@@ -2941,18 +2944,26 @@ My Comments
 .update-comment-form {
   display: grid;
   gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background: var(--brown-85);
 }
 
 .update-comment-textarea {
   width: 100%;
-  resize: none;
+  resize: vertical;
   border-radius: 8px;
   padding: 1.3rem;
-  font-size: 1.05rem;
+  font-size: 1rem;
   letter-spacing: 0.07rem;
-  line-height: 1.6;
-  background: rgb(235, 235, 235);
+  line-height: 1.5;
+  background: var(--brown-90);
+  color: var(--purplish-brown-20);
   border: none;
+}
+
+.update-comment-textarea:focus {
+  outline: 2px solid var(--focus);
 }
 
 .update-comment-form-buttons-container {
@@ -2961,24 +2972,33 @@ My Comments
   gap: 0.5rem;
 }
 
-.update-comment-submit-btn {
+.update-comment-submit-btn,
+.update-comment-cancel-btn{
   padding: 0.5rem 1rem;
   letter-spacing: 0.05rem;
   font-size: 1rem;
-  background: rgb(255, 83, 20);
-  border-radius: 5px;
+  background: var(--orange-50);
+  border-radius: 30px;
   color: white;
   border: none;
+  cursor: pointer;
 }
 
 .update-comment-cancel-btn {
-  padding: 0.5rem 1rem;
-  letter-spacing: 0.05rem;
-  font-size: 1rem;
-  background: rgb(61, 61, 61);
-  border-radius: 5px;
-  color: white;
-  border: none;
+  background: var(--black-30);
+}
+
+@media screen and (min-width: 600px) {
+  .my-comments-container {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .my-comments-container {
+    padding: 3rem 0;
+    padding-bottom: 4rem;
+  }
 }
 /* 
 ===========

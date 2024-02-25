@@ -102,23 +102,33 @@ function MyComment() {
         {comments && comments.map((comment)=> {
             return (
                 <div key={comment.id} className="my-comments-container__my-comment">
-                  <div>
+                  <div className='my-comments-date-and-time'>
                     <p className='my-comments__date-replied'>{new Date(comment.date_posted).toDateString()}</p>
-                    <p className='my-comments__post_detail-link'>Post title: 
-                      <Link className='my-comments__post_detail-link' to={`/post/${comment.post}/detail/`}>{comment.post_title}</Link>
+                    <p className='my-comments__post_name'>Replied to: 
+                      <Link className='my-comments__post-name-link' to={`/post/${comment.post}/detail/`}>{comment.post_title}</Link>
                     </p>
-                   
-                    <p className='my-comments__post_author'>By:<span>{comment.post_author}</span></p>
                   </div>
                   <p className='my-comments__content'>{comment.content}</p>
                   <div className="my-comments-container__buttons">
-                    <button onClick={()=>setUpdate({content:comment.content, id:comment.id})} className='my-comments__update-button'>Update</button>
-                    <button onClick={()=>deleteComment(comment.id)} className='my-comments__delete-button'>Delete</button>
+                    <button
+                      onClick={()=>setUpdate({content:comment.content, id:comment.id})} 
+                      className='my-comments__update-button'
+                    >
+                      <i className="fa-solid fa-pen"></i>
+                      update
+                    </button>
+                    <button
+                      onClick={()=>deleteComment(comment.id)} 
+                      className='my-comments__delete-button'
+                    >
+                       <i className="fa-solid fa-trash-can"></i>
+                      delete
+                    </button>
                   </div>
                   {update && update.id === comment.id &&
                     <div className="update-comment-form-container">
                       <form action="" className="update-comment-form" onSubmit={(e)=>updateComment(e,comment.id)}>
-                        <textarea onChange={handleChange} className='update-comment-textarea' value={update.content} name="content" rows="8"></textarea>
+                        <textarea onChange={handleChange} className='update-comment-textarea' value={update.content} name="content" rows="6"></textarea>
                         <div className="update-comment-form-buttons-container">
                           <button type='submit' className='update-comment-submit-btn'>Submit</button>
                           <button onClick={()=>setUpdate(null)} type='button' className='update-comment-cancel-btn'>Cancel</button>

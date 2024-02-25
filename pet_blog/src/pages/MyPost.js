@@ -97,7 +97,7 @@ function MyPost() {
                     {authenticated.num_of_comments > 1 ? 
                       `${authenticated.num_of_comments} comments`
                     :
-                      `${authenticated.num_of_comments} comments`}
+                      `${authenticated.num_of_comments} comment`}
                   </Link>
                 </div>
             </div>

@@ -2878,14 +2878,11 @@ My Comments
 .my-comments-container__my-comment {
   display: grid;
   gap: 0.8rem;
+  align-content: start;
   background: white;
-  padding-bottom: 2rem;
-  border-bottom: 2px solid var(--black-90);
-}
-
-.my-comments-container__my-comment:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
+  padding: 1rem;
+  border-radius: 10px;
+  background: var(--brown-90);
 }
 
 .my-comments-date-and-time {
@@ -2902,7 +2899,9 @@ My Comments
 .my-comments__post_name {
   display: flex;
   align-items: center;
-  gap: 0.3rem
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  row-gap: 0;
 }
 
 .my-comments__post-name-link {
@@ -2915,6 +2914,8 @@ My Comments
   letter-spacing: 0.07rem;
   color: var(--purplish-brown-20);
   line-height: 1.5;
+  text-wrap: pretty;
+  font-size: clamp(0.9rem, 1vw + 0.7rem, 1rem);
 }
 
 .my-comments-container__buttons {
@@ -2938,13 +2939,13 @@ My Comments
 
 .update-comment-form-container {
   display: grid;
-  margin-top: 1rem;
+  margin-top: 0.2rem;
 }
 
 .update-comment-form {
   display: grid;
   gap: 1rem;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 8px;
   background: var(--brown-85);
 }
@@ -2954,12 +2955,13 @@ My Comments
   resize: vertical;
   border-radius: 8px;
   padding: 1.3rem;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 1vw + 0.5rem, 1rem);
   letter-spacing: 0.07rem;
   line-height: 1.5;
   background: var(--brown-90);
   color: var(--purplish-brown-20);
   border: none;
+  text-wrap: pretty;
 }
 
 .update-comment-textarea:focus {
@@ -2991,6 +2993,14 @@ My Comments
 @media screen and (min-width: 600px) {
   .my-comments-container {
     width: 90%;
+  }
+
+  .my-comments-container__my-comment {
+    padding: 2rem;
+  }
+
+  .update-comment-form {
+    padding: 1.5rem;
   }
 }
 

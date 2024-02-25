@@ -97,14 +97,34 @@ function MyComment() {
   }
   return (
     <React.Fragment>
-      <div className="bg-img"></div>
+      <div className="bg-img">
+        <div className="my-posts-hero-container">
+            <div className="my-posts-header-contents">
+                <div className="my-posts-author-profile">
+                    <img className='my-posts-profile-img' src={authenticate.profile_image_url} alt="" />
+                    <h4 className='my-posts-username'>{authenticate.username}</h4>
+                </div>
+                <h1 className='my-posts-hero-header'>My Comments</h1>
+                <div>
+                  <p className='my-posts-num-of-posts'>{comments.length > 1 ? `${comments.length} posts`:`${comments.length} posts`}</p>
+                  <Link to='/my-posts' className='my-posts-num-of-comments'>
+                    {authenticate.num_of_posts > 1 ? 
+                      `${authenticate.num_of_posts} posts`
+                    :
+                      `${authenticate.num_of_posts} post`}
+                  </Link>
+                </div>
+            </div>
+        </div>
+      </div>
       <div className='my-comments-container'>
         {comments && comments.map((comment)=> {
             return (
                 <div key={comment.id} className="my-comments-container__my-comment">
                   <div className='my-comments-date-and-time'>
                     <p className='my-comments__date-replied'>{new Date(comment.date_posted).toDateString()}</p>
-                    <p className='my-comments__post_name'>Replied to: 
+                    <p className='my-comments__post_name'>
+                      <span>Replied to:</span> 
                       <Link className='my-comments__post-name-link' to={`/post/${comment.post}/detail/`}>{comment.post_title}</Link>
                     </p>
                   </div>

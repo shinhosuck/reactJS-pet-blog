@@ -3342,7 +3342,7 @@ TOPIC POSTS
 =============
 USER REGISTER
 ============= */
-.user-register-main-container {
+/* .user-register-main-container {
   min-height: calc(100dvh - 57.19px);
   background:  linear-gradient(to top,rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url('images/bg_img.webp');
   background-size: cover;
@@ -3350,27 +3350,29 @@ USER REGISTER
   background-position: center;
 
   display: grid;
-}
+} */
 
 .user-register-container {
-  width: 90%;
-  margin: 0 auto;
-  max-width: 1200px;
+  position: relative;
+  min-height: calc(100dvh - 57.19px);
+  background:  linear-gradient(to top,rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url('images/bg_img.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 
   display: grid;
-  align-content: center;
+  align-items: stretch;
   
 }
 
 .user-register {
   display: grid;
-  align-content: start;
+  align-content: center;
   gap: 2rem;
+
+  background: linear-gradient(to top,rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2));
   padding: 1.3rem;
-  max-width: 450px;
-  border-radius: 10px;
-  background: hsla(9, 52%, 68%, 0.158);
-  backdrop-filter: blur(8px);
+  padding-top: 5rem;
 }
 
 .user-register__header {
@@ -3440,6 +3442,32 @@ USER REGISTER
   font-size: 0.95rem;
 }
 
+@media screen and (min-width: 600px) {
+  .user-register-main-container {
+    position: relative;
+    min-height: calc(100dvh - 57.19px);
+    background:  linear-gradient(to top,rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('images/bg_img.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  .user-register-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: center;
+    background: none;
+  }
+
+  .user-register {
+    max-width: 450px;
+    padding: 1.3rem;
+    border-radius: 10px;
+    background: linear-gradient(to top,rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+  }
+}
+
 /* 
 ==========
 USER LOGIN
@@ -3483,7 +3511,6 @@ USER LOGIN
   gap: 2rem;
 
   background: linear-gradient(to top,rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2));
-  /* backdrop-filter: blur(2px); */
   padding: 1.3rem;
   padding-top: 5rem;
 }

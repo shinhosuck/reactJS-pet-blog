@@ -102,7 +102,7 @@ function PostDetail() {
 
                 }else {
                     console.log(data)
-                    setComments(null)
+                    setComments(false)
                 }
             } catch (error) {
                 console.log(error.message)
@@ -178,28 +178,28 @@ function PostDetail() {
                                 authenticated={authenticated}
                             />
                         }
-                        <>
-                            {comments ? 
-                                <Comments 
-                                    comments={comments} 
-                                    authenticated={authenticated} 
-                                    setComments={setComments} 
-                                    setPost={setPost}
-                                />
-                            :
-                                !showCommentForm &&
-                                    <div className="no-comments-container">
-                                        <div className="no-comment-text-container">
-                                            <h3>Be the first to comment!</h3>
-                                            <p>
-                                                Nobody's responded to this post yet.
-                                                Add your thoughts and get the conversation going.
-                                            </p>
-                                        </div>
-                                    </div>
-                            }
-                        </>
+                        
+                        {comments &&
+                            <Comments 
+                                comments={comments} 
+                                authenticated={authenticated} 
+                                setComments={setComments} 
+                                setPost={setPost}
+                            />
+                        }
+                            
                     </div>
+                    {!showCommentForm && !showUpdatePostForm && !comments &&
+                        <div className="no-comments-container">
+                            <div className="no-comment-text-container">
+                                <h3>Be the first to comment!</h3>
+                                <p>
+                                    Nobody's responded to this post yet.
+                                    Add your thoughts and get the conversation going.
+                                </p>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </React.Fragment>

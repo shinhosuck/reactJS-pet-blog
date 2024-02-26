@@ -47,6 +47,7 @@
   --brown-80: hsl(27, 27%, 80%);
   --brown-85: hsl(27, 27%, 85%);
   --brown-90: hsl(27, 27%, 90%);
+  --brown-95: hsl(27, 27%, 95%);
 
   /* input && textarea focus */
   --focus: hsl(12, 100%, 72%);
@@ -2273,7 +2274,8 @@ Post Detail
   gap: 1rem;
   padding: 1.3rem;
   border-radius: 8px;
-  border: 1px solid var(--black-80);
+  background: var(--brown-95);
+  /* border: 1px solid var(--black-80); */
 }
 
 .post-detail-post-edit-form > input {
@@ -2311,6 +2313,7 @@ Post Detail
   font-size: 1rem;
   letter-spacing: 0.05rem;
   border: none;
+  cursor: pointer;
 }
 
 .post-detail-post-edit-btn-cancel {
@@ -2321,7 +2324,8 @@ Post Detail
   border-radius: 30px;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  border: none
+  border: none;
+  cursor: pointer;
 }
 
 .post-detail-post-edit-form > textarea:focus,
@@ -2337,6 +2341,7 @@ Post Detail
   gap: 1rem;
   padding: 1.3rem;
   border-radius: 8px;
+  background: var(--brown-95);
   border: 1px solid var(--black-80);
 }
 
@@ -2372,6 +2377,7 @@ Post Detail
   font-size: 1rem;
   letter-spacing: 0.05rem;
   border: none;
+  cursor: pointer;
 }
 
 .comment-btn-cancel {
@@ -2382,7 +2388,8 @@ Post Detail
   border-radius: 30px;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  border: none
+  border: none;
+  cursor: pointer;
 }
 
 /* comments */

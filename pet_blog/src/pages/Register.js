@@ -1,21 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, Navigate } from 'react-router-dom'
 import { register } from '../utils/api'
 import { passwordCheck, newUserInfoCheck } from '../utils/utils'
 import ScrollToTop from '../components/ScrollToTop'
-
+import LoadingPage from './LoadingPage'
 
 export const url = window.location.host === 'localhost:3000' ? 
 'http://127.0.0.1:8000' : 'https://pawpals.pythonanywhere.com'
 
 
 function Register() {
+    const [isLoading, setIsLoading] = useState(true)
     const [newUser, setNewUser] = useState({username:'',password:'',passwordConfirmation:''})
     const [userInfoError, setUserInfoError] = useState(null)
     const [passwordValidated, setPasswordValidated] = useState(true)
     const [backendAuthError, setBackendAuthError] = useState(null)
     const authenticated = null || localStorage.getItem('auth')
     const navigate = useNavigate()
+
+
+
 
     const handleForm = async function(e) {
         e.preventDefault()
@@ -53,11 +57,29 @@ function Register() {
         setNewUser((prev)=> ({...prev, [name]:value}))
     }
 
+    useEffect(()=> {
+        const timeoutId = setTimeout(()=> {
+            if(document.readyState === 'complete') {
+                setIsLoading(false)
+                clearTimeout(timeoutId)
+            }else {
+                timeoutId()
+            }
+        }, 100)
+    })
+
     if(authenticated) {
         return (
             <Navigate to='/posts' replace={true} state={{error:'You are registered and logged in already!'}}/>
         )
     }
+
+    if(isLoading) {
+        return (
+            <LoadingPage />
+        )
+    }
+
     return (
         <div className="user-register-main-container">
             <ScrollToTop />

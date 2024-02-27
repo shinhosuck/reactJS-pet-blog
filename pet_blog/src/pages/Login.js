@@ -4,9 +4,12 @@ import { loginInfoValidation  } from '../utils/utils'
 import { login } from '../utils/api'
 import { url } from './Register'
 import ScrollToTop from '../components/ScrollToTop'
+import LoadingPage from './LoadingPage'
+
 
 
 function Login() {
+    const [isLoading, setIsLoading] = useState(true)
     const [user, setUser] = useState({username:'',password:''})
     const [frontendErrorMessage, setFrontendErrorMessage] = useState(null)
     const [backendAuthError, setBackendAuthError] = useState(null)
@@ -70,11 +73,30 @@ function Login() {
 
     }, [state])
 
+
+    useEffect(()=> {
+        const timeoutId = setTimeout(()=> {
+            if(document.readyState === 'complete') {
+                setIsLoading(false)
+                clearTimeout(timeoutId)
+            }else {
+                timeoutId()
+            }
+        }, 100)
+    })
+
     if(authenticated) {
         return (
             <Navigate to='/posts' replace={true} state={{error:'You are logged in already!'}} />
         )
     }
+
+    if(isLoading) {
+        return (
+            <LoadingPage />
+        )
+    }
+
     return (
         <div className="user-login-main-container">
             <ScrollToTop />

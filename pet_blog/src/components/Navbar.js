@@ -24,10 +24,8 @@ export function Navbar(props) {
 
         if(mobileTopics.classList.contains('show-navbar-topics')){
             mobileTopicsChevronDown.style.transform = 'rotate(180deg)'
-            mobileTopics.style.marginTop = '0.8rem'
         }else{
             mobileTopicsChevronDown.style.transform = 'rotate(0deg)'
-            mobileTopics.style.marginTop = '0rem'
         }
     }
 
@@ -239,10 +237,13 @@ export function Navbar(props) {
                             const navbarTopics = [...document.querySelectorAll('.navbar-topics')][1]
                             const lgTopicChevron = document.querySelector('.lg-topic-chevron')
 
-                            lgAuthenticatedUser.classList.remove('show-lg-authenticated-user')
+                            lgAuthenticatedUser && lgAuthenticatedUser.classList.remove('show-lg-authenticated-user')
                             navbarTopics.classList.toggle('show-navbar-topics')
-                            chevronDown.style.transform = 'rotate(0deg)'
 
+                            if(chevronDown) {
+                                chevronDown.style.transform = 'rotate(0deg)'
+                            }
+                            
                             if(navbarTopics.classList.contains('show-navbar-topics')) {
                                 lgTopicChevron.style.transform = 'rotate(180deg)'
                             }else {

@@ -6,8 +6,9 @@ import { Link, useLocation } from 'react-router-dom'
 function PostListPosts(props) {
     const [postsByTopics, setPostsByTopics] = useState(null)
     const [topics, setTopics] = useState(null)
+    const [topicObjs, setTopicObjs] = useState(null)
     const {state, pathname} = useLocation()
-    const {posts, user} = props
+    const {posts, user, topicsArray} = props
     
 
 
@@ -33,7 +34,6 @@ function PostListPosts(props) {
         getPostsByTopics()
     }, [posts])
 
-
     return (
         <div className="post-container__posts">
            {topics && topics.map((topic)=> {
@@ -42,10 +42,15 @@ function PostListPosts(props) {
                         <div className='post-container__posts-by-topic'>
                             <div className="post-container__topic-container">
                                 <h2 className='post-container__topic-name'>{topic}</h2>
-                                <p className='post-container__topic-text'>
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                                    Est totam fugiat consequuntur enim exercitationem assumenda.
-                                </p>
+                                {topicsArray.map((obj)=> {
+                                    return (
+                                        <React.Fragment key={obj.id}>
+                                            {obj.name === topic && 
+                                                <p className='post-container__topic-text'>{obj.description}</p>
+                                            }
+                                        </React.Fragment>
+                                    )
+                                })}
                             </div>
                             {postsByTopics.map((obj)=>{
                                 return (

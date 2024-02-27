@@ -4,6 +4,7 @@ import { getPostData} from '../utils/api'
 import LoadingPage from './LoadingPage'
 import PostListPosts from '../components/PostListPosts'
 import ScrollToTop from '../components/ScrollToTop'
+import { getTopicData } from '../utils/api'
 
 export const url = window.location.host === 'localhost:3000' ? 
 'http://127.0.0.1:8000' : 'https://pawpals.pythonanywhere.com'
@@ -12,6 +13,7 @@ export const url = window.location.host === 'localhost:3000' ?
 
 function PostList() {
   const [posts, setPosts] = useState(null)
+  const [topics, setTopics] = useState(null)
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   // const [message, setMessage] = useState(null)
@@ -39,8 +41,19 @@ function PostList() {
     }
   }
 
+  const getTopics = async()=> {
+    try {
+      const data = await getTopicData(`${url}/api/topics/`)
+      setTopics(data)
+      // console.log(data)
+    } catch (error) {
+      console.log(error.message)
+    }
+  } 
+
   useEffect(()=>{
     getData()
+    getTopics()
   }, [])
 
   // useEffect(()=> {
@@ -92,6 +105,7 @@ function PostList() {
       {posts && 
         <PostListPosts 
           posts={posts} 
+          topicsArray={topics}
           // user={user} 
         />
       }

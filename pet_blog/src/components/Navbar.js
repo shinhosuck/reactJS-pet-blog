@@ -24,8 +24,10 @@ export function Navbar(props) {
 
         if(mobileTopics.classList.contains('show-navbar-topics')){
             mobileTopicsChevronDown.style.transform = 'rotate(180deg)'
+            mobileTopics.style.marginTop = '0.8rem'
         }else{
             mobileTopicsChevronDown.style.transform = 'rotate(0deg)'
+            mobileTopics.style.marginTop = '0rem'
         }
     }
 
@@ -230,10 +232,29 @@ export function Navbar(props) {
                     >
                         Home
                     </NavLink>
-                    <div id='topics'className='navbar-navlink'>
+                    <div
+                        onClick={()=> {
+                            const lgAuthenticatedUser = document.querySelector('.lg-authenticated-user')
+                            const chevronDown = document.querySelector('.lg-chevron')
+                            const navbarTopics = [...document.querySelectorAll('.navbar-topics')][1]
+                            const lgTopicChevron = document.querySelector('.lg-topic-chevron')
+
+                            lgAuthenticatedUser.classList.remove('show-lg-authenticated-user')
+                            navbarTopics.classList.toggle('show-navbar-topics')
+                            chevronDown.style.transform = 'rotate(0deg)'
+
+                            if(navbarTopics.classList.contains('show-navbar-topics')) {
+                                lgTopicChevron.style.transform = 'rotate(180deg)'
+                            }else {
+                                lgTopicChevron.style.transform = 'rotate(0deg)'
+                            }
+                        }}
+                        id='topics'
+                        className='navbar-navlink'
+                    >
                         <div style={{display:'flex', alignItems:'center', gap:'0.5rem'}}>
                             <span>Topics</span>
-                            <i style={{fontSize:'0.9rem', marginTop:'0.25rem'}} className="fa fa-chevron-down"></i>
+                            <i style={{fontSize:'0.9rem', marginTop:'0.25rem'}} className="fa fa-chevron-down lg-topic-chevron"></i>
                         </div>
                         {<NavbarTopics topics={topics} />}
                     </div>
@@ -246,11 +267,29 @@ export function Navbar(props) {
                     </NavLink>
                     {isAuthenticated ?
                         <>
+                            <div 
+                                onClick={()=> {
+                                    const navbarTopics = [...document.querySelectorAll('.navbar-topics')][1]
+                                    const lgAuthenticatedUser = document.querySelector('.lg-authenticated-user')
+                                    const chevronDown = document.querySelector('.lg-chevron')
+                                    const lgTopicChevron = document.querySelector('.lg-topic-chevron')
+                                    
+                                    lgAuthenticatedUser.classList.toggle('show-lg-authenticated-user')
+                                    navbarTopics.classList.remove('show-navbar-topics')
+                                    lgTopicChevron.style.transform = 'rotate(0deg)'
 
-                            <div className="lg-authenticated-user-container navbar-navlink">
+                                    if(lgAuthenticatedUser.classList.contains('show-lg-authenticated-user')){
+                                        chevronDown.style.transform = 'rotate(180deg)'
+
+                                    }else {
+                                        chevronDown.style.transform = 'rotate(0deg)'
+                                    }
+                                }}
+                                className="lg-authenticated-user-container navbar-navlink"
+                            >
                                 <img src={isAuthenticated.profile_image_url} alt="" />
                                 <span>{isAuthenticated.username}</span>
-                                <i className="fa fa-chevron-down"></i>
+                                <i className="fa fa-chevron-down lg-chevron"></i>
                                 <div className="lg-authenticated-user">
                                     <NavLink 
                                         to='/my-posts'
@@ -315,7 +354,7 @@ function NavbarTopics(props) {
 
     return (
         <>
-            <div className='navbar-topics'>
+            <div className='navbar-topics lg-navbar-topics'>
                 {topics && topics.map((topic)=> {
                     return (
                         <NavLink 

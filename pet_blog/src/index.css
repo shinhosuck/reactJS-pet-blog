@@ -1380,10 +1380,9 @@ NAVBAR
   background: none;
   border: none;
   display: grid;
-  gap: 0.8rem;
 }
 
-#mobile-topics > .navbar-topics {
+.navbar-topics {
   max-height: 0;
   overflow: hidden;
 
@@ -1542,6 +1541,7 @@ NAVBAR
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    cursor: pointer;
   }
 
   .lg-authenticated-user-container > img {
@@ -1590,20 +1590,17 @@ NAVBAR
     padding-bottom: 1.3rem;
   }
 
-  @media (hover) {
-    .lg-authenticated-user-container:hover 
-    .lg-authenticated-user{
-      max-height: 250px;
-      opacity: 1;
-      overflow-y: scroll;
-    }
+  .show-lg-authenticated-user{
+    max-height: 250px;
+    opacity: 1;
+    overflow-y: scroll;
   }
-
   /* end */
 
   /* navbar topics */
   #topics {
     position: relative;
+    cursor: pointer;
   }
 
   .navbar-topics {
@@ -1639,12 +1636,18 @@ NAVBAR
     font-weight: 600;
   }
 
-  @media (hover) {
+  /* @media (hover) {
     #topics:hover .navbar-topics{
       max-height: 250px;
       opacity: 1;
       overflow-y: scroll;
     }
+  } */
+
+  .show-navbar-topics{
+    max-height: 250px;
+    opacity: 1;
+    overflow-y: scroll;
   }
 
   /* end */

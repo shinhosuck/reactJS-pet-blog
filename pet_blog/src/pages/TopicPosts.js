@@ -8,8 +8,9 @@ import ScrollToTop from '../components/ScrollToTop'
 
 function TopicPosts() {
     const {state} = useLocation()
+    const [topics, setTopics] = useState(null)
     const [postArray, setPostArray] = useState(null)
-    const [topicsArray, setTopicsArray] = useState(null)
+    const [topicNames,setTopicNames] = useState(null)
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [topicMenuOpen, setTopicMenuOpen] = useState(false)
@@ -34,13 +35,14 @@ function TopicPosts() {
     const getTopics = async()=> {
         try {
             const data = await getTopicData(`${url}/api/topics`)
-            const topics = data.reduce((total, topic)=> {
+            const names = data.reduce((total, topic)=> {
                 if(!total.includes(topic.name)){
                     total.push(topic.name)
                 }
                 return total
             }, ['All Posts'])
-            setTopicsArray(topics)
+            setTopics(data)
+            setTopicNames(names)
            
         } catch ({message}) {
             setIsLoading(false)
@@ -60,7 +62,7 @@ function TopicPosts() {
     }, [])
 
     
-    if(postArray && topicsArray) {
+    if(postArray && topicNames) {
         const timeOutID = setTimeout(()=> {
             setIsLoading(false)
             clearTimeout(timeOutID)
@@ -85,10 +87,18 @@ function TopicPosts() {
         )
     }
 
+
     return (
         <React.Fragment>
             <ScrollToTop />
-            <div className="bg-img"></div>            
+            <div className="bg-img">
+                <div className="my-posts-hero-container">
+                    <div className="my-posts-header-contents">
+                        <h1 className='my-posts-hero-header'>{state && state.topic}</h1>
+                        <TopicContent topics={topics} state={state}/>
+                    </div>
+                </div>
+            </div>            
             <div className="topic-posts-container">
                 <div className='topic-posts-navbar'>
                     <div className='topic-posts-navbar__toggle-btns-container'>
@@ -110,7 +120,7 @@ function TopicPosts() {
                         </button>
                         {topicMenuOpen && 
                             <div className="topic-posts-navbar__topics-btns">
-                                {topicsArray && topicsArray.map((obj)=> {
+                                {topicNames && topicNames.map((obj)=> {
                                     return (
                                         <Link
                                             onClick={()=> setTopicMenuOpen(false)}
@@ -192,3 +202,14 @@ function TopicPosts() {
 }
 
 export default TopicPosts
+
+
+const TopicContent = (props)=> {
+    const {topics, state} = props
+    const topicContent = topics && topics.find((topic)=> topic.name === state.topic)
+    return (
+        <>
+            <p style={{fontSize:'1rem'}} className='my-posts-num-of-posts'>{topicContent.description}</p>
+        </>
+    )
+}

@@ -43,6 +43,7 @@
   /* Brown */
   --brown-20: hsl(27, 27%, 20%);
   --brown-30: hsl(27, 27%, 30%);
+  --brown-40: hsl(27, 27%, 40%);
   --brown-70: hsl(27, 27%, 70%);
   --brown-80: hsl(27, 27%, 80%);
   --brown-85: hsl(27, 27%, 85%);
@@ -1555,7 +1556,7 @@ NAVBAR
   .lg-authenticated-user {
     position: absolute;
     z-index: 2;
-    top: 67px;
+    top: 70px;
     left: 0;
     max-height: 0;
     width: 200px;
@@ -1564,10 +1565,8 @@ NAVBAR
     display: grid;
     align-content: start;
     border-radius: 10px;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
     opacity: 0;
-    background: var(--black-90);
+    background: var(--brown-80);
     transition: max-height 200ms linear;
   }
 
@@ -1593,7 +1592,7 @@ NAVBAR
   .show-lg-authenticated-user{
     max-height: 250px;
     opacity: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   /* end */
 
@@ -1606,7 +1605,7 @@ NAVBAR
   .navbar-topics {
     position: absolute;
     z-index: 2;
-    top: 67px;
+    top: 70px;
     left: 0;
     max-height: 0;
     width: 200px;
@@ -1615,10 +1614,8 @@ NAVBAR
     display: grid;
     align-content: start;
     border-radius: 10px;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
     opacity: 0;
-    background: var(--black-90);
+    background: var(--brown-80);
     transition: max-height 200ms linear;
   }
 
@@ -1636,18 +1633,10 @@ NAVBAR
     font-weight: 600;
   }
 
-  /* @media (hover) {
-    #topics:hover .navbar-topics{
-      max-height: 250px;
-      opacity: 1;
-      overflow-y: scroll;
-    }
-  } */
-
   .show-navbar-topics{
-    max-height: 250px;
+    max-height: 500px;
     opacity: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   /* end */

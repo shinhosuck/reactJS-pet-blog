@@ -3,6 +3,9 @@ import { deletePost } from '../utils/api'
 import { url } from '../pages/PostList'
 
 
+
+
+
 function PostDetailPost(props) {
     const [textContainer, setTextContainer] = useState(null)
     const [showBtns, setShowBtns] = useState(false)
@@ -33,6 +36,7 @@ function PostDetailPost(props) {
 
         }else if(imgContainer) {
             imgContainer.style.height = 'auto'
+            imgContainer.style.minHeight = 'initial'
         }
         seWidth(window.innerWidth)
     }

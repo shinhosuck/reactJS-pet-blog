@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, Navigate, useLocation } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { url } from './PostList'
 import LoadingPage from './LoadingPage'
 import { fetchComments, removeComment, editComment } from '../utils/api'
@@ -11,27 +11,31 @@ function MyComment() {
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const authenticate = JSON.parse(localStorage.getItem('auth'))
-
+  const navigate = useNavigate()
   const {state, pathname} = useLocation()
 
 
   const deleteComment = async(id)=> {
-    const obj = {message:'my comment'}
+    const obj = {isMyComment:true}
     try {
       const data = await removeComment(`${url}/api/comment/${id}/delete/`, authenticate.token, obj)
-      console.log(data)
-      if(!data.message){
-        setComments(data)
+      if(!data.error){
+        const new_comment_array = comments.filter((comment)=> comment.id !== id)
+        setComments(new_comment_array)
         setIsLoading(false)
+        console.log(data)
 
       }else{
-        setComments(null)
+        console.log(data.message)
         setIsLoading(false)
+        navigate('/error', {replace:true, state:{message:{error:`${data.error}`}}})
+        
       }
 
     } catch (error) {
       console.log(error.message)
       setIsLoading(false)
+      navigate('/error', {replace:true, state:{message:{error:`${error.message}`}}})
     }
 
   }
@@ -106,7 +110,7 @@ function MyComment() {
                 </div>
                 <h1 className='my-posts-hero-header'>My Comments</h1>
                 <div>
-                  <p className='my-posts-num-of-posts'>{comments.length > 1 ? `${comments.length} posts`:`${comments.length} posts`}</p>
+                  <p className='my-posts-num-of-posts'>{comments.length > 1 ? `${comments.length} comments`:`${comments.length} comment`}</p>
                   <Link to='/my-posts' className='my-posts-num-of-comments'>
                     {authenticate.num_of_posts > 1 ? 
                       `${authenticate.num_of_posts} posts`
@@ -125,7 +129,7 @@ function MyComment() {
                     <p className='my-comments__date-replied'>{new Date(comment.date_posted).toDateString()}</p>
                     <p className='my-comments__post_name'>
                       <span>Replied to:</span> 
-                      <Link className='my-comments__post-name-link' to={`/post/${comment.post}/detail/`}>{comment.post_title}</Link>
+                      <Link className='my-comments__post-name-link' to={`/post/${comment.post_id}/detail/`}>{comment.post}</Link>
                     </p>
                   </div>
                   <p className='my-comments__content'>{comment.content}</p>

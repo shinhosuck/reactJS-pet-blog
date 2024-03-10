@@ -2040,7 +2040,6 @@ Post Detail
   display: grid;
   align-self: start;
   gap: 1rem;
-  /* border: 2px solid red; */
   padding: 2rem;
   background: var(--brown-90);
   border-radius: 10px;
@@ -2048,7 +2047,7 @@ Post Detail
 
 .post-detail-container__post-detail {
   display: grid;
-  align-items: start;
+  align-content: start;
   gap: 1rem;
 }
 
@@ -2611,6 +2610,7 @@ Post Detail
 
   .post-detail-container__post-detail {
     display: flex;
+    align-items: start;
     gap: 2rem
   }
 

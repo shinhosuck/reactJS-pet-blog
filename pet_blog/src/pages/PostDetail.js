@@ -1,61 +1,34 @@
-import React, { useState, useEffect, useRef} from 'react'
-import { useParams, Link, useLocation, useNavigate } from 'react-router-dom'
-import { getPostData, addLikes, createComment, getPostComments } from '../utils/api'
+import React, { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import CommentForm from '../components/CommentForm'
 import LoadingPage from './LoadingPage'
 import UpdatePostForm from '../components/UpdatePostForm'
 import Comments from '../components/Comments'
-import { url } from './PostList'
-import userImg from '../images/default.png'
 import ScrollToTop from '../components/ScrollToTop'
 import PostDetailPost from '../components/PostDetailPost'
-
-
+import { getPostData, addLikes, getPostComments } from '../utils/api'
+import { url } from './PostList'
 
 
 function PostDetail() {
     const [post, setPost] = useState(null)
     const [comments, setComments] = useState(null)
-
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
-
     const [showCommentForm, setShowCommentForm] = useState(false)
     const [showUpdatePostForm, setShowUpdatePostForm] = useState(false)
-    // const {state, pathname} = useLocation()
-
     const authenticated = JSON.parse(localStorage.getItem('auth')) || null
     const { id } = useParams()
-    const commentContent = useRef()
     const navigate = useNavigate()
     
 
-
-    const handleCommentSubmit = async(e)=> {
-        e.preventDefault()
-        const content = {content:commentContent.current.value}
-        if(content) {
-            try {
-                const data = await createComment(`${url}/api/post/${post.id}/create/comment/`, content, authenticated.token)
-                const obj = {...data, user:authenticated.username, user_image_url:authenticated.profile_image_url}
-                comments ? setComments((prev)=> [...prev, obj]) : setComments([obj])
-                setPost((prev)=> ({...prev, num_of_replies:data.comment_count}))
-                e.target.reset()
-                setShowCommentForm(false)
-
-            } catch (error) {
-                console.log(error.message)
-            }
-        }
-    }
-    
     const updateLike = async(e)=> {
         if(!authenticated) {
             navigate('/login', {replace:true, state:{error:'You must login first.'}})
 
         }else {
             try {
-                const data = await addLikes(`${url}/api/update/post/${post.id}/like/`, authenticated.token)
+                const data = await addLikes(`${url}/api/post/${post.id}/like/`, authenticated.token)
                 if(!data.error){
                     setPost((prev)=>{
                         const newLike = prev.like
@@ -111,20 +84,17 @@ function PostDetail() {
         fetchPostComments()
     }, [post])
 
-
     if(isLoading) {
         return (
             <LoadingPage />
         )
     }
 
-
     if(isError) {
         return (
             <h2>There was an error</h2>
         )
     }
-
 
     return (
         <React.Fragment>
@@ -133,7 +103,7 @@ function PostDetail() {
                 <div className="bg-img-header-container">
                     <div className="bg-img-contents">
                         <div className="post-detail-author-profile">
-                            <img className='post-detail-author-img' src={post.author_profile_image} alt="" />
+                            <img className='post-detail-author-img' src={post.author_profile_image_url} alt="" />
                             <h4 className='post-detail-post-author'>{post.author}</h4>
                         </div>
                         <p className='post-detail-date-posted'>Posted on {post.date_posted}</p>
@@ -166,9 +136,12 @@ function PostDetail() {
                         
                         {showCommentForm && authenticated &&
                             <CommentForm 
-                                handleCommentSubmit={handleCommentSubmit} 
-                                showCommentForm={setShowCommentForm} 
-                                commentContent={commentContent}
+                                setShowCommentForm={setShowCommentForm} 
+                                comments={comments}
+                                setComments={setComments}
+                                post={post}
+                                setPost={setPost}
+                                
                             />
                         }
                         {showUpdatePostForm && authenticated &&

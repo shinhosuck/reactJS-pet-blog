@@ -16,16 +16,11 @@ function PostList() {
   const [topics, setTopics] = useState(null)
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  // const [message, setMessage] = useState(null)
-  // const [user, setUser] = useState(null)
-  // const {topics} = useOutletContext()
-  // const {state, pathname} = useLocation()
-
-  
   const authenticated = JSON.parse(localStorage.getItem('auth')) || null
-
   window.history.replaceState({state:null}, '', '/posts')
 
+
+  
   const getData = async()=> {
     try {
       const data = await getPostData(`${url}/api/posts/`)

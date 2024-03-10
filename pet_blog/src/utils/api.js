@@ -41,7 +41,6 @@ export const getMyData = async(url, token)=> {
 
 
 export const removeComment = async(url, token, obj=null)=> {
-    console.log(obj)
     const resp = await fetch(url, {
         method: 'DELETE',
         headers: {

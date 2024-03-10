@@ -1,16 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { editComment } from '../utils/api'
 import { url } from '../pages/PostList'
-
-
-
 
 
 
 function UpdateCommentForm(props) {
     const [comment, setComment] = React.useState(props.comment)
     const {setShowCommentEditForm, setComments, authenticated} = props
-
+    const navigate = useNavigate()
 
     const handleSubmit = async(e)=> {
         e.preventDefault()
@@ -22,12 +20,19 @@ function UpdateCommentForm(props) {
         e.target.reset()
         setShowCommentEditForm(false)
 
-        const obj = {content:comment.content}
         try {
-            const data = await editComment(`${url}/api/comment/${comment.id}/update/`, obj, authenticated.token)
+            const data = await editComment(`${url}/api/comment/${comment.id}/update/`, comment, authenticated.token)
+            if(data.error){
+                console.log(data.error)
+                navigate('/error', {replace:false, state:{message:{error:`${data.error}`}}})
+
+            }else {
+                console.log(data)
+            }
             
         } catch (error) {
             console.log(error.message)
+            navigate('/error', {replace:false, state:{message:{error:`${error.message}`}}})
         }
     }
     

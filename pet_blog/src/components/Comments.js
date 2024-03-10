@@ -9,24 +9,25 @@ import UpdateCommentForm from './UpdateCommentForm'
 function Comments(props) {
     const { comments, setComments, authenticated, setPost} = props
     const [showCommentEditForm, setShowCommentEditForm] = React.useState(false)
-    const [showBtns, setShowBtns] = React.useState({show:false,id:null})
+    const [showBtns, setShowBtns] = React.useState({show:false, comment_id:null})
     
     const deleteComment = async(id)=> {
         try {
             const data = await removeComment(`${url}/api/comment/${id}/delete/`, authenticated.token)
             if(!data.error) {
-                setComments(data)
-                setPost((prev)=> ({...prev, num_of_replies:prev.num_of_replies - 1}))
+                const new_comment_array = comments.filter((comment)=> comment.id !== id)
+                setPost((prev)=> ({...prev, num_of_replies:data.comment_count}))
+                setComments(new_comment_array)
+                console.log(data)
 
             }else {
-                setComments(null)
-                setPost((prev)=> ({...prev, num_of_replies:0}))
+                console.log(data.error)
             }
         } catch (error) {
             console.log(error.message)
         }
     }
-
+   
     return (
         <div className="post-detail-comments">
             {comments && comments.map((comment)=> {
@@ -50,17 +51,20 @@ function Comments(props) {
                                         <>
                                             <div className='post-detail-btns-ellipsis'>
                                                 <button onClick={()=> {
-                                                    setShowBtns({show:showBtns.show?false:true, id:showBtns.id?null:comment.id})
+                                                    setShowBtns({
+                                                        show:showBtns.show?false:true, 
+                                                        comment_id:showBtns.comment_id?null:comment.id
+                                                    })
                                                 }}>
                                                     <i className="fa-solid fa-ellipsis"></i>
                                                 </button>
                                             </div>
-                                            {showBtns && showBtns.show && showBtns.id === comment.id &&
+                                            {showBtns && showBtns.show && showBtns.comment_id === comment.id &&
                                                 <div className='post-detail-comment-edit-and-delete'>
                                                     <button 
                                                         onClick={()=> {
-                                                            setShowCommentEditForm({id:comment.id})
-                                                            setShowBtns({show:false, id:null})
+                                                            setShowCommentEditForm({comment_id:comment.id})
+                                                            setShowBtns({show:false, comment_id:null})
                                                         }} 
                                                         className='post-detail-comment-edit-btn'
                                                     >
@@ -70,7 +74,7 @@ function Comments(props) {
                                                     <button 
                                                         onClick={()=> {
                                                             deleteComment(comment.id)
-                                                            setShowBtns({show:false, id:null})
+                                                            setShowBtns({show:false, comment_id:null})
                                                         }} 
                                                         className='post-detail-comment-remove-btn'
                                                     >
@@ -84,7 +88,7 @@ function Comments(props) {
                                 </>
                             }
                         </div>
-                        {showCommentEditForm && showCommentEditForm.id === comment.id &&
+                        {showCommentEditForm && showCommentEditForm.comment_id === comment.id &&
                             <UpdateCommentForm 
                                 comment={comment} 
                                 setShowCommentEditForm={setShowCommentEditForm}

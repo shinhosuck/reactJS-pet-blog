@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import landingPageImg from '../images/landing_page.webp'
+import { Link } from 'react-router-dom'
 import { getPostData, getTopicData} from '../utils/api'
-import LoadingPage from './LoadingPage'
 import { url } from './PostList'
 import Footer from './Footer'
-import paw from '../images/paw.webp'
 import LandingPageTopics from '../components/LandingPageTopics'
 import LandingPagePosts from '../components/LandingPagePosts'
 import LandingPageFeaturePosts from '../components/LandingPageFeaturePosts'
 import LandingPageHeader from '../components/LandingPageHeader'
 import LandingPageEmailSub from '../components/LandingPageEmailSub'
+import LoadingPage from './LoadingPage'
+
+
+
 
 
 function LandingPage() {
-    const [posts, setPosts] = useState(null)
-    const [topics, setTopics] = useState(null)
     const [featured, setFeatured] = useState(null)
+    const [topics, setTopics] = useState(null)
+    const [posts, setPosts] = useState(null)
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const authenticated = window.localStorage.getItem('auth')
 
 
     useEffect(()=> {
-        const getData = async()=> {
+        const getPosts = async()=> {
             try {
                 const data = await getPostData(`${url}/api/posts/`)
                 const objs = data.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()}))
@@ -32,14 +33,14 @@ function LandingPage() {
                 setFeatured(objs.slice(0,6))
                 setTimeout(()=>{
                     setIsLoading(false)
-                }, 500)
+                }, 100)
             } catch ({message}) {
                 console.log(message)
                 setIsError(message)
                 setIsLoading(false)
             }
         }
-        getData()
+        getPosts()
     }, [])
 
     useEffect(()=> {

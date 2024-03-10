@@ -11,18 +11,16 @@ function MyPost() {
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const authenticated = JSON.parse(localStorage.getItem('auth')) || null
-  const {state, pathname} = useLocation()
-  const navigate = useNavigate()
-
-
+  const {pathname} = useLocation()
   window.history.replaceState({state:null}, '', '/my-posts')
+
 
   const getMyPosts = async()=> {
     try {
       const data = await getMyData(`${url}/api/my-post/`, authenticated.token)
       if(data.error) {
         setIsLoading(false)
-        setIsError(data)
+        setIsError({error:data.error})
 
       }else {
         const objs = data.map((post)=>({...post, date_posted:new Date().toDateString()}))
@@ -30,10 +28,18 @@ function MyPost() {
         const timeoutID = setTimeout(()=> {
           setIsLoading(false)
           clearTimeout(timeoutID)
-        }, 500)
+        }, 100)
       }
     } catch (error) {
-      console.log(error.message)
+      console.log('MESSAGE:', error.message, 'NAME:', error.name)
+      setIsLoading(false)
+      setIsError(
+        {
+          error:error.message, 
+          name:error.name
+        }
+      )
+
     }
   }
 
@@ -46,11 +52,16 @@ function MyPost() {
         console.log(data.message)
 
       }else {
-        console.log(data.error)
+        setIsError({error:data.message})
       }
-      console.log(data)
+
     } catch (error) {
-      console.log(error.message)
+      setIsError(
+        {
+          error:error.message, 
+          name:error.name
+        }
+      )
     }
   }
 
@@ -68,7 +79,16 @@ function MyPost() {
 
   if(!authenticated) {
     return (
-      <Navigate to='/login' replace={true} state={{redirect:pathname ,error:'Please login to see your post!'}}/>
+      <Navigate 
+        to='/login' 
+        replace={true} 
+        state={
+            {
+              redirect:pathname ,
+              error:'Please login to see your post!'
+            }
+          }
+        />
     )
   }
   if(isLoading) {
@@ -78,7 +98,18 @@ function MyPost() {
   }
   if(isError) {
     return (
-      <Navigate to='/error' replace={true} state={{message:isError.error}}/>
+      <Navigate 
+        to='/error' 
+        replace={true} 
+        state={
+          {
+            message:{
+              error:isError.error,
+              name:isError.name
+            }
+          }
+        }
+      />
     )
   }
   return (

@@ -110,7 +110,7 @@ function MyComment() {
                 </div>
                 <h1 className='my-posts-hero-header'>My Comments</h1>
                 <div>
-                  <p className='my-posts-num-of-posts'>{comments.length > 1 ? `${comments.length} comments`:`${comments.length} comment`}</p>
+                  <p className='my-posts-num-of-posts'>{authenticate.num_of_comments > 1 ? `${authenticate.num_of_comments} comments`:`${authenticate.num_of_comments} comment`}</p>
                   <Link to='/my-posts' className='my-posts-num-of-comments'>
                     {authenticate.num_of_posts > 1 ? 
                       `${authenticate.num_of_posts} posts`

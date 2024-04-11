@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { editComment } from '../utils/api'
-import { url } from '../pages/PostList'
+import { url } from '../utils/urls'
 
 
 

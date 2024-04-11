@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { updatePost } from '../utils/api'
-import { url } from '../pages/PostList'
+import { url } from '../utils/urls'
 
 
 

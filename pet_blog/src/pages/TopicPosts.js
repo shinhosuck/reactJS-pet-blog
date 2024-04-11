@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation, Navigate, Link } from 'react-router-dom'
 import { getPostData, getTopicData } from '../utils/api'
 import LoadingPage from './LoadingPage'
-import { url } from './PostList'
-import ScrollToTop from '../components/ScrollToTop'
+import { url } from '../utils/urls'
 
 
 function TopicPosts() {
@@ -90,7 +89,6 @@ function TopicPosts() {
 
     return (
         <React.Fragment>
-            <ScrollToTop />
             <div className="bg-img">
                 <div className="my-posts-hero-container">
                     <div className="my-posts-header-contents">

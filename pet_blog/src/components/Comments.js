@@ -1,6 +1,6 @@
 import React from 'react'
 import { removeComment } from '../utils/api'
-import { url } from '../pages/PostList'
+import { url } from '../utils/urls'
 import UpdateCommentForm from './UpdateCommentForm'
 
 

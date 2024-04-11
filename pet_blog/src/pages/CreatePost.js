@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useLocation, Link} from 'react-router-dom'
 import LoadingPage from './LoadingPage'
 import { getTopicData, createPost, updatePost } from '../utils/api'
-import { validatePost } from '../utils/utils'
-import { url } from './PostList'
+import { validatePost } from '../utils/validators'
+import { url } from '../utils/urls'
 
 
 

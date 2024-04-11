@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation, Navigate, useNavigate } from 'react-router-dom'
-import { loginInfoValidation  } from '../utils/utils'
+import { Link, useLocation, Navigate, useNavigate, useOutletContext} from 'react-router-dom'
+import { loginInfoValidation  } from '../utils/validators'
 import { login } from '../utils/api'
-import { url } from './Register'
-import ScrollToTop from '../components/ScrollToTop'
+import { url } from '../utils/urls'
 import LoadingPage from './LoadingPage'
 
 
@@ -17,6 +16,7 @@ function Login() {
     const [successMessage, setSuccessMessage] = useState(null) 
     const {state, pathname} = useLocation()
     const navigate = useNavigate()
+    const { setIsAuthenticated } = useOutletContext()
 
     const authenticated = localStorage.getItem('auth') || null
 
@@ -35,10 +35,11 @@ function Login() {
             try {
                 const data = await login(`${url}/api/auth/login/`, user)
                 if(data.error) {
-                    setBackendAuthError({error:data.error})
+                    setBackendAuthError(data.error)
 
                 }else {
                     localStorage.setItem('auth', JSON.stringify(data))
+                    setIsAuthenticated(data)
                     navigate(`${state && state.redirect?state.redirect:'/posts'}`, {replace:true, state:{message:data.message}})
                 }
             } catch ({message}) {
@@ -80,10 +81,10 @@ function Login() {
                 setIsLoading(false)
                 clearTimeout(timeoutId)
             }else {
-                timeoutId()
+                clearTimeout(timeoutId)
             }
         }, 100)
-    })
+    }, [])
 
     if(authenticated) {
         return (
@@ -99,7 +100,6 @@ function Login() {
 
     return (
         <div className="user-login-main-container">
-            <ScrollToTop />
             <div className="user-login-container">
                 {successMessage && successMessage.registered && <p className='user-login__message'>{successMessage.registered}</p>}
                 {state && state.error && <p className='user-login__error-message'>{state.error}</p>}

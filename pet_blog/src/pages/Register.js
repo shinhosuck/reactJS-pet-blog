@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, Navigate } from 'react-router-dom'
 import { register } from '../utils/api'
-import { passwordCheck, newUserInfoCheck } from '../utils/utils'
-import ScrollToTop from '../components/ScrollToTop'
+import { passwordCheck, newUserInfoCheck } from '../utils/validators'
 import LoadingPage from './LoadingPage'
+import { url } from '../utils/urls'
 
-export const url = window.location.host === 'localhost:3000' ? 
-'http://127.0.0.1:8000' : 'https://pawpals.pythonanywhere.com'
 
 
 function Register() {
@@ -82,7 +80,6 @@ function Register() {
 
     return (
         <div className="user-register-main-container">
-            <ScrollToTop />
             <div className="user-register-container">
                 <div className='user-register'>
                     <h2 className='user-register__header'>Register</h2>

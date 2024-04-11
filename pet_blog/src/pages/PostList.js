@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { useOutletContext, useLocation } from 'react-router-dom'
+import {useOutletContext} from 'react-router-dom'
 import { getPostData} from '../utils/api'
 import LoadingPage from './LoadingPage'
 import PostListPosts from '../components/PostListPosts'
-import ScrollToTop from '../components/ScrollToTop'
 import { getTopicData } from '../utils/api'
+import { url } from '../utils/urls'
 
-export const url = window.location.host === 'localhost:3000' ? 
-'http://127.0.0.1:8000' : 'https://pawpals.pythonanywhere.com'
+// export const url = window.location.host === 'localhost:3000' ? 
+// 'http://127.0.0.1:8000' : 'https://pawpals.pythonanywhere.com'
 
 
 
@@ -18,8 +18,6 @@ function PostList() {
   const [isLoading, setIsLoading] = useState(true)
   const authenticated = JSON.parse(localStorage.getItem('auth')) || null
   window.history.replaceState({state:null}, '', '/posts')
-
-
   
   const getData = async()=> {
     try {
@@ -51,26 +49,6 @@ function PostList() {
     getTopics()
   }, [])
 
-  // useEffect(()=> {
-  //   if(authenticated) {
-  //     setUser(authenticated)
-  //   }
-  // }, [])
-
-  // useEffect(()=>{
-  //   state && state.message && setMessage(state.message)
-  //   if(state) {
-  //     !authenticated && setUser(null)
-  //     const timeoutID = setTimeout(()=>{
-  //       const element = document.querySelector('.post-list-message')
-  //       if(element) {
-  //         element.style.display = 'none'
-  //       }
-  //       clearTimeout(timeoutID)
-  //     }, 5000)
-  //   }
-  // }, [state])
-
   if(isLoading) {
     return (
       <LoadingPage />
@@ -83,7 +61,6 @@ function PostList() {
   }
   return (
     <React.Fragment>
-      <ScrollToTop />
       <div className="bg-img">
         <div className="bg-img-header-container">
           <div className="bg-img-contents">

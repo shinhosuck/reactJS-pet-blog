@@ -7,13 +7,11 @@ import paw from '../images/paw.webp'
 
 export function Navbar(props) {
     const [topics, setTopics] = useState(props.topics)
+    const {isAuthenticated, setIsAuthenticated } = props
     const [showNavLinks, setShowNavLinks] = useState(false)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-    let isAuthenticated = JSON.parse(localStorage.getItem('auth')) || null
     const navigate = useNavigate()
-
-
-
+   
     const handleMobileTopics = ()=> {
         const mobileTopics = document.querySelector('#mobile-topics > .navbar-topics')
         const mobileTopicsChevronDown = document.querySelector('.mobile-topics-chevron-down')
@@ -55,11 +53,12 @@ export function Navbar(props) {
                 document.body.style.overflow = 'auto'
             }
         }
-        window.removeEventListener('resize', windowResizeEvent)
+        return window.removeEventListener('resize', windowResizeEvent)
     }
 
     const logout = function() {
         setShowNavLinks(true)
+        setIsAuthenticated(null)
         localStorage.removeItem('auth')
         navigate(
             '/login', 

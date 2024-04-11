@@ -23,22 +23,30 @@ import MyPost from './pages/MyPost';
 import MyComment from './pages/MyComment';
 import TopicPosts from './pages/TopicPosts';
 import UpdatePost from './pages/UpdatePost';
+import ScrollToTop from './components/ScrollToTop';
+import PageNotFound from './pages/PageNotFound';
+import Logout from './pages/Logout';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<RootLayout />}>
-      <Route path='/' element={<LandingPage />}/>
-      <Route element={<ContentLayout/>} >
-        <Route path='posts' element={<PostList/>} />
-        <Route path='post/:id/detail' element={<PostDetail/>} />
-        <Route path='create/post' element={<CreatePost />}/>
-        <Route path='my-posts' element={<MyPost />}/>
-        <Route path='my-comments' element={<MyComment />}/>
-        <Route path='topic/:name/posts' element={<TopicPosts />}/>
-        <Route path='update/:id/post' element={<UpdatePost />}/>
-        <Route path='register' element={<Register />}/>
-        <Route path='login' element={<Login />}/>
-        <Route path='error' element={<Error />}/>
+    <Route element={<ScrollToTop />}>
+      <Route path='/' element={<RootLayout />} >
+        <Route index element={<LandingPage />}/>
+        <Route element={<ContentLayout/>}>
+          <Route path='posts' element={<PostList/>} />
+          <Route path='post/:id/detail' element={<PostDetail/>} />
+          <Route path='create/post' element={<CreatePost />}/>
+          <Route path='my-posts' element={<MyPost />}/>
+          <Route path='my-comments' element={<MyComment />}/>
+          <Route path='topic/:name/posts' element={<TopicPosts />}/>
+          <Route path='update/:id/post' element={<UpdatePost />}/>
+          <Route path='register' element={<Register />}/>
+          <Route path='login' element={<Login />}/>
+          <Route path='logout' element={<Logout />}/>
+          <Route path='error' element={<Error />}/>
+          <Route path='*' element={<PageNotFound />}/>
+        </Route>
       </Route>
     </Route>
   )

@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 function LandingPagePosts(props) {
     const {pathname, state} = useLocation()
-    const {posts} = props
+    const {latesPosts} = props
     return (
         <div className="landing-page-posts-container">
             <div className="landing-page-posts-wrapper">
@@ -18,7 +18,7 @@ function LandingPagePosts(props) {
                     </p>
                 </div>
                 <div className="landing-page-posts">
-                    {posts.map((post)=> {
+                    {latesPosts.map((post)=> {
                         return (
                             <div key={post.id} className="landing-page-post">
                                 <div className="landing-page-post-image-container">

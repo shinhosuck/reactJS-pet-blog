@@ -4,10 +4,9 @@ import CommentForm from '../components/CommentForm'
 import LoadingPage from './LoadingPage'
 import UpdatePostForm from '../components/UpdatePostForm'
 import Comments from '../components/Comments'
-import ScrollToTop from '../components/ScrollToTop'
 import PostDetailPost from '../components/PostDetailPost'
 import { getPostData, addLikes, getPostComments } from '../utils/api'
-import { url } from './PostList'
+import { url } from '../utils/urls'
 
 
 function PostDetail() {
@@ -98,7 +97,6 @@ function PostDetail() {
 
     return (
         <React.Fragment>
-            <ScrollToTop />
             <div className="bg-img">
                 <div className="bg-img-header-container">
                     <div className="bg-img-contents">

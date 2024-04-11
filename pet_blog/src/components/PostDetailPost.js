@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { deletePost } from '../utils/api'
-import { url } from '../pages/PostList'
+import { url } from '../utils/urls'
 
 
 

@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useOutletContext} from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
 import Footer from '../pages/Footer'
 import { getTopicData, getPostData } from '../utils/api'
-import { url } from '../pages/PostList'
+import { url } from '../utils/urls'
 
 
 
 function ContentLayout() {
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem('auth') ? 
+    JSON.parse(localStorage.getItem('auth')) :
+    null
+  )
   const [topics, setTopics] = useState(null)
   const [posts, setPosts] = useState(null)
 
-
-  
   const getTopics = async()=> {
     try {
       const data = await getTopicData(`${url}/api/topics/`)
@@ -42,18 +45,24 @@ function ContentLayout() {
   return (
     <React.Fragment>
         <header className='main-header'>
-            <Navbar topics={topics} />
+            <Navbar 
+              topics={topics} 
+              setIsAuthenticated={setIsAuthenticated} 
+              isAuthenticated={isAuthenticated} 
+            />
         </header>
         <main>
             <Outlet context={
               {
                 posts:posts, 
                 topics:topics,
+                setIsAuthenticated:setIsAuthenticated,
+                isAuthenticated:isAuthenticated
               }
             }/>
         </main>
         <footer>
-          <Footer />
+          <Footer isAuthenticated={isAuthenticated}/>
         </footer>
         <div className='bg-overlay hide-bg-overlay'></div>
     </React.Fragment>

@@ -28,14 +28,14 @@ function LandingPageTopics(props) {
                                 <img className='landing-page-topic-image' src={topic.image_url} alt={topic.name} />
                                 <div className="landing-page-topic-bg-overlay">
                                     <h3 className='landing-page-topic-name'>{topic.name}</h3>
-                                    <div className='landing-page-topic-likes-and-message'>
+                                    <div className='landing-page-topic-likes-and-post_count'>
                                         <div className='landing-page-topic-like'>
                                             <i className="fa-solid fa-hands-clapping landing-page-post-clap"></i>
-                                            <span>34</span>
+                                            <span>{topic.topic_post_set_likes}</span>
                                         </div>
-                                        <div className='landing-page-topic-message'>
+                                        <div className='landing-page-topic-post_count'>
                                             <i className="fa-solid fa-message"></i>
-                                            <span>56</span>
+                                            <span>{topic.post_count}</span>
                                         </div>
                                     </div>
                                 </div>

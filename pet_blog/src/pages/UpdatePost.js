@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { getTopicData } from '../utils/api'
-import { url } from './PostList'
+import { url } from '../utils/urls'
 import CreatePost from './CreatePost'
 
 

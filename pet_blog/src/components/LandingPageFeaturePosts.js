@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 
 
 
 function LandingPageFeaturePosts(props) {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const {pathname, state} = useLocation()
-    const {featured} = props
+    const {featuredPosts} = props
 
+    const setWidth = (e)=> {
+        setWindowWidth(window.innerWidth)
+        return e.target.removeEventListener('resize', setWidth)
+    }
+
+    useEffect(()=> {
+        window.addEventListener('resize', setWidth)
+    }, [windowWidth])
 
     
     return (
@@ -22,7 +31,7 @@ function LandingPageFeaturePosts(props) {
                     </p>
                 </div>
                 <div className="landing-page-featured-posts">
-                    {featured.map((post)=> {
+                    {featuredPosts.map((post, index)=> {
                         return (
                             <div key={post.id} className="landing-page-featured-post">
                                 <div className="landing-page-featured-post-image-container">
@@ -53,7 +62,11 @@ function LandingPageFeaturePosts(props) {
                                 </div>
                                 <div className='landing-page-featured-post-text-content'>
                                     <h3 className='landing-page-featured-post-title'>{post.title}</h3>
-                                    <p className='landing-page-featured-post-content'>{post.content.slice(0, 70)}...
+                                    <p className='landing-page-featured-post-content'>{
+                                        windowWidth >= 1200 && index === 2 && post.content.slice(0, 200) || 
+                                        windowWidth >= 1200 && index !== 2 && post.content.slice(0, 50) ||
+                                        post.content.slice(0, 100)
+                                        }...
                                         <Link 
                                             to={`/post/${post.id}/detail/`} 
                                             state={{redirect:pathname}} 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { url } from './PostList'
+import { url } from '../utils/urls'
 import LoadingPage from './LoadingPage'
 import { fetchComments, removeComment, editComment } from '../utils/api'
 

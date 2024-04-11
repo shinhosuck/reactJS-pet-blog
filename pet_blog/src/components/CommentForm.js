@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { url } from '../pages/PostList'
+import { url } from '../utils/urls'
 import { createComment } from '../utils/api'
 
 

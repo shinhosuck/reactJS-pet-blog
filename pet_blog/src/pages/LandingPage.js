@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useOutletContext} from 'react-router-dom'
 import { getPostData, getTopicData} from '../utils/api'
-import { url } from './PostList'
+import { url } from '../utils/urls'
 import Footer from './Footer'
 import LandingPageTopics from '../components/LandingPageTopics'
 import LandingPagePosts from '../components/LandingPagePosts'
@@ -11,32 +11,31 @@ import LandingPageEmailSub from '../components/LandingPageEmailSub'
 import LoadingPage from './LoadingPage'
 
 
-
-
-
 function LandingPage() {
-    const [featured, setFeatured] = useState(null)
+    const [featuredPosts, setFeaturedPosts] = useState(null)
     const [topics, setTopics] = useState(null)
-    const [posts, setPosts] = useState(null)
-    const [isError, setIsError] = useState(false)
+    const [latesPosts, setLatestPosts] = useState(null)
+    const [isError, setIsError] = useState()
     const [isLoading, setIsLoading] = useState(true)
-    const authenticated = window.localStorage.getItem('auth')
-
+    const isAuthenticated = window.localStorage.getItem('auth')
 
     useEffect(()=> {
         const getPosts = async()=> {
-            try {
-                const data = await getPostData(`${url}/api/posts/`)
+            const data = await getPostData(`${url}/api/posts/`)
+            if(data.error) {
+                setIsError(data.error)
+            }
+            else {
                 const objs = data.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()}))
-                // const filtered = objs.filter((post)=>post.num_of_replies >= 1)
-                setPosts(objs.slice(0,6))
-                setFeatured(objs.slice(0,6))
-                setTimeout(()=>{
-                    setIsLoading(false)
-                }, 100)
-            } catch ({message}) {
-                console.log(message)
-                setIsError(message)
+                const latesPost = data.filter((post)=>!post.featured)
+                .map((post)=> {
+                    const newDate = new Date(post.date_posted)
+                    const formatedDate = `${newDate.toDateString()} ${newDate.toLocaleTimeString({hour: '2-digit', minute:'2-digit'})}`
+                    return {...post, date_posted:formatedDate}
+                })
+                const featuredPosts = objs.filter((post)=>post.featured)
+                setLatestPosts(latesPost.slice(0,6))
+                setFeaturedPosts(featuredPosts.slice(0,6))
                 setIsLoading(false)
             }
         }
@@ -45,18 +44,12 @@ function LandingPage() {
 
     useEffect(()=> {
         const getTopics = async()=> {
-            try {
-                const data = await getTopicData(`${url}/api/topics`)
-                setTopics(data)
-                setTimeout(()=>{
-                    setIsLoading(false)
-                }, 100)
-               
-            } catch ({message}) {
-                setIsLoading(false)
-                setIsError({error:message})
-                console.log(message)
+            const data = await getTopicData(`${url}/api/topics`)
+            if(data.error){
+                setIsError(data.error)
             }
+            setTopics(data)
+            setIsLoading(false)
         }
         getTopics()
     }, [])
@@ -68,7 +61,7 @@ function LandingPage() {
     }
     if(isError) {
         return (
-            <h2>There was an error {window.location.host}</h2>
+            <Navigate to='/error' state={{error:isError}}/>
         )
     }
 
@@ -84,7 +77,7 @@ function LandingPage() {
                         <p className='mobile-landing-page-hero-paragraph'>
                             Request suggestions and share your experience and expertise on various canines's health issues.
                         </p>
-                        <Link to={!authenticated ? '/register':'/posts'} className='mobile-landing-page-join-btn'>{authenticated?'Explore':'Join now'}</Link>
+                        <Link to={!isAuthenticated ? '/register':'/posts'} className='mobile-landing-page-join-btn'>{isAuthenticated?'Explore':'Join now'}</Link>
                     </div>
                 </div>
                 <div className='lg-landing-page-hero-wrapper'>
@@ -94,19 +87,17 @@ function LandingPage() {
                             <p className='landing-page-hero-paragraph'>
                                 Request suggestions and share your experience and expertise on various canines's health issues.
                             </p>
-                            <Link to={!authenticated ? '/register':'/posts'} className='landing-page-join-btn'>{authenticated?'Explore':'Join now'}</Link>
+                            <Link to={!isAuthenticated ? '/register':'/posts'} className='landing-page-join-btn'>{isAuthenticated?'Explore':'Join now'}</Link>
                         </div>
                     </div>
                 </div>
-                {featured && <LandingPageFeaturePosts featured={featured} />} 
+                {featuredPosts && <LandingPageFeaturePosts featuredPosts={featuredPosts} />} 
                 {topics && <LandingPageTopics topics={topics}/>}
-                {posts && <LandingPagePosts posts={posts} />}
+                {latesPosts && <LandingPagePosts latesPosts={latesPosts} />}
                 <LandingPageEmailSub />
             </main>
             <footer>
-                {posts && topics && 
-                    <Footer />
-                }
+                <Footer isAuthenticated={isAuthenticated}/>
             </footer>
         </React.Fragment>
     )

@@ -1,5 +1,4 @@
 
-
 export const getTopicData = async(url)=> {
     const resp = await fetch(url, {
         method: 'GET',
@@ -12,7 +11,6 @@ export const getTopicData = async(url)=> {
     return data
 }
 
-
 export const getPostData = async(url)=> {
     const resp = await fetch(url, {
         method: 'GET',
@@ -24,7 +22,6 @@ export const getPostData = async(url)=> {
     const data = await resp.json()
     return data
 }
-
 
 export const getMyData = async(url, token)=> {
     const resp = await fetch(url, {
@@ -39,7 +36,6 @@ export const getMyData = async(url, token)=> {
     return data
 }
 
-
 export const removeComment = async(url, token, obj=null)=> {
     const resp = await fetch(url, {
         method: 'DELETE',
@@ -52,7 +48,6 @@ export const removeComment = async(url, token, obj=null)=> {
     const data = await resp.json()
     return data
 }
-
 
 export const editComment = async(url, body, token)=> {
     const resp = await fetch(url, {
@@ -67,7 +62,6 @@ export const editComment = async(url, body, token)=> {
     return data
 }
 
-
 export const fetchComments = async(url, token)=> {
     const resp = await fetch(url, {
         method: 'GET',
@@ -79,7 +73,6 @@ export const fetchComments = async(url, token)=> {
     const data = await resp.json()
     return data
 }
-
 
 export const updatePost = async(url, body, token)=> {
     const resp = await fetch(url, {
@@ -93,7 +86,6 @@ export const updatePost = async(url, body, token)=> {
     return data
 }
 
-
 export const deletePost = async(url, token)=> {
     const resp = await fetch(url, {
         method: 'DELETE',
@@ -105,7 +97,6 @@ export const deletePost = async(url, token)=> {
     const data = await resp.json()
     return data
 }
-
 
 export const createPost = async(url, form, token)=>  {
     console.log(token)
@@ -120,7 +111,6 @@ export const createPost = async(url, form, token)=>  {
     return data
 }
 
-
 export const addLikes = async(url, token)=> {
     const resp = await fetch(url, {
         method: 'POST',
@@ -133,7 +123,6 @@ export const addLikes = async(url, token)=> {
     const data = await resp.json()
     return data
 }
-
 
 export const createComment = async(url, body, token)=> {
     const resp = await fetch(url, {
@@ -148,7 +137,6 @@ export const createComment = async(url, body, token)=> {
     return data
 }
 
-
 export const getPostComments = async(url)=> {
     const resp = await fetch(url, {
         method: 'GET',
@@ -161,21 +149,6 @@ export const getPostComments = async(url)=> {
     const data = await resp.json()
     return data
 }
-
-
-// export const hasReplied = async(url, token) => {
-//     const resp = await fetch(url, {
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': `Token ${token}`
-//         },
-//         body: null
-//     })
-//     const data = await resp.json()
-//     return data
-// }
-
 
 export const register = async(url, body)=> {
     try {
@@ -193,7 +166,6 @@ export const register = async(url, body)=> {
         console.log({name:error.name, message:error.message})
     }
 }
-
 
 export const login = async(url, body)=> {
     const resp = await fetch(url, {

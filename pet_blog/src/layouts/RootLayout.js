@@ -9,7 +9,7 @@ import React from 'react'
 
 function RootLayout() {
   return (
-    <Outlet />
+    <Outlet context={{message:'This is root layout'}}/>
   )
 }
 

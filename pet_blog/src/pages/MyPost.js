@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation, Navigate, useNavigate, Link} from 'react-router-dom'
+import { useLocation, Navigate, useNavigate, Link, useOutletContext} from 'react-router-dom'
 import { getMyData, deletePost } from '../utils/api'
 import LoadingPage from './LoadingPage'
-import { url } from './PostList'
+import { url } from '../utils/urls'
 
 
 
@@ -13,7 +13,6 @@ function MyPost() {
   const authenticated = JSON.parse(localStorage.getItem('auth')) || null
   const {pathname} = useLocation()
   window.history.replaceState({state:null}, '', '/my-posts')
-
 
   const getMyPosts = async()=> {
     try {

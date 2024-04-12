@@ -47,7 +47,7 @@ function PostListPosts(props) {
                     <div key={topic} className="post-container__rows">
                         <div className='post-container__posts-by-topic'>
                             <div className="post-container__topic-container">
-                                <h2 className='post-container__topic-name'>{topic}</h2>
+                                <h1 className='post-container__topic-name'>{topic}</h1>
                                 {topicsOjbs && topicsOjbs.map((topicObj)=> {
                                     return (
                                         <React.Fragment key={topicObj.id}>

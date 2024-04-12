@@ -24,7 +24,7 @@
   
 
   /* Section header text */
-  --section-header: hsl(19, 100%, 47%);
+  --section-header: hsl(15, 100%, 47%);
 
   /* Error text */
   --error-text: hsl(9, 100%, 64%);
@@ -405,7 +405,7 @@ Landing Page
 .landing-featured-posts-text {
   letter-spacing: 0.05rem;
   line-height: 1.5;
-  color: var(--purplish-brown-20);
+  color: var(--brown-30);
   max-width: 500px;
   font-weight: 500;
   text-align: center;
@@ -525,7 +525,7 @@ Landing Page
 .landing-page-topics-wrapper {
   padding: 2rem 0;
   padding-bottom: 2rem;
-  background: var(--brown-90);
+  background: var(--brown-80);
 }
 
 .landing-page-topics-container {
@@ -556,7 +556,7 @@ Landing Page
 .landing-page-topic-text {
   letter-spacing: 0.05rem;
   line-height: 1.5;
-  color: var(--purplish-brown-20);
+  color: var(--brown-20);
   max-width: 400px;
   font-weight: 500;
   font-size: 1.05rem;
@@ -670,7 +670,7 @@ Landing Page
 .landing-page-posts-text {
   letter-spacing: 0.05rem;
   line-height: 1.5;
-  color: var(--purplish-brown-20);
+  color: var(--brown-30);
   max-width: 500px;
   font-weight: 500;
   text-align: center;
@@ -796,7 +796,7 @@ Landing Page
 
 /* Email subscription */
 .landing-page-email-sub-form-wrapper {
-  background: var(--brown-90);
+  background: var(--brown-80);
   padding: 2rem 0;
   padding-bottom: 2rem;
 }
@@ -830,7 +830,7 @@ Landing Page
   text-align: center;
   letter-spacing: 0.07rem;
   line-height: 1.5;
-  color: var(--purplish-brown-20);
+  color: var(--brown-20);
   text-wrap: pretty;
   font-size: 1.05rem;
   max-width: 400px;
@@ -1269,7 +1269,7 @@ NAVBAR
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--brown-20)
+  background: var(--brown-10)
 }
 
 .navbar-container {
@@ -1695,24 +1695,12 @@ NAVBAR
 =====
 Posts
 ===== */
-
-/* message */
-/* .post-list-message {
-  color: hsl(128, 100%, 30%);
-  letter-spacing: 0.07rem;
-  font-weight: 500;
-  width: 90%;
-  max-width:1000px;
-  margin: 0 auto;
-  padding-top: 2rem;
-} */
-/* end */
 .post-container__rows {
   padding: 2rem 0;
 }
 
 .post-container__rows:nth-child(even) {
-  background: var(--brown-90);
+  background: var(--brown-80);
 }
 
 .post-container__posts-by-topic {
@@ -1741,13 +1729,18 @@ Posts
 }
 
 .post-container__topic-text {
-  color: var(--purplish-brown-20);
+  color: var(--brown-30);
   letter-spacing: 0.07rem;
   line-height: 1.5;
   max-width: 500px;
   margin: 0 auto;
   font-size: 1.05rem;
   font-weight: 500;
+}
+
+.post-container__rows:nth-child(even) 
+.post-container__topic-text{
+  color: var(--brown-20);
 }
 
 .post-container__post {

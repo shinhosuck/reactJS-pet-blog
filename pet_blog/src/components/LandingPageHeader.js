@@ -58,16 +58,6 @@ function LandingPageHeader() {
                         <button onClick={()=>setShowNavLinks(false)} className='landing-page-toggle-btn landing-page-hide-navlink-btn'>
                             <i className="fa fa-times"></i>
                         </button>
-                        {/* <Link
-                            to='/topics' 
-                            className='landing-page-navlink'
-                            onClick={()=> {
-                                document.body.style.overflowY = 'scroll'
-                                setShowNavLinks(false)
-                            }}
-                        >
-                            Topics
-                        </Link> */}
                         <Link
                             to='/posts' 
                             className='landing-page-navlink'

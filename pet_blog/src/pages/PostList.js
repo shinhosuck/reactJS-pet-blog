@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import {useOutletContext} from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { getPostData} from '../utils/api'
 import LoadingPage from './LoadingPage'
 import PostListPosts from '../components/PostListPosts'
 import { getTopicData } from '../utils/api'
 import { url } from '../utils/urls'
-
-// export const url = window.location.host === 'localhost:3000' ? 
-// 'http://127.0.0.1:8000' : 'https://pawpals.pythonanywhere.com'
-
 
 
 function PostList() {
@@ -19,33 +15,41 @@ function PostList() {
   const authenticated = JSON.parse(localStorage.getItem('auth')) || null
   window.history.replaceState({state:null}, '', '/posts')
   
-  const getData = async()=> {
-    try {
-      const data = await getPostData(`${url}/api/posts/`)
-      const objs = data.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()}))
-      setPosts(objs)
-      const timeoutID = setTimeout(()=>{
-        setIsLoading(false)
-        clearTimeout(timeoutID)
-      }, 100)
-    } catch ({message}) {
-      setIsError(message)
-      setIsLoading(false)
-    }
-  }
 
-  const getTopics = async()=> {
-    try {
-      const data = await getTopicData(`${url}/api/topics/`)
-      setTopics(data)
-      // console.log(data)
-    } catch (error) {
-      console.log(error.message)
-    }
-  } 
+  // const getPosts = async()=> {
+  //   const data_objs = await getPostData(`${url}/api/posts/`)
+  //   if (data_objs.error) {
+  //     setIsError(data_objs.error)
+  //   }
+  //   const post_data = data_objs.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()}))
+  //   setPosts(post_data)
+  //   setIsLoading(false)
+  // }
+
+  
 
   useEffect(()=>{
-    getData()
+    const getPosts = async()=> {
+      const data_objs = await getPostData(`${url}/api/posts/`)
+      if (data_objs.error) {
+        setIsError(data_objs.error)
+      }
+      const post_data = data_objs.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()}))
+      setPosts(post_data)
+      setIsLoading(false)
+    }
+    getPosts()
+  }, [])
+
+  useEffect(()=> {
+    const getTopics = async()=> {
+      const topics_data = await getTopicData(`${url}/api/topics/`)
+      if(topics_data.error){
+        setIsError(topics_data.error)
+      }
+      setTopics(topics_data)
+      setIsLoading(false)
+    } 
     getTopics()
   }, [])
 
@@ -56,7 +60,7 @@ function PostList() {
   }
   if(isError) {
     return (
-      <h2>There was an error {window.location.host}</h2>
+      <Navigate to='/error' state={{error:isError}}/>
     )
   }
   return (
@@ -74,12 +78,7 @@ function PostList() {
       </div>
 
       {/* {message && <p className='post-list-message'>{message}</p>} */}
-      {posts && 
-        <PostListPosts 
-          posts={posts} 
-          topicsArray={topics}
-          // user={user} 
-        />
+      {posts && topics && <PostListPosts posts={posts} topicsOjbs={topics}/>
       }
     </React.Fragment>
   )

@@ -1,25 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-
+import ScrollToTop from './ScrollToTop'
 
 
 function PostListPosts(props) {
     const [postsByTopics, setPostsByTopics] = useState(null)
-    const [topics, setTopics] = useState(null)
-    const [topicObjs, setTopicObjs] = useState(null)
-    const {state, pathname} = useLocation()
-    const {posts, user, topicsArray} = props
+    const [topicNames, setTopicNames] = useState(null)
+    const {pathname} = useLocation()
+    const {posts, topicsOjbs} = props
     
+    
+    // const topicNameSet = [...new Set(...[posts && posts.map((post)=>post.topic)])]
+    // const postsFilteredByTopicName = topicNameSet && topicNameSet.filter((name)=> {
+    //     const filteredObjs = posts.filter((post)=> {
+    //         if(name === post.topic){
+    //             return post
+    //         }
+    //     });return filteredObjs.slice(6)
+        
+    // })
+    // console.log(postsFilteredByTopicName)
 
+    useEffect(()=> {
+        const getPostsByTopics = ()=> {
+            const topicNamesArray = posts && posts.reduce((topicsArray, post)=> {
+                !topicsArray.includes(post.topic) && topicsArray.push(post.topic)
+                return topicsArray
+            }, [])
+            setTopicNames(topicNamesArray)
+        }
+        getPostsByTopics()
+    }, [posts])
 
-    const getPostsByTopics = ()=> {
-        const topics = posts && posts.reduce((topicsArray, post)=> {
-            !topicsArray.includes(post.topic) && topicsArray.push(post.topic)
-            return topicsArray
-        }, [])
-        setTopics(topics)
-
-        const objs = topics.map((topicName)=> {
+    useEffect(()=> {
+        const objs = topicNames && topicNames.map((topicName)=> {
             const postsFiltered = posts.filter((post)=> {
                 if(post.topic === topicName){
                     return post
@@ -28,25 +42,22 @@ function PostListPosts(props) {
             return {topic:topicName, posts:postsFiltered.slice(0,6)}
         })
         setPostsByTopics(objs)
-    }
-    
-    useEffect(()=> {
-        getPostsByTopics()
-    }, [posts])
+    }, [topicNames])
 
     return (
         <div className="post-container__posts">
-           {topics && topics.map((topic)=> {
+            <ScrollToTop />
+           {postsByTopics && topicNames && topicNames.map((topic)=> {
                 return (
                     <div key={topic} className="post-container__rows">
                         <div className='post-container__posts-by-topic'>
                             <div className="post-container__topic-container">
                                 <h2 className='post-container__topic-name'>{topic}</h2>
-                                {topicsArray.map((obj)=> {
+                                {topicsOjbs && topicsOjbs.map((topicObj)=> {
                                     return (
-                                        <React.Fragment key={obj.id}>
-                                            {obj.name === topic && 
-                                                <p className='post-container__topic-text'>{obj.description}</p>
+                                        <React.Fragment key={topicObj.id}>
+                                            {topicObj.name === topic && 
+                                                <p className='post-container__topic-text'>{topicObj.description}</p>
                                             }
                                         </React.Fragment>
                                     )

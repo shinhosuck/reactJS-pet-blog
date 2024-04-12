@@ -1,19 +1,17 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import paw from '../images/paw.webp'
-import { ContentLayoutContext } from '../layouts/ContentLayout'
-import NavbarTopics from './NavarTopics'
-import { url } from '../utils/urls'
-import { getTopicData } from '../utils/api'
 
-export function Navbar() {
-    const { isAuthenticated, setIsAuthenticated } = useContext(ContentLayoutContext)
-    const [topics, setTopics] = useState(null)
+
+
+
+export function Navbar(props) {
+    const [topics, setTopics] = useState(props.topics)
+    const {isAuthenticated, setIsAuthenticated } = props
     const [showNavLinks, setShowNavLinks] = useState(false)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const navigate = useNavigate()
-
-
+   
     const handleMobileTopics = ()=> {
         const mobileTopics = document.querySelector('#mobile-topics > .navbar-topics')
         const mobileTopicsChevronDown = document.querySelector('.mobile-topics-chevron-down')
@@ -76,12 +74,8 @@ export function Navbar() {
     }, [windowWidth])
 
     useEffect(()=> {
-        const getTopics = async()=> {
-            const data = await getTopicData(`${url}/api/topics/`)
-            setTopics(data)
-          }
-          getTopics()
-    }, [])
+        setTopics(props.topics)
+    }, [props])
 
     return (
         <div className="navbar-container">
@@ -352,3 +346,31 @@ export function Navbar() {
     )
 }
 
+
+
+
+function NavbarTopics(props) {
+    const { topics, setShowNavLinks } = props
+
+    return (
+        <>
+            <div className='navbar-topics lg-navbar-topics'>
+                {topics && topics.map((topic)=> {
+                    return (
+                        <NavLink 
+                            onClick={()=> {
+                                setShowNavLinks && setShowNavLinks(false)
+                                document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
+                                document.body.style.overflow = 'auto'
+                            }}
+                            className={({isActive})=>isActive?'active-navbar-topic-link navbar-topic-link':'navbar-topic-link'}
+                            to={`/topic/${topic.name}/posts/?filter=${topic.name}`} state={{topic:topic.name}} key={topic.id}
+                        >
+                            {topic.name}
+                        </NavLink>
+                    )
+                })}
+            </div>
+        </>
+    )
+}

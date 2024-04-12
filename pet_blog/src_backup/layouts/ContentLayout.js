@@ -1,12 +1,10 @@
-import React, { useState, useEffect, createContext } from 'react'
-import { Outlet, useNavigate, Navigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Outlet, useOutletContext} from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
 import Footer from '../pages/Footer'
 import { getTopicData, getPostData } from '../utils/api'
 import { url } from '../utils/urls'
 
-
-export const ContentLayoutContext = createContext()
 
 
 function ContentLayout() {
@@ -17,47 +15,47 @@ function ContentLayout() {
   )
   const [topics, setTopics] = useState(null)
   const [posts, setPosts] = useState(null)
-  const navigate = useNavigate()
 
-  useEffect(()=> {
-    const getTopics = async()=> {
+  const getTopics = async()=> {
+    try {
       const data = await getTopicData(`${url}/api/topics/`)
       setTopics(data)
+    } catch (error) {
+      console.log(error.message)
     }
+  }
+
+  const getPosts = async()=> {
+    try {
+      const data = await getPostData(`${url}/api/posts/`)
+      setPosts(data)
+    } catch ({message}) {
+      console.log(message)
+    }
+  }
+
+  useEffect(()=> {
     getTopics()
   }, [])
 
   useEffect(()=> {
-    const getPosts = async()=> {
-      try {
-        const data = await getPostData(`${url}/api/posts/`)
-        
-        setPosts(data)
-      } catch ({message}) {
-        console.log(message)
-      }
-    }
     getPosts()
   }, [])
 
   return (
-    <ContentLayoutContext.Provider value={
-        {
-          topics:topics,
-          posts:posts,
-          setIsAuthenticated:setIsAuthenticated,
-          isAuthenticated:isAuthenticated
-        }
-      }
-    >
+    <React.Fragment>
         <header className='main-header'>
-            <Navbar/>
+            <Navbar 
+              topics={topics} 
+              setIsAuthenticated={setIsAuthenticated} 
+              isAuthenticated={isAuthenticated} 
+            />
         </header>
         <main>
             <Outlet context={
               {
-                // posts:posts, 
-                // topics:topics,
+                posts:posts, 
+                topics:topics,
                 setIsAuthenticated:setIsAuthenticated,
                 isAuthenticated:isAuthenticated
               }
@@ -67,7 +65,7 @@ function ContentLayout() {
           <Footer isAuthenticated={isAuthenticated}/>
         </footer>
         <div className='bg-overlay hide-bg-overlay'></div>
-    </ContentLayoutContext.Provider>
+    </React.Fragment>
   )
 }
 

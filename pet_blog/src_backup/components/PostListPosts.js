@@ -1,15 +1,26 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import LoadingPage from '../pages/LoadingPage'
+import ScrollToTop from './ScrollToTop'
 
 
 function PostListPosts(props) {
-    const [isLoading, setIsLoading] = useState(true)
     const [postsByTopics, setPostsByTopics] = useState(null)
     const [topicNames, setTopicNames] = useState(null)
     const {pathname} = useLocation()
     const {posts, topicsOjbs} = props
     
+    
+    // const topicNameSet = [...new Set(...[posts && posts.map((post)=>post.topic)])]
+    // const postsFilteredByTopicName = topicNameSet && topicNameSet.filter((name)=> {
+    //     const filteredObjs = posts.filter((post)=> {
+    //         if(name === post.topic){
+    //             return post
+    //         }
+    //     });return filteredObjs.slice(6)
+        
+    // })
+    // console.log(postsFilteredByTopicName)
+
     useEffect(()=> {
         const getPostsByTopics = ()=> {
             const topicNamesArray = posts && posts.reduce((topicsArray, post)=> {
@@ -31,17 +42,11 @@ function PostListPosts(props) {
             return {topic:topicName, posts:postsFiltered.slice(0,6)}
         })
         setPostsByTopics(objs)
-        setIsLoading(false)
     }, [topicNames])
-
-    if(isLoading) {
-        return (
-            <LoadingPage />
-        )
-    }
 
     return (
         <div className="post-container__posts">
+            <ScrollToTop />
            {postsByTopics && topicNames && topicNames.map((topic)=> {
                 return (
                     <div key={topic} className="post-container__rows">
@@ -94,7 +99,7 @@ function PostListPosts(props) {
                                                         <div className='post-container__post-text-content'>
                                                             <h3 className='post-container__post-title'>{post.title}</h3>
                                                             <p className='post-container__post-content'>
-                                                                {post.content.substring(0, 100)}...
+                                                                {post.content.substring(0, 70)}...
                                                                 <Link 
                                                                     className='post-container__post-read-more-btn'
                                                                     to={`/post/${post.id}/detail/`}

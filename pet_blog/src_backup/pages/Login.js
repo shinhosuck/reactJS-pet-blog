@@ -6,6 +6,7 @@ import { url } from '../utils/urls'
 import LoadingPage from './LoadingPage'
 
 
+
 function Login() {
     const [isLoading, setIsLoading] = useState(true)
     const [user, setUser] = useState({username:'',password:''})
@@ -16,10 +17,11 @@ function Login() {
     const {state, pathname} = useLocation()
     const navigate = useNavigate()
     const { setIsAuthenticated } = useOutletContext()
+
     const authenticated = localStorage.getItem('auth') || null
+
     window.history.replaceState({state:null}, '', '/login')
 
-    
     const handleForm = async function(e) {
         e.preventDefault()
         setBackendAuthError(null)

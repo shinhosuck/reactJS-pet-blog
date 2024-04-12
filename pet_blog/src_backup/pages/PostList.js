@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import { getPostData} from '../utils/api'
 import LoadingPage from './LoadingPage'
 import PostListPosts from '../components/PostListPosts'
 import { getTopicData } from '../utils/api'
 import { url } from '../utils/urls'
-
 
 
 function PostList() {
@@ -15,6 +14,18 @@ function PostList() {
   const [isLoading, setIsLoading] = useState(true)
   const authenticated = JSON.parse(localStorage.getItem('auth')) || null
   window.history.replaceState({state:null}, '', '/posts')
+  
+
+  // const getPosts = async()=> {
+  //   const data_objs = await getPostData(`${url}/api/posts/`)
+  //   if (data_objs.error) {
+  //     setIsError(data_objs.error)
+  //   }
+  //   const post_data = data_objs.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()}))
+  //   setPosts(post_data)
+  //   setIsLoading(false)
+  // }
+
   
 
   useEffect(()=>{
@@ -47,13 +58,11 @@ function PostList() {
       <LoadingPage />
     )
   }
-
   if(isError) {
     return (
       <Navigate to='/error' state={{error:isError}}/>
     )
   }
-
   return (
     <React.Fragment>
       <div className="bg-img">
@@ -67,7 +76,10 @@ function PostList() {
           </div>
         </div>
       </div>
-      {posts && topics && <PostListPosts posts={posts} topicsOjbs={topics}/>}
+
+      {/* {message && <p className='post-list-message'>{message}</p>} */}
+      {posts && topics && <PostListPosts posts={posts} topicsOjbs={topics}/>
+      }
     </React.Fragment>
   )
 }

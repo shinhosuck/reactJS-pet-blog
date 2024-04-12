@@ -50,7 +50,7 @@ function LandingPagePosts(props) {
                                 <div className='landing-page-post-text-content'>
                                     <h3 className='landing-page-post-title'>{post.title}</h3>
                                     <p className='landing-page-post-content'>
-                                        {post.content.substring(0, 100)}... 
+                                        {post.content.substring(0, 70)}... 
                                         <Link 
                                             to={`/post/${post.id}/detail/`} 
                                             state={{redirect:pathname}} 

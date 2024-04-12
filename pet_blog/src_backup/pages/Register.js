@@ -17,6 +17,8 @@ function Register() {
     const navigate = useNavigate()
 
 
+
+
     const handleForm = async function(e) {
         e.preventDefault()
         setUserInfoError(null)

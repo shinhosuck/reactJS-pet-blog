@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Navigate } from 'react-router-dom'
 import { deletePost } from '../utils/api'
 import { url } from '../utils/urls'
 
@@ -8,19 +7,22 @@ import { url } from '../utils/urls'
 
 
 function PostDetailPost(props) {
-    const [isError, setIsError] = useState(false)
     const [textContainer, setTextContainer] = useState(null)
     const [showBtns, setShowBtns] = useState(false)
     const [width, seWidth] = useState(window.innerWidth)
     const {setShowUpdatePostForm, setShowCommentForm, authenticated, 
             documentReady, navigate, post, updateLike} = props
-    
+
     const removePost = async()=> {
-        const data = await deletePost(`${url}/api/post/${post.id}/delete/`, authenticated.token)
-        if(data.error) {
-            setIsError(data.error)
+        console.log(post.id)
+        try {
+            const data = await deletePost(`${url}/api/post/${post.id}/delete/`, authenticated.token)
+            console.log(data.message)
+            navigate('/posts')
+
+        } catch (error) {
+            console.log(error.message)
         }
-        navigate('/posts')
     }
 
     // match post img height to the post content height on window resize
@@ -49,18 +51,13 @@ function PostDetailPost(props) {
     useEffect(()=> {
         const content = document.querySelector('.post-detail-container__text-contents')
         content && setTextContainer(true)
+
         if(textContainer) {
             getWindowWidth()
         }
+
     }, [textContainer])
     // end
-
-
-    if(isError) {
-        return (
-            <Navigate to='/error' state={{error:isError}} />
-        )
-    }
 
     return (
         <div className="post-detail-container__post-detail">

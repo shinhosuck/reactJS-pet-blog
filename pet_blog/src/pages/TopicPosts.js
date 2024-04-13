@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useLocation, Navigate, Link } from 'react-router-dom'
 import { getPostData, getTopicData } from '../utils/api'
 import LoadingPage from './LoadingPage'
 import { url } from '../utils/urls'
+import dogImg from '../images/cartoon_dog.png'
+import { ContentLayoutContext } from '../layouts/ContentLayout'
 
 
 function TopicPosts() {
@@ -13,7 +15,7 @@ function TopicPosts() {
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [topicMenuOpen, setTopicMenuOpen] = useState(false)
-
+    const { isAuthenticated } = useContext(ContentLayoutContext)
     const location = useLocation()
     
     const getPosts =  async()=> {
@@ -82,10 +84,9 @@ function TopicPosts() {
 
     if(isError) {
         return (
-            <Navigate to='/error' replace={true} state={{message:isError.error}} />
+            <Navigate to='/error' replace={true} state={{message:isError}} />
         )
     }
-
 
     return (
         <React.Fragment>
@@ -136,13 +137,19 @@ function TopicPosts() {
                     </div>
                 </div>
                 {!posts.length ? 
-                    <div className="no-comments-container" style={{marginTop: '4rem'}}>
-                        <div className="no-comment-text-container">
-                            <h3>Be the first to post on "{state && state.topic}"!</h3>
+                    <div className="no-topic-post-container">
+                        <img src={dogImg} alt="" />
+                        <div className="no-topic-post-text-container">
+                            <h3>Be the first to post on topic "{state && state.topic}"!</h3>
                             <p>
                                 Nobody's posted yet on this topic.
                                 Create a post and get the conversation going.
                             </p>
+                            {isAuthenticated ? 
+                                <Link to='/create/post'>Create Post</Link>
+                            : 
+                                <p className='login-to-create-post'>Please login to create post. <Link to='/login'>Login <i className="fa fa-arrow-right"></i></Link></p>
+                            }
                         </div>
                     </div>
                 :

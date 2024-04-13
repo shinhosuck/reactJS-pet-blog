@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useParams, useNavigate, Navigate } from 'react-router-dom'
+import { useParams, useNavigate, Navigate, Link } from 'react-router-dom'
 import CommentForm from '../components/CommentForm'
 import LoadingPage from './LoadingPage'
 import UpdatePostForm from '../components/UpdatePostForm'
@@ -140,11 +140,13 @@ function PostDetail() {
                     {!showCommentForm && !showUpdatePostForm && !comments &&
                         <div className="no-comments-container">
                             <div className="no-comment-text-container">
+                                {isAuthenticated && <div onClick={()=> setShowCommentForm(true)}><p>Add comment</p></div>}
                                 <h3>Be the first to comment!</h3>
                                 <p>
                                     Nobody's responded to this post yet.
                                     Add your thoughts and get the conversation going.
                                 </p>
+                                {!isAuthenticated && <p className='login-to-create-post'>Please login to comment on this post. <Link to='/login'>Login <i className="fa fa-arrow-right"></i></Link></p>}
                             </div>
                         </div>
                     }

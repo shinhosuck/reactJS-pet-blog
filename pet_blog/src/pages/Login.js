@@ -32,6 +32,7 @@ function Login() {
         }else{
             try {
                 const data = await login(`${url}/api/auth/login/`, user)
+                console.log(data)
                 if(data.error) {
                     setBackendAuthError(data.error)
 
@@ -103,7 +104,7 @@ function Login() {
                 {state && state.error && <p className='user-login__error-message'>{state.error}</p>}
                 <div className='user-login'>
                     <h2 className='user-login__header'>Sign In</h2>
-                    {backendAuthError && <p className='user-register__error'>{backendAuthError.error}</p>}
+                    {backendAuthError && <p className='user-register__error'>{backendAuthError}</p>}
                     <form className='user-login__form' onSubmit={handleForm}>
                         {frontendErrorMessage && frontendErrorMessage.username === 'null' && <p className='user-register__error'>This field is required.</p>}
                         <input 

@@ -60,15 +60,7 @@ export function Navbar() {
 
     const logout = function() {
         setShowNavLinks(true)
-        setIsAuthenticated(null)
-        localStorage.removeItem('auth')
-        navigate(
-            '/login', 
-            {
-                replace:true, 
-                // state:{message:'Successfully logged out!'}
-            }
-        )
+        navigate('/logout')
     }
    
     useEffect(()=> {
@@ -118,7 +110,7 @@ export function Navbar() {
                         {isAuthenticated &&
                             <div className="mobile-navlinks-authenticated-user-container">
                                 <button onClick={handleAuthenticatedUserNavLinks} className="mobile-navlinks-authenticated-user">
-                                    <img src={isAuthenticated.profile_image_url} alt="" />
+                                    <img src={isAuthenticated.image_url} alt="" />
                                     <span>{isAuthenticated.username}</span>
                                     <i className="fa fa-chevron-down mobile-navlinks-authenticated-user-chevron"></i>
                                 </button>
@@ -293,7 +285,7 @@ export function Navbar() {
                                 }}
                                 className="lg-authenticated-user-container navbar-navlink"
                             >
-                                <img src={isAuthenticated.profile_image_url} alt="" />
+                                <img src={isAuthenticated.image_url} alt="" />
                                 <span>{isAuthenticated.username}</span>
                                 <i className="fa fa-chevron-down lg-chevron"></i>
                                 <div className="lg-authenticated-user">

@@ -1,13 +1,46 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useOutletContext, Link } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import paw from '../images/paw.webp'
-
-
+import { url } from '../utils/urls'
+import { handleMessage } from '../utils/api'
 
 
 function Footer(prop) {
   const { isAuthenticated } = prop
+  const [message, setMessage] = useState({email:'', content:''})
+  const [successMessage, setSuccessMessage] = useState(null)
+  const [isError, setIsError] = useState(null)
+
+
+
+  const handleSubmit = async(e)=> {
+    e.preventDefault()
+    if(message.email && message.content) {
+      const data = await handleMessage(`${url}/api/message/`, message)
+      if(data.error) {
+        setIsError(data.error)
+
+      }else {
+        setSuccessMessage(data.message)
+        setMessage({email:'', content:''})
+      }
+    }
+  }
+
+  const handleChange = (e)=> {
+    const {name, value} = e.target
+    setMessage((prev)=> ({...prev, [name]:value}))
+  }
+
+
+  useEffect(()=> {
+    const timeoutID = setTimeout(()=> {
+      setSuccessMessage(null)
+      setIsError(null)
+      clearTimeout(timeoutID)
+    }, 7000)
+  },[isError, successMessage])
 
   return (
     <div className='footer-container'>
@@ -82,11 +115,10 @@ function Footer(prop) {
                 </div>
               </div>
               <div className='contact-form-container'>
-                <form className='contact-form' action="">
-                  <label htmlFor="email">Email<span style={{fontSize:'1.4rem',color:'hsl(9, 100%, 64%)'}}>*</span></label>
-                  <input type="email" id='email' name='email' required/>
-                  <label htmlFor="message">Message<span style={{fontSize:'1.4rem',color:'hsl(9, 100%, 64%)'}}>*</span></label>
-                  <textarea name="message" id="message" required></textarea>
+                <form className='contact-form' onSubmit={handleSubmit}>
+                  {successMessage && <p className='success-message'>{successMessage}</p> || isError && <p className='error-message'>{isError}</p>}
+                  <input onChange={handleChange} value={message.email} type="email" id='email' name='email' required placeholder='Your email'/>
+                  <textarea onChange={handleChange} value={message.content} name="content" id="message" required placeholder='Your message'></textarea>
                   <button type='submit'>Submit</button>
                 </form>
               </div>

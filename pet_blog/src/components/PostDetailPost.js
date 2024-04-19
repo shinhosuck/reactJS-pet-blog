@@ -14,7 +14,8 @@ function PostDetailPost(props) {
     const [width, seWidth] = useState(window.innerWidth)
     const {setShowUpdatePostForm, setShowCommentForm, authenticated, 
             documentReady, navigate, post, updateLike} = props
-    
+
+ 
     const removePost = async()=> {
         const data = await deletePost(`${url}/api/post/${post.id}/delete/`, authenticated.token)
         if(data.error) {
@@ -68,24 +69,31 @@ function PostDetailPost(props) {
                 <img className='post-detail-container__post-image' src={post.image_url} alt="" />
             </div>
             <div className="post-detail-container__text-contents">
-                <h3 className='post-detail-container__post-title'>{post.title}</h3>
+                <div className='post-detail-author-info-container'>
+                    <div className='post-detail-author-and-date'>
+                        <img src={post.author_profile_image_url} alt="author image" />
+                        <small>{post.author}</small>
+                        <small>{post.date_posted}</small>
+                    </div>
+                    <h3 className='post-detail-container__post-title'>{post.title}</h3>
+                </div>
                 <p className='post-detail-container__post-content'>{post.content}</p>
                 <div className="post-detail-container__like-and-reply">
                     
                     <button 
                         onClick={(e)=>authenticated ? updateLike(e, post): ''} 
                         className={authenticated ?
-                                'post-detail-container__post-like'
+                                'post-detail-container__post-like  post-detail-like-btn'
                             :
-                                'post-detail-container__post-like-not-authenticated'
+                                'post-detail-container__post-like-not-authenticated  post-detail-like-btn'
                         } 
                     >
                         <i className='fa-solid fa-hands-clapping post-detail-like'></i>
-                        <span className='post-detail-like-count'>{post.like.length}</span>
+                        <span className='post-detail-like-count'>{post.qs_count.like_count}</span>
                     </button>
                     <div className='post-detail-container__num-of-replies-container'>
                         <i className="fa-solid fa-message post-detail-container__num-of-post"></i>
-                        <span className='post-detail-container__reply-count'>{post.num_of_replies}</span>
+                        <span className='post-detail-container__reply-count'>{post.qs_count.comment_count}</span>
                     </div>
                     <div className="post-detail-lg-btns">
                         {authenticated && 
@@ -118,7 +126,7 @@ function PostDetailPost(props) {
                                                     }}
                                                 >
                                                     <i className="fa-solid fa-pen post-detail-edit-btn"></i>
-                                                    <span className='post-detail-edit-text'>edit</span>
+                                                    <span className='post-detail-edit-text'>Edit</span>
                                                 </button> 
                                                 <button
                                                     onClick={()=> {
@@ -128,7 +136,7 @@ function PostDetailPost(props) {
                                                     className='post-detail-delete'
                                                 >
                                                     <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
-                                                    <span className='post-detail-remove-text'>delete</span>
+                                                    <span className='post-detail-remove-text'>Remove</span>
                                                 </button>
                                             </div>
                                         }

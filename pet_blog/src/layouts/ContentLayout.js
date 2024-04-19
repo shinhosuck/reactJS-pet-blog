@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react'
 import { Outlet, useNavigate, Navigate } from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
-import Footer from '../pages/Footer'
+import Footer from '../components/Footer'
 import { getTopicData, getPostData } from '../utils/api'
 import { url } from '../utils/urls'
 

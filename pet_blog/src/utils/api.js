@@ -99,7 +99,6 @@ export const deletePost = async(url, token)=> {
 }
 
 export const createPost = async(url, form, token)=>  {
-    console.log(token)
     const resp =  await fetch(url, {
         method: 'POST', 
         headers: {
@@ -178,3 +177,19 @@ export const login = async(url, body)=> {
     const data = await resp.json()
     return data
 }
+
+export const handleMessage = async(url, body)=> {
+    const resp = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': null
+        },
+        body: JSON.stringify(body)
+    })
+    const data = await resp.json()
+    return data
+}
+
+
+

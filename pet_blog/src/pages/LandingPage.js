@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, Navigate} from 'react-router-dom'
 import { getPostData, getTopicData} from '../utils/api'
 import { url } from '../utils/urls'
-import Footer from './Footer'
+import Footer from '../components/Footer'
 import LandingPageTopics from '../components/LandingPageTopics'
 import LandingPagePosts from '../components/LandingPagePosts'
 import LandingPageFeaturePosts from '../components/LandingPageFeaturePosts'
@@ -27,7 +27,7 @@ function LandingPage() {
             }
             else {
                 const objs = data.map((post)=>({...post, date_posted:new Date(post.date_posted).toDateString()}))
-                const latesPost = data.filter((post)=>!post.featured)
+                const latesPost = data.filter((post)=>!post.featured).sort((a, b)=>new Date(b.date_posted)-new Date(a.date_posted))
                 .map((post)=> {
                     const newDate = new Date(post.date_posted)
                     const formatedDate = `${newDate.toDateString()} ${newDate.toLocaleTimeString({hour: '2-digit', minute:'2-digit'})}`

@@ -63,30 +63,30 @@ function PostListPosts(props) {
                                     obj.posts.map((post)=> {
                                         return ( 
                                             <React.Fragment key={post.id}>
-                                                {obj.topic === topic ?
+                                                {obj.topic === topic &&
                                                     <div className="post-container__post">
                                                         <div className="post-container__post-image-container">
                                                             <img className='post-container__post-image' src={post.image_url} alt={post.title} />
-                                                            {post.like.length > 1 ? 
+                                                            {post.qs_count.like_count > 1 ? 
                                                                 <div className='post-container__post-like'>
                                                                     <div className='post-container__post-like-container'>
                                                                         <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
-                                                                        <span className='post-container__post-like-count'>{post.like.length}</span>
+                                                                        <span className='post-container__post-like-count'>{post.qs_count.like_count}</span>
                                                                     </div>
                                                                     <div className='post-container__num-of-replies-container'>
                                                                         <i className="fa-solid fa-message post-container__num-of-post"></i>
-                                                                        <span className='post-container__post-reply-count'>{post.num_of_replies}</span>
+                                                                        <span className='post-container__post-reply-count'>{post.qs_count.comment_count}</span>
                                                                     </div>
                                                                 </div>
                                                             : 
                                                                 <div className='post-container__post-like'>
                                                                     <div className='post-container__post-like-container'>
                                                                         <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
-                                                                        <span className='post-container__post-like-count'>{post.like.length}</span>
+                                                                        <span className='post-container__post-like-count'>{post.qs_count.like_count}</span>
                                                                     </div>
                                                                     <div className='post-container__num-of-replies-container'>
                                                                         <i className="fa-solid fa-message post-container__num-of-post"></i>
-                                                                        <span className='post-container__post-reply-count'>{post.num_of_replies}</span>
+                                                                        <span className='post-container__post-reply-count'>{post.qs_count.comment_count}</span>
                                                                     </div>
                                                                 </div>
                                                             }
@@ -105,8 +105,6 @@ function PostListPosts(props) {
                                                             </p>
                                                         </div>
                                                     </div>
-                                                :
-                                                    ''
                                                 }
                                             </React.Fragment>
                                         )

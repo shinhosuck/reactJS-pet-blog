@@ -21,7 +21,6 @@ function PostDetail() {
     const { id } = useParams()
     const navigate = useNavigate()
     
-
     const updateLike = async(e)=> {
         if(!isAuthenticated) {
             navigate('/login', {replace:true, state:{error:'You must login first.'}})
@@ -44,11 +43,11 @@ function PostDetail() {
             if(data.error) {
                 setIsError(data.error)
                 setIsLoading(false)
-                console.log(data.error)
-
+                
             }else {
-                const objs = {...data, date_posted:new Date(data.date_posted).toDateString()}
-                setPost(objs)
+                const datePosted = new Date(data.date_posted)
+                const postObj = {...data, date_posted:`${datePosted.toDateString()} ${datePosted.toLocaleTimeString({}, { hour:'2-digit', minute:'2-digit'})}`}
+                setPost(postObj)
                 setIsLoading(false)
             }
         }
@@ -86,11 +85,6 @@ function PostDetail() {
             <div className="bg-img">
                 <div className="bg-img-header-container">
                     <div className="bg-img-contents">
-                        <div className="post-detail-author-profile">
-                            <img className='post-detail-author-img' src={post.author_profile_image_url} alt="" />
-                            <h4 className='post-detail-post-author'>{post.author}</h4>
-                        </div>
-                        <p className='post-detail-date-posted'>Posted on {post.date_posted}</p>
                         <h1 className='post-detail-post-title'>{post.title}</h1>
                     </div>
                 </div>

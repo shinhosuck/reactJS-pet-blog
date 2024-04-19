@@ -159,26 +159,26 @@ function TopicPosts() {
                                 <div key={post.id} className="topic-posts-container__post">
                                     <div className="topic-posts-container__post-image-container">
                                         <img className='topic-posts-container__post-image' src={post.image_url} alt={post.title}/>
-                                        {post.like.length > 1 ? 
+                                        {post.qs_count.like_count > 1 ? 
                                             <div className='topic-posts-container__post-like'>
                                                 <div className='topic-post-like-container'>
                                                     <i className="fa-solid fa-hands-clapping topic-post-like"></i>
-                                                    <span className='topic-post-like-count'>{post.like.length}</span>
+                                                    <span className='topic-post-like-count'>{post.qs_count.like_count}</span>
                                                 </div>
                                                 <div className='topic-posts-container__num-of-replies-container'>
                                                     <i className="fa-solid fa-message topic-posts-container__num-of-post"></i>
-                                                    <span className='topic-post-reply-count'>{post.num_of_replies}</span>
+                                                    <span className='topic-post-reply-count'>{post.qs_count.comment_count}</span>
                                                 </div>
                                             </div>
                                             : 
                                             <div className='topic-posts-container__post-like'>
                                                 <div className='topic-post-like-container'>
                                                     <i className="fa-solid fa-hands-clapping topic-post-like"></i>
-                                                    <span className='topic-post-like-count'>{post.like.length}</span>
+                                                    <span className='topic-post-like-count'>{post.qs_count.like_count}</span>
                                                 </div>
                                                 <div className='topic-posts-container__num-of-replies-container'>
                                                     <i className="fa-solid fa-message topic-posts-container__num-of-post "></i>
-                                                    <span className='topic-post-reply-count'>{post.num_of_replies}</span>
+                                                    <span className='topic-post-reply-count'>{post.qs_count.comment_count}</span>
                                                 </div>
                                             </div>
                                         }

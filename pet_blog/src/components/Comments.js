@@ -38,7 +38,11 @@ function Comments(props) {
                             </div>
                             <div className='post-detail-username-and-date'>
                                 <p className='post-detail-comments__username'>{comment.user}</p>
-                                <p className='post-detail-comments__date-posted'>{new Date(comment.date_posted).toDateString()}</p>
+                                <p className='post-detail-comments__date-posted'>{
+                                        `${new Date(comment.date_posted).toDateString()} 
+                                        ${new Date(comment.date_posted).toLocaleTimeString({}, {hour:'2-digit', minute:'2-digit'})}`
+                                    }
+                                </p>
                             </div>
                         </div>
                         <div className="post-detail-comment-btns">

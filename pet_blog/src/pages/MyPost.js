@@ -3,7 +3,7 @@ import { useLocation, Navigate, useNavigate, Link, useOutletContext} from 'react
 import { getMyData, deletePost } from '../utils/api'
 import LoadingPage from './LoadingPage'
 import { url } from '../utils/urls'
-
+import dogImg from '../images/cartoon_dog.png'
 
 
 function MyPost() {
@@ -14,36 +14,30 @@ function MyPost() {
   const {pathname} = useLocation()
   window.history.replaceState({state:null}, '', '/my-posts')
 
+
   const getMyPosts = async()=> {
-    try {
-      const data = await getMyData(`${url}/api/my-post/`, authenticated.token)
-      if(data.error) {
-        setIsLoading(false)
-        setIsError({error:data.error})
-
-      }else {
-        const objs = data.map((post)=>({...post, date_posted:new Date().toDateString()}))
-        setPosts(objs)
-        const timeoutID = setTimeout(()=> {
-          setIsLoading(false)
-          clearTimeout(timeoutID)
-        }, 100)
-      }
-    } catch (error) {
-      console.log('MESSAGE:', error.message, 'NAME:', error.name)
+    const data = await getMyData(`${url}/api/my-post/`, authenticated.token)
+    if(data.error || data.message || data.length === 0) {
       setIsLoading(false)
-      setIsError(
-        {
-          error:error.message, 
-          name:error.name
-        }
-      )
 
+    }else {
+      const objs = data.map((post)=> {
+        const datePosted = new Date(post.date_posted)
+        return (
+          {...post, 
+            date_posted:`${datePosted.toDateString()} 
+            ${datePosted.toLocaleTimeString(
+              {}, {hour:'2-digit', minute:'2-digit'}
+              )
+            }`
+          })
+      })
+      setPosts(objs)
+      setIsLoading(false)
     }
   }
 
   const removePost = async(e, post)=> {
-    try {
       const data = await deletePost(`${url}/api/post/${post.id}/delete/`, authenticated.token)
       if(!data.error) {
         const newPostArray = posts.filter((obj)=>obj.id !== post.id)
@@ -51,29 +45,12 @@ function MyPost() {
         console.log(data.message)
 
       }else {
-        setIsError({error:data.message})
+        setIsError({error:data.error})
       }
-
-    } catch (error) {
-      setIsError(
-        {
-          error:error.message, 
-          name:error.name
-        }
-      )
-    }
   }
 
   useEffect(()=> {
     getMyPosts()
-    const timeoutID = setTimeout(()=> {
-      const message = document.querySelector('.my-posts-container__message')
-        if(message) {
-          message.style.display = 'none'
-        }
-        clearTimeout(timeoutID)
-    }, 3000)
-    
   }, [])
 
   if(!authenticated) {
@@ -90,11 +67,13 @@ function MyPost() {
         />
     )
   }
+
   if(isLoading) {
     return (
       <LoadingPage />
     )
   }
+
   if(isError) {
     return (
       <Navigate 
@@ -111,23 +90,29 @@ function MyPost() {
       />
     )
   }
+
   return (
     <React.Fragment>
       <div className="bg-img">
         <div className="my-posts-hero-container">
             <div className="my-posts-header-contents">
                 <div className="my-posts-author-profile">
-                    <img className='my-posts-profile-img' src={authenticated.profile_image_url} alt="" />
+                    <img className='my-posts-profile-img' src={authenticated.image_url} alt="" />
                     <h4 className='my-posts-username'>{authenticated.username}</h4>
                 </div>
                 <h1 className='my-posts-hero-header'>My Posts</h1>
                 <div>
-                  <p className='my-posts-num-of-posts'>{posts.length > 1 ? `${posts.length} posts`:`${posts.length} posts`}</p>
-                  <Link to='/my-comments' className='my-posts-num-of-comments'>
-                    {authenticated.num_of_comments > 1 ? 
-                      `${authenticated.num_of_comments} comments`
+                  <p className='my-posts-num-of-posts'>
+                    {authenticated.qs_count.post_count > 1 ? 
+                    `${authenticated.qs_count.post_count} posts`
                     :
-                      `${authenticated.num_of_comments} comment`}
+                    `${authenticated.qs_count.post_count} posts`}
+                  </p>
+                  <Link to='/my-comments' className='my-posts-num-of-comments'>
+                    {authenticated.qs_count.comment_count > 1 ? 
+                      `${authenticated.qs_count.comment_count} comments`
+                    :
+                      `${authenticated.qs_count.comment_count} comment`}
                   </Link>
                 </div>
             </div>
@@ -136,82 +121,61 @@ function MyPost() {
       <div className="my-posts-main-container">
         <div className='my-posts-container'>
             <div className="my-posts-container__posts">
-              {posts.map((post)=> {
+            {!posts ?
+              <div className="no-topic-post-container" style={
+                {
+                  gridColumn:'1 / -1', 
+                  alignItems:'start'
+                }
+              }>
+                <img src={dogImg} alt="" />
+                <div className="no-topic-post-text-container">
+                    <h2>You do not have any post!</h2>
+                    <p>
+                        Please pick a topic and create a post to start a new conversation.
+                    </p>
+                    <Link to='/create/post'>Create Post</Link>
+                </div>
+              </div>
+             :
+              posts.map((post)=> {
                 return (
                   <div key={post.id} className="my-posts-container__post">
                     <div className="my-posts-container__post-image-container">
                       <img className='my-posts-container__post-image' src={post.image_url} alt={post.title} />
-                      {post.like.length > 1 ? 
-                        <div className='post-container__post-like'>
-                          <div className='post-container__post-like-container'>
-                              <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
-                              <span className='post-container__post-like-count'>{post.like.length}</span>
-                          </div>
-                          <div className='post-container__num-of-replies-container'>
-                              <i className="fa-solid fa-message post-container__num-of-post"></i>
-                              <span className='post-container__post-reply-count'>{post.num_of_replies}</span>
-                          </div>
-                          <div className="my-posts-container__btns">
-                            <Link 
-                              to={`/update/${post.id}/post`} state={{update:post, redirect:pathname}} 
-                              className='my-posts-container__post-update'
-                            >
-                              <i className="fa-solid fa-pen post-detail-edit-btn"></i>
-                              <span className='post-detail-edit-text'>edit</span>
-                            </Link>
-                            <button onClick={(e)=>removePost(e, post)} className='my-posts-container__post-delete'>
-                              <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
-                              <span className='post-detail-remove-text'>delete</span>
-                            </button>
-                          </div>
+                      <div className='post-container__post-like'>
+                        <div className='post-container__post-like-container'>
+                            <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
+                            <span className='post-container__post-like-count'>{post.qs_count.like_count}</span>
                         </div>
-                      : 
-                        <div className='post-container__post-like'>
-                          <div className='post-container__post-like-container'>
-                              <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
-                              <span className='post-container__post-like-count'>{post.like.length}</span>
-                          </div>
-                          <div className='post-container__num-of-replies-container'>
-                              <i className="fa-solid fa-message post-container__num-of-post"></i>
-                              <span className='post-container__post-reply-count'>{post.num_of_replies}</span>
-                          </div>
-                          <div className="my-posts-container__btns">
-                            <Link 
-                              to={`/update/${post.id}/post`} state={{update:post, redirect:pathname}} 
-                              className='my-posts-container__post-update'
-                            >
-                              <i className="fa-solid fa-pen post-detail-edit-btn"></i>
-                              <span className='post-detail-edit-text'>edit</span>
-                            </Link>
-                            <button onClick={(e)=>removePost(e, post)} className='my-posts-container__post-delete'>
-                              <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
-                              <span className='post-detail-remove-text'>delete</span>
-                            </button>
-                          </div>
+                        <div className='post-container__num-of-replies-container'>
+                            <i className="fa-solid fa-message post-container__num-of-post"></i>
+                            <span className='post-container__post-reply-count'>{post.qs_count.comment_count}</span>
                         </div>
-                      }
+                        <div className="my-posts-container__btns">
+                          <Link 
+                            to={`/update/${post.id}/post`} state={{update:post, redirect:pathname}} 
+                            className='my-posts-container__post-update'
+                          >
+                            <i className="fa-solid fa-pen post-detail-edit-btn"></i>
+                            <span className='post-detail-edit-text'>Edit</span>
+                          </Link>
+                          <button onClick={(e)=>removePost(e, post)} className='my-posts-container__post-delete'>
+                            <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
+                            <span className='post-detail-remove-text'>Remove</span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                     <div className='my-posts-container__post-text-content'>
-                      <p className='my-posts-container__date-posted'>Posted on {post.date_posted}</p>
+                      <p className='my-posts-container__date-posted'>{post.date_posted}</p>
                       <h3 className='my-posts-container__post-title'>{post.title}</h3>
                       <p className='my-posts-container__post-content'>{post.content}</p>
-                      {/* <div className="my-posts-container__btns">
-                        <Link 
-                          to={`/update/${post.id}/post`} state={{update:post, redirect:pathname}} 
-                          className='my-posts-container__post-update'
-                        >
-                          <i className="fa-solid fa-pen post-detail-edit-btn"></i>
-                          <span className='post-detail-edit-text'>edit</span>
-                        </Link>
-                        <button onClick={(e)=>removePost(e, post)} className='my-posts-container__post-delete'>
-                          <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
-                          <span className='post-detail-remove-text'>delete</span>
-                        </button>
-                      </div> */}
                     </div>
                   </div>
                 )
-              })}
+              })
+            }
             </div>
         </div>
       </div>

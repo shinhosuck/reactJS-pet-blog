@@ -3,7 +3,7 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { url } from '../utils/urls'
 import LoadingPage from './LoadingPage'
 import { fetchComments, removeComment, editComment } from '../utils/api'
-
+import dogImg from '../images/cartoon_dog.png'
 
 function MyComment() {
   const [comments, setComments] = useState(null)
@@ -66,18 +66,11 @@ function MyComment() {
 
   useEffect(()=> {
     const getComments = async()=> {
-      try {
-        const data = await fetchComments(`${url}/api/my-comment/`, authenticate.token)
-        if(!data.error) {
-          setComments(data)
-          setIsLoading(false)
-
-        }else {
-          console.log(data)
-        }
-      } catch (error) {
-        console.log(error.message)
+      const data = await fetchComments(`${url}/api/my-comment/`, authenticate.token)
+      if(data.length !== 0) {
+        setComments(data)
       }
+      setIsLoading(false)
     }
     getComments()
   }, [])
@@ -94,39 +87,43 @@ function MyComment() {
           <LoadingPage />
       )
   }
-  if(isError) {
-      return (
-          <h2>There was an error</h2>
-      )
-  }
+
   return (
     <React.Fragment>
       <div className="bg-img">
         <div className="my-posts-hero-container">
             <div className="my-posts-header-contents">
                 <div className="my-posts-author-profile">
-                    <img className='my-posts-profile-img' src={authenticate.profile_image_url} alt="" />
+                    <img className='my-posts-profile-img' src={authenticate.image_url} alt="" />
                     <h4 className='my-posts-username'>{authenticate.username}</h4>
                 </div>
                 <h1 className='my-posts-hero-header'>My Comments</h1>
                 <div>
-                  <p className='my-posts-num-of-posts'>{authenticate.num_of_comments > 1 ? `${authenticate.num_of_comments} comments`:`${authenticate.num_of_comments} comment`}</p>
-                  <Link to='/my-posts' className='my-posts-num-of-comments'>
-                    {authenticate.num_of_posts > 1 ? 
-                      `${authenticate.num_of_posts} posts`
+                  <p className='my-posts-num-of-posts'>
+                    {authenticate.qs_count.comment_count > 1 ? 
+                      `${authenticate.qs_count.comment_count} comments`
                     :
-                      `${authenticate.num_of_posts} post`}
+                      `${authenticate.qs_count.comment_count} comment`}
+                  </p>
+                  <Link to='/my-posts' className='my-posts-num-of-comments'>
+                    {authenticate.qs_count.post_count > 1 ? 
+                      `${authenticate.qs_count.post_count} posts`
+                    :
+                      `${authenticate.qs_count.post_count} post`}
                   </Link>
                 </div>
             </div>
         </div>
       </div>
       <div className='my-comments-container'>
-        {comments && comments.map((comment)=> {
+        {comments ? comments.map((comment)=> {
             return (
                 <div key={comment.id} className="my-comments-container__my-comment">
                   <div className='my-comments-date-and-time'>
-                    <p className='my-comments__date-replied'>{new Date(comment.date_posted).toDateString()}</p>
+                    <p className='my-comments__date-replied'>{
+                      `${new Date(comment.date_posted).toDateString()} 
+                      ${new Date(comment.date_posted).toLocaleTimeString({}, {hour:'2-digit', minute:'2-digit'})}`}
+                    </p>
                     <p className='my-comments__post_name'>
                       <span>Replied to:</span> 
                       <Link className='my-comments__post-name-link' to={`/post/${comment.post_id}/detail/`}>{comment.post}</Link>
@@ -139,14 +136,14 @@ function MyComment() {
                       className='my-comments__update-button'
                     >
                       <i className="fa-solid fa-pen"></i>
-                      update
+                      Edit
                     </button>
                     <button
                       onClick={()=>deleteComment(comment.id)} 
                       className='my-comments__delete-button'
                     >
                        <i className="fa-solid fa-trash-can"></i>
-                      delete
+                      Remove
                     </button>
                   </div>
                   {update && update.id === comment.id &&
@@ -162,7 +159,19 @@ function MyComment() {
                   }
                 </div>
             )
-        })}
+        })
+        :
+          <div className="no-topic-post-container">
+            <img src={dogImg} alt="" />
+            <div className="no-topic-post-text-container">
+                <h2>You do not have any coment!</h2>
+                <p>
+                    Please pick a post and comment.
+                </p>
+                <Link to='/posts'>Back to posts</Link>
+            </div>
+          </div>
+        }
       </div>
     </React.Fragment>
   )

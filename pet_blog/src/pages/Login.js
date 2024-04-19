@@ -11,13 +11,12 @@ function Login() {
     const [user, setUser] = useState({username:'',password:''})
     const [frontendErrorMessage, setFrontendErrorMessage] = useState(null)
     const [backendAuthError, setBackendAuthError] = useState(null)
-    const [auth, setAuth] = useState(null)
     const [successMessage, setSuccessMessage] = useState(null) 
-    const {state, pathname} = useLocation()
-    const navigate = useNavigate()
-    const { setIsAuthenticated } = useOutletContext()
-    const authenticated = localStorage.getItem('auth') || null
+    const {isAuthenticated, setIsAuthenticated} = useOutletContext()
     window.history.replaceState({state:null}, '', '/login')
+    const {state} = useLocation()
+    const navigate = useNavigate()
+   
 
     
     const handleForm = async function(e) {
@@ -85,7 +84,7 @@ function Login() {
         }, 100)
     }, [])
 
-    if(authenticated) {
+    if(isAuthenticated) {
         return (
             <Navigate to='/posts' replace={true} state={{error:'You are logged in already!'}} />
         )

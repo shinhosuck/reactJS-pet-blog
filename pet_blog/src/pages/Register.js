@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link, useNavigate, Navigate } from 'react-router-dom'
 import { register } from '../utils/api'
 import { passwordCheck, newUserInfoCheck } from '../utils/validators'
 import LoadingPage from './LoadingPage'
 import { url } from '../utils/urls'
+import { ContentLayoutContext } from '../layouts/ContentLayout' 
 
 
 
 function Register() {
+    const [windowLoaded, setWindowLoaded] = useState(document.readyState === 'interactive')
     const [isLoading, setIsLoading] = useState(true)
-    const [newUser, setNewUser] = useState({username:'',password:'',passwordConfirmation:''})
+    const [newUser, setNewUser] = useState({username:'', password:'', passwordConfirmation:''})
     const [userInfoError, setUserInfoError] = useState(null)
     const [passwordValidated, setPasswordValidated] = useState(true)
     const [backendAuthError, setBackendAuthError] = useState(null)
-    const authenticated = null || localStorage.getItem('auth')
+    const {isAuthenticated} = useContext(ContentLayoutContext)
     const navigate = useNavigate()
 
-
+    
     const handleForm = async function(e) {
         e.preventDefault()
         setUserInfoError(null)
@@ -36,13 +38,12 @@ function Register() {
             }else {
                 const body = {username:newUser.username, password:newUser.password}
                 const data = await register(`${url}/api/auth/register/`, body)
-                if(data && data.status === 201 && data.message.toLowerCase() === 'successfully registered!') {
+                if(data.message.toLowerCase() === 'successfully registered!') {
                     setNewUser({username:'',password:'',passwordConfirmation:''})
                     navigate('/login', {replace:true, state:{message:data.message}})
 
                 }else if(data && data.error){
                     setBackendAuthError(data)
-                    console.log(data)
                 }
             }
         }
@@ -54,17 +55,10 @@ function Register() {
     }
 
     useEffect(()=> {
-        const timeoutId = setTimeout(()=> {
-            if(document.readyState === 'complete') {
-                setIsLoading(false)
-                clearTimeout(timeoutId)
-            }else {
-                timeoutId()
-            }
-        }, 100)
-    })
+        setIsLoading(false)
+    }, [windowLoaded])
 
-    if(authenticated) {
+    if(isAuthenticated) {
         return (
             <Navigate to='/posts' replace={true} state={{error:'You are registered and logged in already!'}}/>
         )
@@ -75,7 +69,7 @@ function Register() {
             <LoadingPage />
         )
     }
-
+    
     return (
         <div className="user-register-main-container">
             <div className="user-register-container">

@@ -15,6 +15,7 @@ function Register() {
     const [userInfoError, setUserInfoError] = useState(null)
     const [passwordValidated, setPasswordValidated] = useState(true)
     const [backendAuthError, setBackendAuthError] = useState(null)
+    const [isRegistering, setIsregistering] = useState(false)
     const {isAuthenticated} = useContext(ContentLayoutContext)
     const navigate = useNavigate()
 
@@ -24,7 +25,7 @@ function Register() {
         setUserInfoError(null)
         setPasswordValidated(true)
         setBackendAuthError(null)
-
+    
         const userInfo = newUserInfoCheck(newUser)
 
         if(userInfo !== 'validated') {
@@ -36,9 +37,11 @@ function Register() {
                 setPasswordValidated(false)
 
             }else {
+                setIsregistering(true)
                 const body = {username:newUser.username, password:newUser.password}
                 const data = await register(`${url}/api/auth/register/`, body)
                 if(data.message.toLowerCase() === 'successfully registered!') {
+                    setIsregistering(false)
                     setNewUser({username:'',password:'',passwordConfirmation:''})
                     navigate('/login', {replace:true, state:{message:data.message}})
 
@@ -118,7 +121,9 @@ function Register() {
                             type="password" 
                             placeholder='Confirm password'
                         />
-                        <button className='user-register__btn' type='submit'>Regster</button>
+                        <button className='user-register__btn' type='submit'>
+                            {isRegistering ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Registering...<p className='registering-animation'></p></div> : 'Register'}
+                        </button>
                     </form>
                     <div className="user-register__already-registered">
                         <p>Already registered? </p>

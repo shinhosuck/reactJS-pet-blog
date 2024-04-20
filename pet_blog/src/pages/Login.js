@@ -12,6 +12,7 @@ function Login() {
     const [frontendErrorMessage, setFrontendErrorMessage] = useState(null)
     const [backendAuthError, setBackendAuthError] = useState(null)
     const [successMessage, setSuccessMessage] = useState(null) 
+    const [isLogingin, setIsLogingin] = useState(false)
     const {isAuthenticated, setIsAuthenticated} = useOutletContext()
     window.history.replaceState({state:null}, '', '/login')
     const {state} = useLocation()
@@ -27,22 +28,17 @@ function Login() {
         const isNotValid = loginInfoValidation (user)
         if(isNotValid) {
             setFrontendErrorMessage(isNotValid)
-
         }else{
-            try {
-                const data = await login(`${url}/api/auth/login/`, user)
-                console.log(data)
-                if(data.error) {
-                    setBackendAuthError(data.error)
-
-                }else {
-                    localStorage.setItem('auth', JSON.stringify(data))
-                    setIsAuthenticated(data)
-                    navigate(`${state && state.redirect?state.redirect:'/posts'}`, {replace:true, state:{message:data.message}})
-                }
-            } catch ({message}) {
-                console.log(message)
-                setBackendAuthError({error:message})
+            setIsLogingin(true)
+            const data = await login(`${url}/api/auth/login/`, user)
+            if(data.error) {
+                setIsLogingin(false)
+                setBackendAuthError(data.error)
+            }else {
+                setIsLogingin(false)
+                localStorage.setItem('auth', JSON.stringify(data))
+                setIsAuthenticated(data)
+                navigate(`${state && state.redirect?state.redirect:'/posts'}`, {replace:true, state:{message:data.message}})
             }
         }
     }
@@ -99,7 +95,7 @@ function Login() {
     return (
         <div className="user-login-main-container">
             <div className="user-login-container">
-                {successMessage && successMessage.registered && <p className='user-login__message'>{successMessage.registered}</p>}
+                {/* {successMessage && successMessage.registered && <p className='user-login__message'>{successMessage.registered}</p>} */}
                 {state && state.error && <p className='user-login__error-message'>{state.error}</p>}
                 <div className='user-login'>
                     <h2 className='user-login__header'>Sign In</h2>
@@ -123,7 +119,9 @@ function Login() {
                             type="password" 
                             placeholder='Password'
                         />
-                        <button className='user-login__btn' type='submit'>Login</button>
+                        <button className='user-login__btn' type='submit'>
+                            {isLogingin ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Logging in...<p className='registering-animation'></p></div> : 'Login'}
+                        </button>
                     </form>
                     <div className="user-login__not-yet-registered">
                         <p>Not yet registered? </p>

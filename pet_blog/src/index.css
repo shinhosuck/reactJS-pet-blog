@@ -3513,13 +3513,39 @@ USER REGISTER
 
 .user-register__btn {
   padding: 0.8rem 1rem;
-  background: orangered;
+  background: var(--orange-50);
   color: white;
   font-size: 1rem;
   border-radius: 5px;
   border: none;
   letter-spacing: 0.05rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.registering-animation {
+  border-radius: 50%;
+  width: 23px;
+  aspect-ratio: 1/1;
+  border: 5px solid rgb(255, 138, 138);
+  border-top: 5px solid rgb(255, 255, 255);
+  animation-name: registering;
+  animation-duration: 500ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+}
+
+@keyframes registering {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 
 .user-register__already-registered {
   display: flex;
@@ -3658,6 +3684,9 @@ USER LOGIN
   border-radius: 5px;
   border: none;
   letter-spacing: 0.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .user-login__not-yet-registered {

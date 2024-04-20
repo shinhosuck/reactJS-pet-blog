@@ -21,7 +21,8 @@ function MyPost() {
       setIsLoading(false)
 
     }else {
-      const objs = data.map((post)=> {
+      const objs = data.sort((a, b)=>new Date(b.date_posted)-new Date(a.date_posted))
+      .map((post)=> {
         const datePosted = new Date(post.date_posted)
         return (
           {...post, 

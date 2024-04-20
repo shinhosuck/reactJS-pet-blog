@@ -34,7 +34,7 @@ function Comments(props) {
                     <div key={comment.id} className="post-detail-comments__comment">
                         <div className='post-detail-comments__user-profile'>
                             <div className='post-detail-comments__user-image-container'>
-                                <img className='post-detail-comments__user-image' src={comment.user_image_url} alt="profile image"/>
+                                <img className='post-detail-comments__user-image' src={comment.user_profile_image_url} alt="profile image"/>
                             </div>
                             <div className='post-detail-username-and-date'>
                                 <p className='post-detail-comments__username'>{comment.user}</p>

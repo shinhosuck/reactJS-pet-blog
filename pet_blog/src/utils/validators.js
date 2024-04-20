@@ -3,14 +3,14 @@
 export const validatePost = (newPost)=> {
     const keys = Object.keys(newPost)
     const reduce = keys.reduce((total, item)=>{
-        const key = !newPost[item] && item
+        const key = item !== 'image' && !newPost[item] && item
         if(key){
             return {...total,[key]:'' }
         }else {
             return total
         }
     }, {})
-    return Object.keys(reduce).length  === 0 ? '' : reduce
+    return Object.keys(reduce).length  === 0 ? 'valid' : reduce
 }
 
 // Cheacks if user password ia valid

@@ -38,7 +38,7 @@ function PostDetail() {
     }
 
     useEffect(()=>{
-        const getData = async()=> {
+        const getPost = async()=> {
             const data = await getPostData(`${url}/api/post/${id}/detail/`)
             if(data.error) {
                 setIsError(data.error)
@@ -51,7 +51,7 @@ function PostDetail() {
                 setIsLoading(false)
             }
         }
-        getData()
+        getPost()
     }, [id])
     
 

@@ -1391,7 +1391,6 @@ NAVBAR
 .navbar-topics {
   max-height: 0;
   overflow: hidden;
-
   display: grid;
   align-content: start;
   background: var(--black-90);
@@ -1566,18 +1565,17 @@ NAVBAR
     max-height: 0;
     width: 200px;
     overflow: hidden;
-
     display: grid;
     align-content: start;
     border-radius: 10px;
     opacity: 0;
-    background: var(--brown-80);
+    background: var(--black-90);
     transition: max-height 200ms linear;
   }
 
   .lg-authenticated-user > 
   .navbar-navlink {
-    color: var(--purplish-brown-20);
+    color: var(--brown-10);
     padding: 1.3rem 1.3rem 0 1.3rem;
     height: initial;
   }
@@ -1620,12 +1618,12 @@ NAVBAR
     align-content: start;
     border-radius: 10px;
     opacity: 0;
-    background: var(--brown-80);
+    background: var(--black-90);
     transition: max-height 200ms linear;
   }
 
   .navbar-topic-link {
-    color: var(--purplish-brown-20);
+    color: var(--brown-10);
     padding: 1.3rem 1.3rem 0 1.3rem;
   }
 
@@ -2994,16 +2992,34 @@ My Comments
 Create Post
 ===========
  */
- .create-post-container {
-  padding: 2rem 0;
- }
+.create-post-container {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+  width: 95%;
+  max-width: 700px;
+  margin: 2rem auto;
+}
+
+.create-post-bg-img {
+  display: grid;
+  align-items: start;
+}
+.create-post-bg-img-text-container {
+  align-self: center;
+  width: 95%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.create-post-bg-img-text-container > 
+.bg-img-text {
+  max-width: 400px;
+}
 
  .create-post-container__redirect-btn {
-  padding: 2rem 0;
-  padding-top: 0;
-  width: 90%;
-  max-width: 550px;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -3030,13 +3046,9 @@ Create Post
   display: grid;
   align-self: start;
   gap: 1.5rem;
-  width: 90%;
-  max-width: 550px;
-  margin: 0 auto;
   padding: 1.3rem;
+  background: var(--brown-90);
   border-radius: 8px;
-  background: rgb(255, 255, 255);
-  box-shadow: 3px 3px 10px -1px var(--black-70);
 }
 
 .create-post__form {
@@ -3046,7 +3058,7 @@ Create Post
 }
 
 .create-post__error {
-  color: rgb(255, 17, 0);
+  color: var(--error-text);
   letter-spacing: 0.07rem;
   font-weight: 500;
   font-size: 0.95rem;
@@ -3064,39 +3076,42 @@ Create Post
   border-radius: 5px;
   color: white;
   letter-spacing: 0.05rem;
-  background: rgb(110, 9, 177);
+  background: var(--orange-30);
+  cursor: pointer;
 }
 
 .create-post__label {
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  margin-top: 0.8rem;
-  color: black;
+  margin-top: 0.5rem;
+  color: var(--brown-10);
   line-height: 1;
+  font-weight: 500;
 }
 
 .create-post__select {
-  width: 100%;
-  padding: 0.7rem 1rem;
+  padding: 0.8rem 1rem;
   border-radius: 5px;
   background: none;
-  font-size: 0.95rem;
   letter-spacing: 0.05rem;
-  border: 1px solid lightgray;
+  border: none;
+  background: white;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .create-post__option[value=""] {
-  font-size: 0.95rem;
   letter-spacing: 0.05rem;
+  font-size: 1rem;
 }
 
 .create-post__input,
 .create-post__textarea {
-  padding: 0.7rem 1rem;
-  border: 1px solid lightgray;
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  border: none;
   letter-spacing: 0.05rem;
   border-radius: 5px;
-  font-size: 0.95rem;
   letter-spacing: 0.05rem;
   resize: none;
 }
@@ -3112,12 +3127,30 @@ Create Post
   box-sizing: border-box;
 }
 
+.create-post-btns {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 0.5rem
+}
+
 .create-post__btn {
-  padding: 0.9rem 1rem;
+  padding: 0.6rem 1rem;
   letter-spacing: 0.05rem;
   color: white;
-  background: orangered;
-  border-radius: 0.5rem;
+  background: var(--orange-50);
+  border-radius: 20rem;
+  border: none;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.create-post-cancel-btn {
+  padding: 0.6rem 1rem;
+  letter-spacing: 0.05rem;
+  color: white;
+  background: var(--black-30);
+  border-radius: 20rem;
   border: none;
   font-size: 1rem;
   margin-top: 0.5rem;
@@ -3127,9 +3160,15 @@ Create Post
 .create-post__input:focus,
 .create-post__textarea:focus {
   outline: 2px solid var(--focus);
-  border: 1px solid transparent;
 }
 
+@media (min-width:700px) {
+  .create-post-container {
+    margin: 3rem auto;
+    margin-bottom: 10rem;
+    width: 90%;
+  }
+}
 /*
 ===========
 TOPIC POSTS

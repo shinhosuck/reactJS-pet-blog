@@ -8,7 +8,7 @@ import PostDetailPost from '../components/PostDetailPost'
 import { getPostData, addLikes, getPostComments } from '../utils/api'
 import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
-import ScrollToTop from '../components/ScrollToTop'
+
 
 function PostDetail() {
     const [post, setPost] = useState(null)
@@ -21,7 +21,8 @@ function PostDetail() {
     const { id } = useParams()
     const navigate = useNavigate()
     
-    const updateLike = async(e)=> {
+
+    const updateLike = async()=> {
         if(!isAuthenticated) {
             navigate('/login', {replace:true, state:{error:'You must login first.'}})
 
@@ -29,16 +30,22 @@ function PostDetail() {
             const data = await addLikes(`${url}/api/post/${post.id}/like/`, isAuthenticated.token)
             if(!data.error){
                 setPost((prev)=>{
-                    const newLike = prev.like
-                    !newLike.includes(isAuthenticated.username) && newLike.push(isAuthenticated.username)
-                    return {...prev, like:newLike}
+                    if(!prev.likes.includes(isAuthenticated.username)) {
+                        return {
+                            ...prev, 
+                            likes:[...prev.likes, isAuthenticated.username],
+                            qs_count:{...prev.qs_count, like_count:prev.qs_count.like_count+1}
+                        }
+                    }else {
+                        return prev
+                    }
                 })
             }
         }
     }
 
-    useEffect(()=>{
-        const getPost = async()=> {
+    const getPost = async()=> {
+        try {
             const data = await getPostData(`${url}/api/post/${id}/detail/`)
             if(data.error) {
                 setIsError(data.error)
@@ -50,17 +57,22 @@ function PostDetail() {
                 setPost(postObj)
                 setIsLoading(false)
             }
+        } catch (error) {
+            console.log(error.message)
+            setIsLoading(false)
         }
+    }
+
+    useEffect(()=>{
         getPost()
     }, [id])
     
-
     useEffect(()=> {
         const fetchPostComments = async()=> {
             const data = await getPostComments(`${url}/api/post/${id}/comments/`)
             if(data.error) {
                 setComments(false)
-
+    
             }else {
                 setComments(data)
             }
@@ -102,15 +114,13 @@ function PostDetail() {
                                 updateLike = {updateLike}
                             />
                         }
-                        
-                        {showCommentForm && isAuthenticated &&
+                        {!showUpdatePostForm &&
                             <CommentForm 
-                                setShowCommentForm={setShowCommentForm} 
+                                setShowCommentForm={setShowCommentForm}
                                 comments={comments}
                                 setComments={setComments}
-                                post={post}
                                 setPost={setPost}
-                                
+                                post={post}
                             />
                         }
                         {showUpdatePostForm && isAuthenticated &&
@@ -121,15 +131,21 @@ function PostDetail() {
                             />
                         }
                         
-                        {comments &&
-                            <Comments 
-                                comments={comments} 
-                                authenticated={isAuthenticated} 
-                                setComments={setComments} 
-                                setPost={setPost}
-                            />
-                        }
-                            
+                        <div className="post-detail-comments">
+                            {comments && comments.map((comment)=> {
+                                return (
+                                    <Comments
+                                        key={comment.id}
+                                        comment={comment}
+                                        comments={comments}
+                                        setComments={setComments}
+                                        setPost={setPost}
+                                        post={post}
+                                        getPost={getPost}
+                                    />
+                                )
+                            })} 
+                        </div>
                     </div>
                     {!showCommentForm && !showUpdatePostForm && !comments &&
                         <div className="no-comments-container">

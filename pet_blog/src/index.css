@@ -1978,9 +1978,7 @@ Post Detail
 .post-detail-container__post-detail {
   display: grid;
   align-content: start;
-  gap: 1rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--brown-80);
+  gap: 0.5rem;
 }
 
 .post-detail-container__post-image-container {
@@ -1997,13 +1995,13 @@ Post Detail
 .post-detail-container__text-contents {
   display: grid;
   align-content: start;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .post-detail-author-info-container {
   display: grid;
   align-content: start;
-  gap: 0.3rem;
+  gap: 0.5rem;
 }
 
 .post-detail-author-and-date {
@@ -2032,7 +2030,7 @@ Post Detail
 
 .post-detail-container__post-content {
   letter-spacing: 0.05rem;
-  line-height: 1.5;
+  line-height: 1.4;
   text-wrap: pretty;
   color: var(--black-30);
 }
@@ -2041,7 +2039,8 @@ Post Detail
   position: relative;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.3rem;
+  margin-top: 0.3rem
 }
 
 /* Post detail like */
@@ -2115,13 +2114,6 @@ Post Detail
 /* end */
 
 /* Post detail authenticated user buttons */
-.post-detail-lg-btns {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
 .post-detail-btns-ellipsis {
   margin-top: 0.3rem;
 }
@@ -2137,14 +2129,10 @@ Post Detail
 }
 
 .post-detail-edit-and-delete-btns {
-  position: absolute;
-  top: 30px;
-  right: 0;
-  z-index: 2;
-  width: auto;
-  border: 1px solid var(--black-80);
   background: white;
-  display: grid;
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
   border-radius: 8px;
 }
 
@@ -2156,7 +2144,6 @@ Post Detail
   background: none;
   border: none;
   cursor: pointer;
-  padding: 1.3rem 1.3rem 0rem 1.3rem;
 }
 
 .post-detail-edit-btn {
@@ -2171,7 +2158,6 @@ Post Detail
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 1.3rem 1.3rem 1.3rem 1.3rem;
   background: none;
   border: none;
   cursor: pointer;
@@ -2213,33 +2199,32 @@ Post Detail
 
 /* post edit */
 .post-detail-post-edit-form {
-  width: 100%;
   display: grid;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: 0.5rem;
+  padding: 1rem;
   border-radius: 8px;
-  background: var(--brown-95);
+  border: 1px solid lightgray;
 }
 
-.post-detail-post-edit-form > input {
+.post-detail-post-edit-form > input{
   padding: 0.8rem 1rem;
   border-radius: 8px;
   letter-spacing: 0.05rem;
-  border: none;
   color: var(--brown-10);
-  font-size: 1rem
+  font-size: 1rem;
+  border: 1px solid lightgray;
 }
 
 .post-detail-post-edit-form > textarea {
-  resize: none;
+  resize: vertical;
   border-radius: 8px;
   font-size: 1rem;
   letter-spacing: 0.05rem;
   line-height: 1.5;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 0.8rem 1rem;
   color: var(--brown-10);
-  border: none;
+  border: 1px solid lightgray;
 }
 
 .post-detail-post-edit-btns {
@@ -2250,23 +2235,23 @@ Post Detail
 }
 
 .post-detail-post-edit-btn-submit {
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   background: var(--orange-50);
   color: white;
   border-radius: 30px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.05rem;
   border: none;
   cursor: pointer;
 }
 
 .post-detail-post-edit-btn-cancel {
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   background: none;
   color: white;
   background: var(--black-30);
   border-radius: 30px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.05rem;
   border: none;
   cursor: pointer;
@@ -2282,53 +2267,55 @@ Post Detail
 .comment-form {
   width: 100%;
   display: grid;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: 0.5rem;
   border-radius: 8px;
-  background: var(--brown-95)
+  padding: 1rem;
+  border: 1px solid lightgray;
 }
 
 .comment-form-textarea {
-  resize: none;
-  border-radius: 8px;
+  resize: vertical;
   font-size: 1rem;
   letter-spacing: 0.05rem;
   line-height: 1.5;
-  overflow-y: scroll;
+  overflow-y: auto;
   color: var(--brown-10);
   border: none;
   padding: 1rem;
-  
+  min-height: 60px;
+  border-radius: 8px;
+  border: 1px solid lightgray;
 }
 
 .comment-form-textarea:focus {
-  outline: 2px solid var(--focus) !important;
+  outline: 2px solid var(--focus);
+  border: 1px solid transparent
 }
 
 .comment-btns {
   justify-self: end;
   display: flex;
   align-items: center;
-  gap: 0.5rem
+  gap: 0.3rem;
 }
 .comment-btn-submit {
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   background: var(--orange-50);
   color: white;
   border-radius: 30px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.05rem;
   border: none;
   cursor: pointer;
 }
 
 .comment-btn-cancel {
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   background: none;
   color: white;
   background: var(--black-30);
   border-radius: 30px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.05rem;
   border: none;
   cursor: pointer;
@@ -2337,27 +2324,29 @@ Post Detail
 /* comments */
 .post-detail-comments {
   display: grid;
-  gap: 1rem;
+  align-content: start;
+  gap: 1.5rem;
 }
 
 .post-detail-comments__comment {
-  display: flex;
-  align-items: start;
-  flex-wrap: wrap;
+  display: grid;
+  align-content: start;
   gap: 0.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--brown-80);
 }
 
-.post-detail-comments__comment:last-child {
-  border-bottom: none;
-  padding-bottom: 1rem;
+.post-detail-comments__comment > * {
+  margin-left: 1rem;
 }
 
+.has-parent-id {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
 .post-detail-comments__user-profile {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem
+  gap: 0.5rem;
+  margin-left: 0;
 }
 
 .post-detail-comments__user-image-container {
@@ -2385,11 +2374,13 @@ Post Detail
   display: grid;
   align-items: center;
   gap: 0.5rem;
+  padding: 0 0 0.5rem 1rem;
+  border-left: 1px solid lightgray;
 }
 
 .post-detail-comments__content {
-  line-height: 1.6;
-  letter-spacing: 0.07rem;
+  line-height: 1.4;
+  letter-spacing: 0.05rem;
   color: var(--black-15);
 }
 
@@ -2518,26 +2509,25 @@ Post Detail
 
 /* Update comment form */
 .post-detail-update-comment-form {
-  flex: 0 0 100%;
-  padding: 1.5rem;
-  background: var(--brown-95);
+  width: 100%;
+  padding: 1rem;
   display: grid;
-  gap: 1rem;
+  gap: 0.5rem;
   align-content: start;
   border-radius: 8px;
-  margin-top: 0.5rem;
+  border: 1px solid lightgray;
 }
 
 .post-detail-update-comment-textarea {
   border: none;
-  resize: none;
-  width: 100%;
+  resize: vertical;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  line-height: 1.5;
+  line-height: 1.4;
   color: var(--brown-10);
   padding: 1rem;
   border-radius: 8px;
+  border: 1px solid lightgray;
 }
 
 .post-detail-update-comment-textarea:focus {
@@ -2547,40 +2537,31 @@ Post Detail
 .post-detail-update-comment-form-btns {
   display: flex;
   justify-content: end;
-  gap: 0.5rem
+  gap: 0.3rem;
 }
 
 .post-detail-update-comment-update-btn {
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   background: var(--orange-50);
   color: white;
   text-align: center;
   border-radius: 30px;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.9rem;
   border: none;
   cursor: pointer;
 }
 
 .post-detail-update-comment-cancel-btn {
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   background: var(--black-30);
   color: white;
   text-align: center;
   border-radius: 30px;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.9rem;
   border: none;
   cursor: pointer;
 }
 /* end */
-
-@media screen and (min-width: 421px) {
-  .post-detail-lg-btns {
-    display: flex;
-  }
-
-}
 
 @media screen and (min-width: 700px) {
   .post-detail-main-container {
@@ -2595,7 +2576,7 @@ Post Detail
   .post-detail-container__post-detail {
     display: flex;
     align-items: start;
-    gap: 2rem;
+    gap: 1rem;
   }
 
   .post-detail-container__post-image-container {
@@ -2613,9 +2594,9 @@ Post Detail
       flex: 2
   }
 
-  .post-detail-comments__comment {
+  /* .post-detail-comments__comment {
     padding-top: 1rem;
-  }
+  } */
 }
 
 @media screen and (min-width: 1000px) {

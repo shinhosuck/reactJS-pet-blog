@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Navigate } from 'react-router-dom'
 import { deletePost } from '../utils/api'
 import { url } from '../utils/urls'
-
-
-
+import { ContentLayoutContext } from '../layouts/ContentLayout'
 
 
 function PostDetailPost(props) {
     const [isError, setIsError] = useState(false)
     const [textContainer, setTextContainer] = useState(null)
-    const [showBtns, setShowBtns] = useState(false)
     const [width, seWidth] = useState(window.innerWidth)
+    const { isAuthenticated } = useContext(ContentLayoutContext)
     const {setShowUpdatePostForm, setShowCommentForm, authenticated, 
             documentReady, navigate, post, updateLike} = props
 
@@ -79,9 +77,8 @@ function PostDetailPost(props) {
                 </div>
                 <p className='post-detail-container__post-content'>{post.content}</p>
                 <div className="post-detail-container__like-and-reply">
-                    
                     <button 
-                        onClick={(e)=>authenticated ? updateLike(e, post): ''} 
+                        onClick={()=>updateLike()} 
                         className={authenticated ?
                                 'post-detail-container__post-like  post-detail-like-btn'
                             :
@@ -95,56 +92,29 @@ function PostDetailPost(props) {
                         <i className="fa-solid fa-message post-detail-container__num-of-post"></i>
                         <span className='post-detail-container__reply-count'>{post.qs_count.comment_count}</span>
                     </div>
-                    <div className="post-detail-lg-btns">
-                        {authenticated && 
-                            <>
-                                
-                                <button 
-                                    onClick={()=> {
-                                        setShowCommentForm(true)
-                                        setShowUpdatePostForm(false)
-                                    }} 
-                                    className='post-detail-reply'
-                                >
-                                    <i className="fa fa-reply post-detail-reply-btn" title='reply'></i>
-                                </button>
-                                {authenticated.username === post.author &&
-                                    <>
-                                        <div className='post-detail-btns-ellipsis'>
-                                            <button onClick={()=>setShowBtns(!showBtns)}>
-                                                <i className="fa-solid fa-ellipsis"></i>
-                                            </button>
-                                        </div>
-                                        {showBtns &&
-                                            <div className='post-detail-edit-and-delete-btns'>
-                                                <button
-                                                    className='post-detail-edit' 
-                                                    onClick={()=> {
-                                                        setShowUpdatePostForm(true)
-                                                        setShowCommentForm(false)
-                                                        setShowBtns(false)
-                                                    }}
-                                                >
-                                                    <i className="fa-solid fa-pen post-detail-edit-btn"></i>
-                                                    <span className='post-detail-edit-text'>Edit</span>
-                                                </button> 
-                                                <button
-                                                    onClick={()=> {
-                                                        removePost()
-                                                        setShowBtns(false)
-                                                    }}
-                                                    className='post-detail-delete'
-                                                >
-                                                    <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
-                                                    <span className='post-detail-remove-text'>Remove</span>
-                                                </button>
-                                            </div>
-                                        }
-                                    </>
-                                }
-                            </>
-                        }
-                    </div>
+                    {isAuthenticated && isAuthenticated.username === post.author &&
+                        <div className='post-detail-edit-and-delete-btns'>
+                            <button
+                                className='post-detail-edit' 
+                                onClick={()=> {
+                                    setShowUpdatePostForm(true)
+                                    setShowCommentForm(false)
+                                }}
+                            >
+                                <i className="fa-solid fa-pen post-detail-edit-btn"></i>
+                                <span className='post-detail-edit-text'>Edit</span>
+                            </button> 
+                            <button
+                                onClick={()=> {
+                                    removePost()
+                                }}
+                                className='post-detail-delete'
+                            >
+                                <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
+                                <span className='post-detail-remove-text'>Remove</span>
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

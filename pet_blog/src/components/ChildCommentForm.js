@@ -1,43 +1,50 @@
 import React, { useEffect, useRef, useState, useContext } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
-import { postComment } from '../utils/handleComments'
+import { childComment } from '../utils/handleComments'
 
 
-function CommentForm(props) {
+
+function ChildCommentForm(props) {
     const [isError, setIsError] =  useState(false)
     const { isAuthenticated } = useContext(ContentLayoutContext)
     const commentContent = useRef()
     const navigate = useNavigate()
     const { 
         setShowCommentForm, 
+        setChildrenComments,
         post,
-        setPost, 
-        comments, 
-        setComments
+        setPost,
+        comment,
     } = props
-    
+
     const handleCommentSubmit = async(e)=> {
         e.preventDefault()
         if(isAuthenticated) {
             const newComment = commentContent.current.value
             const body = {content:newComment}
-            const data = await postComment(post.id, body, isAuthenticated.token)
+            const data = await childComment(comment.id, {...body, postId:post.id}, isAuthenticated.token)
             if(!data.error) {
                 e.target.reset()
-                setShowCommentForm(false)
+                setShowCommentForm({id:null})
                 const newCommentObj = {
                     ...data, user:isAuthenticated.username, 
-                    user_image_url:isAuthenticated.profile_image_url
+                    user_image_url:isAuthenticated.profile_image_url,
                 }
-                setPost((prev)=>({...prev, qs_count:{...prev.qs_count, comment_count:prev.qs_count.comment_count+1}}))
-                setComments((prev)=> comments ? [newCommentObj, ...prev] : [newCommentObj])
+                setChildrenComments((prev)=>[newCommentObj, ...prev])
+                setPost((prev)=>(
+                    {...prev, 
+                        qs_count:{...prev.qs_count, 
+                            comment_count:prev.qs_count.comment_count+1
+                        }
+                    }
+                ))
 
             }else {
                 setIsError(data.error)
             }
         }else {
-            navigate('/login', {replace:true})
+            navigate('/login')
         }
         
     }
@@ -52,12 +59,13 @@ function CommentForm(props) {
     return (
         <form action="" className="comment-form" onSubmit={handleCommentSubmit}>
             {isError && <p style={{color:'orangered'}}>{isError}</p>}
-            <textarea required id='comment' name='comment' rows='4' className='comment-form-textarea' ref={commentContent} placeholder='Add a comment'/>
+            <textarea required id='comment' name='comment' className='comment-form-textarea' ref={commentContent} rows='3' placeholder='Add a comment'/>
             <div className="comment-btns">
                 <button className='comment-btn-submit' type='submit'>Comment</button>
+                <button onClick={()=>setShowCommentForm(false)} className='comment-btn-cancel' type='button'>Cancel</button>
             </div>
         </form>
     )
 }
 
-export default CommentForm
+export default ChildCommentForm

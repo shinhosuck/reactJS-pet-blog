@@ -136,12 +136,37 @@ export const createComment = async(url, body, token)=> {
     return data
 }
 
+export const createChildComment = async(url, body, token)=> {
+    const resp = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
+        },
+        body: JSON.stringify(body)
+    })
+    const data = await resp.json()
+    return data
+}
+
 export const getPostComments = async(url)=> {
     const resp = await fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': null
+        },
+        body: null
+    })
+    const data = await resp.json()
+    return data
+}
+
+export const getChildrenComments = async(url)=> {
+    const resp = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
         },
         body: null
     })

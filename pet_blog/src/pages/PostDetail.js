@@ -8,6 +8,7 @@ import PostDetailPost from '../components/PostDetailPost'
 import { getPostData, addLikes, getPostComments } from '../utils/api'
 import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
+import dogImg from '../images/cartoon_dog.png'
 
 
 function PostDetail() {
@@ -112,6 +113,7 @@ function PostDetail() {
                                 navigate = {navigate} 
                                 post = {post} 
                                 updateLike = {updateLike}
+                                getPost={getPost}
                             />
                         }
                         {!showUpdatePostForm &&
@@ -147,16 +149,16 @@ function PostDetail() {
                             })} 
                         </div>
                     </div>
-                    {!showCommentForm && !showUpdatePostForm && !comments &&
+                    {!showUpdatePostForm && !comments &&
                         <div className="no-comments-container">
+                            <img src={dogImg} alt="" />
                             <div className="no-comment-text-container">
-                                {isAuthenticated && <div onClick={()=> setShowCommentForm(true)}><p>Add comment</p></div>}
                                 <h3>Be the first to comment!</h3>
                                 <p>
                                     Nobody's responded to this post yet.
                                     Add your thoughts and get the conversation going.
                                 </p>
-                                {!isAuthenticated && <p className='login-to-create-post'>Please login to comment on this post. <Link to='/login'>Login <i className="fa fa-arrow-right"></i></Link></p>}
+                                {!isAuthenticated && <p className='login-to-create-post'>Please login to comment on this post. <Link to='/login'>Login</Link></p>}
                             </div>
                         </div>
                     }

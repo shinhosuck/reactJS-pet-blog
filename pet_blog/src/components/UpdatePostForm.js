@@ -1,16 +1,35 @@
 import React, { useState } from 'react'
+import { useContext } from 'react'
 import { updatePost } from '../utils/api'
 import { url } from '../utils/urls'
-
+import { ContentLayoutContext } from '../layouts/ContentLayout'
 
 
 function UpdatePostForm(props) {
     const [post, setPost] = useState(props.post)
-    const {showUpdatePostForm, authenticated} = props
+    const { showUpdatePostForm, getPost } = props
+    const { isAuthenticated } = useContext(ContentLayoutContext)
 
     const handleSubmit = async(e)=> {
         e.preventDefault()
-        console.log('hello world')
+        const token = isAuthenticated.token
+        const newFormData = new FormData()
+        const keys = Object.keys(post)
+        keys.forEach((key)=>{
+            newFormData.append(key, post[key])
+        })
+        const body = newFormData
+        try {
+            const data = await updatePost(`${url}/api/post/${post.id}/update/`, body, token)
+            if(!data.error) {
+                getPost()
+                showUpdatePostForm(false)
+            }else {
+                console.log(data.error) 
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
     }
 
     const handleChange = (e)=> {

@@ -76,7 +76,7 @@ export function Navbar() {
     }, [])
 
     return (
-        <div className="navbar-container">
+        <div id='navbar-container' className="navbar-container">
             <nav className="navbar-wrapper">
                 <Link to='/posts' className='navbar-brand-link'>
                     <img className='navbar-brand-logo' src={paw} alt="paw" />

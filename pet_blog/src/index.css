@@ -46,6 +46,7 @@
   --brown-20: hsl(28, 27%, 20%);
   --brown-30: hsl(27, 27%, 30%);
   --brown-40: hsl(27, 27%, 40%);
+  --brown-45: hsl(27, 27%, 45%);
   --brown-50: hsl(27, 27%, 50%);
   --brown-60: hsl(27, 27%, 60%);
   --brown-70: hsl(27, 27%, 70%);
@@ -137,7 +138,9 @@ textarea {
 .hide-bg-overlay {
   display: none;
 }
+/* end */
 
+/* Hero image */
 .bg-img {
   min-height: 50dvh;
   background: linear-gradient(to right, rgba(0, 0, 0, 0.90),rgba(0, 0, 0, 0.2)),
@@ -174,7 +177,9 @@ textarea {
   line-height: 1.5;
   font-size: clamp(0.95rem, 1vw + 0.8rem, 1.1rem);
 }
+/* end */
 
+/* Error and success message */
 .error-message {
   color: var(--error-text)
 }
@@ -182,6 +187,26 @@ textarea {
 .success-message {
   color: var(--success-text)
 }
+/* end */
+
+/* Scroll up  */
+.scroll-up-container {
+  position: fixed;
+  z-index: 8;
+  bottom: 20px;
+  right: 10px;
+  width: 40px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background: var(--brown-45);
+  border:none;
+}
+.scroll-up-container > i {
+  font-size: 1rem;
+  margin-top: 0.4rem;
+  color: white;
+}
+/* end */
 
 /* 
 ============
@@ -429,19 +454,19 @@ Landing Page
 .landing-page-featured-post {
   display: grid;
   align-content: start;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .landing-page-featured-post-image-container {
   position: relative;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .landing-page-featured-post-image{
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .landing-page-featured-post-text-content {
@@ -481,7 +506,7 @@ Landing Page
   align-items: end !important;
   padding: 0.5rem 1rem;
   margin-top: 0 !important;
-  background: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
 }
 
 .lg-landing-page-featured-post-like {
@@ -580,8 +605,7 @@ Landing Page
   position: relative;
   display: grid;
   align-content: start;
-  gap: 0.8rem;
-  border-radius: 20px;
+  border-radius: 8px;
   transition: transform 200ms linear;
 }
 
@@ -596,7 +620,7 @@ Landing Page
   aspect-ratio: 3/2;
   object-fit: cover;
   display: block;
-  border-radius: 15px;
+  border-radius: 8px;
 }
 
 .landing-page-topic-bg-overlay {
@@ -606,14 +630,13 @@ Landing Page
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 15px;
+  border-radius: 8px;
   background: rgba(0, 0, 0, 0.7);
-
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: start;
-  gap: 1rem;
+  gap: 0.5rem;
   padding: 1rem;
 }
 
@@ -694,19 +717,19 @@ Landing Page
 .landing-page-post {
   display: grid;
   align-content: start;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .landing-page-post-image-container {
   position: relative;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .landing-page-post-image{
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .landing-page-post-text-content {
@@ -748,7 +771,7 @@ Landing Page
   gap: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 10px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
 }
 
 .landing-page-post-like-container {
@@ -1194,13 +1217,12 @@ Landing Page
 
   .landing-page-featured-post {
     position: relative;
-    border-radius: 15px;
+    border-radius: 8px;
     padding: 0;
   }
 
-  .landing-page-featured-post-image-container,
-  .landing-page-featured-post-image {
-    border-radius: 15px;
+  .landing-page-featured-post-image-container{
+    border-radius: 8px;
   }
 
   .landing-page-featured-post-image{
@@ -1209,6 +1231,7 @@ Landing Page
     aspect-ratio: 3/2;
     object-fit: cover;
     display: block;
+    border-radius: 8px;
   }
 
   .landing-page-featured-post-text-content {
@@ -1218,9 +1241,9 @@ Landing Page
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 15px;
+    border-radius: 8px;
     padding: 1rem;
-    background: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0.2));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.93), rgba(0, 0, 0, 0));
     gap: 0.2rem;
     align-content: end;
   }
@@ -1249,7 +1272,7 @@ Landing Page
   .landing-page-featured-post:nth-child(3) > 
   .landing-page-featured-post-text-content {
     padding: 2rem;
-    gap: 1rem
+    gap: 0.5rem;
   }
 
   .landing-page-featured-post:nth-child(3) > 
@@ -1258,7 +1281,7 @@ Landing Page
     max-width: 600px;
     font-size: 1rem;
     letter-spacing: 0.07rem;
-    line-height: 1.5;
+    line-height: 1.4;
   }
   
   .landing-page-featured-post:nth-child(3) > 
@@ -1722,7 +1745,7 @@ Posts
 .post-container__post {
   display: grid;
   align-content: start;
-  gap: 0.8rem;
+  gap: 0.5rem
 }
 
 .post-container__post-image-container {
@@ -1734,7 +1757,7 @@ Posts
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .post-container__post-text-content {
@@ -1745,7 +1768,7 @@ Posts
 
 .post-container__post-title {
   color: var(--purplish-brown-15);
-  line-height: 1.3;
+  line-height: 1.2;
   font-size: clamp(1.1rem, 1vw + 1rem , 1.7rem);
   font-weight: 600;
   text-wrap: pretty;
@@ -1770,12 +1793,11 @@ Posts
   left: 0;
   width: 100%;
   height: 100%;
-
   display: flex;
   align-items: end;
   gap: 1rem;
   padding: 0.5rem 1rem;
-  border-radius: 10px;
+  border-radius: 8px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
 }
 
@@ -2203,6 +2225,7 @@ Post Detail
   gap: 0.5rem;
   padding: 1rem;
   border-radius: 8px;
+  margin-bottom: 1rem;
   border: 1px solid lightgray;
 }
 
@@ -2270,6 +2293,7 @@ Post Detail
   gap: 0.5rem;
   border-radius: 8px;
   padding: 1rem;
+  margin-bottom: 1rem;
   border: 1px solid lightgray;
 }
 
@@ -2448,17 +2472,22 @@ Post Detail
 
 /* No comments */
 .no-comments-container {
-  display: grid;
-  align-content: start;
-  width: 90%;
-  max-width: 700px;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
   margin-top: 1rem;
 }
 
+.no-comments-container > img {
+  width: 170px;
+  display: block;
+  height: auto;
+}
 .no-comment-text-container {
   display: grid;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .no-comment-text-container > h3 {
@@ -2469,22 +2498,10 @@ Post Detail
 
 .no-comment-text-container > p {
   letter-spacing: 0.05rem;
-  line-height: 1.5;
+  line-height: 1.4;
   text-wrap: pretty;
   color: var(--brown-20);
-}
-
-.no-comment-text-container > div {
-  text-align: start;
-  border: 1px solid var(--brown-70);
-  border-radius: 25px;
-  padding: 0.6rem 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.no-comment-text-container > div > p {
-  letter-spacing: 0.05rem;
-  color: var(--brown-40)
+  max-width: 500px;
 }
 
 .no-comment-text-container > 
@@ -2498,12 +2515,8 @@ Post Detail
 .no-comment-text-container > 
 .login-to-create-post > a {
   color: var(--orange-50);
-  font-weight: 500;
-}
-
-.no-comment-text-container > 
-.login-to-create-post > a > i {
- font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: underline;
 }
 /* end */
 
@@ -2568,10 +2581,10 @@ Post Detail
     width: 90%;
   }
 
-  .post-detail-container,
+  /* .post-detail-container,
   .post-detail-container-contents {
     gap: 2rem
-  }
+  } */
 
   .post-detail-container__post-detail {
     display: flex;
@@ -2695,19 +2708,19 @@ My Posts
   position: relative;
   display: grid;
   align-items: start;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .my-posts-container__post-image-container {
   position: relative;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .my-posts-container__post-image{
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .my-posts-container__post-text-content {
@@ -3246,19 +3259,19 @@ TOPIC POSTS
 .topic-posts-container__post {
   display: grid;
   align-content: start;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .topic-posts-container__post-image-container {
   position: relative;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .topic-posts-container__post-image{
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .topic-posts-container__post-like {
@@ -3353,7 +3366,7 @@ TOPIC POSTS
 
 .no-topic-post-text-container {
   display: grid;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .no-topic-post-text-container > h3 {
@@ -3393,13 +3406,10 @@ TOPIC POSTS
 .no-topic-post-text-container > 
 .login-to-create-post > a {
   color: var(--orange-50);
-  font-weight: 500;
+  font-weight: 600;
+  text-decoration: underline;
 }
 
-.no-topic-post-text-container > 
-.login-to-create-post > a > i {
- font-size: 0.9rem;
-}
 
 /* end */
 
@@ -3929,6 +3939,7 @@ FOOTER
   font-size: 0.9rem;
   letter-spacing: 0.07rem;
   line-height: 1.5;
+  max-width: 300px;
 }
 
 .email {

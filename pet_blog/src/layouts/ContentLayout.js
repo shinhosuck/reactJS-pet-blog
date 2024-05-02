@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react'
-import { Outlet, useNavigate, Navigate } from 'react-router-dom'
+import { Outlet, useNavigate, Link } from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
 import Footer from '../components/Footer'
 import { getTopicData, getPostData } from '../utils/api'
@@ -15,9 +15,21 @@ function ContentLayout() {
     JSON.parse(localStorage.getItem('auth')) :
     null
   )
+  const [scrollHeight, setScrollHeight] = useState(window.pageYOffset)
   const [topics, setTopics] = useState(null)
   const [posts, setPosts] = useState(null)
   const navigate = useNavigate()
+
+
+  function endEventListener(){
+    const height = window.pageYOffset
+    setScrollHeight(height)
+    return window.removeEventListener('scroll', endEventListener)
+  }
+
+  useEffect(()=> {
+    window.addEventListener('scroll', endEventListener)
+  }, [scrollHeight])
 
   useEffect(()=> {
     const getTopics = async()=> {
@@ -56,8 +68,6 @@ function ContentLayout() {
         <main>
             <Outlet context={
               {
-                // posts:posts, 
-                // topics:topics,
                 setIsAuthenticated:setIsAuthenticated,
                 isAuthenticated:isAuthenticated
               }
@@ -66,6 +76,11 @@ function ContentLayout() {
         <footer>
           <Footer isAuthenticated={isAuthenticated}/>
         </footer>
+        {scrollHeight >= 500 && 
+          <button className="scroll-up-container" onClick={()=> window.scrollTo(0, 0)}>
+            <i className="fa fa-chevron-up"></i>
+          </button>
+        }
         <div className='bg-overlay hide-bg-overlay'></div>
     </ContentLayoutContext.Provider>
   )

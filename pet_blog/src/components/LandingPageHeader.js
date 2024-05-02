@@ -3,16 +3,24 @@ import { Link, useNavigate } from 'react-router-dom'
 import paw from '../images/paw.webp'
 
 
-
-
-
-
 function LandingPageHeader() {
     const [showNavLinks, setShowNavLinks] = useState(false)
     const [width, setWidth] = useState(window.innerWidth)
     const authenticated = window.localStorage.getItem('auth')
+    const [scrollHeight, setScrollHeight] = useState(window.pageYOffset)
     const navigate = useNavigate()
 
+
+    function endEventListener(){
+        const height = window.pageYOffset
+        setScrollHeight(height)
+        return window.removeEventListener('scroll', endEventListener)
+    }
+    
+    useEffect(()=> {
+        window.addEventListener('scroll', endEventListener)
+    }, [scrollHeight])
+    
 
     const logout = function() {
         setShowNavLinks(false)
@@ -20,7 +28,6 @@ function LandingPageHeader() {
         navigate('/login', {replace:true, state:{message:'Successfully logged out!'}})
     }
 
-    
     const getWindowWidth = ()=> {
         setWidth(window.innerWidth)
         setShowNavLinks(false)
@@ -91,6 +98,11 @@ function LandingPageHeader() {
                     </div>
                 </nav>
             </div>
+            {scrollHeight >= 500 &&
+                <button className="scroll-up-container" onClick={()=> window.scrollTo(0, 0)}>
+                    <i className="fa fa-chevron-up"></i>
+                </button>
+            }
             <div className={showNavLinks ? 'bg-overlay' : 'hide-bg-overlay'}></div>
         </React.Fragment>
     )

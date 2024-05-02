@@ -103,7 +103,7 @@ function Footer(prop) {
               <div className='contact'>
                 <div className="address">
                   <i className="fa-solid fa-address-book"></i>
-                  <p>96 Imelda Village 5A Baguio City, Benguet, PH 2600</p>
+                  <p>96 Imelda Village Baguio City, Benguet, PH 2600</p>
                 </div>
                 <div className="email">
                   <i className="fa-solid fa-envelope"></i>

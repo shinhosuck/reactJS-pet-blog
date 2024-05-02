@@ -140,7 +140,7 @@ function TopicPosts() {
                     <div className="no-topic-post-container">
                         <img src={dogImg} alt="" />
                         <div className="no-topic-post-text-container">
-                            <h3>Be the first to post on topic "{state && state.topic}"!</h3>
+                            <h3>Be the first to post on this topic!</h3>
                             <p>
                                 Nobody's posted yet on this topic.
                                 Create a post and get the conversation going.
@@ -148,7 +148,7 @@ function TopicPosts() {
                             {isAuthenticated ? 
                                 <Link to='/create/post'>Create Post</Link>
                             : 
-                                <p className='login-to-create-post'>Please login to create post. <Link to='/login'>Login <i className="fa fa-arrow-right"></i></Link></p>
+                                <p className='login-to-create-post'>Please login to create post. <Link to='/login'>Login</Link></p>
                             }
                         </div>
                     </div>

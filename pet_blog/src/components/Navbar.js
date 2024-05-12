@@ -59,7 +59,9 @@ export function Navbar() {
     }
 
     const logout = function() {
-        setShowNavLinks(true)
+        const bgOverlay = document.querySelector('.bg-overlay')
+        bgOverlay.classList.add('hide-bg-overlay')
+        setShowNavLinks(false)
         navigate('/logout')
     }
    
@@ -78,7 +80,7 @@ export function Navbar() {
     return (
         <div id='navbar-container' className="navbar-container">
             <nav className="navbar-wrapper">
-                <Link to='/posts' className='navbar-brand-link'>
+                <Link to='/' className='navbar-brand-link'>
                     <img className='navbar-brand-logo' src={paw} alt="paw" />
                     <h2 className='navbar-brand-name'>PawPals</h2>
                 </Link>
@@ -167,9 +169,9 @@ export function Navbar() {
                         className='navbar-navlink'
                         onClick={handleMobileTopics} 
                     >
-                        <div style={{display:'flex', alignItems:'center', gap:'0.5rem'}}>
+                        <div className='navbar-topic'>
                             <span>Topics</span>
-                            <i style={{fontSize:'0.9rem', marginTop:'0.25rem'}} className="fa fa-chevron-down mobile-topics-chevron-down"></i>
+                            <i className="fa fa-chevron-down mobile-topics-chevron-down"></i>
                         </div>
                         {<NavbarTopics topics={topics} setShowNavLinks={setShowNavLinks} />}
 
@@ -250,9 +252,9 @@ export function Navbar() {
                         id='topics'
                         className='navbar-navlink'
                     >
-                        <div style={{display:'flex', alignItems:'center', gap:'0.5rem'}}>
+                        <div className='navbar-topic'>
                             <span>Topics</span>
-                            <i style={{fontSize:'0.9rem', marginTop:'0.25rem'}} className="fa fa-chevron-down lg-topic-chevron"></i>
+                            <i className="fa fa-chevron-down lg-topic-chevron"></i>
                         </div>
                         {<NavbarTopics topics={topics} />}
                     </div>

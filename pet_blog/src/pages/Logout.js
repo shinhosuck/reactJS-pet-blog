@@ -16,9 +16,14 @@ function Logout() {
 
     return (
         <div className='logout-container'>
-            <h2>Are you sure you want to logout?</h2>
-            <Link to='/posts'><i className="fa fa-arrow-left"></i>No, take me back home</Link>
-            <button onClick={logout}>Log me out</button>
+            <div className="logout-content">
+                <h1>Logout</h1>
+                <h3>Are you sure you would like to logout?</h3>
+                <div className="logout-container-btns">
+                    <Link to='/posts'>Cancel</Link>
+                    <button onClick={logout}>Logout</button>
+                </div>
+            </div>
         </div>
     )
 }

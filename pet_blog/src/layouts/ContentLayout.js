@@ -18,9 +18,7 @@ function ContentLayout() {
   const [scrollHeight, setScrollHeight] = useState(window.pageYOffset)
   const [topics, setTopics] = useState(null)
   const [posts, setPosts] = useState(null)
-  const navigate = useNavigate()
-
-
+  
   function endEventListener(){
     const height = window.pageYOffset
     setScrollHeight(height)
@@ -43,7 +41,6 @@ function ContentLayout() {
     const getPosts = async()=> {
       try {
         const data = await getPostData(`${url}/api/posts/`)
-        
         setPosts(data)
       } catch ({message}) {
         console.log(message)

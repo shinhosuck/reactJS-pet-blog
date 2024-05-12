@@ -73,8 +73,8 @@ function Comments(props) {
                     </p>
                 </div>
             </div>
-            <div className="post-detail-comment-btns">
-                <p id={`comment-${comment.id}`} value='' className='post-detail-comments__content'>{comment.content}</p>
+            <div className="post-detail-comment-content-container">
+                <p id={`comment-${comment.id}`} className='post-detail-comments__content'>{comment.content}</p>
                 <div className='post-comment-btns'>
                     <button className='post-detail-comment-reply-btn'
                         onClick={()=> {

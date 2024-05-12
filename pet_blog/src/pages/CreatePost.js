@@ -88,7 +88,7 @@ function CreatePost(props) {
 
     if(!isAuthenticated) {
         return (
-            <Navigate to='/login' replace={true} state={{error:'You must login to create post!', redirect:pathname}}/>
+            <Navigate to='/login' replace={true} state={{error:'Please login first!', redirect:pathname}}/>
         )
     }
     if(isLoading) {

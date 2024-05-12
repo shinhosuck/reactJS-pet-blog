@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import LoadingPage from '../pages/LoadingPage'
+import { formatDate } from '../utils/formatDate'
 
 
 function PostListPosts(props) {
@@ -8,7 +9,7 @@ function PostListPosts(props) {
     const [postsByTopics, setPostsByTopics] = useState(null)
     const [topicNames, setTopicNames] = useState(null)
     const {pathname} = useLocation()
-    const {posts, topicsOjbs} = props
+    const {posts, topicsOjbs, state} = props
     
     useEffect(()=> {
         const getPostsByTopics = ()=> {
@@ -74,7 +75,7 @@ function PostListPosts(props) {
                                                                         <span className='post-container__post-like-count'>{post.qs_count.like_count}</span>
                                                                     </div>
                                                                     <div className='post-container__num-of-replies-container'>
-                                                                        <i className="fa-solid fa-message post-container__num-of-post"></i>
+                                                                        <i className="fas fa-comment post-container__num-of-post"></i>
                                                                         <span className='post-container__post-reply-count'>{post.qs_count.comment_count}</span>
                                                                     </div>
                                                                 </div>
@@ -85,7 +86,7 @@ function PostListPosts(props) {
                                                                         <span className='post-container__post-like-count'>{post.qs_count.like_count}</span>
                                                                     </div>
                                                                     <div className='post-container__num-of-replies-container'>
-                                                                        <i className="fa-solid fa-message post-container__num-of-post"></i>
+                                                                        <i className="fas fa-comment post-container__num-of-post"></i>
                                                                         <span className='post-container__post-reply-count'>{post.qs_count.comment_count}</span>
                                                                     </div>
                                                                 </div>
@@ -103,6 +104,13 @@ function PostListPosts(props) {
                                                                     Read more
                                                                 </Link>
                                                             </p>
+                                                        </div>
+                                                        <div className='landing-page-post-author-and-date'>
+                                                            <img src={post.author_profile_image_url} alt="" />
+                                                            <div>
+                                                                <p>{post.author}</p>
+                                                                <p>{formatDate(post.date_posted)}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 }

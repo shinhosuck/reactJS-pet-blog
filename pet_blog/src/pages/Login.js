@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation, Navigate, useNavigate, useOutletContext} from 'react-router-dom'
+import { 
+    Link, 
+    useLocation, 
+    Navigate, 
+    useNavigate, 
+    useOutletContext,
+} from 'react-router-dom'
 import { loginInfoValidation  } from '../utils/validators'
 import { login } from '../utils/api'
 import { url } from '../utils/urls'
@@ -11,15 +17,12 @@ function Login() {
     const [user, setUser] = useState({username:'',password:''})
     const [frontendErrorMessage, setFrontendErrorMessage] = useState(null)
     const [backendAuthError, setBackendAuthError] = useState(null)
-    const [successMessage, setSuccessMessage] = useState(null) 
     const [isLogingin, setIsLogingin] = useState(false)
     const {isAuthenticated, setIsAuthenticated} = useOutletContext()
-    window.history.replaceState({state:null}, '', '/login')
     const {state} = useLocation()
     const navigate = useNavigate()
-   
+    window.history.replaceState({state:null}, '', '/login')
 
-    
     const handleForm = async function(e) {
         e.preventDefault()
         setBackendAuthError(null)
@@ -49,18 +52,18 @@ function Login() {
     }
 
     useEffect(()=> {
-        state && state.message && setSuccessMessage({registered:state.message})
         const timeoutID = setTimeout(()=>{
-            if(state && state.message) {
-                const message = document.querySelector('.user-login__message')
-                setSuccessMessage(null)
-                if(message) {
-                    message.style.disply = 'none'
-                }
-            }else if(state && state.error) {
-                const error = document.querySelector('.user-login__error-message')
-                if(error) {
-                    error.style.display = 'none'
+            if(state) {
+                if(state.message) {
+                    const message = document.querySelector('.user-login__message')
+                    if(message) {
+                        message.style.display = 'none'
+                    }
+                }if(state.error) {
+                    const error = document.querySelector('.user-login__error')
+                    if(error) {
+                        error.style.display = 'none'
+                    }
                 }
             }
             clearTimeout(timeoutID)
@@ -74,7 +77,8 @@ function Login() {
             if(document.readyState === 'complete') {
                 setIsLoading(false)
                 clearTimeout(timeoutId)
-            }else {
+            }
+            else {
                 clearTimeout(timeoutId)
             }
         }, 100)
@@ -82,7 +86,7 @@ function Login() {
 
     if(isAuthenticated) {
         return (
-            <Navigate to='/posts' replace={true} state={{error:'You are logged in already!'}} />
+            <Navigate to='/posts' replace={true} state={{error:'You are logged in already'}} />
         )
     }
 
@@ -95,9 +99,12 @@ function Login() {
     return (
         <div className="user-login-main-container">
             <div className="user-login-container">
-                {/* {successMessage && successMessage.registered && <p className='user-login__message'>{successMessage.registered}</p>} */}
-                {state && state.error && <p className='user-login__error-message'>{state.error}</p>}
                 <div className='user-login'>
+                    {state &&
+                        <p className={state.error && 'user-login__error' || state.message && 'user-login__message' }>
+                            {state.error && state.error || state.message && state.message}
+                        </p>
+                    }
                     <h2 className='user-login__header'>Sign In</h2>
                     {backendAuthError && <p className='user-register__error'>{backendAuthError}</p>}
                     <form className='user-login__form' onSubmit={handleForm}>

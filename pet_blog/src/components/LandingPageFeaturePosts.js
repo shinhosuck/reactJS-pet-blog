@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-
+import { formatDate } from '../utils/formatDate'
 
 
 
@@ -43,7 +43,7 @@ function LandingPageFeaturePosts(props) {
                                                 <span className='landing-page-featured-post-like-count'>{post.qs_count.like_count}</span>
                                             </div>
                                             <div className='landing-page-featured-post-num-of-replies-container'>
-                                                <i className="fa-solid fa-message landing-page-featured-post-num-of-post"></i>
+                                                <i className="fas fa-comment landing-page-featured-post-num-of-post"></i>
                                                 <span className='landing-page-featured-post-reply-count'>{post.qs_count.comment_count}</span>
                                             </div>
                                         </div>
@@ -54,14 +54,31 @@ function LandingPageFeaturePosts(props) {
                                                 <span className='landing-page-featured-post-like-count'>{post.qs_count.like_count}</span>
                                             </div>
                                             <div className='landing-page-featured-post-num-of-replies-container'>
-                                                <i className="fa-solid fa-message landing-page-featured-post-num-of-post"></i>
+                                                <i className="fas fa-comment landing-page-featured-post-num-of-post"></i>
                                                 <span className='landing-page-featured-post-reply-count'>{post.qs_count.comment_count}</span>
                                             </div>
                                         </div>
                                     }
                                 </div>
                                 <div className='landing-page-featured-post-text-content'>
-                                    <h3 className='landing-page-featured-post-title'>{post.title}</h3>
+                                    <div className='lg-landing-page-featured-post-author-and-date'>
+                                        <img id={`img-${index + 1}`} src={post.author_profile_image_url} alt="" />
+                                        <div>
+                                            <p>{post.author}</p>
+                                            <p>{formatDate(post.date_posted)}</p>
+                                        </div>
+                                    </div>
+                                    <h3 className='landing-page-featured-post-title'>
+                                        {post.title}
+                                        <span className='lg-landing-page-truncate'>...</span>
+                                        <Link 
+                                            to={`/post/${post.id}/detail/`} 
+                                            state={{redirect:pathname}} 
+                                            className='lg-landing-page-featured-post-read-post'
+                                        >
+                                            Read more
+                                        </Link>
+                                    </h3>
                                     <p className='landing-page-featured-post-content'>{
                                         windowWidth >= 1200 && index === 2 && post.content.slice(0, 200) || 
                                         windowWidth >= 1200 && index !== 2 && post.content.slice(0, 50) ||
@@ -82,7 +99,7 @@ function LandingPageFeaturePosts(props) {
                                                 <span className='landing-page-featured-post-like-count'>{post.qs_count.like_count}</span>
                                             </div>
                                             <div className='landing-page-featured-post-num-of-replies-container'>
-                                                <i className="fa-solid fa-message landing-page-featured-post-num-of-post"></i>
+                                                <i className="fas fa-comment landing-page-featured-post-num-of-post"></i>
                                                 <span className='landing-page-featured-post-reply-count'>{post.qs_count.comment_count}</span>
                                             </div>
                                         </div>
@@ -93,12 +110,18 @@ function LandingPageFeaturePosts(props) {
                                                 <span className='landing-page-featured-post-like-count'>{post.qs_count.like_count}</span>
                                             </div>
                                             <div className='landing-page-featured-post-num-of-replies-container'>
-                                                <i className="fa-solid fa-message landing-page-featured-post-num-of-post"></i>
+                                                <i className="fas fa-comment landing-page-featured-post-num-of-post"></i>
                                                 <span className='landing-page-featured-post-reply-count'>{post.qs_count.comment_count}</span>
                                             </div>
                                         </div>
                                     }
-                                   
+                                    <div className='mobile-landing-page-featured-post-author-and-date'>
+                                        <img src={post.author_profile_image_url} alt="" />
+                                        <div>
+                                            <p>{post.author}</p>
+                                            <p>{formatDate(post.date_posted)}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         )

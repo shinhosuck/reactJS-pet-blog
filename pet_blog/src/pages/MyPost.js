@@ -4,6 +4,8 @@ import { getMyData, deletePost } from '../utils/api'
 import LoadingPage from './LoadingPage'
 import { url } from '../utils/urls'
 import dogImg from '../images/cartoon_dog.png'
+import { formatDate } from '../utils/formatDate'
+import SidebarLatestPosts from '../components/SidebarLatestPosts'
 
 
 function MyPost() {
@@ -13,8 +15,27 @@ function MyPost() {
   const authenticated = JSON.parse(localStorage.getItem('auth')) || null
   const {pathname} = useLocation()
   window.history.replaceState({state:null}, '', '/my-posts')
+  const [ scrollHeight, setScrollHeight] = useState(window.pageYOffset)
 
-
+  function endEventListener(){
+      const postDetailSideBar = document.querySelector('.posts-side-bar')
+      const scrolled = window.pageYOffset
+      if(scrolled >= 450) {
+          if(postDetailSideBar) {
+              postDetailSideBar.style.top = '75px'
+          }
+      }else {
+          if(postDetailSideBar) {
+              postDetailSideBar.style.top = '0px'
+          }
+      }
+      setScrollHeight(scrolled)
+      return window.removeEventListener(
+          'scroll', 
+          endEventListener
+      )
+  }
+    
   const getMyPosts = async()=> {
     const data = await getMyData(`${url}/api/my-post/`, authenticated.token)
     if(data.error || data.message || data.length === 0) {
@@ -22,17 +43,6 @@ function MyPost() {
 
     }else {
       const objs = data.sort((a, b)=>new Date(b.date_posted)-new Date(a.date_posted))
-      .map((post)=> {
-        const datePosted = new Date(post.date_posted)
-        return (
-          {...post, 
-            date_posted:`${datePosted.toDateString()} 
-            ${datePosted.toLocaleTimeString(
-              {}, {hour:'2-digit', minute:'2-digit'}
-              )
-            }`
-          })
-      })
       setPosts(objs)
       setIsLoading(false)
     }
@@ -49,6 +59,13 @@ function MyPost() {
         setIsError({error:data.error})
       }
   }
+
+  useEffect(()=> {
+    window.addEventListener(
+        'scroll', 
+        endEventListener
+    )
+  }, [scrollHeight])
 
   useEffect(()=> {
     getMyPosts()
@@ -121,27 +138,24 @@ function MyPost() {
       </div>
       <div className="my-posts-main-container">
         <div className='my-posts-container'>
-            <div className="my-posts-container__posts">
-            {!posts ?
-              <div className="no-topic-post-container" style={
-                {
-                  gridColumn:'1 / -1', 
-                  alignItems:'start'
-                }
-              }>
-                <img src={dogImg} alt="" />
-                <div className="no-topic-post-text-container">
-                    <h2>You do not have any post!</h2>
-                    <p>
-                        Please pick a topic and create a post to start a new conversation.
-                    </p>
-                    <Link to='/create/post'>Create Post</Link>
-                </div>
+          {!posts ?
+            <div className="no-topic-post-container">
+              <img src={dogImg} alt="" />
+              <div className="no-topic-post-text-container">
+                  <h3>You do not have any post!</h3>
+                  <p>
+                      Please pick a topic and create a post to start a new conversation.
+                  </p>
+                  <Link to='/create/post'>Create Post</Link>
               </div>
-             :
-              posts.map((post)=> {
+            </div> 
+          : 
+            <div className="my-posts-container__posts">
+              {posts.map((post)=> {
                 return (
                   <div key={post.id} className="my-posts-container__post">
+                    <h3 className='my-posts-container__post-title'>{post.title}</h3>
+                    <p className='my-posts-container__date-posted'>{formatDate(post.date_posted)}</p>
                     <div className="my-posts-container__post-image-container">
                       <img className='my-posts-container__post-image' src={post.image_url} alt={post.title} />
                       <div className='post-container__post-like'>
@@ -150,7 +164,7 @@ function MyPost() {
                             <span className='post-container__post-like-count'>{post.qs_count.like_count}</span>
                         </div>
                         <div className='post-container__num-of-replies-container'>
-                            <i className="fa-solid fa-message post-container__num-of-post"></i>
+                            <i className="fa-solid fa-comment post-container__num-of-post"></i>
                             <span className='post-container__post-reply-count'>{post.qs_count.comment_count}</span>
                         </div>
                         <div className="my-posts-container__btns">
@@ -169,15 +183,16 @@ function MyPost() {
                       </div>
                     </div>
                     <div className='my-posts-container__post-text-content'>
-                      <p className='my-posts-container__date-posted'>{post.date_posted}</p>
-                      <h3 className='my-posts-container__post-title'>{post.title}</h3>
                       <p className='my-posts-container__post-content'>{post.content}</p>
                     </div>
                   </div>
                 )
-              })
-            }
+              })}
             </div>
+          }
+        </div>
+        <div className='posts-side-bar'>
+            <SidebarLatestPosts />
         </div>
       </div>
     </React.Fragment>

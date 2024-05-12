@@ -11,7 +11,7 @@ function LandingPageTopics(props) {
         <div className="landing-page-topics-wrapper">
             <div className="landing-page-topics-container">
                 <div className="landing-page-topic-header-container">
-                    <h1 className='landing-page-topic-header'>Top Topics</h1>
+                    <h1 className='landing-page-topic-header'>Topics</h1>
                     <p className='landing-page-topic-text'>
                         Ask questions, share your experiences, and discuss topics of mutual interest.
                     </p>
@@ -28,16 +28,17 @@ function LandingPageTopics(props) {
                                 <img className='landing-page-topic-image' src={topic.image_url} alt={topic.name} />
                                 <div className="landing-page-topic-bg-overlay">
                                     <h3 className='landing-page-topic-name'>{topic.name}</h3>
-                                    <div className='landing-page-topic-likes-and-post_count'>
-                                        <div className='landing-page-topic-like'>
-                                            <i className="fa-solid fa-hands-clapping landing-page-post-clap"></i>
-                                            <span>{topic.topic_post_set_likes}</span>
-                                        </div>
+                                    {topic.post_count > 1 ? 
                                         <div className='landing-page-topic-post_count'>
-                                            <i className="fa-solid fa-message"></i>
+                                            <span>Posts</span>
                                             <span>{topic.post_count}</span>
                                         </div>
-                                    </div>
+                                    :
+                                        <div className='landing-page-topic-post_count'>
+                                            <span>Post</span>
+                                            <span>{topic.post_count}</span>
+                                        </div>
+                                    }
                                 </div>
                             </Link>
                         )

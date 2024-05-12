@@ -9,6 +9,8 @@ import { getPostData, addLikes, getPostComments } from '../utils/api'
 import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
 import dogImg from '../images/cartoon_dog.png'
+import SidebarLatestPosts from '../components/SidebarLatestPosts'
+
 
 
 function PostDetail() {
@@ -18,10 +20,9 @@ function PostDetail() {
     const [isLoading, setIsLoading] = useState(true)
     const [showCommentForm, setShowCommentForm] = useState(false)
     const [showUpdatePostForm, setShowUpdatePostForm] = useState(false)
-    const { isAuthenticated } = useContext(ContentLayoutContext)
+    const { isAuthenticated, posts, topics } = useContext(ContentLayoutContext)
     const { id } = useParams()
     const navigate = useNavigate()
-    
 
     const updateLike = async()=> {
         if(!isAuthenticated) {
@@ -98,6 +99,7 @@ function PostDetail() {
             <div className="bg-img">
                 <div className="bg-img-header-container">
                     <div className="bg-img-contents">
+                        <p className='post-detail-post-topic-name'>{post.topic}</p>
                         <h1 className='post-detail-post-title'>{post.title}</h1>
                     </div>
                 </div>
@@ -132,7 +134,6 @@ function PostDetail() {
                                 authenticated={isAuthenticated}
                             />
                         }
-                        
                         <div className="post-detail-comments">
                             {comments && comments.map((comment)=> {
                                 return (
@@ -162,6 +163,9 @@ function PostDetail() {
                             </div>
                         </div>
                     }
+                </div>
+                <div className='post-detail-side-bar'>
+                    <SidebarLatestPosts />
                 </div>
             </div>
         </React.Fragment>

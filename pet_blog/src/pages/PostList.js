@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import { getPostData} from '../utils/api'
 import LoadingPage from './LoadingPage'
-import PostListPosts from '../components/PostListPosts'
 import { getTopicData } from '../utils/api'
 import { url } from '../utils/urls'
-
+import PostListPosts from './PostListPosts'
 
 
 function PostList() {
@@ -13,10 +12,9 @@ function PostList() {
   const [topics, setTopics] = useState(null)
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const authenticated = JSON.parse(localStorage.getItem('auth')) || null
+  const { state } = useLocation()
   window.history.replaceState({state:null}, '', '/posts')
   
-
   useEffect(()=>{
     const getPosts = async()=> {
       const data_objs = await getPostData(`${url}/api/posts/`)
@@ -42,6 +40,25 @@ function PostList() {
     getTopics()
   }, [])
 
+  useEffect(()=> {
+    const timeoutID = setTimeout(()=>{
+        if(state) {
+            if(state.message) {
+                const message = document.querySelector('.success-message')
+                if(message) {
+                  message.style.display = 'none'
+                }
+            }if(state.error) {
+                const error = document.querySelector('.error-message')
+                if(error) {
+                  error.style.display = 'none'
+                }
+            }
+        }
+        clearTimeout(timeoutID)
+    }, 5000)
+  }, [state])
+
   if(isLoading) {
     return (
       <LoadingPage />
@@ -65,9 +82,14 @@ function PostList() {
               from best practices to advice against.
             </p>
           </div>
+          {state && 
+            <p className={state.error?'error-message post-list-message':'success-message post-list-message'}>
+              {state.error && state.error || state.message && state.message}
+            </p>
+          }
         </div>
       </div>
-      {posts && topics && <PostListPosts posts={posts} topicsOjbs={topics}/>}
+      <PostListPosts />
     </React.Fragment>
   )
 }

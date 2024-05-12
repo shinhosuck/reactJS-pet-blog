@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-
+import { formatDate } from '../utils/formatDate'
 
 
 
@@ -30,7 +30,7 @@ function LandingPagePosts(props) {
                                                 <span className='landing-page-post-like-count'>{post.qs_count.like_count}</span>
                                             </div>
                                             <div className='landing-page-post-num-of-replies-container'>
-                                                <i className="fa-solid fa-message landing-page-post-num-of-post"></i>
+                                                <i className="fas fa-comment landing-page-post-num-of-post"></i>
                                                 <span className='landing-page-post-reply-count'>{post.qs_count.comment_count}</span>
                                             </div>
                                         </div>
@@ -41,7 +41,7 @@ function LandingPagePosts(props) {
                                                 <span className='landing-page-post-like-count'>{post.qs_count.like_count}</span>
                                             </div>
                                             <div className='landing-page-post-num-of-replies-container'>
-                                                <i className="fa-solid fa-message landing-page-post-num-of-post"></i>
+                                                <i className="fas fa-comment landing-page-post-num-of-post"></i>
                                                 <span className='landing-page-post-reply-count'>{post.qs_count.comment_count}</span>
                                             </div>
                                         </div>
@@ -59,6 +59,13 @@ function LandingPagePosts(props) {
                                             Read more
                                         </Link>
                                     </p>
+                                </div>
+                                <div className='landing-page-post-author-and-date'>
+                                    <img src={post.author_profile_image_url} alt="" />
+                                    <div>
+                                        <p>{post.author}</p>
+                                        <p>{formatDate(post.date_posted)}</p>
+                                    </div>
                                 </div>
                             </div>
                         )

@@ -52,7 +52,7 @@ function CommentForm(props) {
     return (
         <form action="" className="comment-form" onSubmit={handleCommentSubmit}>
             {isError && <p style={{color:'orangered'}}>{isError}</p>}
-            <textarea required id='comment' name='comment' rows='4' className='comment-form-textarea' ref={commentContent} placeholder='Add a comment'/>
+            <textarea required id='comment' name='comment' className='comment-form-textarea' ref={commentContent} placeholder='Add a comment'/>
             <div className="comment-btns">
                 <button className='comment-btn-submit' type='submit'>Comment</button>
             </div>

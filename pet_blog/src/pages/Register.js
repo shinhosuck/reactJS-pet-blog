@@ -40,13 +40,14 @@ function Register() {
                 setIsregistering(true)
                 const body = {username:newUser.username, password:newUser.password}
                 const data = await register(`${url}/api/auth/register/`, body)
-                if(data.message.toLowerCase() === 'successfully registered!') {
+                console.log(data)
+                if(data.error){
+                    setBackendAuthError(data)
+                    setIsregistering(false)
+                }else{
                     setIsregistering(false)
                     setNewUser({username:'',password:'',passwordConfirmation:''})
                     navigate('/login', {replace:true, state:{message:data.message}})
-
-                }else if(data && data.error){
-                    setBackendAuthError(data)
                 }
             }
         }
@@ -63,7 +64,7 @@ function Register() {
 
     if(isAuthenticated) {
         return (
-            <Navigate to='/posts' replace={true} state={{error:'You are registered and logged in already!'}}/>
+            <Navigate to='/posts' replace={true} state={{error:'You are registered already'}}/>
         )
     }
 

@@ -7,16 +7,17 @@ function NavbarTopics(props) {
     return (
         <>
             <div className='navbar-topics lg-navbar-topics'>
-                {topics && topics.map((topic)=> {
+                {topics && topics.map((topic, index)=> {
                     return (
                         <NavLink 
+                            key={topic.id}
                             onClick={()=> {
                                 setShowNavLinks && setShowNavLinks(false)
                                 document.querySelector('.bg-overlay').classList.add('hide-bg-overlay')
                                 document.body.style.overflow = 'auto'
                             }}
                             className={({isActive})=>isActive?'active-navbar-topic-link navbar-topic-link':'navbar-topic-link'}
-                            to={`/topic/${topic.name}/posts/?filter=${topic.name}`} state={{topic:topic.name}} key={topic.id}
+                            to={`/topic/${topic.name}/posts/?filter=${topic.name}`} state={{topic:topic.name}}
                         >
                             {topic.name}
                         </NavLink>

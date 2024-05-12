@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom'
 
 // Layouts
-import RootLayout from './layouts/RootLayout';
 import ContentLayout from './layouts/ContentLayout';
 
 // Pages
@@ -31,9 +30,8 @@ import Logout from './pages/Logout';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<ScrollToTop />}>
-      <Route path='/' element={<RootLayout />} >
-        <Route index element={<LandingPage />}/>
-        <Route element={<ContentLayout/>}>
+        <Route path='/' element={<ContentLayout/>}>
+          <Route index element={<LandingPage />}/>
           <Route path='posts' element={<PostList/>} />
           <Route path='post/:id/detail' element={<PostDetail/>} />
           <Route path='create/post' element={<CreatePost />}/>
@@ -47,7 +45,6 @@ const router = createBrowserRouter(
           <Route path='error' element={<Error />}/>
           <Route path='*' element={<PageNotFound />}/>
         </Route>
-      </Route>
     </Route>
   )
 )

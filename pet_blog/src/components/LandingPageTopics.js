@@ -13,7 +13,8 @@ function LandingPageTopics(props) {
                 <div className="landing-page-topic-header-container">
                     <h1 className='landing-page-topic-header'>Topics</h1>
                     <p className='landing-page-topic-text'>
-                        Ask questions, share your experiences, and discuss topics of mutual interest.
+                        Ask questions, share your experiences, 
+                        and discuss topics of mutual interest.
                     </p>
                 </div>
                 <div className="landing-page-topics">
@@ -30,13 +31,13 @@ function LandingPageTopics(props) {
                                     <h3 className='landing-page-topic-name'>{topic.name}</h3>
                                     {topic.post_count > 1 ? 
                                         <div className='landing-page-topic-post_count'>
-                                            <span>Posts</span>
                                             <span>{topic.post_count}</span>
+                                            <span>Posts</span>
                                         </div>
                                     :
                                         <div className='landing-page-topic-post_count'>
-                                            <span>Post</span>
                                             <span>{topic.post_count}</span>
+                                            <span>Post</span>
                                         </div>
                                     }
                                 </div>

@@ -34,6 +34,16 @@ function LandingPageFeaturePosts(props) {
                     {featuredPosts.map((post, index)=> {
                         return (
                             <div key={post.id} className="landing-page-featured-post">
+                                <div className='mobile-landing-page-featured-post-author-and-date'>
+                                    <img src={post.author_profile_image_url} alt="" />
+                                    <div>
+                                        <p>{post.author}</p>
+                                        <p>{formatDate(post.date_posted)}</p>
+                                    </div>
+                                </div>
+                                <h3 className='mobile-landing-page-featured-post-title'>
+                                    {post.title}
+                                </h3>
                                 <div className="landing-page-featured-post-image-container">
                                     <img className='landing-page-featured-post-image' src={post.image_url} alt={post.title} />
                                     {post.qs_count.like_count > 1 ? 
@@ -69,8 +79,12 @@ function LandingPageFeaturePosts(props) {
                                         </div>
                                     </div>
                                     <h3 className='landing-page-featured-post-title'>
-                                        {post.title}
-                                        <span className='lg-landing-page-truncate'>...</span>
+                                        {post.title.length > 22 ?
+                                            `${post.title.substring(0, 22)}`
+                                        : 
+                                            `${post.title}`
+                                        }
+                                        <span>...</span>
                                         <Link 
                                             to={`/post/${post.id}/detail/`} 
                                             state={{redirect:pathname}} 
@@ -79,11 +93,12 @@ function LandingPageFeaturePosts(props) {
                                             Read more
                                         </Link>
                                     </h3>
-                                    <p className='landing-page-featured-post-content'>{
-                                        windowWidth >= 1200 && index === 2 && post.content.slice(0, 200) || 
-                                        windowWidth >= 1200 && index !== 2 && post.content.slice(0, 50) ||
-                                        post.content.slice(0, 100)
-                                        }...
+                                    <p className='landing-page-featured-post-content'>
+                                        {post.content.length > 250 ?
+                                            `${post.content.substring(0, 250)}...`
+                                        :
+                                            `${post.content}...`
+                                        }
                                         <Link 
                                             to={`/post/${post.id}/detail/`} 
                                             state={{redirect:pathname}} 
@@ -115,13 +130,6 @@ function LandingPageFeaturePosts(props) {
                                             </div>
                                         </div>
                                     }
-                                    <div className='mobile-landing-page-featured-post-author-and-date'>
-                                        <img src={post.author_profile_image_url} alt="" />
-                                        <div>
-                                            <p>{post.author}</p>
-                                            <p>{formatDate(post.date_posted)}</p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         )

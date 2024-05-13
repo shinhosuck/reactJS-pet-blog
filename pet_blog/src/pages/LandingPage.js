@@ -66,7 +66,8 @@ function LandingPage() {
                 <div className="mobile-landing-page-hero-text-wrapper">
                     <h1 className='mobile-landing-page-hero-header'>We are Canine Blog Site</h1>
                     <p className='mobile-landing-page-hero-paragraph'>
-                        Request suggestions and share your experience and expertise on various canines's health issues.
+                        Request suggestions and share your experience and 
+                        expertise on various canines's health issues.
                     </p>
                     <Link to={!isAuthenticated ? '/register':'/posts'} className='mobile-landing-page-join-btn'>{isAuthenticated?'Explore':'Join now'}</Link>
                 </div>

@@ -21,6 +21,14 @@ function LandingPagePosts(props) {
                     {latesPosts.map((post)=> {
                         return (
                             <div key={post.id} className="landing-page-post">
+                                <div className='landing-page-post-author-and-date'>
+                                    <img src={post.author_profile_image_url} alt="" />
+                                    <div>
+                                        <p>{post.author}</p>
+                                        <p>{formatDate(post.date_posted)}</p>
+                                    </div>
+                                </div>
+                                <h3 className='landing-page-post-title'>{post.title}</h3>
                                 <div className="landing-page-post-image-container">
                                     <img className='landing-page-post-image' src={post.image_url} alt={post.title} />
                                     {post.qs_count.like_count > 1 ? 
@@ -48,9 +56,12 @@ function LandingPagePosts(props) {
                                     }
                                 </div>
                                 <div className='landing-page-post-text-content'>
-                                    <h3 className='landing-page-post-title'>{post.title}</h3>
                                     <p className='landing-page-post-content'>
-                                        {post.content.substring(0, 100)}... 
+                                        {post.content.length > 250 ?
+                                            post.content.substring(0, 250)
+                                        :
+                                            post.content
+                                        }... 
                                         <Link 
                                             to={`/post/${post.id}/detail/`} 
                                             state={{redirect:pathname}} 
@@ -59,13 +70,6 @@ function LandingPagePosts(props) {
                                             Read more
                                         </Link>
                                     </p>
-                                </div>
-                                <div className='landing-page-post-author-and-date'>
-                                    <img src={post.author_profile_image_url} alt="" />
-                                    <div>
-                                        <p>{post.author}</p>
-                                        <p>{formatDate(post.date_posted)}</p>
-                                    </div>
                                 </div>
                             </div>
                         )

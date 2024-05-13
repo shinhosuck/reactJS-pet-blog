@@ -95,7 +95,11 @@ function PostListPosts(props) {
                                                         <div className='post-container__post-text-content'>
                                                             <h3 className='post-container__post-title'>{post.title}</h3>
                                                             <p className='post-container__post-content'>
-                                                                {post.content.substring(0, 100)}...
+                                                                {post.content.length > 250 ?
+                                                                    `${post.content.substring(0, 250)}...`
+                                                                :
+                                                                    `${post.content}...`
+                                                                }
                                                                 <Link 
                                                                     className='post-container__post-read-more-btn'
                                                                     to={`/post/${post.id}/detail/`}

@@ -237,19 +237,14 @@ Landing Page
   display: grid;
   gap: 1rem;
   align-content: center;
-  text-align: center;
-  padding-top: 7rem;
 }
 
-@media (min-width: 479px) {
-  .mobile-landing-page-hero-header {
-    max-width: 500px;
-  }
+.mobile-landing-page-hero-header {
+  max-width: 500px;
+}
 
-  .mobile-landing-page-hero-paragraph {
-    max-width: 400px;
-    margin: 0 auto
-  }
+.mobile-landing-page-hero-paragraph {
+  max-width: 400px;
 }
 
 .mobile-landing-page-hero-header {
@@ -267,20 +262,9 @@ Landing Page
   font-size: clamp(1rem, 1vw + 0.5rem, 1.2rem);
 }
 
-@media (min-width: 479px) {
-  .mobile-landing-page-hero-header {
-    max-width: 500px;
-  }
-
-  .mobile-landing-page-hero-paragraph {
-    max-width: 400px;
-    margin: 0 auto
-  }
-}
-
 .mobile-landing-page-join-btn {
-  justify-self: center;
-  padding: 0.5rem 1.5rem ;
+  justify-self: start;
+  padding: 0.7rem 2rem ;
   text-align: center;
   background: var(--orange-50);
   color: hsl(0, 0%, 100%);
@@ -306,7 +290,7 @@ Landing Page
   display: flex;
   flex-direction: column;
   justify-content: start;
-  align-items: center;
+  align-items: start;
   gap: 0.5rem;
 }
 
@@ -314,7 +298,6 @@ Landing Page
   text-wrap: pretty;
   color: var(--orange-50);
   line-height: 1.3;
-  text-align: center;
   font-size: clamp(1.5rem, 3vw + 1rem, 2rem);
 }
 
@@ -324,8 +307,9 @@ Landing Page
   color: var(--black-30);
   max-width: 500px;
   font-weight: 500;
-  text-align: center;
+  text-align: start;
   font-size: 1.05rem;
+  width: 90%;
 }
 
 .landing-page-featured-posts {
@@ -338,10 +322,12 @@ Landing Page
   display: flex;
   flex-direction: column;
   justify-content: start;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.200)
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15), 
+              0 3px 15px rgba(0, 0, 0, 0.15), 
+              0 3px 15px rgba(0, 0, 0, 0.15);
 }
 
 .landing-page-featured-post-image-container {
@@ -351,7 +337,9 @@ Landing Page
 
 .landing-page-featured-post-image{
   width: 100%;
-  height: auto;
+  height: 100%;
+  aspect-ratio: 4/2;
+  object-fit: cover;
   display: block;
   border-radius: 10px;
 }
@@ -364,7 +352,16 @@ Landing Page
 }
 
 .landing-page-featured-post-title {
-  color: var(--purplish-brown-15);
+  display: none;
+  color: var(--black-15);
+  line-height: 1.2;
+  font-size: clamp(1.1rem, 1vw + 1rem , 1.7rem);
+  font-weight: 600;
+  text-wrap: pretty;
+}
+
+.mobile-landing-page-featured-post-title {
+  color: var(--black-15);
   line-height: 1.2;
   font-size: clamp(1.1rem, 1vw + 1rem , 1.7rem);
   font-weight: 600;
@@ -374,9 +371,8 @@ Landing Page
 .landing-page-featured-post-content {
   letter-spacing: 0.05rem;
   color: var(--black-30);
-  line-height: 1.4;
+  line-height: 1.5;
   text-wrap: pretty;
-  margin-top: 0.2rem;
 }
 
 .lg-landing-page-featured-post-like {
@@ -448,8 +444,6 @@ Landing Page
 }
 
 .mobile-landing-page-featured-post-author-and-date {
-  margin-top: auto;
-  padding-top: 1.2rem;
   display: flex;
   flex-wrap: wrap;
   align-items: start;
@@ -467,10 +461,6 @@ div > p {
   font-size: 0.9rem;
   color: var(--black-40);
   text-wrap: pretty;
-}
-
-.lg-landing-page-truncate {
-  display: none;
 }
 
 .lg-landing-page-featured-post-read-post {
@@ -498,9 +488,8 @@ div > p {
 .landing-page-topic-header-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  justify-content: start;
+  align-items: start;
   gap: 0.5rem
 }
 
@@ -518,6 +507,7 @@ div > p {
   max-width: 400px;
   font-weight: 500;
   font-size: 1.05rem;
+  width: 90%;
 }
 
 .landing-page-topics {
@@ -543,7 +533,7 @@ div > p {
 
 .landing-page-topic-image {
   width: 100%;
-  aspect-ratio: 3/2;
+  aspect-ratio: 4/2;
   object-fit: cover;
   display: block;
   border-radius: 10px;
@@ -563,6 +553,7 @@ div > p {
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
+  padding: 1rem;
 }
 
 .landing-page-topic-name {
@@ -572,7 +563,7 @@ div > p {
   max-width: 200px;
   text-align: center;
   text-wrap: balance;
-  font-size: clamp(0.9rem, 1vw + 1rem, 1.1rem);
+  font-size: clamp(0.9rem, 1vw + 1rem, 1.2rem);
 }
 
 .landing-page-topic-post_count {
@@ -604,7 +595,7 @@ div > p {
 .landing-page-post-header-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: start;
   gap: 0.5rem;
 }
@@ -613,7 +604,6 @@ div > p {
   text-wrap: pretty;
   color: var(--orange-50);
   line-height: 1.2;
-  text-align: center;
   font-size: clamp(1.5rem, 3vw + 1rem, 2rem);
 }
 
@@ -623,8 +613,8 @@ div > p {
   color: var(--black-30);
   max-width: 500px;
   font-weight: 500;
-  text-align: center;
   font-size: 1.05rem;
+  width: 90%;
 }
 
 .landing-page-posts {
@@ -637,10 +627,12 @@ div > p {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.200)
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15), 
+              0 3px 15px rgba(0, 0, 0, 0.15), 
+              0 3px 15px rgba(0, 0, 0, 0.15);
 }
 
 .landing-page-post-image-container {
@@ -650,9 +642,12 @@ div > p {
 
 .landing-page-post-image{
   width: 100%;
-  height: auto;
+  height: 100;
+  aspect-ratio: 4/2;
+  object-fit: cover;
   display: block;
   border-radius: 10px;
+
 }
 
 .landing-page-post-text-content {
@@ -672,9 +667,8 @@ div > p {
 .landing-page-post-content {
   letter-spacing: 0.05rem;
   color: var(--black-30);
-  line-height: 1.4;
+  line-height: 1.5;
   text-wrap: pretty;
-  margin-top: 0.2rem;
 }
 
 .landing-page-post-read-more {
@@ -732,7 +726,6 @@ div > p {
 
 .landing-page-post-author-and-date {
   margin-top: auto;
-  /* padding-top: 1.2rem; */
   display: flex;
   flex-wrap: wrap;
   align-items: start;
@@ -781,8 +774,7 @@ div > p {
 }
 
 .landing-page-email-form-contents {
-  width: 85%;
-  max-width: 450px;
+  width: 95%;
   margin: 0 auto;
   display: grid;
   align-content: start;
@@ -792,10 +784,10 @@ div > p {
 .landing-page-email-form-text-container {
   display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-content: center;
+  align-content: start;
+  justify-content: start;
   gap: 0.5rem;
-  text-align: center;
+  max-width: 500px;
 }
 
 .landing-page-email-form-header {
@@ -806,14 +798,15 @@ div > p {
 }
 
 .landing-page-email-form-text {
-  text-align: center;
   letter-spacing: 0.05rem;
   line-height: 1.4;
   color: var(--black-20);
   text-wrap: pretty;
   font-size: 1.05rem;
+  width: 90%;
   max-width: 400px;
   font-weight: 500;
+
 }
 
 .landing-page-email-sub-form {
@@ -851,13 +844,74 @@ div > p {
   }
 
   .landing-page-topic-name {
-    font-size: 0.9rem;
-    /* text-wrap: nowrap; */
+    color: var(--black-95);
+    line-height: 1.4;
+    letter-spacing: 0.05rem;
+    max-width: 200px;
+    text-align: center;
+    text-wrap: balance;
+    font-size: clamp(0.9rem, 1vw + 1rem, 1rem);
   }
 }
 
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 600px) {
+  /* mobile landing page header */
+  .mobile-landing-page-hero-text-wrapper {
+    text-align: start;
+  }
 
+  .mobile-landing-page-hero-paragraph {
+    max-width: 400px;
+    margin: 0;
+  }
+  /* end */
+
+  /* Landing page email subscription form */
+  .landing-page-email-form-contents {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto
+  }
+
+  .landing-page-email-form-text-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: start;
+    text-align: center;
+    margin: 0 auto
+  }
+
+  .landing-page-email-form-text {
+    width: initial;
+    max-width: 500px;  
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 640px) {
+
+  .mobile-landing-page-hero-wrapper {
+    height: calc(80dvh);
+    background: linear-gradient(
+      to top, hsla(0, 0%, 0%, 0.9), hsla(0, 0%, 0%, 0.2)), 
+      url('./images/landing_page.webp');
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    align-items: stretch;
+  }
+
+  .mobile-landing-page-hero-header {
+    font-size: clamp(2rem, 4vw + 1rem, 4rem);
+    text-wrap: pretty;
+    line-height: 1.2;
+    color: white;
+  }
+}
+
+@media screen and (min-width: 750px) {
   /* Landing page featured posts */
   .landing-page-featured-posts-wrapper {
     width: 90%;
@@ -867,14 +921,18 @@ div > p {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .landing-page-featured-post-image{
+  .landing-page-featured-post {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.200)
+  }
+
+  /* .landing-page-featured-post-image{
     width: 100%;
     height: 100%;
     aspect-ratio: 3/2;
     object-fit: cover;
-  }
+  } */
 
-  .landing-page-featured-post-title {
+  .mobile-landing-page-featured-post-title {
     font-size: clamp(1.1rem, 1vw + 1rem , 1.2rem);
   }
   /* end */
@@ -886,6 +944,10 @@ div > p {
 
   .landing-page-posts {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .landing-page-post {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.200)
   }
 
   .landing-page-post-image {
@@ -911,54 +973,18 @@ div > p {
   }
 
   .landing-page-topic-name {
-    font-size: clamp(1rem, 1vw + 1rem, 1.1rem);;
+    font-size: clamp(1rem, 1vw + 1rem, 1.2rem);;
   }
   /* end */
-
-}
-
-@media screen and (min-width: 600px) {
-  /* mobile landing page header */
-  .mobile-landing-page-hero-text-wrapper {
-    text-align: start;
-  }
-
-  .mobile-landing-page-hero-paragraph {
-    max-width: 400px;
-    margin: 0;
-  }
-
-  .mobile-landing-page-join-btn {
-    justify-self: start;
-  }
-  /* end */
-}
-
-@media screen and (min-width: 640px) {
-
-  .mobile-landing-page-hero-wrapper {
-    height: calc(80dvh);
-    background: linear-gradient(
-      to top, hsla(0, 0%, 0%, 0.9), hsla(0, 0%, 0%, 0.2)), 
-      url('./images/landing_page.webp');
-    background-position: right;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: grid;
-    align-items: stretch;
-  }
-
-  .mobile-landing-page-hero-header {
-    font-size: clamp(2rem, 4vw + 1rem, 4rem);
-    text-wrap: pretty;
-    line-height: 1.2;
-    color: white;
-  }
 }
 
 @media screen and (min-width: 850px) {
   .landing-page-topics {
     grid-template-columns: repeat(3, 1fr); 
+  }
+
+  .landing-page-topic-name {
+    font-size: clamp(1rem, 1vw + 1rem, 1.1rem);;
   }
 }
 
@@ -1012,12 +1038,13 @@ div > p {
     letter-spacing: 0.05rem;
     line-height: 1.5;
     text-wrap: pretty;
+    max-width: 400px;
     font-size: clamp(1.05rem, 1vw + 0.5rem, 1.2rem);
   }
 
   .landing-page-join-btn {
     justify-self: start;
-    padding: 0.8rem 2rem;
+    padding: 0.7rem 2rem;
     text-align: center;
     background: var(--orange-50);
     color: hsl(0, 0%, 100%);
@@ -1025,7 +1052,7 @@ div > p {
     letter-spacing: 0.05rem;
     margin-top: 1rem;
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 }
 
@@ -1110,11 +1137,19 @@ div > p {
   .landing-page-email-form-header {
     font-size: clamp(1.5rem, 5vw + 1rem, 2rem);
   }
+
+  .landing-page-topic-name {
+    font-size: clamp(1rem, 1vw + 1rem, 1.2rem);;
+  }
 }
 
 @media screen and (min-width: 1200px) {
   .mobile-landing-page-featured-post-like {
     display: none !important;
+  }
+
+  .mobile-landing-page-featured-post-title {
+    display: none;
   }
 
   .lg-landing-page-featured-post-like {
@@ -1198,7 +1233,12 @@ div > p {
   }
 
   .landing-page-featured-post-title {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
     color: white;
+    row-gap: 0.3rem;
+    font-size: clamp(1rem, 1vw + 1rem , 1.2rem);
   }
 
   .landing-page-featured-post-content {
@@ -1299,11 +1339,6 @@ div > p {
     font-size: 0.9rem;
     color: var(--black-90);
     text-wrap: pretty;
-  }
-
-  .lg-landing-page-truncate {
-    font-weight: 400;
-    display: inline-block;
   }
 
   .lg-landing-page-featured-post-read-post {
@@ -1775,7 +1810,9 @@ Posts
   gap: 1rem;
   border-radius: 10px;
   padding: 1rem;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.200)
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15), 
+              0 3px 15px rgba(0, 0, 0, 0.15), 
+              0 3px 15px rgba(0, 0, 0, 0.15);
 }
 
 .post-container__post-author-and-date {
@@ -1814,6 +1851,8 @@ Posts
   height: auto;
   display: block;
   border-radius: 10px;
+  aspect-ratio: 4/2;
+  object-fit: cover;
 }
 
 .post-container__post-text-content {
@@ -2850,7 +2889,9 @@ My Posts
   gap: 0.5rem;
   border-radius: 10px;
   padding: 1rem;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.200)
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15), 
+              0 3px 15px rgba(0, 0, 0, 0.15), 
+              0 3px 15px rgba(0, 0, 0, 0.15);
 }
 
 .my-posts-container__date-posted {
@@ -2875,7 +2916,7 @@ My Posts
 .my-posts-container__post-image{
   width: 100%;
   height: 100%;
-  aspect-ratio: 3/2;
+  aspect-ratio: 4/2;
   object-fit: cover;
   display: block;
   border-radius: 10px;
@@ -3490,7 +3531,9 @@ TOPIC POSTS
   gap: 1rem;
   border-radius: 10px;
   padding: 1rem;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.200)
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15), 
+              0 3px 15px rgba(0, 0, 0, 0.15), 
+              0 3px 15px rgba(0, 0, 0, 0.15);
 }
 
 .topic-posts-container__post-image-container {
@@ -4068,7 +4111,7 @@ FOOTER
 
 .footer-container__contents {
   width: 95%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   gap: 2rem;

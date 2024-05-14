@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import { useLocation, Navigate, useNavigate, Link, useOutletContext} from 'react-router-dom'
+import React, { useState, useEffect, useContext } from 'react'
+import { useLocation, Navigate, Link} from 'react-router-dom'
 import { getMyData, deletePost } from '../utils/api'
 import LoadingPage from './LoadingPage'
 import { url } from '../utils/urls'
 import dogImg from '../images/cartoon_dog.png'
 import { formatDate } from '../utils/formatDate'
 import SidebarLatestPosts from '../components/SidebarLatestPosts'
+import { ContentLayoutContext } from '../layouts/ContentLayout'
 
 
 function MyPost() {
   const [posts, setPosts] = useState(null)
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const authenticated = JSON.parse(localStorage.getItem('auth')) || null
   const {pathname} = useLocation()
   window.history.replaceState({state:null}, '', '/my-posts')
   const [ scrollHeight, setScrollHeight] = useState(window.pageYOffset)
+  const {isAuthenticated} = useContext(ContentLayoutContext)
 
   function endEventListener(){
       const postDetailSideBar = document.querySelector('.posts-side-bar')
@@ -37,7 +38,7 @@ function MyPost() {
   }
     
   const getMyPosts = async()=> {
-    const data = await getMyData(`${url}/api/my-post/`, authenticated.token)
+    const data = await getMyData(`${url}/api/my-post/`, isAuthenticated.token)
     if(data.error || data.message || data.length === 0) {
       setIsLoading(false)
 
@@ -49,7 +50,7 @@ function MyPost() {
   }
 
   const removePost = async(e, post)=> {
-      const data = await deletePost(`${url}/api/post/${post.id}/delete/`, authenticated.token)
+      const data = await deletePost(`${url}/api/post/${post.id}/delete/`, isAuthenticated.token)
       if(!data.error) {
         const newPostArray = posts.filter((obj)=>obj.id !== post.id)
         setPosts(newPostArray)
@@ -71,7 +72,7 @@ function MyPost() {
     getMyPosts()
   }, [])
 
-  if(!authenticated) {
+  if(!isAuthenticated) {
     return (
       <Navigate 
         to='/login' 
@@ -115,22 +116,30 @@ function MyPost() {
         <div className="my-posts-hero-container">
             <div className="my-posts-header-contents">
                 <div className="my-posts-author-profile">
-                    <img className='my-posts-profile-img' src={authenticated.image_url} alt="" />
-                    <h4 className='my-posts-username'>{authenticated.username}</h4>
+                    <img className='my-posts-profile-img' src={isAuthenticated.image_url} alt="" />
+                    <h4 className='my-posts-username'>{isAuthenticated.username}</h4>
                 </div>
                 <h1 className='my-posts-hero-header'>My Posts</h1>
                 <div>
                   <p className='my-posts-num-of-posts'>
-                    {authenticated.qs_count.post_count > 1 ? 
-                    `${authenticated.qs_count.post_count} posts`
+                    {isAuthenticated.qs_count.post_count > 1 ? 
+                      `${isAuthenticated.qs_count.post_count} posts`
                     :
-                    `${authenticated.qs_count.post_count} posts`}
+                      isAuthenticated.qs_count.post_count === 1 ?
+                          `${isAuthenticated.qs_count.post_count} post`
+                      :
+                          "0 post"
+                    }
                   </p>
                   <Link to='/my-comments' className='my-posts-num-of-comments'>
-                    {authenticated.qs_count.comment_count > 1 ? 
-                      `${authenticated.qs_count.comment_count} comments`
+                    {isAuthenticated.qs_count.comment_count > 1 ? 
+                      `${isAuthenticated.qs_count.comment_count} comments`
                     :
-                      `${authenticated.qs_count.comment_count} comment`}
+                      isAuthenticated.qs_count.comment_count === 1 ?
+                        `${isAuthenticated.qs_count.comment_count} comment`
+                      :
+                          "0 comment"
+                    }
                   </Link>
                 </div>
             </div>

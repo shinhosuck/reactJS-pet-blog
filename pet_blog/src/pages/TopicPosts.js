@@ -121,10 +121,16 @@ function TopicPosts() {
     return (
         <React.Fragment>
             <div className="bg-img">
-                <div className="my-posts-hero-container">
-                    <div className="my-posts-header-contents">
-                        <h1 className='my-posts-hero-header'>{state && state.topic}</h1>
-                        <TopicContent topics={topics} state={state}/>
+                <div className="bg-img-header-container">
+                    <div className="bg-img-contents">
+                        <h1 className='bg-img-header'>{state && state.topic}</h1>
+                        {topics && topics.filter((topic)=> topic.name === state.topic)
+                            .map((obj)=> {
+                                return (
+                                    <p className='bg-img-text' key={obj.id}>{obj.description}</p>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>
@@ -254,14 +260,3 @@ function TopicPosts() {
 }
 
 export default TopicPosts
-
-
-const TopicContent = (props)=> {
-    const {topics, state} = props
-    const topicContent = topics && topics.find((topic)=> topic.name === state.topic)
-    return (
-        <>
-            <p style={{fontSize:'1rem'}} className='my-posts-num-of-posts'>{topicContent.description}</p>
-        </>
-    )
-}

@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { url } from '../utils/urls'
 import LoadingPage from './LoadingPage'
 import { fetchComments, removeComment, editComment } from '../utils/api'
 import dogImg from '../images/cartoon_dog.png'
+import { ContentLayoutContext } from '../layouts/ContentLayout'
+
 
 function MyComment() {
   const [comments, setComments] = useState(null)
   const [update, setUpdate] = useState(null)
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const authenticate = JSON.parse(localStorage.getItem('auth'))
   const navigate = useNavigate()
   const {state, pathname} = useLocation()
+  const { isAuthenticated } = useContext(ContentLayoutContext)
 
 
   const deleteComment = async(id)=> {
     const obj = {isMyComment:true}
     try {
-      const data = await removeComment(`${url}/api/comment/${id}/delete/`, authenticate.token, obj)
+      const data = await removeComment(`${url}/api/comment/${id}/delete/`, isAuthenticated.token, obj)
       if(!data.error){
         const new_comment_array = comments.filter((comment)=> comment.id !== id)
         setComments(new_comment_array)
@@ -42,9 +44,9 @@ function MyComment() {
 
   const updateComment = async(e, id)=> {
     e.preventDefault()
-    const body = {content:update.content, user:authenticate.username}
+    const body = {content:update.content, user:isAuthenticated.username}
     try {
-      const data = await editComment(`${url}/api/comment/${id}/update/`, body, authenticate.token)
+      const data = await editComment(`${url}/api/comment/${id}/update/`, body, isAuthenticated.token)
       if(!data.error) {
         console.log(data)
         const newComments = comments.map((comment)=> {
@@ -74,7 +76,7 @@ function MyComment() {
 
   useEffect(()=> {
     const getComments = async()=> {
-      const data = await fetchComments(`${url}/api/my-comment/`, authenticate.token)
+      const data = await fetchComments(`${url}/api/my-comment/`, isAuthenticated.token)
       if(data.length !== 0) {
         setComments(data)
       }
@@ -83,7 +85,7 @@ function MyComment() {
     getComments()
   }, [])
 
-  if(!authenticate) {
+  if(!isAuthenticated) {
     return (
       <Navigate to='/login'  replace={true} state={{error:'Please login to see your comment!', redirect:pathname}}/>
     )
@@ -101,22 +103,30 @@ function MyComment() {
         <div className="my-posts-hero-container">
             <div className="my-posts-header-contents">
                 <div className="my-posts-author-profile">
-                    <img className='my-posts-profile-img' src={authenticate.image_url} alt="" />
-                    <h4 className='my-posts-username'>{authenticate.username}</h4>
+                    <img className='my-posts-profile-img' src={isAuthenticated.image_url} alt="" />
+                    <h4 className='my-posts-username'>{isAuthenticated.username}</h4>
                 </div>
                 <h1 className='my-posts-hero-header'>My Comments</h1>
                 <div>
                   <p className='my-posts-num-of-posts'>
-                    {authenticate.qs_count.comment_count > 1 ? 
-                      `${authenticate.qs_count.comment_count} comments`
+                    {isAuthenticated.qs_count.comment_count > 1 ? 
+                      `${isAuthenticated.qs_count.comment_count} comments`
                     :
-                      `${authenticate.qs_count.comment_count} comment`}
+                      isAuthenticated.qs_count.comment_count === 1 ?
+                        `${isAuthenticated.qs_count.comment_count} comment`
+                      :
+                        "0 comment"
+                    }
                   </p>
                   <Link to='/my-posts' className='my-posts-num-of-comments'>
-                    {authenticate.qs_count.post_count > 1 ? 
-                      `${authenticate.qs_count.post_count} posts`
+                    {isAuthenticated.qs_count.post_count > 1 ? 
+                      `${isAuthenticated.qs_count.post_count} posts`
                     :
-                      `${authenticate.qs_count.post_count} post`}
+                      isAuthenticated.qs_count.post_count === 1 ?
+                        `${isAuthenticated.qs_count.post_count} post`
+                      :
+                        "0 post"
+                    }
                   </Link>
                 </div>
             </div>

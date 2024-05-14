@@ -48,10 +48,10 @@ function SidebarLatestPosts() {
                                 <img src={post.image_url} alt="" />
                             </div>
                             <div className='side-bar-post-content'>
-                                {post.title.length > 40 ?
-                                    <h5>{post.title.substring(0, 40)}...</h5>
+                                {post.title.length > 50 ?
+                                    <h4>{post.title.substring(0, 50)}...</h4>
                                 :
-                                    <h5>{post.title}</h5>
+                                    <h4>{post.title}</h4>
                                 }
                                 <div className="side-bar-likes-and-num-of-comments">
                                     <div className="side-bar-likes">

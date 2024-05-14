@@ -78,7 +78,8 @@ function PostList() {
           <div className="bg-img-contents">
             <h1 className='bg-img-header'>Latest Posts</h1>
             <p className='bg-img-text'>
-              You'll find a wealth of information about caring for your canine companion, 
+              You'll find a wealth of information 
+              about caring for your canine companion, 
               from best practices to advice against.
             </p>
           </div>

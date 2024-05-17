@@ -43,17 +43,20 @@ function LandingPageEmailSub() {
         <div className='landing-page-email-sub-form-wrapper'>
             <div className="landing-page-email-form-contents">
                 <div className="landing-page-email-form-text-container">
-                    <h1 className="landing-page-email-form-header">Stay Informed About Canine Care</h1>
+                    <h1 className="landing-page-email-form-header">Stay Informed</h1>
                     <p className="landing-page-email-form-text">
-                        Subscribe to our blog for regular updates and valuable
-                        tips on caring for your furry friend.
+                        Enter your name and email to subscribe to 
+                        our blog and never miss out on valuable updates.
                     </p>
                 </div>
                 <form className='landing-page-email-sub-form' onSubmit={handleSubmit}>
                     {successMessage && <p className='success-message'>{successMessage}</p> || isError && <p className='error-message'>{isError}</p>}
-                    <input onChange={handleChange} value={subscriber.first} name='first' type="text" placeholder='First name'/>
-                    <input onChange={handleChange} value={subscriber.last} name='last' type="text" placeholder='Last name'/>
-                    <input onChange={handleChange} value={subscriber.email} name='email' type="email" placeholder='example@mail.com'/>
+                    <label htmlFor="firstName">First Name</label>
+                    <input id='firstName' onChange={handleChange} value={subscriber.first} name='first' type="text"/>
+                    <label htmlFor="lastName">Last Name</label>
+                    <input id='lastName' onChange={handleChange} value={subscriber.last} name='last' type="text"/>
+                    <label htmlFor="email">Email</label>
+                    <input id='email' onChange={handleChange} value={subscriber.email} name='email' type="email"/>
                     <button className='landing-page-email-sub-btn' type='submit'>Subscribe</button>
                 </form>
             </div>

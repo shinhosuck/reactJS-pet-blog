@@ -90,13 +90,6 @@ function Footer(prop) {
               }
             </ul>
           </div>
-          <div className="social-links">
-            <h2 className='social-links-header'>External Links</h2>
-            <div className="social-links-container">
-              <Link to="https://github.com/shinhosuck" target="_blank"><i className="fab fa-github"></i></Link>
-              <Link to="https://www.linkedin.com/in/eric-anderson-a6b906214/" target="_blank"><i className="fab fa-linkedin-in"></i></Link>
-            </div>
-          </div>
           <div className="contact-us-container">
             <h2 className='contact-us-header'>Contact US</h2>
             <div className='contacts'>
@@ -124,6 +117,13 @@ function Footer(prop) {
               </div>
             </div>
           </div>
+          {/* <div className="social-links">
+            <h2 className='social-links-header'>External Links</h2>
+            <div className="social-links-container">
+              <Link to="https://github.com/shinhosuck" target="_blank"><i className="fab fa-github"></i></Link>
+              <Link to="https://www.linkedin.com/in/eric-anderson-a6b906214/" target="_blank"><i className="fab fa-linkedin-in"></i></Link>
+            </div>
+          </div> */}
         </div>
         <div className="copy-right">
             <p className="copy-right-text">&copy;Copyright 2024 DRF ReactJS Blog Team. All Rights Reserved.</p>

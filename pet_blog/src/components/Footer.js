@@ -48,7 +48,7 @@ function Footer(prop) {
           <div className='footer-container__brand-container'>
               <div className="footer-container__logo">
                 <img className='footer-container__brand-logo' src={paw} alt="paw" />
-                <h2 className='footer-container__brand-name'>PawPals</h2>
+                <h2 className='footer-container__brand-name'>Canine Blog</h2>
               </div>
               <div className="footer-container__brand-text">
                 <p>
@@ -92,41 +92,26 @@ function Footer(prop) {
           </div>
           <div className="contact-us-container">
             <h2 className='contact-us-header'>Contact US</h2>
-            <div className='contacts'>
-              <div className='contact'>
-                <div className="address">
-                  <i className="fa-solid fa-address-book"></i>
-                  <p>96 Imelda Village Baguio City, Benguet, PH 2600</p>
-                </div>
-                <div className="email">
-                  <i className="fa-solid fa-envelope"></i>
-                  <Link to="malito:shinhosuck1973@gmail.com">shinhosuck1973@gmail.com</Link>
-                </div>
-                <div className="phone">
-                  <i className="fa-solid fa-phone"></i>
-                  <Link to="tel:+639693527097">+63 969 352 7097</Link>
-                </div>
-              </div>
-              <div className='contact-form-container'>
-                <form className='contact-form' onSubmit={handleSubmit}>
-                  {successMessage && <p className='success-message'>{successMessage}</p> || isError && <p className='error-message'>{isError}</p>}
-                  <input onChange={handleChange} value={message.email} type="email" id='email' name='email' required placeholder='Your email'/>
-                  <textarea onChange={handleChange} value={message.content} name="content" id="message" required placeholder='Your message'></textarea>
-                  <button type='submit'>Submit</button>
-                </form>
-              </div>
+            <div className='contact-form-container'>
+              <form className='contact-form' onSubmit={handleSubmit}>
+                {successMessage && <p className='success-message'>{successMessage}</p> || isError && <p className='error-message'>{isError}</p>}
+                <label htmlFor="contactEmail">Email</label>
+                <input onChange={handleChange} value={message.email} type="email" id='contactEmail' name='email' required/>
+                <label htmlFor="contactMessage">Message</label>
+                <textarea onChange={handleChange} value={message.content} name="content" id="contactMessage" required></textarea>
+                <button type='submit'>Submit</button>
+              </form>
             </div>
           </div>
-          {/* <div className="social-links">
-            <h2 className='social-links-header'>External Links</h2>
-            <div className="social-links-container">
-              <Link to="https://github.com/shinhosuck" target="_blank"><i className="fab fa-github"></i></Link>
-              <Link to="https://www.linkedin.com/in/eric-anderson-a6b906214/" target="_blank"><i className="fab fa-linkedin-in"></i></Link>
-            </div>
-          </div> */}
+        </div>
+        <div className="social-links">
+          <div className="social-links-container">
+            <Link to="https://github.com/shinhosuck" target="_blank"><i className="fab fa-github"></i></Link>
+            <Link to="https://www.linkedin.com/in/eric-anderson-a6b906214/" target="_blank"><i className="fab fa-linkedin-in"></i></Link>
+          </div>
         </div>
         <div className="copy-right">
-            <p className="copy-right-text">&copy;Copyright 2024 DRF ReactJS Blog Team. All Rights Reserved.</p>
+            <p className="copy-right-text">&copy;Copyright 2024 PawPal Team. All Rights Reserved.</p>
         </div>
     </div>
   )

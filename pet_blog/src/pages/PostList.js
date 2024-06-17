@@ -9,7 +9,6 @@ import PostListPosts from './PostListPosts'
 
 function PostList() {
   const [posts, setPosts] = useState(null)
-  const [topics, setTopics] = useState(null)
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const { state } = useLocation()
@@ -26,18 +25,6 @@ function PostList() {
       setIsLoading(false)
     }
     getPosts()
-  }, [])
-
-  useEffect(()=> {
-    const getTopics = async()=> {
-      const topics_data = await getTopicData(`${url}/api/topics/`)
-      if(topics_data.error){
-        setIsError(topics_data.error)
-      }
-      setTopics(topics_data)
-      setIsLoading(false)
-    } 
-    getTopics()
   }, [])
 
   useEffect(()=> {
@@ -90,7 +77,7 @@ function PostList() {
           }
         </div>
       </div>
-      <PostListPosts />
+      {posts && <PostListPosts posts={posts} />}
     </React.Fragment>
   )
 }

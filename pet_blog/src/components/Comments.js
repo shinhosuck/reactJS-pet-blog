@@ -95,7 +95,7 @@ function Comments(props) {
                                 className='post-detail-comment-edit-btn'
                             >
                                 <i className="fa-solid fa-pen post-detail-comment-edit-icon"></i>
-                                <span className='post-detail-comment-edit-text'>Edit</span>
+                                <span className='post-detail-comment-edit-text'>Update</span>
                             </button>
                             <button 
                                 onClick={()=> {

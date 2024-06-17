@@ -8,7 +8,6 @@ import PostDetailPost from '../components/PostDetailPost'
 import { getPostData, addLikes, getPostComments } from '../utils/api'
 import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
-import dogImg from '../images/cartoon_dog.png'
 import SidebarLatestPosts from '../components/SidebarLatestPosts'
 
 
@@ -20,7 +19,7 @@ function PostDetail() {
     const [isLoading, setIsLoading] = useState(true)
     const [showCommentForm, setShowCommentForm] = useState(false)
     const [showUpdatePostForm, setShowUpdatePostForm] = useState(false)
-    const { isAuthenticated, posts, topics } = useContext(ContentLayoutContext)
+    const { isAuthenticated } = useContext(ContentLayoutContext)
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -127,13 +126,15 @@ function PostDetail() {
                                 post={post}
                             />
                         }
-                        {showUpdatePostForm && isAuthenticated &&
-                            <UpdatePostForm 
-                                post={post} 
-                                showUpdatePostForm={setShowUpdatePostForm}
-                                authenticated={isAuthenticated}
-                            />
-                        }
+                        <div id="post-edit-container">
+                            {showUpdatePostForm && isAuthenticated &&
+                                <UpdatePostForm 
+                                    post={post} 
+                                    showUpdatePostForm={setShowUpdatePostForm}
+                                    authenticated={isAuthenticated}
+                                />
+                            }
+                        </div>
                         <div className="post-detail-comments">
                             {comments && comments.map((comment)=> {
                                 return (
@@ -152,7 +153,6 @@ function PostDetail() {
                     </div>
                     {!showUpdatePostForm && !comments &&
                         <div className="no-comments-container">
-                            <img src={dogImg} alt="" />
                             <div className="no-comment-text-container">
                                 <h3>Be the first to comment!</h3>
                                 <p>

@@ -13,7 +13,6 @@ export function Navbar() {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const navigate = useNavigate()
 
-
     const handleMobileTopics = ()=> {
         const mobileTopics = document.querySelector('#mobile-topics > .navbar-topics')
         const mobileTopicsChevronDown = document.querySelector('.mobile-topics-chevron-down')
@@ -82,7 +81,7 @@ export function Navbar() {
             <nav className="navbar-wrapper">
                 <Link to='/' className='navbar-brand-link'>
                     <img className='navbar-brand-logo' src={paw} alt="paw" />
-                    <h2 className='navbar-brand-name'>PawPals</h2>
+                    <h2 className='navbar-brand-name'>Canine Blog</h2>
                 </Link>
                 <button
                     onClick={()=> {
@@ -153,7 +152,7 @@ export function Navbar() {
                                 </div>
                             </div>
                         }
-                    {/*  */}
+                    {/* END */}
                     <NavLink 
                         onClick={()=> {
                             setShowNavLinks(false)
@@ -338,9 +337,6 @@ export function Navbar() {
 
                 </div>
                 {/* END */}
-
-
-
             </nav>
         </div>
     )

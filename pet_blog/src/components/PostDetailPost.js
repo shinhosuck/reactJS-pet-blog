@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Navigate } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
+import { Navigate, Link } from 'react-router-dom'
 import { deletePost } from '../utils/api'
 import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
+
 
 
 function PostDetailPost(props) {
@@ -46,7 +48,7 @@ function PostDetailPost(props) {
                     </div>
                     <h3 className='post-detail-container__post-title'>{post.title}</h3>
                 </div>
-                <div className='post-detail-container__post-image-container'>
+                <div id='post-image' className='post-detail-container__post-image-container'>
                     <img className='post-detail-container__post-image' src={post.image_url} alt="" />
                     <div className="post-detail-container__like-and-reply">
                         <button 
@@ -85,7 +87,7 @@ function PostDetailPost(props) {
                                     }}
                                 >
                                     <i className="fa-solid fa-pen post-detail-edit-btn"></i>
-                                    <span className='post-detail-edit-text'>Edit</span>
+                                    <HashLink to='#post-image' className='post-detail-edit-text'>Update</HashLink>
                                 </button> 
                                 <button
                                     onClick={()=> {

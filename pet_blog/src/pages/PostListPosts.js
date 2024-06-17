@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext} from 'react'
+import React, { useState, useEffect} from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ContentLayoutContext } from '../layouts/ContentLayout'
 import { formatDate } from '../utils/formatDate'
 import SidebarLatestPosts from '../components/SidebarLatestPosts'
 
-function PostListPosts() {
-    const {posts} = useContext(ContentLayoutContext)
+
+function PostListPosts(props) {
+    const {posts} = props
     const {pathname} = useLocation()
     const [ scrollHeight, setScrollHeight] = useState(window.pageYOffset)
 
@@ -40,6 +40,7 @@ function PostListPosts() {
         <div className="post-container">
             <div className="post-container__posts">
                 {posts && posts.map((post)=> {
+                    console.log(post)
                     return (
                         <div key={post.id} className="post-container__post">
                             <div className='post-container__post-author-and-date'>
@@ -49,11 +50,17 @@ function PostListPosts() {
                                     <p className='post-container__post-date-posted'>{formatDate(post.date_posted)}</p>
                                 </div>
                             </div>
-                            <h3 className='post-container__post-title'>{post.title}</h3>
+                            <div className='post-container-post-title-topic-container'>
+                                {/* <p className='post-container-post-topic'>{post.topic}</p> */}
+                                <h3 className='post-container__post-title'>{post.title}</h3>
+                            </div>
                             <div className="post-container__post-image-container">
                                 <img className='post-container__post-image' src={post.image_url} alt={post.title} />
                                 {post.qs_count.like_count > 1 ? 
                                     <div className='post-container__post-like'>
+                                        <div className='post-container-post-topic'>
+                                            <p>{post.topic}</p>
+                                        </div>
                                         <div className='post-container__post-like-container'>
                                             <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
                                             <span className='post-container__post-like-count'>{post.qs_count.like_count}</span>
@@ -65,6 +72,9 @@ function PostListPosts() {
                                     </div>
                                 : 
                                     <div className='post-container__post-like'>
+                                        <div className='post-container-post-topic'>
+                                            <p>{post.topic}</p>
+                                        </div>
                                         <div className='post-container__post-like-container'>
                                             <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
                                             <span className='post-container__post-like-count'>{post.qs_count.like_count}</span>

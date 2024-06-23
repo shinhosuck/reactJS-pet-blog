@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useLocation, Navigate, Link, NavLink } from 'react-router-dom'
+import { useLocation, Navigate, Link, NavLink, useSearchParams} from 'react-router-dom'
 import { getPostData, getTopicData } from '../utils/api'
 import LoadingPage from './LoadingPage'
 import { url } from '../utils/urls'
@@ -20,7 +20,9 @@ function TopicPosts() {
     const { isAuthenticated } = useContext(ContentLayoutContext)
     const location = useLocation()
     const [ scrollHeight, setScrollHeight] = useState(window.pageYOffset)
+    const [searchParams, setSearchParams] = useSearchParams()
 
+    const filter = searchParams.get('filter')
 
     function endEventListener(){
         const postDetailSideBar = document.querySelector('.posts-side-bar')
@@ -42,11 +44,12 @@ function TopicPosts() {
     }
     
     useEffect(()=> {
+        document.title = `Topic: ${filter}`
         window.addEventListener(
             'scroll', 
             endEventListener
         )
-    }, [scrollHeight])
+    }, [scrollHeight, filter])
     
     const getPosts =  async()=> {
         try {
@@ -82,7 +85,7 @@ function TopicPosts() {
         }
     }
 
-    const posts = postArray && state && postArray.filter((post)=> post.topic === state.topic)
+    const posts = postArray && filter && postArray.filter((post)=> post.topic === filter)
     
     useEffect(()=> {
         getPosts()
@@ -91,7 +94,6 @@ function TopicPosts() {
     useEffect(()=> {
         getTopics()
     }, [])
-
     
     if(postArray && topicNames) {
         const timeOutID = setTimeout(()=> {
@@ -123,8 +125,8 @@ function TopicPosts() {
             <div className="bg-img">
                 <div className="bg-img-header-container">
                     <div className="bg-img-contents">
-                        <h1 className='bg-img-header'>{state && state.topic}</h1>
-                        {topics && topics.filter((topic)=> topic.name === state.topic)
+                        <h1 className='bg-img-header'>{filter}</h1>
+                        {topics && topics.filter((topic)=> topic.name === filter)
                             .map((obj)=> {
                                 return (
                                     <p className='bg-img-text' key={obj.id}>{obj.description}</p>
@@ -143,7 +145,7 @@ function TopicPosts() {
                                 onClick={()=>setTopicMenuOpen(!topicMenuOpen)}
                                 className='topic-posts-navbar__toggle-btns'
                             >
-                                <p className='topic-change-input' >{state && state.topic}</p>
+                                <p className='topic-change-input' >{filter && filter}</p>
                                 {!topicMenuOpen ?
                                     <div className='topic-post-toggle-btn'>
                                         <i className="fa fa-chevron-down"></i>
@@ -162,7 +164,7 @@ function TopicPosts() {
                                                 key={topicName}
                                                 onClick={()=> setTopicMenuOpen(false)}
                                                 to={`.?filter=${topicName}`} 
-                                                state={{topic:topicName, redirect:state.redirect}} 
+                                                state={{topic:topicName, redirect:filter}} 
                                                 className='topic-btn'
                                             >
                                                 {topicName}

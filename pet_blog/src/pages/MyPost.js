@@ -5,7 +5,6 @@ import LoadingPage from './LoadingPage'
 import { url } from '../utils/urls'
 import dogImg from '../images/cartoon_dog.png'
 import { formatDate } from '../utils/formatDate'
-import SidebarLatestPosts from '../components/SidebarLatestPosts'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
 
 
@@ -14,28 +13,9 @@ function MyPost() {
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const {pathname} = useLocation()
-  window.history.replaceState({state:null}, '', '/my-posts')
   const [ scrollHeight, setScrollHeight] = useState(window.pageYOffset)
   const {isAuthenticated} = useContext(ContentLayoutContext)
 
-  function endEventListener(){
-      const postDetailSideBar = document.querySelector('.posts-side-bar')
-      const scrolled = window.pageYOffset
-      if(scrolled >= 450) {
-          if(postDetailSideBar) {
-              postDetailSideBar.style.top = '75px'
-          }
-      }else {
-          if(postDetailSideBar) {
-              postDetailSideBar.style.top = '0px'
-          }
-      }
-      setScrollHeight(scrolled)
-      return window.removeEventListener(
-          'scroll', 
-          endEventListener
-      )
-  }
     
   const getMyPosts = async()=> {
     const data = await getMyData(`${url}/api/my-post/`, isAuthenticated.token)
@@ -60,13 +40,6 @@ function MyPost() {
         setIsError({error:data.error})
       }
   }
-
-  useEffect(()=> {
-    window.addEventListener(
-        'scroll', 
-        endEventListener
-    )
-  }, [scrollHeight])
 
   useEffect(()=> {
     getMyPosts()
@@ -112,44 +85,9 @@ function MyPost() {
 
   return (
     <React.Fragment>
-      <div className="bg-img">
-        <div className="my-posts-hero-container">
-            <div className="my-posts-header-contents">
-                <div className="my-posts-author-profile">
-                    <img className='my-posts-profile-img' src={isAuthenticated.image_url} alt="" />
-                    <h4 className='my-posts-username'>{isAuthenticated.username}</h4>
-                </div>
-                <h1 className='my-posts-hero-header'>My Posts</h1>
-                <div>
-                  <p className='my-posts-num-of-posts'>
-                    {isAuthenticated.qs_count.post_count > 1 ? 
-                      `${isAuthenticated.qs_count.post_count} posts`
-                    :
-                      isAuthenticated.qs_count.post_count === 1 ?
-                          `${isAuthenticated.qs_count.post_count} post`
-                      :
-                          "0 post"
-                    }
-                  </p>
-                  <Link to='/my-comments' className='my-posts-num-of-comments'>
-                    {isAuthenticated.qs_count.comment_count > 1 ? 
-                      `${isAuthenticated.qs_count.comment_count} comments`
-                    :
-                      isAuthenticated.qs_count.comment_count === 1 ?
-                        `${isAuthenticated.qs_count.comment_count} comment`
-                      :
-                          "0 comment"
-                    }
-                  </Link>
-                </div>
-            </div>
-        </div>
-      </div>
-      <div className="my-posts-main-container">
         <div className='my-posts-container'>
           {!posts ?
             <div className="no-topic-post-container">
-              <img src={dogImg} alt="" />
               <div className="no-topic-post-text-container">
                   <h3>You do not have any post!</h3>
                   <p>
@@ -178,7 +116,7 @@ function MyPost() {
                         </div>
                         <div className="my-posts-container__btns">
                           <Link 
-                            to={`/update/${post.id}/post`} state={{update:post, redirect:pathname}} 
+                            to={`/update/${post.id}/post`} state={{update:post, redirect:pathname, name:'Dashboard Posts'}} 
                             className='my-posts-container__post-update'
                           >
                             <i className="fa-solid fa-pen post-detail-edit-btn"></i>
@@ -200,10 +138,6 @@ function MyPost() {
             </div>
           }
         </div>
-        <div className='posts-side-bar'>
-            <SidebarLatestPosts />
-        </div>
-      </div>
     </React.Fragment>
   )
 }

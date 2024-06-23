@@ -78,7 +78,6 @@ function ContentLayout() {
             <i className="fa fa-chevron-up"></i>
           </button>
         }
-        <div className='bg-overlay hide-bg-overlay'></div>
     </ContentLayoutContext.Provider>
   )
 }

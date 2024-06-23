@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react'
-import { removeComment, getChildrenComments } from '../utils/api'
+import React, { useState, useContext, useEffect, useCallback } from 'react'
+import { removeComment, getChildrenComments, handleFollow } from '../utils/api'
 import { url } from '../utils/urls'
 import UpdateCommentForm from './UpdateCommentForm'
 import ChildCommentForm from './ChildCommentForm'
@@ -7,12 +7,56 @@ import { ContentLayoutContext } from '../layouts/ContentLayout'
 
 
 function Comments(props) {
+    const [isFollowing, setIsFollowing] = useState(null)
     const [showCommentEditForm, setShowCommentEditForm] = useState(false)
     const [showCommentForm, setShowCommentForm] = useState({id:null})
     const [childrenComments, setChildrenComments] = useState([])
     const { isAuthenticated } = useContext(ContentLayoutContext)
-    const { post, setPost, comment, comments, setComments, getPost} = props
+    const { 
+        post, 
+        setPost, 
+        comment, 
+        comments, 
+        setComments, 
+        getPost,
+    } = props
 
+
+    const fetchChildrenComments = async()=> {
+        const data = await getChildrenComments(`${url}/api/comment/${comment.id}/children/`)
+        if(!data.error) {
+            setChildrenComments(data)
+            return data
+        }
+        else {
+            console.log(data.error)
+        }
+    }
+
+    const followOrUnfollow = async(e, choice, user)=> {
+        const followURL = `${url}/api/auth/follow/user/${user}/?choice=${choice}`
+        try {
+            const data = await handleFollow(followURL, isAuthenticated.token)
+            if(data.error) {
+                console.log(data.error)
+
+            }else {
+                setIsFollowing((prev)=> {
+                    const obj = {
+                        ...prev, 
+                        follow:data.data.follow, 
+                        follower:data.data.follower
+                    }
+                    return obj
+                })
+                localStorage.removeItem('auth')
+                localStorage.setItem('auth', JSON.stringify(data.data))
+                window.location.reload()
+            }
+        } catch (error) {
+            console.log(error.message, error.type)
+        }
+    }
 
     const deleteComment = async(id, comment)=> {
         if(!comment.parent_id) {
@@ -46,26 +90,42 @@ function Comments(props) {
     }
 
     useEffect(()=> {
-        const fetchChildrenComments = async()=> {
-            const data = await getChildrenComments(`${url}/api/comment/${comment.id}/children/`)
-            if(!data.error) {
-                setChildrenComments(data)
-            }
-            else {
-                console.log(data.error)
-            }
+        if(isAuthenticated) {
+            setIsFollowing((prev)=> {
+                const obj = {
+                    ...prev, 
+                    follow:isAuthenticated.follow, 
+                    follower:isAuthenticated.follower
+                }
+                return obj
+            })
         }
+       
+    }, [])
+
+    useEffect(()=> {
         fetchChildrenComments()
     }, [comment]) 
 
+    
     return (
         <div id={comment.id} key={comment.id} className={comment.parent_id ? 'post-detail-comments__comment has-parent-id' :'post-detail-comments__comment'}>
             <div className='post-detail-comments__user-profile'>
                 <div className='post-detail-comments__user-image-container'>
                     <img className='post-detail-comments__user-image' src={comment.user_profile_image_url} alt="profile image"/>
                 </div>
-                <div className='post-detail-username-and-date'>
-                    <p className='post-detail-comments__username'>{comment.user}</p>
+                <div className='post-detail-username-and-date' style={{gap:'0.5rem'}}>
+                    <div style={{display:'flex', alignItems:'end',gap:'0.8rem'}}>
+                        <p className='post-detail-comments__username'>{comment.user}</p>
+                        {isAuthenticated ?
+                            isFollowing && isFollowing.follow.includes(comment.user) ?
+                            <button className='post-author-unfollow' onClick={(e)=>followOrUnfollow(e,'unfollow', comment.user)}>Unfollow</button>
+                            :
+                            <button className='post-author-follow' onClick={(e)=>followOrUnfollow(e,'follow', comment.user)}>Follow</button> 
+                        :
+                        ''
+                        }
+                    </div>
                     <p className='post-detail-comments__date-posted'>{
                             `${new Date(comment.date_posted).toDateString()} 
                             ${new Date(comment.date_posted).toLocaleTimeString({}, {hour:'2-digit', minute:'2-digit'})}`
@@ -135,8 +195,8 @@ function Comments(props) {
                         setPost={setPost}
                         comment={comment}
                         post={post}
-                        setComments={setComments} 
                         getPost={getPost}
+                        setComments={setComments}
                     />
                 )
             })} 

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { getPostData} from '../utils/api'
 import LoadingPage from './LoadingPage'
-import { getTopicData } from '../utils/api'
 import { url } from '../utils/urls'
 import PostListPosts from './PostListPosts'
 
@@ -28,6 +27,7 @@ function PostList() {
   }, [])
 
   useEffect(()=> {
+    document.title = 'Lates Posts'
     const timeoutID = setTimeout(()=>{
         if(state) {
             if(state.message) {

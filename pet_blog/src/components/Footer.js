@@ -111,7 +111,7 @@ function Footer(prop) {
           </div>
         </div>
         <div className="copy-right">
-            <p className="copy-right-text">&copy;Copyright 2024 PawPal Team. All Rights Reserved.</p>
+            <p className="copy-right-text">&copy;Copyright 2024 Canine Blog Team. All Rights Reserved.</p>
         </div>
     </div>
   )

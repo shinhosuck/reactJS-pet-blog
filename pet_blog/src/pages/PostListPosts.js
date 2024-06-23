@@ -40,7 +40,6 @@ function PostListPosts(props) {
         <div className="post-container">
             <div className="post-container__posts">
                 {posts && posts.map((post)=> {
-                    console.log(post)
                     return (
                         <div key={post.id} className="post-container__post">
                             <div className='post-container__post-author-and-date'>

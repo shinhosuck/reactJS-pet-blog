@@ -96,42 +96,9 @@ function MyComment() {
           <LoadingPage />
       )
   }
-  
+ 
   return (
     <React.Fragment>
-      <div className="bg-img">
-        <div className="my-posts-hero-container">
-            <div className="my-posts-header-contents">
-                <div className="my-posts-author-profile">
-                    <img className='my-posts-profile-img' src={isAuthenticated.image_url} alt="" />
-                    <h4 className='my-posts-username'>{isAuthenticated.username}</h4>
-                </div>
-                <h1 className='my-posts-hero-header'>My Comments</h1>
-                <div>
-                  <p className='my-posts-num-of-posts'>
-                    {isAuthenticated.qs_count.comment_count > 1 ? 
-                      `${isAuthenticated.qs_count.comment_count} comments`
-                    :
-                      isAuthenticated.qs_count.comment_count === 1 ?
-                        `${isAuthenticated.qs_count.comment_count} comment`
-                      :
-                        "0 comment"
-                    }
-                  </p>
-                  <Link to='/my-posts' className='my-posts-num-of-comments'>
-                    {isAuthenticated.qs_count.post_count > 1 ? 
-                      `${isAuthenticated.qs_count.post_count} posts`
-                    :
-                      isAuthenticated.qs_count.post_count === 1 ?
-                        `${isAuthenticated.qs_count.post_count} post`
-                      :
-                        "0 post"
-                    }
-                  </Link>
-                </div>
-            </div>
-        </div>
-      </div>
       {comments ?
         <div className='my-comments-container'>
           {comments.map((comment)=> {

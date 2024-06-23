@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { HashLink } from 'react-router-hash-link'
-import { Navigate, Link } from 'react-router-dom'
-import { deletePost } from '../utils/api'
+import { Navigate } from 'react-router-dom'
+import { deletePost, handleFollow } from '../utils/api'
 import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
 
 
 
 function PostDetailPost(props) {
+    const [isFollowing, setIsFollowing] = useState(null)
     const [isError, setIsError] = useState(false)
     const [showEditDeleteBtns, setShowEditDeleteBtns] = useState(false)
     const { isAuthenticated } = useContext(ContentLayoutContext)
@@ -29,6 +30,39 @@ function PostDetailPost(props) {
         navigate('/posts')
     }
 
+    const followOrUnfollow = async(choice, author)=> {
+        const followURL = `${url}/api/auth/follow/user/${author}/?choice=${choice}`
+        try {
+            const data = await handleFollow(followURL, isAuthenticated.token)
+            if(data.error) {
+                console.log(data.error)
+
+            }else {
+                setIsFollowing((prev)=> {
+                    const obj = {
+                        ...prev, follow:data.data.follow, 
+                        follower:data.data.follower
+                    }
+                    return obj
+                })
+                localStorage.removeItem('auth')
+                localStorage.setItem('auth', JSON.stringify(data.data))
+            }
+        } catch (error) {
+            console.log(error.message, error.type)
+        }
+    }
+
+    useEffect(()=> {
+        if(isAuthenticated){
+            setIsFollowing((prev)=> {
+                const obj = {...prev, follow:isAuthenticated.follow, follower:isAuthenticated.follower}
+                return obj
+            })
+        }
+        
+    }, [])
+
     if(isError) {
         return (
             <Navigate to='/error' state={{error:isError}} />
@@ -42,8 +76,18 @@ function PostDetailPost(props) {
                     <div className='post-detail-author-and-date-wrapper'>
                         <img src={post.author_profile_image_url} alt="author image" />
                         <div className='post-detail-author-post-date'>
-                            <span>{post.author}</span>
-                            <span>{post.date_posted}</span>
+                            <div className='post-author-username'>
+                                <span className='post-detail-author'>{post.author}</span>
+                                {isAuthenticated ?
+                                        isFollowing && isFollowing.follow.includes(post.author) ?
+                                        <button className='post-author-unfollow' onClick={()=>followOrUnfollow('unfollow', post.author)}>Unfollow</button>
+                                        :
+                                        <button className='post-author-follow' onClick={()=>followOrUnfollow('follow', post.author)}>Follow</button>
+                                :
+                                '' 
+                                }
+                            </div>
+                            <span className='post-detail-date-posted'>{post.date_posted}</span>
                         </div>
                     </div>
                     <h3 className='post-detail-container__post-title'>{post.title}</h3>

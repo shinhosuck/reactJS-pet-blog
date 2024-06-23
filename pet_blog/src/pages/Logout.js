@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 
 
@@ -13,6 +13,10 @@ function Logout() {
         localStorage.removeItem('auth')
         navigate('/login', {state:{message:'Successfully logged out.'}, replace:true})
     }
+
+    useEffect(()=> {
+        document.title = 'Logout'
+    }, [])
 
     return (
         <div className='logout-container'>

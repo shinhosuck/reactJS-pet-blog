@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 function LandingPageTopics(props) {
     const {topics} = props
-    const {pathname, state} = useLocation()
+    const {pathname} = useLocation()
 
     return (
         <div className="landing-page-topics-wrapper">

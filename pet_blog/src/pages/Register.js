@@ -40,7 +40,6 @@ function Register() {
                 setIsregistering(true)
                 const body = {username:newUser.username, password:newUser.password}
                 const data = await register(`${url}/api/auth/register/`, body)
-                console.log(data)
                 if(data.error){
                     setBackendAuthError(data)
                     setIsregistering(false)
@@ -59,6 +58,7 @@ function Register() {
     }
 
     useEffect(()=> {
+        document.title = 'Register'
         setIsLoading(false)
     }, [windowLoaded])
 

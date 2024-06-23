@@ -217,4 +217,42 @@ export const handleMessage = async(url, body)=> {
 }
 
 
+export const handleFollow = async(url, token)=> {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `token ${token}`
+        },
+        body: null
+    })
+    const data = await response.json()
+    return data
+}
 
+
+export const fetchSearchItems = async(url, body)=> {
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': null
+        },
+        body: null
+    })
+    const data = await response.json()
+    return data
+}
+
+
+export const updateProfile = async(url, form, token)=> {
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Token ${token}`
+        },
+        body: form
+    })
+    const data = await response.json()
+    return data
+}

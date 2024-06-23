@@ -73,6 +73,7 @@ function Login() {
 
 
     useEffect(()=> {
+        document.title = 'Login'
         const timeoutId = setTimeout(()=> {
             if(document.readyState === 'complete') {
                 setIsLoading(false)

@@ -7,8 +7,7 @@ import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
 
 
-function CreatePost(props) {
-    const {update, text} = props
+function CreatePost() {
     const [post, setPost] = useState({image:'',topic:'',title:'',content:''})
     const [topics, setTopics] = useState(null)
     const [isError, setIsError] = useState(false)
@@ -17,6 +16,7 @@ function CreatePost(props) {
     const {isAuthenticated} = useContext(ContentLayoutContext)
     const {state, pathname} = useLocation()
     const navigate = useNavigate()
+
     
     const handleSubmit = async(e)=> {
         e.preventDefault()
@@ -36,23 +36,16 @@ function CreatePost(props) {
                     }else {
                         form.append(key, post[key])
                     }
-                }else if(key !== 'image') {
+                }else {
                     form.append(key, post[key])
                 }
             })
 
-            let data;
+            const data = await createPost(`${url}/api/create/`, form, isAuthenticated.token)
             
-            if(update) {
-                data = await updatePost(`${url}/api/post/${post.id}/update/`, form, isAuthenticated.token)
-
-            }else {
-                data = await createPost(`${url}/api/create/`, form, isAuthenticated.token)
-            }
-            
-            if(data.message === 'Successfully created' || data.message === 'Successfully updated'){
+            if(data.message === 'Successfully created'){
                 setPost({image:'',topic:'',title:'',content:''})
-                navigate('/my-posts', {state:{message:data.message}})
+                navigate(`/post/${data.id}/detail`, {state:{message:data.message}})
             }
         }
     }
@@ -80,11 +73,9 @@ function CreatePost(props) {
     }
 
     useEffect(()=>{
+        document.title = 'Create Post'
         getData()
-        if(update) {
-            setPost(update)
-        }
-    }, [update])
+    }, [])
 
     if(!isAuthenticated) {
         return (

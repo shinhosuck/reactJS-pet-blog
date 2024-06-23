@@ -38,6 +38,7 @@ function LandingPage() {
     }, [])
 
     useEffect(()=> {
+        document.title = 'Home'
         const getTopics = async()=> {
             const data = await getTopicData(`${url}/api/topics`)
             if(data.error){

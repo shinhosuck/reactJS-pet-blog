@@ -67,17 +67,19 @@ function PostDetail() {
     useEffect(()=>{
         getPost()
     }, [id])
-    
-    useEffect(()=> {
-        const fetchPostComments = async()=> {
-            const data = await getPostComments(`${url}/api/post/${id}/comments/`)
-            if(data.error) {
-                setComments(false)
-    
-            }else {
-                setComments(data)
-            }
+
+    const fetchPostComments = async()=> {
+        const data = await getPostComments(`${url}/api/post/${id}/comments/`)
+        if(data.error) {
+            setComments(false)
+
+        }else {
+            setComments(data)
+            return data
         }
+    }
+
+    useEffect(()=> {
         fetchPostComments()
     }, [post])
 
@@ -92,7 +94,7 @@ function PostDetail() {
             <Navigate to='/error' state={{error:isError}}/>
         )
     }
-
+    
     return (
         <React.Fragment>
             <div className="bg-img">
@@ -146,6 +148,7 @@ function PostDetail() {
                                         setPost={setPost}
                                         post={post}
                                         getPost={getPost}
+                                        fetchPostComments={fetchPostComments}
                                     />
                                 )
                             })} 

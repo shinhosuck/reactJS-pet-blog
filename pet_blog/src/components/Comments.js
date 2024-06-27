@@ -114,18 +114,8 @@ function Comments(props) {
                 <div className='post-detail-comments__user-image-container'>
                     <img className='post-detail-comments__user-image' src={comment.user_profile_image_url} alt="profile image"/>
                 </div>
-                <div className='post-detail-username-and-date' style={{gap:'0.5rem'}}>
-                    <div style={{display:'flex', alignItems:'end',gap:'0.8rem'}}>
-                        <p className='post-detail-comments__username'>{comment.user}</p>
-                        {isAuthenticated ?
-                            isFollowing && isFollowing.follow.includes(comment.user) ?
-                            <button className='post-author-unfollow' onClick={(e)=>followOrUnfollow(e,'unfollow', comment.user)}>Unfollow</button>
-                            :
-                            <button className='post-author-follow' onClick={(e)=>followOrUnfollow(e,'follow', comment.user)}>Follow</button> 
-                        :
-                        ''
-                        }
-                    </div>
+                <div className='post-detail-username-and-date'>
+                    <p className='post-detail-comments__username'>{comment.user}</p>
                     <p className='post-detail-comments__date-posted'>{
                             `${new Date(comment.date_posted).toDateString()} 
                             ${new Date(comment.date_posted).toLocaleTimeString({}, {hour:'2-digit', minute:'2-digit'})}`

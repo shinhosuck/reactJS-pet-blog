@@ -18,7 +18,7 @@ function SearchForm(props) {
         setShowSearchForm(false)
         e.target.reset()
         navigate(
-            'posts/search/results/', 
+            '/search/result/', 
             {state:posts && posts.error ? {error:posts.error} : {posts:posts}}
         )
     }

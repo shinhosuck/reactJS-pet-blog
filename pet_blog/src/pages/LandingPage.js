@@ -8,6 +8,8 @@ import LandingPageFeaturePosts from '../components/LandingPageFeaturePosts'
 import LandingPageEmailSub from '../components/LandingPageEmailSub'
 import LoadingPage from './LoadingPage'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
+import RightSidebar from '../components/RightSidebar'
+import { handleRightColumnContent } from '../utils/handleEvents'
 
 
 function LandingPage() {
@@ -50,6 +52,14 @@ function LandingPage() {
         getTopics()
     }, [])
 
+    useEffect(()=> {
+        window.addEventListener('scroll',handleRightColumnContent)
+        return ()=> {
+            window.removeEventListener('scroll', handleRightColumnContent)
+        }
+    }, [])
+    
+
     if(isLoading) {
         return (
           <LoadingPage />
@@ -63,6 +73,7 @@ function LandingPage() {
 
     return (
         <React.Fragment>
+
             <div className='mobile-landing-page-hero-wrapper'>
                 <div className="mobile-landing-page-hero-text-wrapper">
                     <h1 className='mobile-landing-page-hero-header'>We are Canine Blog Site</h1>
@@ -84,11 +95,18 @@ function LandingPage() {
                     </div>
                 </div>
             </div>
-            {featuredPosts && <LandingPageFeaturePosts featuredPosts={featuredPosts} />} 
-            {topics && <LandingPageTopics topics={topics}/>}
-            {latesPosts && <LandingPagePosts latesPosts={latesPosts} />}
-            <LandingPageEmailSub />
-          
+            <div className='landing-page-content-container'>
+                <div className='landing-page-contents'>
+                    {topics && <LandingPageTopics topics={topics}/>}
+                    {featuredPosts && <LandingPageFeaturePosts featuredPosts={featuredPosts} />} 
+                    {latesPosts && <LandingPagePosts latesPosts={latesPosts} />}
+                    <LandingPageEmailSub />
+                </div>
+                <div className='right-side-bar'>
+                    <RightSidebar />
+                </div>
+            </div>
+            
         </React.Fragment>
     )
 }

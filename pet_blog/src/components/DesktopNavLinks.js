@@ -2,40 +2,24 @@ import React, { useContext, useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import NavbarTopics from './NavarTopics'
 import SearchForm from './SearchForm'
+import { 
+    removeDesktopTopicsAndUserLinks,
+    openDesktopUserNavLinks,
+    openDesktopTopics,
+    openDesktopSearchForm
+ } from '../utils/handleEvents'
 
 
 function DesktopNavLinks(props) {
     const {isAuthenticated,  setShowSearchForm, showSearchForm, logout, topics } = props
 
-    function handleEvent(e) {
-        const lgTopicChevron = document.querySelector('.lg-topic-chevron')
-        const navbarTopics = [...document.querySelectorAll('.navbar-topics')][1]
-        const lgAuthenticatedUser = document.querySelector('.lg-authenticated-user')
-        const chevronDown = document.querySelector('.lg-chevron')
-
-        const names = e.target.classList.value.split(' ')
-        
-        if(names.includes('auth-user')) {
-            // pass
-
-        }else if(names.includes('topic-element')) {
-            // pass
-
-        }else {
-            navbarTopics && navbarTopics.classList.remove('show-navbar-topics')
-            lgAuthenticatedUser && lgAuthenticatedUser.classList.remove('show-lg-authenticated-user')
-
-            if(chevronDown) {
-                chevronDown.style.transform = 'rotate(0deg)'
-            }else if(lgTopicChevron) {
-                lgTopicChevron.style.transform = 'rotate(0deg)'
-            }
-        } 
-    }
-
     useEffect(()=> {
-        window.addEventListener('click', handleEvent)
+        window.addEventListener('click', removeDesktopTopicsAndUserLinks)
+        return () => {
+            window.removeEventListener('click', removeDesktopTopicsAndUserLinks)
+        }
     }, [])
+
     return (
         <div className='desktop-navlinks' >
             <NavLink
@@ -45,25 +29,8 @@ function DesktopNavLinks(props) {
             </NavLink>
             <div
                 onClick={()=> {
-                    const lgAuthenticatedUser = document.querySelector('.lg-authenticated-user')
-                    const chevronDown = document.querySelector('.lg-chevron')
-                    const navbarTopics = [...document.querySelectorAll('.navbar-topics')][1]
-                    const lgTopicChevron = document.querySelector('.lg-topic-chevron')
-
-                    lgAuthenticatedUser && lgAuthenticatedUser.classList.remove('show-lg-authenticated-user')
-                    navbarTopics && navbarTopics.classList.toggle('show-navbar-topics')
-
                     setShowSearchForm(false)
-
-                    if(chevronDown) {
-                        chevronDown.style.transform = 'rotate(0deg)'
-                    } 
-                
-                    if(navbarTopics && navbarTopics.classList.contains('show-navbar-topics')) {
-                        lgTopicChevron.style.transform = 'rotate(180deg)'
-                    }else {
-                        lgTopicChevron.style.transform = 'rotate(0deg)'
-                    }
+                    openDesktopTopics()
                 }}
                 id='topics'
                 className='navbar-navlink topic-element'
@@ -86,23 +53,8 @@ function DesktopNavLinks(props) {
                     <div 
                         className="lg-authenticated-user-container navbar-navlink auth-user"
                         onClick={()=> {
-                            const navbarTopics = [...document.querySelectorAll('.navbar-topics')][1]
-                            const lgAuthenticatedUser = document.querySelector('.lg-authenticated-user')
-                            const chevronDown = document.querySelector('.lg-chevron')
-                            const lgTopicChevron = document.querySelector('.lg-topic-chevron')
-                            
-                            lgAuthenticatedUser.classList.toggle('show-lg-authenticated-user')
-                            navbarTopics && navbarTopics.classList.remove('show-navbar-topics')
-                            lgTopicChevron.style.transform = 'rotate(0deg)'
-
                             setShowSearchForm(false)
-
-                            if(lgAuthenticatedUser.classList.contains('show-lg-authenticated-user')){
-                                chevronDown.style.transform = 'rotate(180deg)'
-
-                            }else {
-                                chevronDown.style.transform = 'rotate(0deg)'
-                            }
+                            openDesktopUserNavLinks()
                         }}
                     >
                         <img src={isAuthenticated.image_url} alt="" className='auth-user'/>
@@ -149,20 +101,7 @@ function DesktopNavLinks(props) {
             }
             <button onClick={()=> {
                 setShowSearchForm(!showSearchForm)
-                const navbarTopics = [...document.querySelectorAll('.navbar-topics')][1]
-                const lgAuthenticatedUser = document.querySelector('.lg-authenticated-user')
-                const chevronDown = document.querySelector('.lg-chevron')
-                const lgTopicChevron = document.querySelector('.lg-topic-chevron')
-
-                if (chevronDown) {
-                    chevronDown.style.transform = 'rotate(0deg)'
-                }else if (lgTopicChevron) {
-                     lgTopicChevron.style.transform = 'rotate(0deg)'
-                }
-               
-                navbarTopics && navbarTopics.classList.remove('show-navbar-topics')
-                
-                lgAuthenticatedUser && lgAuthenticatedUser.classList.remove('show-lg-authenticated-user')
+                openDesktopSearchForm()
             }} 
                 className='search-btn'
             >

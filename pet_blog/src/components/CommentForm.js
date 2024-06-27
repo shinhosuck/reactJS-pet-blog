@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState, useContext } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
-import { postComment } from '../utils/handleComments'
+import { url } from '../utils/urls'
+import { createComment } from '../utils/api'
 
 
 function CommentForm(props) {
@@ -20,9 +21,10 @@ function CommentForm(props) {
     const handleCommentSubmit = async(e)=> {
         e.preventDefault()
         if(isAuthenticated) {
+            const commentURL = `${url}/api/post/${post.id}/create/comment/`
             const newComment = commentContent.current.value
             const body = {content:newComment}
-            const data = await postComment(post.id, body, isAuthenticated.token)
+            const data = await createComment(commentURL, body, isAuthenticated.token)
             if(!data.error) {
                 e.target.reset()
                 setShowCommentForm(false)

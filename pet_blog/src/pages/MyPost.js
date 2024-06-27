@@ -101,37 +101,34 @@ function MyPost() {
               {posts.map((post)=> {
                 return (
                   <div key={post.id} className="my-posts-container__post">
+                    <div className="my-posts-container__post-image-container">
+                      <img className='my-posts-container__post-image' src={post.image_url} alt={post.title} /> 
+                      <div className='landing-page-post-image-background-overlay'></div> 
+                    </div>
                     <h3 className='my-posts-container__post-title'>{post.title}</h3>
                     <p className='my-posts-container__date-posted'>{formatDate(post.date_posted)}</p>
-                    <div className="my-posts-container__post-image-container">
-                      <img className='my-posts-container__post-image' src={post.image_url} alt={post.title} />
-                      <div className='post-container__post-like'>
-                        <div className='post-container__post-like-container'>
-                            <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
-                            <span className='post-container__post-like-count'>{post.qs_count.like_count}</span>
+                    <p className='my-posts-container__post-content'>{post.content}</p>
+                    <div className='my-post-container__btns'>
+                        <div className='my-post-container__post-like'>
+                            <i className="fa-solid fa-hands-clapping"></i>
+                            <span>{post.qs_count.like_count}</span>
                         </div>
-                        <div className='post-container__num-of-replies-container'>
-                            <i className="fa-solid fa-comment post-container__num-of-post"></i>
-                            <span className='post-container__post-reply-count'>{post.qs_count.comment_count}</span>
+                        <div className='my-post-container__num-of-replies'>
+                            <i className="fa-solid fa-comment"></i>
+                            <span>{post.qs_count.comment_count}</span>
                         </div>
-                        <div className="my-posts-container__btns">
-                          <Link 
-                            to={`/update/${post.id}/post`} state={{update:post, redirect:pathname, name:'Dashboard Posts'}} 
-                            className='my-posts-container__post-update'
-                          >
-                            <i className="fa-solid fa-pen post-detail-edit-btn"></i>
-                            <span className='post-detail-edit-text'>Edit</span>
-                          </Link>
-                          <button onClick={(e)=>removePost(e, post)} className='my-posts-container__post-delete'>
-                            <i className="fa-solid fa-trash-can post-detail-remove-icon"></i>
-                            <span className='post-detail-remove-text'>Remove</span>
-                          </button>
-                        </div>
+                        <Link 
+                          to={`/update/${post.id}/post`} state={{update:post, redirect:pathname, name:'Dashboard Posts'}} 
+                          className='my-posts-container__post-update'
+                        >
+                          <i className="fa-solid fa-pen"></i>
+                          <span>Edit</span>
+                        </Link>
+                        <button onClick={(e)=>removePost(e, post)} className='my-posts-container__post-delete'>
+                          <i className="fa-solid fa-trash-can"></i>
+                          <span>Remove</span>
+                        </button>
                       </div>
-                    </div>
-                    <div className='my-posts-container__post-text-content'>
-                      <p className='my-posts-container__post-content'>{post.content}</p>
-                    </div>
                   </div>
                 )
               })}

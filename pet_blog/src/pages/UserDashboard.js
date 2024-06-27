@@ -21,10 +21,9 @@ function UserDashboard() {
 
     return (
         <div className='dashboard-container'>
-            <h1 className='landing-page-posts-header'>Dashboard</h1>
             <div className='dashboard-contents'>
                 <div className="left-side-menu">
-                    <img src={isAuthenticated && isAuthenticated.image_url} alt="" />
+                    <img className='dashboard-user-img' src={isAuthenticated && isAuthenticated.image_url} alt="" />
                     <NavLink to='.' end={true} className={({isActive})=> isActive?'active-dashboar-link dashboard-link':'dashboard-link'}>Home</NavLink>
                     <NavLink to='posts' className={({isActive})=> isActive?'active-dashboar-link dashboard-link':'dashboard-link'}>Posts</NavLink>
                     <NavLink to='comments' className={({isActive})=> isActive?'active-dashboar-link dashboard-link':'dashboard-link'}>Comments</NavLink>

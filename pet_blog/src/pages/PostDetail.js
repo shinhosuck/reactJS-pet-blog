@@ -6,10 +6,11 @@ import UpdatePostForm from '../components/UpdatePostForm'
 import Comments from '../components/Comments'
 import PostDetailPost from '../components/PostDetailPost'
 import { getPostData, addLikes, getPostComments } from '../utils/api'
-import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
-import SidebarLatestPosts from '../components/SidebarLatestPosts'
-
+import RightSidebar from '../components/RightSidebar'
+import { formatDate } from '../utils/formatDate'
+import { url } from '../utils/urls'
+import { handleRightColumnContent } from '../utils/handleEvents'
 
 
 function PostDetail() {
@@ -22,6 +23,7 @@ function PostDetail() {
     const { isAuthenticated } = useContext(ContentLayoutContext)
     const { id } = useParams()
     const navigate = useNavigate()
+
 
     const updateLike = async()=> {
         if(!isAuthenticated) {
@@ -53,8 +55,7 @@ function PostDetail() {
                 setIsLoading(false)
                 
             }else {
-                const datePosted = new Date(data.date_posted)
-                const postObj = {...data, date_posted:`${datePosted.toDateString()} ${datePosted.toLocaleTimeString({}, { hour:'2-digit', minute:'2-digit'})}`}
+                const postObj = {...data, date_posted:formatDate(data.date_posted)}
                 setPost(postObj)
                 setIsLoading(false)
             }
@@ -63,10 +64,6 @@ function PostDetail() {
             setIsLoading(false)
         }
     }
-
-    useEffect(()=>{
-        getPost()
-    }, [id])
 
     const fetchPostComments = async()=> {
         const data = await getPostComments(`${url}/api/post/${id}/comments/`)
@@ -79,9 +76,21 @@ function PostDetail() {
         }
     }
 
+    useEffect(()=>{
+        getPost()
+    }, [id])
+
     useEffect(()=> {
+        document.title = 'Post Detail'
         fetchPostComments()
     }, [post])
+
+    useEffect(()=> {
+        window.addEventListener('scroll', handleRightColumnContent)
+        return ()=> {
+            window.removeEventListener('scroll', handleRightColumnContent)
+        }
+    }, [])
 
     if(isLoading) {
         return (
@@ -167,8 +176,8 @@ function PostDetail() {
                         </div>
                     }
                 </div>
-                <div className='post-detail-side-bar'>
-                    <SidebarLatestPosts />
+                <div className='right-side-bar'>
+                    <RightSidebar />
                 </div>
             </div>
         </React.Fragment>

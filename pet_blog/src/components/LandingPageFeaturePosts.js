@@ -5,136 +5,41 @@ import { formatDate } from '../utils/formatDate'
 
 
 function LandingPageFeaturePosts(props) {
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const {pathname, state} = useLocation()
     const {featuredPosts} = props
 
-    const setWidth = (e)=> {
-        setWindowWidth(window.innerWidth)
-        return e.target.removeEventListener('resize', setWidth)
-    }
-
-    useEffect(()=> {
-        window.addEventListener('resize', setWidth)
-    }, [windowWidth])
-
     
     return (
-       <div className="landing-page-featured-posts-container">
-            <div className="landing-page-featured-posts-wrapper">
-                <div className="landing-page-featured-post-header-container">
-                    <h1 className='landing-page-featured-posts-header'>Featured Posts</h1>
-                    <p className='landing-page-featured-posts-text'>
-                        You'll find valuable information, 
-                        advice, and entertaining stories to help you better 
-                        understand and care for your furry friend. 
-                    </p>
-                </div>
-                <div className="landing-page-featured-posts">
-                    {featuredPosts.map((post, index)=> {
-                        return (
-                            <div key={post.id} className="landing-page-featured-post">
-                                <div className='mobile-landing-page-featured-post-author-and-date'>
-                                    <img src={post.author_profile_image_url} alt="" />
-                                    <div>
-                                        <p>{post.author}</p>
-                                        <p>{formatDate(post.date_posted)}</p>
-                                    </div>
-                                </div>
-                                <h3 className='mobile-landing-page-featured-post-title'>
-                                    {post.title}
-                                </h3>
-                                <div className="landing-page-featured-post-image-container">
-                                    <img className='landing-page-featured-post-image' src={post.image_url} alt={post.title} />
-                                    {post.qs_count.like_count > 1 ? 
-                                        <div className='landing-page-featured-post-like mobile-landing-page-featured-post-like'>
-                                            <div className='landing-page-featured-post-like-container'>
-                                                <i className="fa-solid fa-hands-clapping landing-page-featured-post-clap"></i>
-                                                <span className='landing-page-featured-post-like-count'>{post.qs_count.like_count}</span>
-                                            </div>
-                                            <div className='landing-page-featured-post-num-of-replies-container'>
-                                                <i className="fas fa-comment landing-page-featured-post-num-of-post"></i>
-                                                <span className='landing-page-featured-post-reply-count'>{post.qs_count.comment_count}</span>
-                                            </div>
-                                        </div>
-                                    : 
-                                        <div className='landing-page-featured-post-like mobile-landing-page-featured-post-like'>
-                                            <div className='landing-page-featured-post-like-container'>
-                                                <i className="fa-solid fa-hands-clapping landing-page-featured-post-clap"></i>
-                                                <span className='landing-page-featured-post-like-count'>{post.qs_count.like_count}</span>
-                                            </div>
-                                            <div className='landing-page-featured-post-num-of-replies-container'>
-                                                <i className="fas fa-comment landing-page-featured-post-num-of-post"></i>
-                                                <span className='landing-page-featured-post-reply-count'>{post.qs_count.comment_count}</span>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
-                                <div className='landing-page-featured-post-text-content'>
-                                    <div className='lg-landing-page-featured-post-author-and-date'>
-                                        <img id={`img-${index + 1}`} src={post.author_profile_image_url} alt="" />
-                                        <div>
-                                            <p>{post.author}</p>
-                                            <p>{formatDate(post.date_posted)}</p>
-                                        </div>
-                                    </div>
-                                    <h3 className='landing-page-featured-post-title'>
-                                        {post.title.length > 22 ?
-                                            `${post.title.substring(0, 22)}`
-                                        : 
-                                            `${post.title}`
-                                        }
-                                        <span>...</span>
-                                        <Link 
-                                            to={`/post/${post.id}/detail/`} 
-                                            state={{redirect:pathname}} 
-                                            className='lg-landing-page-featured-post-read-post'
-                                        >
-                                            Read more
-                                        </Link>
-                                    </h3>
-                                    <p className='landing-page-featured-post-content'>
-                                        {post.content.length > 250 ?
-                                            `${post.content.substring(0, 250)}...`
-                                        :
-                                            `${post.content}...`
-                                        }
-                                        <Link 
-                                            to={`/post/${post.id}/detail/`} 
-                                            state={{redirect:pathname}} 
-                                            className='landing-page-featured-post-read-post'
-                                        >
-                                            Read more
-                                        </Link>
-                                    </p>
-                                    {post.qs_count.like_count > 1 ? 
-                                        <div className='landing-page-featured-post-like lg-landing-page-featured-post-like'>
-                                            <div className='landing-page-featured-post-like-container'>
-                                                <i className="fa-solid fa-hands-clapping landing-page-featured-post-clap"></i>
-                                                <span className='landing-page-featured-post-like-count'>{post.qs_count.like_count}</span>
-                                            </div>
-                                            <div className='landing-page-featured-post-num-of-replies-container'>
-                                                <i className="fas fa-comment landing-page-featured-post-num-of-post"></i>
-                                                <span className='landing-page-featured-post-reply-count'>{post.qs_count.comment_count}</span>
-                                            </div>
-                                        </div>
-                                    : 
-                                        <div className='landing-page-featured-post-like lg-landing-page-featured-post-like'>
-                                            <div className='landing-page-featured-post-like-container'>
-                                                <i className="fa-solid fa-hands-clapping landing-page-featured-post-clap"></i>
-                                                <span className='landing-page-featured-post-like-count'>{post.qs_count.like_count}</span>
-                                            </div>
-                                            <div className='landing-page-featured-post-num-of-replies-container'>
-                                                <i className="fas fa-comment landing-page-featured-post-num-of-post"></i>
-                                                <span className='landing-page-featured-post-reply-count'>{post.qs_count.comment_count}</span>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
+        <div className="landing-page-featured-posts-wrapper">
+            <h1 className='landing-page-featured-posts-header'>Featured Posts</h1>
+            <div className="landing-page-featured-posts">
+                {featuredPosts.slice(0, 4).map((post, index)=> {
+                    return (
+                        <div key={post.id} className="landing-page-featured-post">
+                             <div className='landing-page-featured-post-topic-container'>
+                                <Link
+                                 to={`/topic/${post.topic}/posts/?filter=${post.topic}`}
+                                 state={{topic:post.topic, redirect:pathname}} 
+                                 className='post-topic-btn'
+                                >
+                                    {post.topic}
+                                </Link>
+                                <p className='landing-page-featured-post-date-posted'>{formatDate(post.date_posted)}</p>
                             </div>
-                        )
-                    })}
-                </div>
+                            <h3 className='mobile-landing-page-featured-post-title'>{post.title}</h3>
+                            <p className='landing-page-featured-post-content'>
+                                    {post.content.substring(0, 150)}...
+                            </p>
+                            <Link 
+                                to={`/post/${post.id}/detail/`} 
+                                state={{redirect:pathname}} 
+                                className='landing-page-featured-post-read-post-btn'
+                            >
+                                Read more
+                            </Link>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     )

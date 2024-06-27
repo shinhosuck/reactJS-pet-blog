@@ -5,7 +5,6 @@ import Footer from '../components/Footer'
 import { getTopicData, getPostData } from '../utils/api'
 import { url } from '../utils/urls'
 
-
 export const ContentLayoutContext = createContext()
 
 
@@ -19,14 +18,16 @@ function ContentLayout() {
   const [topics, setTopics] = useState(null)
   const [posts, setPosts] = useState(null)
   
-  function endEventListener(){
+  function getWindowScrollHeight(){
     const height = window.pageYOffset
     setScrollHeight(height)
-    return window.removeEventListener('scroll', endEventListener)
   }
 
   useEffect(()=> {
-    window.addEventListener('scroll', endEventListener)
+    window.addEventListener('scroll', getWindowScrollHeight)
+    return ()=> {
+      window.removeEventListener('scroll', getWindowScrollHeight)
+    }
   }, [scrollHeight])
 
   useEffect(()=> {
@@ -62,7 +63,7 @@ function ContentLayout() {
         <header className='main-header'>
             <Navbar/>
         </header>
-        <main>
+        <main className='main-container'>
             <Outlet context={
               {
                 setIsAuthenticated:setIsAuthenticated,

@@ -5,6 +5,7 @@ import LoadingPage from './LoadingPage'
 import { fetchComments, removeComment, editComment } from '../utils/api'
 import dogImg from '../images/cartoon_dog.png'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
+import { formatDate } from '../utils/formatDate'
 
 
 function MyComment() {
@@ -104,16 +105,10 @@ function MyComment() {
           {comments.map((comment)=> {
             return (
               <div key={comment.id} className="my-comments-container__my-comment">
-                <div className='my-comments-date-and-time'>
-                  <p className='my-comments__date-replied'>{
-                    `${new Date(comment.date_posted).toDateString()} 
-                    ${new Date(comment.date_posted).toLocaleTimeString({}, {hour:'2-digit', minute:'2-digit'})}`}
-                  </p>
-                  <p className='my-comments__post_name'>
-                    <span>Replied to:</span> 
-                    <Link className='my-comments__post-name-link' to={`/post/${comment.post_id}/detail/`}>{comment.post}</Link>
-                  </p>
-                </div>
+                <p className='my-comments__date-replied'>
+                  {formatDate(comment.date_posted)}
+                </p>
+                <Link className='my-comments__post-name-link' to={`/post/${comment.post_id}/detail/`}>{comment.post}</Link>
                 <p className='my-comments__content'>{comment.content}</p>
                 <div className="my-comments-container__buttons">
                   <button
@@ -142,6 +137,7 @@ function MyComment() {
                     </form>
                   </div>
                 }
+                <div className="my-comment-border-bottom"></div>
               </div>
             )
           })}

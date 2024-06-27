@@ -42,28 +42,36 @@ function LandingPageEmailSub() {
 
 
     return (
-        <div className='landing-page-email-sub-form-wrapper'>
-            <div className="landing-page-email-form-contents">
-                <div className="landing-page-email-form-text-container">
-                    <h1 className="landing-page-email-form-header">Stay Informed</h1>
-                    <p className="landing-page-email-form-text">
-                        Enter your name and email to subscribe to 
-                        our blog and never miss out on valuable updates.
-                    </p>
-                </div>
-                <form className='landing-page-email-sub-form' onSubmit={handleSubmit}>
-                    {successMessage && <p className='success-message'>{successMessage}</p> || isError && <p className='error-message'>{isError}</p>}
-                    <label htmlFor="firstName">First Name</label>
-                    <input id='firstName' onChange={handleChange} value={subscriber.first} name='first' type="text"/>
-                    <label htmlFor="lastName">Last Name</label>
-                    <input id='lastName' onChange={handleChange} value={subscriber.last} name='last' type="text"/>
-                    <label htmlFor="email">Email</label>
-                    <input id='email' onChange={handleChange} value={subscriber.email} name='email' type="email"/>
-                    <button className='landing-page-email-sub-btn' type='submit'>
-                        {submiting ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Submiting...<p className='registering-animation'></p></div> : 'Subscribe'}
-                    </button>
-                </form>
+        <div className="landing-page-email-form-contents">
+            <div className="landing-page-email-header-container">
+                <h1 className="landing-page-email-form-header">
+                    Sign up for newsletter
+                </h1>
+                <p className="landing-page-email-form-text">
+                    Subscribe to our Canine Blog newsletter and never miss 
+                    out on new updates and exclusive content about your 
+                    favorite furry friends! 
+                </p>
             </div>
+           
+            <form className='landing-page-email-sub-form' onSubmit={handleSubmit}>
+                {successMessage && <p className='success-message'>{successMessage}</p> || isError && <p className='error-message'>{isError}</p>}
+                <div className='landing-page-email-sub-form-input-container'>
+                    <label htmlFor="firstName">First Name</label>
+                    <input required id='firstName' onChange={handleChange} value={subscriber.first} name='first' type="text"/>
+                </div>
+                <div className='landing-page-email-sub-form-input-container'>
+                    <label htmlFor="lastName">Last Name</label>
+                    <input required id='lastName' onChange={handleChange} value={subscriber.last} name='last' type="text"/>
+                </div>
+                <div className='landing-page-email-sub-form-input-container'>
+                    <label htmlFor="email">Email</label>
+                    <input required id='email' onChange={handleChange} value={subscriber.email} name='email' type="email"/>
+                </div>
+                <button className='landing-page-email-sub-btn' type='submit'>
+                    {submiting ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Submiting...<p className='registering-animation'></p></div> : 'Subscribe'}
+                </button>
+            </form>
         </div>
     )
 }

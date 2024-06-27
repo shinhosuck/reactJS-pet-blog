@@ -45,7 +45,7 @@ const router = createBrowserRouter(
           <Route path='register' element={<Register />}/>
           <Route path='login' element={<Login />}/>
           <Route path='logout' element={<Logout />}/>
-          <Route path='posts/search/results' element={<SearchResults />}/>
+          <Route path='search/result' element={<SearchResults />}/>
           <Route path='user/:username/dashboard' element={<UserDashboard />} >
             <Route index element={<DashboardHome />} />
             <Route path='posts' element={<MyPost />}/>

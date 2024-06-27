@@ -17,7 +17,7 @@ function RightSidebar() {
     }, [posts])
    
     return (
-        <div class='right-sidebar-container'>
+        <div className='right-sidebar-container'>
             <div className="right-side-bar-container">
                 <h2 className='right-side-bar-header'>Most Viewed</h2>
                 <div className="side-bar-latest-posts-container">

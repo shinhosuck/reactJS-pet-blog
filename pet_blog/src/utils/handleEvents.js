@@ -33,9 +33,10 @@ export function removeDesktopTopicsAndUserLinks(e) {
         navbarTopics && navbarTopics.classList.remove('show-navbar-topics')
         lgAuthenticatedUser && lgAuthenticatedUser.classList.remove('show-lg-authenticated-user')
 
-        if(chevronDown) {
+        if(chevronDown & lgTopicChevron) {
             chevronDown.style.transform = 'rotate(0deg)'
-        }else if(lgTopicChevron) {
+            lgTopicChevron.style.transform = 'rotate(0deg)'
+        }else {
             lgTopicChevron.style.transform = 'rotate(0deg)'
         }
     } 

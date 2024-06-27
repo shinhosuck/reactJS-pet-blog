@@ -1745,6 +1745,10 @@ Post Detail
   color: var(--brown-50);
   border: none;
   background: none;
+
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  background: var(--brown-90)
 }
 
 .post-detail-like {

@@ -21,7 +21,7 @@
   
   /* Button Background */
   --orange-light: hsl(7, 100%, 57%);
-  --orange-50: hsl(7, 100%, 50%);
+  --orange-50: #ff1e00;
   
 
   /* Section header text */
@@ -54,7 +54,7 @@
   --brown-80: hsl(27, 27%, 80%);
   --brown-85: hsl(27, 27%, 85%);
   --brown-90: hsl(27, 27%, 90%);
-  --brown-95: hsl(27, 27%, 95%);
+  --brown-95: #f6f2ef;
 
   /* input && textarea focus */
   --focus: hsl(12, 100%, 65%);
@@ -288,13 +288,14 @@ Landing Page
 
 .mobile-landing-page-join-btn {
   justify-self: start;
-  padding: 0.7rem 2rem ;
+  padding: 0.8rem 1.6rem ;
   text-align: center;
-  background: var(--orange-50);
-  color: hsl(0, 0%, 100%);
-  border-radius: 30px;
+  background: orangered;
+  color: var(--black-95);
+  border-radius: 25px;
   letter-spacing: 0.05rem;
   font-weight: 500;
+  text-transform: uppercase;
 }
 
 /* Featured posts */
@@ -356,17 +357,31 @@ Landing Page
   color: var(--black-30);
   line-height: 1.5;
   text-wrap: pretty;
-  margin-top: 0.5rem;
+  margin-top: 0.7rem;
 }
 
 .landing-page-featured-post-read-post-btn {
   justify-self: start;
-  border-radius: 20px;
-  color: white;
-  padding: 0.5rem 0.9rem;
-  background: var(--orange-50);
-  font-size: 0.9rem;
+  color: var(--orange-50);
   margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  color: color 100ms linear; 
+}
+
+.landing-page-featured-post-read-post-btn > i {
+  font-size: 1.2rem;
+}
+
+@media (hover) {
+  .landing-page-featured-post-read-post-btn:hover {
+    color: hsl(0, 100%, 36%)
+  }
 }
 
 /* end */
@@ -561,17 +576,31 @@ Landing Page
   color: var(--black-30);
   line-height: 1.5;
   text-wrap: pretty;
-  margin-top: 0.5rem
+  margin-top: 0.7rem
 }
 
 .landing-page-post-read-more-btn {
   justify-self: start;
-  border-radius: 20px;
-  color: white;
-  padding: 0.5rem 0.9rem;
-  background: #FF3D24;
-  font-size: 0.9rem;
+  color: var(--orange-50);
   margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 100ms linear;
+}
+
+.landing-page-post-read-more-btn > i {
+  font-size: 1.2rem;
+}
+
+@media (hover) {
+  .landing-page-post-read-more-btn:hover {
+    color: hsl(0, 100%, 36%);
+  }
 }
 
 .landing-page-post-see-all-posts {
@@ -580,18 +609,27 @@ Landing Page
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  color: var(--orange-50);
-  padding: 0.5rem 1.5rem;
+  padding: 1rem 2rem;
   border-radius: 30px;
-  outline: 2px solid var(--orange-50);
-  font-weight: 500;
-  margin-top: 4rem;
+  background: orangered;
+  color: var(--black-95);
+  font-weight: 600;
+  margin-top: 5rem;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: 0.05rem;
+  transition: background 100ms linear, outline 100ms linear, color 100ms linear ;
+}
+
+.landing-page-post-see-all-posts > i {
+  font-size: 1.2rem;
 }
 
 @media (hover) {
   .landing-page-post-see-all-posts:hover {
-    background: var(--orange-50);
-    color: white;
+    background: hsl(16, 100%, 96%);
+    outline: 2px solid var(--orange-50);
+    color: var(--orange-50);
   }
 }
 /* end */
@@ -600,8 +638,8 @@ Landing Page
 .landing-page-email-form-contents {
   display: grid;
   align-content: start;
-  gap: 3.8rem;
-  padding: 4rem 0rem;
+  gap: 3.5rem;
+  padding: 3rem 0rem;
   background: var(--brown-30);
   border-radius: 30px;
 }
@@ -619,12 +657,15 @@ Landing Page
 }
 
 .landing-page-email-form-header {
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
   color: white;
-  line-height: 1;
+  line-height: 1.2;
   text-wrap: balance;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: clamp(1.2rem, 1vw + 3rem, 4rem);
+  font-size: clamp(1.2rem, 1vw + 1.8rem, 4rem);
 }
 
 .landing-page-email-form-text {
@@ -672,16 +713,22 @@ input:focus {
   padding: 0.8rem 1.6rem;
   border-radius: 25px;
   border: none;
-  background: var(--orange-50);
+  background: orangered;
   font-weight: 500;
-  color: white;
-  font-size: 1rem;
+  color: var(--black-95);
+  font-size: 1.1rem;
   cursor: pointer;
   margin-top: 0.5rem;
   letter-spacing: 0.05rem;
   text-transform: uppercase;
 }
 /* end */
+
+@media (min-width: 400px) {
+  .landing-page-email-form-header {
+    font-size: clamp(1.2rem, 1vw + 2.5rem, 4rem);
+  }
+}
 
 @media screen and (min-width: 600px) {
   .mobile-landing-page-hero-text-wrapper {
@@ -814,15 +861,16 @@ input:focus {
 
   .landing-page-join-btn {
     justify-self: start;
-    padding: 0.7rem 2rem;
+    padding: 1rem 2rem;
     text-align: center;
-    background: var(--orange-50);
-    color: hsl(0, 0%, 100%);
+    background: orangered;
+    color: var(--black-95);
     border-radius: 30px;
     letter-spacing: 0.05rem;
     margin-top: 1rem;
     font-weight: 500;
     font-size: 1.1rem;
+    text-transform: uppercase;
   }
 }
 
@@ -885,6 +933,9 @@ input:focus {
 }
 
 @media (min-width: 1400px) {
+  .landing-page-hero-text-wrapper {
+    width: 40%;
+  }
   .mobile-landing-page-featured-post-title,
   .landing-page-post-title {
     font-size: 1.5rem;
@@ -899,15 +950,11 @@ SEARCH FORM
 .search-form-container {
   position: absolute;
   z-index: 99;
-  top: 57px;
+  top: 70px;
   width:100%;
   left: 0;
   padding: 1rem; 
-  background: linear-gradient(
-    to bottom, 
-    rgba(0, 0, 0, 0.3), 
-    rgba(0, 0, 0, 0)
-  );
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0));
 }
 
 .search-form {
@@ -922,27 +969,30 @@ SEARCH FORM
 .search-input {
   border:none;
   background: var(--brown-90);
-  padding: 0.8rem 1.5rem;
+  padding: 1rem 2rem;
   flex: 9;
   box-sizing: border-box;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  background: var(--brown-80)
 }
 
 .search-submit-btn {
   flex: 1;
-  font-size: 1rem;
+  font-size: 1.1rem;
   border:none;
-  background: var(--orange-50);
-  color: white;
+  background: orangered;
+  color: var(--black-95);
   flex: 1;
   letter-spacing: 0.05rem;
-  padding: 0.8rem 1rem;
+  padding: 1rem 1rem;
   cursor: pointer;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 .search-input:focus,
@@ -952,7 +1002,7 @@ SEARCH FORM
 
 @media (min-width: 800px) {
   .search-form-container {
-    top: 67px;
+    top: 70px;
   }
 }
 
@@ -1110,13 +1160,11 @@ NAVIGATION BAR
 
 .mobile-search-btn {
   margin-left: auto;
-  border: none;
   color: white;
-  letter-spacing: 0.05rem;
-  border-radius: 20px;
-  padding: 0.4rem 0.8rem;
   cursor: pointer;
-  background: var(--orange-50)
+  background: none;
+  border: none;
+  font-size: 1.2rem;
 }
 
 /* moible authenticated user container */
@@ -1354,12 +1402,10 @@ NAVIGATION BAR
 
   .search-btn {
     border: none;
+    background: none;
     color: white;
-    letter-spacing: 0.05rem;
-    border-radius: 20px;
-    padding: 0.4rem 1rem;
     cursor: pointer;
-    background: var(--orange-50)
+    font-size: 1.1rem;
   }
 }
 
@@ -1532,7 +1578,7 @@ Posts
   color: var(--black-30);
   line-height: 1.5;
   text-wrap: pretty;
-  margin-top: 0.5rem
+  margin-top: 0.7rem
 }
 
 .post-container__post-read-more-btn {
@@ -1727,7 +1773,7 @@ Post Detail
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--brown-50);
+  color: white;
   border: none;
   background: none;
   cursor: pointer;
@@ -1735,20 +1781,20 @@ Post Detail
 
   padding: 0.2rem 0.8rem;
   border-radius: 20px;
-  background: var(--brown-90)
+  background: var(--brown-50)
 }
 
 .post-detail-container__post-like-not-authenticated {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--brown-50);
+  color: white;
   border: none;
   background: none;
 
   padding: 0.2rem 0.8rem;
   border-radius: 20px;
-  background: var(--brown-90)
+  background: var(--brown-50)
 }
 
 .post-detail-like {
@@ -1765,11 +1811,11 @@ Post Detail
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--brown-50);
+  color: white;
 
   padding: 0.2rem 0.8rem;
   border-radius: 20px;
-  background: var(--brown-90)
+  background: var(--brown-50)
 }
 
 .post-detail-container__num-of-post {
@@ -1796,27 +1842,22 @@ Post Detail
 
 .post-author-unfollow,
 .post-author-follow {
-  cursor: pointer;
-  border-radius: 20px;
-  background: var(--orange-50);
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.post-author-unfollow {
-  background: var(--black-50)
+  border-radius: 20px;
+  background: var(--brown-50)
 }
 
 .post-author-unfollow > button,
 .post-author-follow > button {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.4rem 0.8rem;
   color: white;
+  font-weight: 500;
   background: none;
   border: none;
-  width: 80px;
-  height: 30px;
-  margin-top: 0.1rem;
+  cursor: pointer;
 }
 
 .post-detail-edit-delete-btns-container {
@@ -1829,13 +1870,11 @@ Post Detail
   background: none;
   border: none;
   align-self: end;
-  width: 45px;
-  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 15px;
-  padding: 0 1.3rem;
+  border-radius: 20px;
+  padding: 0.2rem 0.8rem;
   background: var(--brown-80);
   cursor: pointer;
 }
@@ -2185,54 +2224,55 @@ Post Detail
 
 /* No comments */
 .no-comments-container {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.no-comments-container > img {
-  width: 100px;
-  display: block;
-  height: auto;
-}
-.no-comment-text-container {
   display: grid;
-  gap: 0.5rem;
+  align-content: start;
+  justify-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 1rem;
 }
 
-.no-comment-text-container > h3 {
+.no-comments-container > h3 {
   color: var(--bkack-20);
   letter-spacing: 0.05rem;
   font-size: 1.3rem;
+  text-wrap: balance;
+  font-size: 1.5rem;
 }
 
-.no-comment-text-container > p {
+.no-comment-text {
   letter-spacing: 0.05rem;
-  line-height: 1.4;
-  text-wrap: pretty;
+  line-height: 1.5;
   color: var(--black-30);
-  max-width: 500px;
+  text-wrap: balance;
 }
 
-.no-comment-text-container > 
-.login-to-create-post {
-  color: var(--black-15);
-  font-weight: 500;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  gap: 0.5rem
-}
-
-.no-comment-text-container > 
-.login-to-create-post > a {
-  color: var(--orange-50);
+.no-comment-login-to-create-post{
+  letter-spacing: 0.05rem;
+  line-height: 1.5;
   font-weight: 600;
-  text-decoration: underline;
+  color: var(--black-20);
+  text-wrap: balance;
 }
-/* end */
+
+.no-comments-container > a {
+  color: white;
+  background: var(--orange-50);
+  letter-spacing: 0.05rem;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 1.4rem;
+  gap: 0.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.no-comments-container > a > i {
+  font-size: 1.2rem;
+}
 
 /* Update comment form */
 .post-detail-update-comment-form {
@@ -3235,9 +3275,9 @@ USER REGISTER
 
 .user-register__header {
   letter-spacing: 0.05rem;
-  color: white;
+  color: var(--black-95);
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   margin-bottom: 0.5rem;
 }
 
@@ -3250,10 +3290,11 @@ USER REGISTER
   width: 100%;
   box-sizing: border-box;
   padding: 0.7rem 1rem;
-  border: 1px solid lightgray;
+  border: none;
   font-size: 1rem;
   letter-spacing: 0.05rem;
   border-radius: 5px;
+  background: var(--brown-80);
   
 }
 
@@ -3264,15 +3305,17 @@ USER REGISTER
 
 .user-register__btn {
   padding: 0.8rem 1rem;
-  background: var(--orange-50);
-  color: white;
-  font-size: 1rem;
+  background: hsl(16, 100%, 50%);
+  color: var(--black-95);
+  font-size: 1.1rem;
   border-radius: 25px;
   border: none;
   letter-spacing: 0.05rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 .registering-animation {
@@ -3303,20 +3346,23 @@ USER REGISTER
   flex-wrap: wrap;
   gap: 1rem;
   row-gap: 0.5rem;
-  margin-top: 0.5rem
+  margin-top: 1rem
 }
 
 .user-register__already-registered > p {
   letter-spacing: 0.07rem;
-  color: white;
+  color: var(--black-95);
   font-weight: 500;
 }
 
 .user-register__already-registered > a {
-  color: rgb(255, 30, 0);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgb(255, 114, 95);
   letter-spacing: 0.05rem;
   font-weight: 500;
-  text-decoration: underline;
+  text-transform: uppercase;
 }
 
 .user-register__error {
@@ -3347,7 +3393,7 @@ USER REGISTER
   .user-register {
     max-width: 450px;
     padding: 1.3rem;
-    border-radius: 5px;
+    border-radius: 15px;
     background: linear-gradient(to top,rgba(20, 13, 12, 0.85), rgba(20, 13, 12, 0.85));
   }
 }
@@ -3393,7 +3439,7 @@ USER LOGIN
 
 .user-login__header {
   letter-spacing: 0.05rem;
-  color: white;
+  color: var(--black-95);
   font-weight: 600;
   font-size: 1.7rem;
   margin-bottom: 0.5rem;
@@ -3412,7 +3458,7 @@ USER LOGIN
   font-size: 1rem;
   letter-spacing: 0.05rem;
   border-radius: 5px;
-  background: var(--black-95)
+  background: var(--brown-80);
 }
 
 .user-login__input:focus {
@@ -3422,15 +3468,17 @@ USER LOGIN
 
 .user-login__btn {
   padding: 0.8rem 1rem;
-  background: var(--orange-50);
-  color: white;
-  font-size: 1rem;
+  background: hsl(16, 100%, 50%);
+  color: var(--black-95);
+  font-size: 1.1rem;
   border-radius: 25px;
   border: none;
   letter-spacing: 0.05rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 .user-login__not-yet-registered {
@@ -3439,20 +3487,23 @@ USER LOGIN
   flex-wrap: wrap;
   gap: 1rem;
   row-gap: 0.5rem;
-  margin-top: 0.5rem
+  margin-top: 1rem
 }
 
 .user-login__not-yet-registered > p {
   letter-spacing: 0.07rem;
-  color: white;
+  color: var(--black-95);
   font-weight: 500;
 }
 
 .user-login__not-yet-registered > a {
-  color: var(--orange-50);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   letter-spacing: 0.05rem;
   font-weight: 500;
-  text-decoration: underline;
+  text-transform: uppercase;
+  color: rgb(255, 114, 95);
 }
 
 @media screen and (min-width: 600px) {
@@ -3477,7 +3528,7 @@ USER LOGIN
   .user-login {
     max-width: 450px;
     padding: 1.3rem;
-    border-radius: 5px;
+    border-radius: 15px;
     background: linear-gradient(to top,rgba(20, 13, 12, 0.85), rgba(20, 13, 12, 0.85));
   }
 }
@@ -3556,8 +3607,8 @@ FOOTER
 }
 
 .footer-container__contents {
-  width: 95%;
-  max-width: 1200px;
+  width: 90%;
+  max-width: 1400px;
   margin: 0 auto;
   display: grid;
   row-gap: 2.5rem;
@@ -3788,7 +3839,7 @@ FOOTER
 }
 
 .contact-form > button {
-  padding: 0.7rem 1rem;
+  padding: 0.8rem 1.6rem;
   border-radius: 25px;
   border: none;
   color: white;

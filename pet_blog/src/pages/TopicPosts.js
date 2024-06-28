@@ -100,8 +100,6 @@ function TopicPosts() {
         )
     }
     
-    console.log(state, filter)
-
     return (
         <React.Fragment>
             <div className="bg-img">
@@ -186,7 +184,8 @@ function TopicPosts() {
                                                 to={`/post/${post.id}/detail/`}
                                                 state={{redirect:pathname}} 
                                             >
-                                                Read more
+                                                <span>Read more</span>
+                                                <i className="fa fa-chevron-right"></i>
                                             </Link>
                                         </div>
                                     </div>

@@ -105,7 +105,7 @@ function DesktopNavLinks(props) {
             }} 
                 className='search-btn'
             >
-                Search
+                 <i className='fas fa-search'></i>
             </button>
         </div>
 

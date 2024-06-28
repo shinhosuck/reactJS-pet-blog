@@ -35,7 +35,8 @@ function LandingPageFeaturePosts(props) {
                                 state={{redirect:pathname}} 
                                 className='landing-page-featured-post-read-post-btn'
                             >
-                                Read more
+                                <span>Read more</span>
+                                <i className="fa fa-chevron-right"></i>
                             </Link>
                         </div>
                     )

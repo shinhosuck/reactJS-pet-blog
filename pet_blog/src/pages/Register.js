@@ -128,7 +128,10 @@ function Register() {
                     </form>
                     <div className="user-register__already-registered">
                         <p>Already registered? </p>
-                        <Link to='/login'>Login</Link>
+                        <Link to='/login'>
+                            <span>Login</span>
+                            <i className="fa fa-chevron-right"></i>
+                        </Link>
                     </div>
                 </div>
             </div>

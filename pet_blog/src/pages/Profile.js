@@ -75,9 +75,9 @@ function Profile() {
           ...prev,
           username: isAuthenticated.username,
           image: isAuthenticated.image,
-          first_name: isAuthenticated.first_name,
-          last_name: isAuthenticated.last_name,
-          email: isAuthenticated.email
+          first_name: isAuthenticated.first_name || '',
+          last_name: isAuthenticated.last_name || '',
+          email: isAuthenticated.email || ''
         }
         return userInfo
       })
@@ -89,7 +89,7 @@ function Profile() {
       <form className='profile-form' onSubmit={handleSubmit}>
         <div className="profile-form-input">
           <label htmlFor="img">Profile image</label>
-          <input className='image-input' onChange={handleChange} id='img' type="file" accept='image/*' name='image'/>
+          <input className='image-input' onChange={handleChange} value='' id='img' type="file" accept='image/*' name='image'/>
         </div>
         <div className='profile-form-input'>
           <label htmlFor="username">Username</label>

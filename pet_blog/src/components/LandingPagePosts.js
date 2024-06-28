@@ -38,7 +38,8 @@ function LandingPagePosts(props) {
                                     state={{redirect:pathname}} 
                                     className='landing-page-post-read-more-btn'
                                 >
-                                    Read more
+                                    <span>Read more</span>
+                                    <i className="fa fa-chevron-right"></i>
                                 </Link>
                             </div>
                         </div>
@@ -46,8 +47,8 @@ function LandingPagePosts(props) {
                 })}
             </div>
             <Link to='/posts' className='landing-page-post-see-all-posts'>
-                View all
-                <i className="fa fa-arrow-right"></i>
+                <span>View all</span>
+                <i className="fa fa-chevron-right"></i>
             </Link>
         </div>
     )

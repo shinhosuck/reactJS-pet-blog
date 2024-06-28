@@ -30,11 +30,12 @@ export function Navbar() {
         setShowCloseBtn(false)
         setShowMenuBtn(true)
         setWindowWidth(e.target.innerWidth)
-        
     }
 
     const logout = function() {
         setShowNavLinks(false)
+        setShowCloseBtn(false)
+        setShowMenuBtn(true)
         navigate('/logout')
     }
    
@@ -52,6 +53,7 @@ export function Navbar() {
           }
           getTopics()
     }, [])
+
 
     return (
         <div id='navbar-container' className="navbar-container">
@@ -73,7 +75,7 @@ export function Navbar() {
                     }}
                         className='mobile-search-btn'
                     >
-                        Search
+                        <i className='fas fa-search'></i>
                     </button>
                     {showMenuBtn && 
                         <button
@@ -113,8 +115,8 @@ export function Navbar() {
                         NavbarTopics={NavbarTopics}
                         setShowCloseBtn={setShowCloseBtn}
                         topics={topics}
-                        logout={logout}
                         setShowMenuBtn={setShowMenuBtn}
+                        logout={logout}
 
                     />
                 </div>

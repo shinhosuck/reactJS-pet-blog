@@ -165,14 +165,20 @@ function PostDetail() {
                     </div>
                     {!showUpdatePostForm && !comments &&
                         <div className="no-comments-container">
-                            <div className="no-comment-text-container">
-                                <h3>Be the first to comment!</h3>
-                                <p>
-                                    Nobody's responded to this post yet.
-                                    Add your thoughts and get the conversation going.
-                                </p>
-                                {!isAuthenticated && <p className='login-to-create-post'>Please login to comment on this post. <Link to='/login'>Login</Link></p>}
-                            </div>
+                            <h3>Be the first to comment!</h3>
+                            <p className='no-comment-text'>
+                                Nobody's responded to this post yet.
+                                Add your thoughts and get the conversation going.
+                            </p>
+                            {!isAuthenticated && 
+                             <>
+                                <p className='no-comment-login-to-create-post'>Please login to comment on this post.</p>
+                                <Link to='/login'>
+                                    <span>Login</span>
+                                    <i className="fa fa-chevron-right"></i>
+                                </Link>
+                             </>
+                            }
                         </div>
                     }
                 </div>

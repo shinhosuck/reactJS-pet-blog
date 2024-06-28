@@ -41,7 +41,8 @@ function Login() {
                 setIsLogingin(false)
                 localStorage.setItem('auth', JSON.stringify(data))
                 setIsAuthenticated(data)
-                navigate(`${state && state.redirect?state.redirect:'/posts'}`, {replace:true, state:{message:data.message}})
+                const username = JSON.parse(localStorage.getItem('auth')).username
+                navigate(state && state.redirect ? state.redirect:`/user/${username}/dashboard`, {replace:true, state:{message:data.message}})
             }
         }
     }
@@ -133,7 +134,10 @@ function Login() {
                     </form>
                     <div className="user-login__not-yet-registered">
                         <p>Not yet registered? </p>
-                        <Link to='/register'>Register</Link>
+                        <Link to='/register'>
+                            <span>Register</span>
+                            <i className="fa fa-chevron-right"></i>
+                        </Link>
                     </div>
                 </div>
             </div>

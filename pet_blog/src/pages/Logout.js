@@ -6,8 +6,7 @@ import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 function Logout() {
     const navigate = useNavigate()
     const { setIsAuthenticated } = useOutletContext()
-
-
+    
     const logout = ()=> {
         setIsAuthenticated(null)
         localStorage.removeItem('auth')

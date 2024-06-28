@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import SearchForm from './SearchForm'
+import Logout from '../pages/Logout'
 
 
 function MobileNavLinks(props) {
     const [ showSearForm, setShowSearchForm ] = useState(false)
     const { showNavLinks, setShowNavLinks, 
         isAuthenticated, handleMobileAuthenticatedUserNavLinks,
-        handleMobileTopics, topics, logout, NavbarTopics,
-        setShowCloseBtn, setShowMenuBtn
+        handleMobileTopics, topics, NavbarTopics,
+        setShowCloseBtn, setShowMenuBtn, logout
     } = props
-
+   
     return (
         <div className={showNavLinks?"show-mobile-navlinks mobile-navlinks":"mobile-navlinks"}>
             {isAuthenticated &&

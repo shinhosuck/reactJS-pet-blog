@@ -99,8 +99,6 @@ function PostDetailPost(props) {
                     <i className="fas fa-comment post-detail-container__num-of-post"></i>
                     <span className='post-detail-container__reply-count'>{post.qs_count.comment_count}</span>
                 </div>
-            </div>
-            <div className='post-detail-edit-follow-btns'>
                 {isAuthenticated ?
                         isFollowing && isFollowing.follow.includes(post.author) ?
                         <div className='post-author-unfollow'>
@@ -113,6 +111,8 @@ function PostDetailPost(props) {
                 :
                     ''
                 }
+            </div>
+            <div className='post-detail-edit-follow-btns'>
                 <div className="post-detail-edit-delete-btns-container post-edit">
                     {isAuthenticated && isAuthenticated.username === post.author &&
                         <>

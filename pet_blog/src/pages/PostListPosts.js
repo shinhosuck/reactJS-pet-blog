@@ -54,7 +54,8 @@ function PostListPosts(props) {
                                     to={`/post/${post.id}/detail/`}
                                     state={{redirect:pathname}} 
                                 >
-                                    Read more
+                                    <span>Read more</span>
+                                    <i className="fa fa-chevron-right"></i>
                                 </Link>
                             </div>
                         </div>

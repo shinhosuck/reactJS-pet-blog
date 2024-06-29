@@ -54,9 +54,10 @@ function Profile() {
       window.localStorage.removeItem('auth')
       window.localStorage.setItem('auth', JSON.stringify(data))
     }
-    setTimeout(() => {
+    const timeOutID = setTimeout(() => {
       setIsUpdating(false)
-    }, 1000);
+      clearTimeout(timeOutID)
+    }, 1000)
   }
 
   function handleChange(e) {

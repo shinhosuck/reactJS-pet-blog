@@ -63,8 +63,9 @@ function CreatePost() {
             const data = await getTopicData(`${url}/api/topics/`)
             const topicArray = data.map((topic)=>topic.name)
             setTopics(topicArray)
-            setTimeout(()=>{
+            const timeoutID = setTimeout(()=>{
                 setIsLoading(false)
+                clearTimeout(timeoutID)
             }, 500)
         } catch ({message}) {
             setIsLoading(false)

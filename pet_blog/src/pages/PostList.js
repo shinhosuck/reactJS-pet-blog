@@ -43,7 +43,7 @@ function PostList() {
             }
         }
         clearTimeout(timeoutID)
-    }, 5000)
+    }, 7000)
   }, [state])
 
   if(isLoading) {

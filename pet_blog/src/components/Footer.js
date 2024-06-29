@@ -50,63 +50,50 @@ function Footer(prop) {
                 <img className='footer-container__brand-logo' src={paw} alt="paw" />
                 <h2 className='footer-container__brand-name'>Canine Blog</h2>
               </div>
-              <div className="footer-container__brand-text">
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                  Illo ad neque repellat, voluptatum exercitationem voluptate. 
-                  Quae expedita assumenda tempora enim.
-                </p>
-              </div>
+              <p className="footer-container__brand-text">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                Illo ad neque repellat, voluptatum exercitationem voluptate. 
+                Quae expedita assumenda tempora enim.
+              </p>
           </div>
           <div className='footer-container__quick-links'>
-            <h2 className='quick-links-header'>Quick Links</h2>
-            <ul className='quick-links'>
-              <li className='quick-nav-link'>
-                <NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/'>Home</NavLink>
-              </li>
-              <li className='quick-nav-link'>
-                <NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/posts'>Posts</NavLink>
-              </li>
+            <h3 className='quick-links-header'>Quick Links</h3>
+            <div className='quick-links'>
+              <NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/'>Home</NavLink>
+              <NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/posts'>Posts</NavLink>
               {!isAuthenticated ?
               <>
-
-                <li className='quick-nav-link'>
-                  <NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/login'>Login</NavLink>
-                </li>
-                <li className='quick-nav-link'>
-                  <NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/register'>Register</NavLink>
-                </li>
+                <NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/login'>Login</NavLink>
+                <NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/register'>Register</NavLink>
               </>
               :
               <>
-                <li className='quick-nav-link'>
-                  <NavLink className={({isActive})=>isActive? 'active-quick-link quick-link': 'quick-link'} to='/my-posts'>My Posts</NavLink>
-                </li>
-                <li className='quick-nav-link'>
-                  <NavLink className={({isActive})=>isActive? 'active-quick-link quick-link': 'quick-link'} to='/my-comments'>My Comments</NavLink>
-                </li>
-                <li className='quick-nav-link'><NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/logout'>Logout</NavLink></li>
+                 <NavLink className={({isActive})=>isActive? 'active-quick-link quick-link': 'quick-link'} to='/my-posts'>My Posts</NavLink>
+                 <NavLink className={({isActive})=>isActive? 'active-quick-link quick-link': 'quick-link'} to='/my-comments'>My Comments</NavLink>
+                 <NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/logout'>Logout</NavLink>
               </>
               }
-            </ul>
+            </div>
           </div>
           <div className="contact-us-container">
-            <h2 className='contact-us-header'>Contact US</h2>
-            <div className='contact-form-container'>
-              <form className='contact-form' onSubmit={handleSubmit}>
-                {successMessage && <p className='success-message'>{successMessage}</p> || isError && <p className='error-message'>{isError}</p>}
+            <h3 className='contact-us-header'>Contact</h3>
+            <form className='contact-form' onSubmit={handleSubmit}>
+              {successMessage && <p className='success-message'>{successMessage}</p> || isError && <p className='error-message'>{isError}</p>}
+              <div className='contact-us-input-container'>
                 <label htmlFor="contactEmail">Email</label>
                 <input onChange={handleChange} value={message.email} type="email" id='contactEmail' name='email' required/>
+              </div>
+              <div className='contact-us-input-container'>
                 <label htmlFor="contactMessage">Message</label>
                 <textarea onChange={handleChange} value={message.content} name="content" id="contactMessage" required></textarea>
-                <button type='submit'>Submit</button>
-              </form>
-            </div>
+              </div>
+              <button type='submit'>Submit</button>
+            </form>
           </div>
         </div>
         <div className="social-links">
           <div className="social-links-container">
-            <Link to="https://github.com/shinhosuck" target="_blank"><i className="fab fa-github"></i></Link>
+            <Link to="https://github.com/shinhosuck/reactJS-pet-blog/tree/main/pet_blog" target="_blank"><i className="fab fa-github"></i></Link>
             <Link to="https://www.linkedin.com/in/eric-anderson-a6b906214/" target="_blank"><i className="fab fa-linkedin-in"></i></Link>
           </div>
         </div>

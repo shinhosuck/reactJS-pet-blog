@@ -16,9 +16,9 @@ export function handleRightColumnContent(e) {
 }
 
 export function removeDesktopTopicsAndUserLinks(e) {
-    const lgTopicChevron = document.querySelector('.lg-topic-chevron')
     const navbarTopics = [...document.querySelectorAll('.navbar-topics')][1]
     const lgAuthenticatedUser = document.querySelector('.lg-authenticated-user')
+    const lgTopicChevron = document.querySelector('.lg-topic-chevron')
     const chevronDown = document.querySelector('.lg-chevron')
 
     const names = e.target.classList.value.split(' ')
@@ -30,14 +30,14 @@ export function removeDesktopTopicsAndUserLinks(e) {
         // pass
 
     }else {
-        navbarTopics && navbarTopics.classList.remove('show-navbar-topics')
-        lgAuthenticatedUser && lgAuthenticatedUser.classList.remove('show-lg-authenticated-user')
-
-        if(chevronDown & lgTopicChevron) {
-            chevronDown.style.transform = 'rotate(0deg)'
-            lgTopicChevron.style.transform = 'rotate(0deg)'
-        }else {
-            lgTopicChevron.style.transform = 'rotate(0deg)'
+        
+        if(navbarTopics && navbarTopics.classList.contains('show-navbar-topics')) {
+            navbarTopics.classList.remove('show-navbar-topics')
+             lgTopicChevron.style.transform = 'rotate(0deg)'
+        }
+        if(lgAuthenticatedUser && lgAuthenticatedUser.classList.contains('show-lg-authenticated-user')) {
+            lgAuthenticatedUser.classList.remove('show-lg-authenticated-user')
+             chevronDown.style.transform = 'rotate(0deg)'
         }
     } 
 }

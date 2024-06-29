@@ -54,7 +54,7 @@ function ChildCommentForm(props) {
         const id = setTimeout(()=> {
             setIsError(false)
             clearTimeout(id)
-        }, 3000)
+        }, 7000)
     }, [isError])
 
     return (

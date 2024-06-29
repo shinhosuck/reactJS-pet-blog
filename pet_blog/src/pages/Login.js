@@ -68,7 +68,7 @@ function Login() {
                 }
             }
             clearTimeout(timeoutID)
-        }, 5000)
+        }, 7000)
 
     }, [state])
 
@@ -78,11 +78,8 @@ function Login() {
         const timeoutId = setTimeout(()=> {
             if(document.readyState === 'complete') {
                 setIsLoading(false)
-                clearTimeout(timeoutId)
             }
-            else {
-                clearTimeout(timeoutId)
-            }
+            clearTimeout(timeoutId)
         }, 100)
     }, [])
 

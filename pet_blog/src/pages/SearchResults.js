@@ -43,8 +43,6 @@ function SearchResults() {
         )
     }
 
-    console.log(state)
-    
     return (
         <>
             <div className="bg-img">

@@ -366,16 +366,16 @@ Landing Page
   margin-top: 0.5rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.3rem;
   font-weight: 600;
   letter-spacing: 0.05rem;
   text-transform: uppercase;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: color 100ms linear; 
 }
 
 .landing-page-featured-post-read-post-btn > i {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 @media (hover) {
@@ -585,16 +585,16 @@ Landing Page
   margin-top: 0.5rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.3rem;
   letter-spacing: 0.05rem;
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
   transition: color 100ms linear;
 }
 
 .landing-page-post-read-more-btn > i {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 @media (hover) {
@@ -968,7 +968,7 @@ SEARCH FORM
 
 .search-input {
   border:none;
-  background: var(--brown-90);
+  background: var(--brown-95);
   padding: 1rem 2rem;
   flex: 9;
   box-sizing: border-box;
@@ -1521,6 +1521,14 @@ Posts
   align-content: start;
   column-gap: 2rem;
   row-gap: 4rem;
+}
+
+.post-search-no-result {
+  grid-column: 1 / span 2 !important;
+  letter-spacing: 0.05rem;
+  justify-self: center;
+  color: var(--black-20);
+  font-size: clamp(1.2rem, 1vw + 1.5rem, 2.5rem);
 }
 
 .post-container__post {

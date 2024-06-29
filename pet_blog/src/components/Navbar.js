@@ -84,7 +84,6 @@ export function Navbar() {
                                 setShowSearchForm(false)
                                 setShowCloseBtn(true)
                                 setShowMenuBtn(false)
-                                window.scrollTo({top:0})
                             }} 
                             className='mobile-show-navlink-btn'
                         >

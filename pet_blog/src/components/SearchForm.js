@@ -19,7 +19,7 @@ function SearchForm(props) {
         e.target.reset()
         navigate(
             '/search/result/', 
-            {state:posts && posts.error ? {error:posts.error} : {posts:posts}}
+            {state:posts}
         )
     }
 

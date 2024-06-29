@@ -15,18 +15,19 @@ function SearchResults() {
 
     useEffect(()=> {
         document.title = 'Search Result'
-        if (state) {
-            setPosts(null)
+        
+        if(state) {
             setIsError(null)
+            setPosts(null)
 
-            if (state.posts) {
-                setPosts(state.posts)
-
+            if (state.error) {
+                setIsError(state)
             }else {
-                setIsError(state.error)
+                setPosts(state)
             }
-            setIsLoading(false)
         }
+
+        setIsLoading(false)
     }, [state])
 
     useEffect(()=> {
@@ -41,6 +42,8 @@ function SearchResults() {
             <LoadingPage />
         )
     }
+
+    console.log(state)
     
     return (
         <>
@@ -48,80 +51,62 @@ function SearchResults() {
                 <div className="bg-img-header-container">
                     <div className="bg-img-contents">
                         <h1 className='bg-img-header'>Search Result</h1>
-                        <p className='bg-img-text'>
-                        You'll find a wealth of information 
-                        about caring for your canine companion, 
-                        from best practices to advice against.
-                        </p>
+                        <div className='bg-img-text'>
+                           {!posts 
+                           ? 
+                            <div style={{display:'grid',alignContent:'start',gap:'0.3rem',marginTop:'0.5rem'}}>
+                                <span>Query: {isError.query}</span>
+                                <span>Result: 0 post</span>
+                            </div>
+                           : 
+                            posts.data.length > 1 
+                            ? 
+                            <div style={{display:'grid',alignContent:'start',gap:'0.3rem',marginTop:'0.5rem'}}>
+                                <span>Query: {posts.query}</span>
+                                <span>Result: {posts.data.length} posts</span>
+                            </div>
+                            :
+                            <div style={{display:'grid',alignContent:'start',gap:'0.3rem',marginTop:'0.5rem'}}>
+                                <span>Query: {posts.query}</span>
+                                <span>Result: {posts.data.length} post</span>
+                            </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
             <div className="post-container">
                 <div className="post-container__posts">
-                    { isError ?
-                        <h3>{ isError }</h3>
+                    { isError && isError.error ?
+                        <h3 className='post-search-no-result'>{ isError.error }</h3>
                     :
-                        posts && posts.map((post)=> {
+                        posts && posts.data.map((post)=> {
                             return (
-                                <div key={post.id} className="post-container__post">
-                                    <div className='post-container__post-author-and-date'>
-                                        <img src={post.author_profile_image_url} alt="" />
-                                        <div>
-                                            <p className='post-container__post-author'>{post.author}</p>
-                                            <p className='post-container__post-date-posted'>{formatDate(post.date_posted)}</p>
-                                        </div>
+                                <div key={post.id} className="my-posts-container__post">
+                                    <div className="my-posts-container__post-image-container">
+                                        <img className='my-posts-container__post-image' src={post.image_url} alt={post.title} /> 
+                                        <div className='landing-page-post-image-background-overlay'></div> 
                                     </div>
-                                    <div className='post-container-post-title-topic-container'>
-                                        <h3 className='post-container__post-title'>{post.title}</h3>
+                                    <div className='landing-page-post-topic-container'>
+                                        <Link
+                                        to={`/topic/${post.topic}/posts/?filter=${post.topic}`}
+                                        state={{topic:post.topic, redirect:pathname}} 
+                                        className='post-topic-btn'
+                                        >
+                                            {post.topic}
+                                        </Link>
+                                        <p className='post-container__post-date-posted'>{formatDate(post.date_posted)}</p>
                                     </div>
-                                    <div className="post-container__post-image-container">
-                                        <img className='post-container__post-image' src={post.image_url} alt={post.title} />
-                                        {post.qs_count.like_count > 1 ? 
-                                            <div className='post-container__post-like'>
-                                                <div className='post-container-post-topic'>
-                                                    <p>{post.topic}</p>
-                                                </div>
-                                                <div className='post-container__post-like-container'>
-                                                    <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
-                                                    <span className='post-container__post-like-count'>{post.qs_count.like_count}</span>
-                                                </div>
-                                                <div className='post-container__num-of-replies-container'>
-                                                    <i className="fas fa-comment post-container__num-of-post"></i>
-                                                    <span className='post-container__post-reply-count'>{post.qs_count.comment_count}</span>
-                                                </div>
-                                            </div>
-                                        : 
-                                            <div className='post-container__post-like'>
-                                                <div className='post-container-post-topic'>
-                                                    <p>{post.topic}</p>
-                                                </div>
-                                                <div className='post-container__post-like-container'>
-                                                    <i className="fa-solid fa-hands-clapping post-container__clapping"></i>
-                                                    <span className='post-container__post-like-count'>{post.qs_count.like_count}</span>
-                                                </div>
-                                                <div className='post-container__num-of-replies-container'>
-                                                    <i className="fas fa-comment post-container__num-of-post"></i>
-                                                    <span className='post-container__post-reply-count'>{post.qs_count.comment_count}</span>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-                                    <div className='post-container__post-text-content'>
-                                        <p className='post-container__post-content'>
-                                            {post.content.length > 250 ?
-                                                <span>{`${post.content.substring(0, 250)}`}...</span>
-                                            : 
-                                                <span>{post.content}</span>
-                                            }
-                                            <Link 
-                                                className='post-container__post-read-more-btn'
-                                                to={`/post/${post.id}/detail/`}
-                                                state={{redirect:pathname}} 
-                                            >
-                                                Read more
-                                            </Link>
-                                        </p>
-                                    </div>
+                                    <h3 className='my-posts-container__post-title'>{post.title}</h3>
+                                    <p className='my-posts-container__post-content'>{post.content.substring(0, 150)}...</p>
+                                    <Link 
+                                        className='landing-page-post-read-more-btn'
+                                        to={`/post/${post.id}/detail/`}
+                                        state={{redirect:pathname}} 
+                                    >
+                                        <span>Read more</span>
+                                        <i className="fa fa-chevron-right"></i>
+                                    </Link>
                                 </div>
                             )
                         })

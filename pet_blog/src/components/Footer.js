@@ -51,9 +51,13 @@ function Footer(prop) {
                 <h2 className='footer-container__brand-name'>Canine Blog</h2>
               </div>
               <p className="footer-container__brand-text">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                Illo ad neque repellat, voluptatum exercitationem voluptate. 
-                Quae expedita assumenda tempora enim.
+                Welcome to Canine Blog, a personal canine blog 
+                site where dog lovers come together to share their 
+                stories, seek advice, and support one another. 
+                Whether you're dealing with a mischievous puppy,
+                managing a senior dog's health, or just want to 
+                share a heartwarming moment, our community is 
+                here for you.
               </p>
           </div>
           <div className='footer-container__quick-links'>

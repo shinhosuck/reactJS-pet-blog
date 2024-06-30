@@ -23,10 +23,6 @@
   --orange-light: hsl(7, 100%, 57%);
   --orange-50: #ff1e00;
   
-
-  /* Section header text */
-  --section-header: hsl(15, 100%, 47%);
-
   /* Error text */
   --error-text: hsl(9, 100%, 50%);
 
@@ -34,13 +30,8 @@
   --success-text: rgb(0, 170, 0);
 
   /* Orange */
-  --purplish-brown-15: hsl(10, 30%, 15%);
-  --purplish-brown-20: hsl(10, 30%, 20%);
-  --purplish-brown-30: hsl(10, 30%, 30%);
   --orange-25: hsl(10, 30%, 35%);
   --orange-30: hsl(10, 30%, 40%);
-  --orange-40: hsl(10, 30%, 50%);
-
 
   /* Brown */
   --brown-10: hsl(20, 29%, 10%);
@@ -455,15 +446,6 @@ Landing Page
   padding: 0.5rem 1rem;
   font-weight: 600;
   font-size: 0.85rem;
-}
-
-.landing-page-topic-post_count {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  color: var(--black-90);
-  font-size: 0.9rem;
 }
 
 /* end */
@@ -1052,10 +1034,6 @@ NAVIGATION BAR
   gap: 0.5rem;
 }
 
-.navbar-brand-link:focus {
-  color: var(--purplish-brown-20);
-}
-
 .navbar-brand-logo {
   width: 38px;
   height: 100%;
@@ -1110,8 +1088,6 @@ NAVIGATION BAR
 .mobile-navlinks-container {
   flex: 0 0 100%;
   background: white;
-  border-bottom-right-radius: 8px;
-  border-bottom-left-radius: 8px;
   box-shadow: 4.0px 8.0px 8.0px rgba(0,0,0,0.38);
 
 }
@@ -1126,12 +1102,14 @@ NAVIGATION BAR
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  transition: max-height 100ms linear, right 300ms linear;
+  opacity: 0;
+  transition: max-height 50ms linear;
 }
 
 .show-mobile-navlinks {
   max-height: 100dvh;
   padding: 1rem 0;
+  opacity: 1;
 }
 
 .mobile-navlink{
@@ -1159,7 +1137,7 @@ NAVIGATION BAR
   font-size: 1rem;
   letter-spacing: 0.05rem;
   width: 100%;
-  color: var(--purplish-brown-20);
+  color: var(--black-20);
   font-size: 1rem;
   text-align: start;
 }
@@ -1180,8 +1158,7 @@ NAVIGATION BAR
   display: grid;
   align-content: start;
   gap: 0rem;
-  padding: 1rem;
-  
+  padding: 1rem 0;
 }
 
 .mobile-navlinks-authenticated-user {
@@ -3064,7 +3041,7 @@ TOPIC POSTS
 
 .topic-posts-navbar__nav-bar-text {
   letter-spacing: 0.05rem;
-  color: var(--purplish-brown-20);
+  color: var(--black-20);
   font-size: 0.9rem;
 }
 
@@ -3092,7 +3069,7 @@ TOPIC POSTS
   border: none;
   font-size: 0.9rem;
   cursor: pointer;
-  color: var(--purplish-brown-20);
+  color: var(--black-20);
   margin-left: auto;
 }
 

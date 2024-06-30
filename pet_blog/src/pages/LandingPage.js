@@ -21,6 +21,7 @@ function LandingPage() {
     const {isAuthenticated} = useContext(ContentLayoutContext)
 
     useEffect(()=> {
+        console.log('hello2')
         const getPosts = async()=> {
             const data = await getPostData(`${url}/api/posts/`)
             if(data.error) {
@@ -40,6 +41,7 @@ function LandingPage() {
     }, [])
 
     useEffect(()=> {
+        console.log('hello2')
         document.title = 'Home'
         const getTopics = async()=> {
             const data = await getTopicData(`${url}/api/topics`)
@@ -58,7 +60,6 @@ function LandingPage() {
             window.removeEventListener('scroll', handleRightColumnContent)
         }
     }, [])
-    
 
     if(isLoading) {
         return (
@@ -89,7 +90,8 @@ function LandingPage() {
                     <div className="landing-page-hero-text-wrapper">
                         <h1 className='landing-page-hero-header'>We are Canine Blog Site</h1>
                         <p className='landing-page-hero-paragraph'>
-                            Request suggestions and share your experience and expertise on various canines's health issues.
+                            Request suggestions and share your experience 
+                            and expertise on various canines's health issues.
                         </p>
                         <Link to={!isAuthenticated ? '/register':'/posts'} className='landing-page-join-btn'>{isAuthenticated?'Explore':'Join now'}</Link>
                     </div>

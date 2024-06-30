@@ -223,7 +223,7 @@ Landing Page
 .landing-page-content-container {
   display: grid;
   align-items: start;
-  gap: 5rem;
+  gap: 6rem;
   margin: 2rem auto;
   width: 90%;
 }
@@ -354,19 +354,18 @@ Landing Page
 .landing-page-featured-post-read-post-btn {
   justify-self: start;
   color: var(--orange-50);
-  margin-top: 0.5rem;
   display: flex;
   align-items: center;
   gap: 0.3rem;
   font-weight: 600;
   letter-spacing: 0.05rem;
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: color 100ms linear; 
 }
 
 .landing-page-featured-post-read-post-btn > i {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 @media (hover) {
@@ -406,7 +405,6 @@ Landing Page
   position: relative;
   border-radius: 16px;
   transition: transform 200ms linear;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.700);
 }
 
 @media (hover) {
@@ -564,19 +562,18 @@ Landing Page
 .landing-page-post-read-more-btn {
   justify-self: start;
   color: var(--orange-50);
-  margin-top: 0.5rem;
   display: flex;
   align-items: center;
   gap: 0.3rem;
   letter-spacing: 0.05rem;
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: color 100ms linear;
 }
 
 .landing-page-post-read-more-btn > i {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 @media (hover) {
@@ -950,22 +947,28 @@ SEARCH FORM
 }
 
 .search-input {
-  border:none;
   background: var(--brown-95);
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   flex: 9;
   box-sizing: border-box;
   font-size: 1rem;
   letter-spacing: 0.05rem;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
-  background: var(--brown-80)
+  background: var(--brown-80);
+  border:none;
+  border-radius: none;
+  border-top-left-radius: 25px;
+  border-top-left-radius: 25px;
+}
+
+.search-input::placeholder {
+  font-size: 0.9rem;
 }
 
 .search-submit-btn {
   flex: 1;
   font-size: 1rem;
-  border:none;
   background: orangered;
   color: var(--black-95);
   flex: 1;
@@ -975,6 +978,10 @@ SEARCH FORM
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   font-weight: 500;
+  border:none;
+  border-radius: none;
+  border-top-right-radius: 25px;
+  border-top-right-radius: 25px;
 }
 
 .search-input:focus,
@@ -985,6 +992,10 @@ SEARCH FORM
 @media (min-width: 500px) {
   .search-submit-btn {
     font-size: 1.1rem;
+  }
+
+  .search-input::placeholder {
+    font-size: 1rem;
   }
 }
 
@@ -1089,7 +1100,6 @@ NAVIGATION BAR
   flex: 0 0 100%;
   background: white;
   box-shadow: 4.0px 8.0px 8.0px rgba(0,0,0,0.38);
-
 }
 
 .mobile-navlinks {
@@ -1107,7 +1117,7 @@ NAVIGATION BAR
 }
 
 .show-mobile-navlinks {
-  max-height: 100dvh;
+  max-height: 500dvh;
   padding: 1rem 0;
   opacity: 1;
 }
@@ -1584,7 +1594,7 @@ Posts
     display: grid;
     align-items: start;
     grid-template-columns: 2fr 1fr;
-    gap: 5rem;
+    gap: 6rem;
     margin: 3rem auto;
   }
 
@@ -2352,7 +2362,7 @@ Post Detail
   .post-detail-main-container {
     grid-template-columns: 2fr 1fr;
     margin: 3rem auto;
-    gap: 5rem;
+    gap: 6rem;
   }
 }
 
@@ -2388,20 +2398,17 @@ RIGHT SIDE BAR
 ============== */
 .right-side-bar {
   display: none;
+  /* overflow-y: auto;
+  max-height: 500dvh; */
 }
 
 @media screen and (min-width: 800px) {
   .right-side-bar  {
-    position: sticky;
     display: grid;
     align-items: start;
-    top: 0;
-  }
-
-  .right-sidebar-container {
-    display: grid;
-    align-content: start;
     gap: 2rem;
+    /* position: sticky;
+    top: 0; */
   }
 
   .right-side-bar-container {
@@ -2425,6 +2432,8 @@ RIGHT SIDE BAR
   }
 
   .side-bar-latest-post {
+    display: grid;
+    gap: 0.8rem;
     text-wrap: pretty;
     border: 1px solid var(--black-80);
     padding: 1rem;
@@ -2436,26 +2445,16 @@ RIGHT SIDE BAR
     letter-spacing: 0.05rem;
     color: var(--black-20);
     text-wrap: pretty;
-    margin-top: 0.5rem;
     text-decoration-color: white;
     font-weight: 600;
     font-size: 1.1rem;
     transition: text-decoration 200ms linear;
   }
 
-  @media (hover) {
-    .right-sidebar-post-title:hover {
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
-      text-decoration-color: var(--focus);
-    }
-  }
-
   .right-sidebar-post-content {
     color: var(--black-30);
     letter-spacing: 0.05rem;
-    line-height: 1.4;
-    margin-top: 0.5rem;
+    line-height: 1.5;
   }
 }
 
@@ -3013,7 +3012,7 @@ TOPIC POSTS
   width: 90%;
   max-width: 1400px;
   margin: 2rem auto;
-  gap: 5rem;
+  gap: 6rem;
   min-height: 100dvh;
 }
 

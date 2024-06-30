@@ -8,7 +8,8 @@ import LandingPageFeaturePosts from '../components/LandingPageFeaturePosts'
 import LandingPageEmailSub from '../components/LandingPageEmailSub'
 import LoadingPage from './LoadingPage'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
-import RightSidebar from '../components/RightSidebar'
+import TopPostsSidebar from '../components/TopPostsSidebar'
+import LatestPostsSidebar from '../components/LatestPostsSidebar'
 import { handleRightColumnContent } from '../utils/handleEvents'
 
 
@@ -21,7 +22,6 @@ function LandingPage() {
     const {isAuthenticated} = useContext(ContentLayoutContext)
 
     useEffect(()=> {
-        console.log('hello2')
         const getPosts = async()=> {
             const data = await getPostData(`${url}/api/posts/`)
             if(data.error) {
@@ -41,8 +41,7 @@ function LandingPage() {
     }, [])
 
     useEffect(()=> {
-        console.log('hello2')
-        document.title = 'Home'
+        document.title = 'Canine Blog'
         const getTopics = async()=> {
             const data = await getTopicData(`${url}/api/topics`)
             if(data.error){
@@ -105,7 +104,8 @@ function LandingPage() {
                     <LandingPageEmailSub />
                 </div>
                 <div className='right-side-bar'>
-                    <RightSidebar />
+                    <TopPostsSidebar />
+                    <LatestPostsSidebar />
                 </div>
             </div>
             

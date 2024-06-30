@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import { formatDate } from '../utils/formatDate'
-import RightSidebar from '../components/RightSidebar'
+import LatestPostsSidebar from '../components/LatestPostsSidebar'
+import TopPostsSidebar from '../components/TopPostsSidebar'
 import LoadingPage from './LoadingPage'
 import { handleRightColumnContent } from '../utils/handleEvents'
 
@@ -111,7 +112,8 @@ function SearchResults() {
                     }
                 </div>
                 <div className='right-side-bar'>
-                    <RightSidebar />
+                    <TopPostsSidebar />
+                    <LatestPostsSidebar />
                 </div>
             </div>
         </>

@@ -7,7 +7,8 @@ import Comments from '../components/Comments'
 import PostDetailPost from '../components/PostDetailPost'
 import { getPostData, addLikes, getPostComments } from '../utils/api'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
-import RightSidebar from '../components/RightSidebar'
+import LatestPostsSidebar from '../components/LatestPostsSidebar'
+import TopPostsSidebar from '../components/TopPostsSidebar'
 import { formatDate } from '../utils/formatDate'
 import { url } from '../utils/urls'
 import { handleRightColumnContent } from '../utils/handleEvents'
@@ -183,7 +184,8 @@ function PostDetail() {
                     }
                 </div>
                 <div className='right-side-bar'>
-                    <RightSidebar />
+                    <TopPostsSidebar />
+                    <LatestPostsSidebar />
                 </div>
             </div>
         </React.Fragment>

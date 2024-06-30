@@ -6,7 +6,8 @@ import { url } from '../utils/urls'
 import dogImg from '../images/cartoon_dog.png'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
 import { formatDate } from '../utils/formatDate'
-import RightSidebar from '../components/RightSidebar'
+import TopPostsSidebar from '../components/TopPostsSidebar'
+import LatestPostsSidebar from '../components/LatestPostsSidebar'
 import { handleRightColumnContent } from '../utils/handleEvents'
 
 
@@ -212,7 +213,8 @@ function TopicPosts() {
                     }
                 </div>
                 <div className='right-side-bar'>
-                    <RightSidebar />
+                    <TopPostsSidebar />
+                    <LatestPostsSidebar />
                 </div>
             </div> 
         </React.Fragment>

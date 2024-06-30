@@ -940,7 +940,7 @@ SEARCH FORM
   width: 100%;
   max-width: 700px;
   margin: 0 auto;
-  border-radius: 25px;
+  border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -956,8 +956,8 @@ SEARCH FORM
   background: var(--brown-80);
   border:none;
   border-radius: 0;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
 }
 
 .search-input::placeholder {
@@ -976,8 +976,8 @@ SEARCH FORM
   font-weight: 500;
   border:none;
   border-radius: 0;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 
 .search-input:focus,

@@ -953,13 +953,11 @@ SEARCH FORM
   box-sizing: border-box;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
   background: var(--brown-80);
   border:none;
   border-radius: 0;
   border-top-left-radius: 25px;
-  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 .search-input::placeholder {
@@ -975,13 +973,11 @@ SEARCH FORM
   letter-spacing: 0.05rem;
   padding: 1rem 1.2rem;
   cursor: pointer;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
   font-weight: 500;
   border:none;
   border-radius: 0;
   border-top-right-radius: 25px;
-  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 .search-input:focus,

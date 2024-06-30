@@ -957,7 +957,7 @@ SEARCH FORM
   border-bottom-left-radius: 30px;
   background: var(--brown-80);
   border:none;
-  border-radius: none;
+  border-radius: 0;
   border-top-left-radius: 25px;
   border-top-left-radius: 25px;
 }
@@ -979,7 +979,7 @@ SEARCH FORM
   border-bottom-right-radius: 30px;
   font-weight: 500;
   border:none;
-  border-radius: none;
+  border-radius: 0;
   border-top-right-radius: 25px;
   border-top-right-radius: 25px;
 }

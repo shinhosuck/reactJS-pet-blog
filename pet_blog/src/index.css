@@ -1113,9 +1113,10 @@ NAVIGATION BAR
 }
 
 .show-mobile-navlinks {
-  max-height: 500dvh;
+  max-height: 100dvh;
   padding: 1rem 0;
   opacity: 1;
+  overflow-y: auto;
 }
 
 .mobile-navlink{

@@ -22,15 +22,7 @@ export function Navbar() {
     const [showTopics, setShowTopics] = useState(false)
     const [topics, setTopics] = useState(null)
     const [showNavLinks, setShowNavLinks] = useState(false)
-    // const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const navigate = useNavigate()
-
-    // const windowResizeEvent = function(e) {
-    //     setShowNavLinks(false)
-    //     setShowCloseBtn(false)
-    //     setShowMenuBtn(true)
-    //     setWindowWidth(e.target.innerWidth)
-    // }
 
     const logout = function() {
         setShowNavLinks(false)
@@ -39,13 +31,6 @@ export function Navbar() {
         navigate('/logout')
     }
    
-    // useEffect(()=> {
-    //     window.addEventListener('resize', windowResizeEvent)
-    //     return ()=> {
-    //         window.removeEventListener('resize', windowResizeEvent)
-    //     }
-    // }, [windowWidth])
-
     useEffect(()=> {
         const getTopics = async()=> {
             const data = await getTopicData(`${url}/api/topics/`)

@@ -8,20 +8,27 @@
 
 :root {
   /* Black */
+  --black-10: hsl(0, 0%, 10%);
   --black-15: hsl(0, 0%, 15%);
   --black-20: hsl(0, 0%, 20%);
   --black-30: hsl(0, 0%, 30%);
   --black-40: hsl(0, 0%, 40%);
   --black-50: hsl(0, 0%, 50%);
   --black-60: hsl(0, 0%, 60%);
-  --black-70: hsl(0, 0%, 70%);
   --black-80: hsl(0, 0%, 80%);
   --black-90: hsl(0, 0%, 90%);
   --black-95: hsl(0, 0%, 95%);
   
-  /* Button Background */
-  --orange-light: hsl(7, 100%, 57%);
-  --orange-50: #ff1e00;
+  /* Orange */
+  --header: hsl(16, 100%, 25%);
+  --cta: hsl(16, 100%, 50%);
+  --active-navlink: hsl(16, 100%, 60%);
+  --hover: hsl(16, 100%, 65%);
+  --focus: hsl(12, 100%, 70%);
+  --form-input-textarea: hsl(14, 100%, 95%);
+  --body-background: hsl(14, 100%, 98%);
+  
+
   
   /* Error text */
   --error-text: hsl(9, 100%, 50%);
@@ -48,7 +55,7 @@
   --brown-95: #f6f2ef;
 
   /* input && textarea focus */
-  --focus: hsl(12, 100%, 65%);
+  
 }
 
 html {
@@ -62,7 +69,7 @@ body {
 }
 
 .main-container {
-  background: hsl(25, 75%, 98%);
+  background: var(--body-background);
   display: grid;
   align-items: start;
 }
@@ -198,16 +205,20 @@ textarea {
   z-index: 8;
   bottom: 20px;
   right: 10px;
-  width: 40px;
+  width: 50px;
   aspect-ratio: 1/1;
   border-radius: 50%;
-  background: var(--brown-45);
+  background: var(--cta);
   border:none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 .scroll-up-container > i {
-  font-size: 1rem;
-  margin-top: 0.4rem;
-  color: white;
+  font-size: 1.3rem;
+  padding-top: 0.2rem;
+  color: var(--black-95);
 }
 /* end */
 
@@ -304,7 +315,7 @@ Landing Page
   padding-bottom: 1rem;
   font-weight: 700;
   border-bottom: 1px solid var(--black-80);
-  color: #AD1400;
+  color: var(--header);
   font-size: 1.6rem;
 }
 
@@ -353,7 +364,7 @@ Landing Page
 
 .landing-page-featured-post-read-post-btn {
   justify-self: start;
-  color: var(--orange-50);
+  color: var(--cta);
   display: flex;
   align-items: center;
   gap: 0.3rem;
@@ -385,7 +396,7 @@ Landing Page
 
 .landing-page-topic-header {
   text-wrap: balance;
-  color: #AD1400;
+  color: var(--header);
   line-height: 1.1;
   text-transform: uppercase;
   margin-bottom: 3rem;
@@ -458,7 +469,7 @@ Landing Page
 
 .landing-page-posts-header {
   text-wrap: balance;
-  color: #AD1400;
+  color: var(--header);
   line-height: 1.1;
   text-transform: uppercase;
   margin-bottom: 3rem;
@@ -561,7 +572,7 @@ Landing Page
 
 .landing-page-post-read-more-btn {
   justify-self: start;
-  color: var(--orange-50);
+  color: var(--cta);
   display: flex;
   align-items: center;
   gap: 0.3rem;
@@ -590,7 +601,7 @@ Landing Page
   gap: 0.5rem;
   padding: 1rem 2rem;
   border-radius: 30px;
-  background: orangered;
+  background: var(--cta);
   color: var(--black-95);
   font-weight: 600;
   margin-top: 5rem;
@@ -603,14 +614,6 @@ Landing Page
 .landing-page-post-see-all-posts > i {
   font-size: 1.2rem;
 }
-
-@media (hover) {
-  .landing-page-post-see-all-posts:hover {
-    background: hsl(16, 100%, 96%);
-    outline: 2px solid var(--orange-50);
-    color: var(--orange-50);
-  }
-}
 /* end */
 
 /* Email subscription */
@@ -619,7 +622,7 @@ Landing Page
   align-content: start;
   gap: 3.5rem;
   padding: 3rem 0rem;
-  background: var(--brown-30);
+  background: var(--black-30);
   border-radius: 30px;
 }
 
@@ -639,7 +642,7 @@ Landing Page
   width: 90%;
   max-width: 500px;
   margin: 0 auto;
-  color: white;
+  color: var(--black-95);
   line-height: 1.2;
   text-wrap: balance;
   font-weight: 600;
@@ -648,7 +651,7 @@ Landing Page
 }
 
 .landing-page-email-form-text {
-  color: var(--black-90);
+  color: var(--black-80);
   letter-spacing: 0.04rem;
   line-height: 1.5;
   text-wrap: balance;
@@ -678,9 +681,11 @@ input {
   width: 100%;
   box-sizing: border-box;
   font-size: 1rem;
-  padding: 0.8rem 1.6rem;
+  padding: 1rem;
   border-radius: 8px;
   border: none;
+  color: var(--black-20);
+  letter-spacing: 0.05rem;
 }
 
 .landing-page-email-sub-form-input-container > 
@@ -689,10 +694,10 @@ input:focus {
 }
 
 .landing-page-email-sub-btn {
-  padding: 0.8rem 1.6rem;
-  border-radius: 25px;
+  padding: 1rem;
+  border-radius: 30px;
   border: none;
-  background: orangered;
+  background: var(--cta);
   font-weight: 500;
   color: var(--black-95);
   font-size: 1.1rem;
@@ -842,7 +847,7 @@ input:focus {
     justify-self: start;
     padding: 1rem 2rem;
     text-align: center;
-    background: orangered;
+    background: var(--cta);
     color: var(--black-95);
     border-radius: 30px;
     letter-spacing: 0.05rem;
@@ -947,13 +952,12 @@ SEARCH FORM
 }
 
 .search-input {
-  background: var(--brown-95);
+  background: white;
   padding: 1rem 1.5rem;
   flex: 9;
   box-sizing: border-box;
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  background: var(--brown-80);
   border:none;
   border-radius: 0;
   border-top-left-radius: 30px;
@@ -1009,7 +1013,7 @@ NAVIGATION BAR
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--brown-10)
+  background: var(--black-10)
 }
 
 .navbar-container {
@@ -1042,14 +1046,9 @@ NAVIGATION BAR
 }
 
 .navbar-brand-logo {
-  width: 38px;
-  height: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  border-radius: 50%;
+  width: 35px;
+  height: auto;
   display: block;
-  background: var(--orange-25);
-  padding: 0.3rem
 }
 
 .navbar-brand-name {
@@ -1289,20 +1288,27 @@ NAVIGATION BAR
     white-space: nowrap;
     padding: 0;
     height: 67px;
-    color: white;
+    color: var(--black-95);
     width: auto;
     display: flex;
     align-items: center;
   }
+
+  @media (hover) {
+    .navbar-topic-btn:hover,
+    .navbar-navlink:hover {
+      color: var(--hover) !important;
+    }
+  }
   
   .navbar-active-navlink {
-    color: rgb(255, 91, 41);
+    color: var(--active-navlink);
     font-weight: 600;
   }
 
   .navbar-topic-btn {
     font-size: 1rem;
-    color: white;
+    color: var(--black-95);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -1314,13 +1320,6 @@ NAVIGATION BAR
   .navbar-topic-btn > i {
     font-size: 0.8rem;
     margin-top: 0.3rem;
-  }
-
-  @media (hover) {
-    .navbar-topic-btn:hover,
-    .navbar-navlink:hover {
-      color: rgb(255, 91, 41) !important;
-    }
   }
 
   /* Lg authenticated user container  */
@@ -1355,22 +1354,22 @@ NAVIGATION BAR
     display: grid;
     align-content: start;
     gap: 1rem;
-    border-radius: 8px;
+    border-radius: 15px;
     opacity: 0;
     transition: max-height 100ms linear;
   }
 
   .show-lg-authenticated-user{
-    background: var(--brown-90);
+    background: var(--black-90);
     max-height: 250px;
     opacity: 1;
     padding: 1rem 0;
-    overflow-y: auto;
+    /* overflow-y: auto; */
   }
 
   .lg-authenticated-user > 
   .navbar-navlink {
-    color: var(--brown-10);
+    color: var(--black-15);
     padding: 0 1rem;
     height: initial;
     font-size: 1rem;
@@ -1378,14 +1377,14 @@ NAVIGATION BAR
 
   .lg-authenticated-user > 
   .navbar-active-navlink {
-    color: rgb(255, 91, 41);
+    color: var(--active-navlink);
     font-weight: 600;
   }
 
   @media (hover) {
     .lg-authenticated-user > 
     .navbar-navlink:hover {
-      color: rgb(255, 91, 41) !important
+      color: var(--hover) !important;
     }
   }
 
@@ -1394,7 +1393,7 @@ NAVIGATION BAR
   .search-btn {
     border: none;
     background: none;
-    color: white;
+    color: var(--black-95);
     cursor: pointer;
     font-size: 1.1rem;
   }
@@ -1416,7 +1415,7 @@ NAVIGATION BAR
 .show-navbar-topics{
   max-height: 1000px !important;
   overflow: auto !important;
-  border-radius: 8px;
+  border-radius: 15px;
   margin-top: 1rem;
   padding: 0rem 1.5rem;
   padding-top: 0.5rem;
@@ -1424,19 +1423,19 @@ NAVIGATION BAR
 }
 
 .navbar-topic-link {
-  color: var(--black-40);
+  color: var(--black-15);
   font-size: 0.95rem;
   overflow-x: auto;
 }
 
 @media (hover) {
   .navbar-topic-link:hover {
-    color: var(--orange-50);
+    color: var(--hover);
   }
 }
 
 .active-navbar-topic-link {
-  color: var(--orange-50) !important;
+  color: var(--active-navlink) !important;
   font-weight: 600;
 }
 
@@ -1458,7 +1457,7 @@ NAVIGATION BAR
     display: grid;
     align-content: start;
     border-radius: 5px;
-    background: var(--brown-90);
+    background: var(--black-90);
     transition: max-height 200ms linear;
   }
 
@@ -1469,6 +1468,7 @@ NAVIGATION BAR
     margin-top: 0;
     border:none;
     padding: 1.5rem;
+    border-radius: 15px;
   }
 
   .navbar-topic-link {
@@ -1732,7 +1732,7 @@ Post Detail
 
 .post-detail-date-posted {
   font-size: 0.9rem;
-  color: var(--black-30);
+  color: var(--black-40);
 }
 
 .post-detail-container__post-title {
@@ -1909,7 +1909,7 @@ Post Detail
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--brown-40);
+  color: var(--black-50);
   background: none;
   border: none;
   cursor: pointer;
@@ -1921,7 +1921,7 @@ Post Detail
 
 .post-detail-edit-text {
   font-size: 0.85rem;
-  color: var(--brown-40);
+  color: var(--black-50);
 }
 
 .post-detail-delete {
@@ -1933,7 +1933,7 @@ Post Detail
   cursor: pointer;
   font-size: 1rem;
   text-align: start;
-  color: var(--brown-40);
+  color: var(--black-50);
 }
 
 .post-detail-remove-icon {
@@ -1947,24 +1947,24 @@ Post Detail
 
 @media (hover) {
   .post-detail-container__post-like:hover {
-    color: var(--orange-light) !important;
+    color: var(--hover) !important;
   }
   
   .post-detail-edit:hover {
-    color: var(--orange-light) !important;
+    color: var(--hover) !important;
   }
 
   .post-detail-edit:hover >
   .post-detail-edit-text {
-    color: var(--orange-light) !important;
+    color: var(--hover) !important;
   }
 
   .post-detail-btns-ellipsis:hover button i{
-    color: var(--orange-light) !important;
+    color: var(--hover) !important;
   }
 
   .post-detail-delete:hover * {
-    color: var(--orange-light) !important;
+    color: var(--hover) !important;
   }
 }
 
@@ -2168,7 +2168,7 @@ Post Detail
 }
 
 .post-detail-comments__username {
-  color: var(--black-30);
+  color: var(--black-20);
   font-weight: 500;
 }
 
@@ -2185,8 +2185,9 @@ Post Detail
 .post-detail-comments__content {
   line-height: 1.4;
   letter-spacing: 0.05rem;
-  color: var(--black-15);
-  word-wrap: break-word;
+  color: var(--black-20);
+  text-wrap: balance;
+  margin-top: 0.5rem;
   font-size: clamp(0.85rem, 1dvw + 0.5rem, 1rem);
 }
 
@@ -2206,7 +2207,7 @@ Post Detail
   align-items:center;
   flex-wrap: wrap;
   gap: 0.4rem;
-  color: var(--brown-50);
+  color: var(--black-60);
   background: none;
   border: none;
   cursor: pointer;
@@ -2216,25 +2217,26 @@ Post Detail
 .post-detail-comment-reply-icon,
 .post-detail-comment-edit-icon,
 .post-detail-comment-remove-icon {
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .post-detail-comment-edit-text,
 .post-detail-comment-edit-text,
 .post-detail-comment-remove-text {
-  font-size: 0.85rem;
-
+  font-size: 0.9rem;
+  color: var(--black-60);
+  font-weight: 500;
 }
 
 @media (hover) {
   .post-detail-comment-reply-btn:hover * {
-    color: var(--orange-light)
+    color: var(--hover)
   }
   .post-detail-comment-edit-btn:hover * {
-    color: var(--orange-light)
+    color: var(--hover)
   }
   .post-detail-comment-remove-btn:hover * {
-    color: var(--orange-light)
+    color: var(--hover)
   }
 }
 
@@ -2416,7 +2418,7 @@ RIGHT SIDE BAR
 
   .right-side-bar-header {
     text-transform: uppercase;
-    color: #AD1400;
+    color: var(--header);
     font-size: 1.2rem;
     line-height: 1;
     font-weight: 700;
@@ -2563,7 +2565,7 @@ My Posts
 }
 
 .my-posts-container__date-posted {
-  color: var(--black-50);
+  color: var(--black-40);
   font-size: 0.9rem;
 }
 
@@ -2696,7 +2698,7 @@ My Comments
 }
 
 .my-comments__date-replied {
-  color: var(--black-50);
+  color: var(--black-40);
   font-size: 0.95rem;
 }
 
@@ -3019,93 +3021,6 @@ TOPIC POSTS
   gap: 2rem;
 }
 
-.topic-posts-navbar {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-}
-
-.topic-posts-navbar__toggle-btns-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border: 1px solid lightgray;
-  padding: 0.5rem;
-  border-radius: 10px;
-}
-
-.topic-posts-navbar__nav-bar-text {
-  letter-spacing: 0.05rem;
-  color: var(--black-20);
-  font-size: 0.9rem;
-}
-
-.topic-posts-navbar__toggle-btns {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: none;
-  cursor: pointer;
-  border: none;
-}
-
-.topic-change-input {
-  flex: auto;
-  letter-spacing: 0.05rem;
-  font-size: 0.9rem;
-  color: var(--orange-50);
-  text-align: start;
-  font-weight: 500;
-  line-height: 1;
-}
-
-.topic-post-toggle-btn {
-  background: none;
-  border: none;
-  font-size: 0.9rem;
-  cursor: pointer;
-  color: var(--black-20);
-  margin-left: auto;
-}
-
-.topic-post-toggle-btn > i {
-  margin-top: 0.3rem;
-}
-
-.topic-posts-navbar__topics-btns {
-  position: absolute;
-  z-index: 3;
-  top: 49px;
-  right: 0;
-  width: 100%;
-  display: grid;
-  padding: 1rem;
-  border-radius: 5px;
-  background: white;
-  max-height: 250px;
-  overflow-y: auto;
-  border: 1px solid var(--black-80);
-  display: grid;
-  align-content: start;
-  row-gap: 0.8rem;
-}
-
-.topic-btn {
-  border: none;
-  background: none;
-  font-size: 0.9rem;
-  text-align: start;
-  color: rgb(39, 39, 39);
-  line-height: 1.3;
-}
-
-@media (hover) {
-  .topic-btn:hover {
-    color: var(--orange-50)
-  }
-}
-
 .topic-posts-container__posts {
   display: grid;
   align-content: start;
@@ -3186,24 +3101,6 @@ styling.
 }
 
 /* end */
-
-@media screen and (min-width: 267px) {
-  .topic-posts-navbar__topics-btns {
-    top: 44px;
-  }
-}
-@media screen and (min-width: 370px) {
-  .topic-change-input {
-    flex: initial;
-    width: 225px;
-    line-height: initial;
-  }
-
-  .topic-posts-navbar__topics-btns {
-    top: 43px;
-  }
-}
-
 @media screen and (min-width: 626px) {
   .no-topic-post-container > img {
     width: 170px;
@@ -3615,7 +3512,7 @@ LOGOUT
 FOOTER
 ====== */
 .footer-container {
-  background: var(--brown-10);
+  background: var(--black-10);
   align-content: start;
   display: grid;
 }
@@ -3643,13 +3540,9 @@ FOOTER
 }
 
 .footer-container__brand-logo {
-  width: 50px;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  border-radius: 50%;
+  width: 40px;
   display: block;
-  background: var(--orange-25);
-  padding: 0.4rem
+  height: auto;
 }
 
 .footer-container__brand-name {
@@ -3660,7 +3553,7 @@ FOOTER
 }
 
 .footer-container__brand-text {
-  color: var(--black-90);
+  color: var(--black-80);
   letter-spacing: 0.05rem;
   line-height: 1.5;
   max-width: 400px;
@@ -3674,7 +3567,7 @@ FOOTER
 }
 
 .quick-links-header {
-  color: white;
+  color: var(--black-95);
   font-size: 1.3rem;
   font-weight: 500;
 }
@@ -3689,8 +3582,14 @@ FOOTER
   color: var(--black-80)
 }
 
+@media (hover) {
+  .quick-link:hover {
+    color: var(--hover)
+  }
+}
+
 .active-quick-link {
-  color: var(--orange-50) !important;
+  color: var(--active-navlink) !important;
   font-weight: 600;
 }
 
@@ -3702,7 +3601,7 @@ FOOTER
 
 .contact-us-header {
   grid-column: 1 / -1;
-  color: white;
+  color: var(--black-95);
   font-size: 1.3rem;
   font-weight: 500;
 }
@@ -3719,7 +3618,7 @@ FOOTER
 }
 
 .contact-us-input-container > label {
-  color: var(--black-90);
+  color: var(--black-80);
   letter-spacing: 0.05rem;
   font-weight: 500;
 }
@@ -3733,7 +3632,6 @@ FOOTER
   color: var(--black-20);
   border: none;
   border-radius: 8px;
-  background: var(--brown-90)
 }
 
 .contact-us-input-container > textarea {
@@ -3745,26 +3643,25 @@ FOOTER
   letter-spacing: 0.05rem;
   line-height: 1.4;
   border: none;
-  background: var(--brown-90);
   border-radius: 8px;
 }
 
 #contactEmail:focus,
 #contactMessage:focus{
-  outline: 2px solid var(--focus);
+  outline: 3px solid var(--focus);
 }
 
 .contact-form > button {
-  padding: 0.8rem 1.6rem;
-  border-radius: 25px;
+  padding: 1rem;
+  border-radius: 30px;
   border: none;
-  color: white;
-  background: var(--orange-50);
+  color: var(--black-95);
+  background: var(--cta);
   text-transform: uppercase;
   letter-spacing: 0.05rem;
   font-weight: 500;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-top: 0.5rem;
 }
 
@@ -3779,19 +3676,12 @@ FOOTER
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.8rem;
+  gap: 1rem;
 }
 
 .social-links-container > a {
   font-size: 3rem;
-  color: var(--brown-60);
-}
-
-@media (hover){
-  .social-links-container > a:hover {
-    color: var(--focus)
-    
-  }
+  color: var(--black-95);
 }
 
 .copy-right {
@@ -3799,7 +3689,7 @@ FOOTER
   justify-content: center;
   align-items: center;
   padding: 1.5rem 0;
-  background: var(--brown-30)
+  background: var(--black-30)
 }
 
 .copy-right-text {

@@ -21,6 +21,7 @@ function TopicPosts() {
     const [topicMenuOpen, setTopicMenuOpen] = useState(false)
     const { isAuthenticated } = useContext(ContentLayoutContext)
     const [searchParams, setSearchParams] = useSearchParams()
+    const [windowInnerWidth, setWindowInnerWidth] = useState(window.innerWidth)
 
     const filter = searchParams.get('filter')
 
@@ -75,6 +76,18 @@ function TopicPosts() {
             window.removeEventListener('scroll', handleRightColumnContent)
         }
     }, [])
+
+
+    function windowResizeEvent(params) {
+        setWindowInnerWidth(window.innerWidth)
+    }
+
+    useEffect(()=> {
+        const windowEvent = window.addEventListener('resize', windowResizeEvent)
+        return ()=> {
+            window.removeEventListener('resize', windowResizeEvent)
+        }
+    }, [windowInnerWidth])
     
     if(postArray && topicNames) {
         const timeOutID = setTimeout(()=> {
@@ -119,43 +132,6 @@ function TopicPosts() {
             </div>
             <div className='topic-posts-wrapper'>           
                 <div className="topic-posts-container">
-                    <div className='topic-posts-navbar'>
-                        <div className='topic-posts-navbar__toggle-btns-container'>
-                            <p className='topic-posts-navbar__nav-bar-text'>Topic:</p>
-                            <button 
-                                onClick={()=>setTopicMenuOpen(!topicMenuOpen)}
-                                className='topic-posts-navbar__toggle-btns'
-                            >
-                                <p className='topic-change-input' >{filter && filter}</p>
-                                {!topicMenuOpen ?
-                                    <div className='topic-post-toggle-btn'>
-                                        <i className="fa fa-chevron-down"></i>
-                                    </div>
-                                :
-                                    <div className='topic-post-toggle-btn'>
-                                        <i className="fa fa-chevron-up"></i>
-                                    </div>
-                                }
-                            </button>
-                            {topicMenuOpen && 
-                                <div className="topic-posts-navbar__topics-btns">
-                                    {topicNames && topicNames.map((topicName)=> {
-                                        return (
-                                            <NavLink
-                                                key={topicName}
-                                                onClick={()=> setTopicMenuOpen(false)}
-                                                to={`.?filter=${topicName}`} 
-                                                state={{topic:topicName, redirect:filter}} 
-                                                className='topic-btn'
-                                            >
-                                                {topicName}
-                                            </NavLink>
-                                        )
-                                    })}
-                                </div>
-                            }
-                        </div>
-                    </div>
                     {posts.length ? 
                         <div className="topic-posts-container__posts">
                             {posts.map((post)=> {

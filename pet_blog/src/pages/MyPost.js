@@ -89,11 +89,14 @@ function MyPost() {
           {!posts ?
             <div className="no-topic-post-container">
               <div className="no-topic-post-text-container">
-                  <h3>You do not have any post!</h3>
-                  <p>
+                  <h3 className="no-topic-post-header">You do not have any post!</h3>
+                  <p className="no-topic-post-text">
                       Please pick a topic and create a post to start a new conversation.
                   </p>
-                  <Link to='/create/post'>Create Post</Link>
+                  <Link className="no-topic-post-create-btn" to='/create/post'>
+                    <span>Create Post</span>
+                    <i className="fa fa-chevron-right"></i>
+                  </Link>
               </div>
             </div> 
           : 

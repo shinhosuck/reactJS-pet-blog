@@ -3,7 +3,6 @@ import { useLocation, Navigate, Link, NavLink, useSearchParams} from 'react-rout
 import { getPostData, getTopicData } from '../utils/api'
 import LoadingPage from './LoadingPage'
 import { url } from '../utils/urls'
-import dogImg from '../images/cartoon_dog.png'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
 import { formatDate } from '../utils/formatDate'
 import TopPostsSidebar from '../components/TopPostsSidebar'
@@ -171,20 +170,26 @@ function TopicPosts() {
                             })}
                         </div>
                     :
-                        <div className="no-topic-post-container">
-                            <img src={dogImg} alt="" />
-                            <div className="no-topic-post-text-container">
-                                <h3>Be the first to post on this topic!</h3>
-                                <p>
-                                    Nobody's posted yet on this topic.
-                                    Create a post and get the conversation going.
-                                </p>
-                                {isAuthenticated ? 
-                                    <Link to='/create/post'>Create Post</Link>
-                                : 
-                                    <p className='login-to-create-post'>Please login to create post. <Link to='/login'>Login</Link></p>
-                                }
-                            </div>
+                        <div className="no-topic-post-text-container">
+                            <h3 className="no-topic-post-header">Be the first to post on this topic!</h3>
+                            <p className="no-topic-post-text">
+                                Nobody's posted yet on this topic.
+                                Create a post and get the conversation going.
+                            </p>
+                            {isAuthenticated ? 
+                                <Link className="no-topic-post-create-btn" to='/create/post'>
+                                    <span>Create Post</span>
+                                    <i className="fa fa-chevron-right"></i>
+                                </Link>
+                            : 
+                                <>
+                                    <p className='login-to-create-post'>Please login to create post.</p> 
+                                    <Link className='no-topic-login-to-create-post-btn' to='/login'>
+                                        <span>Login</span>
+                                        <i className="fa fa-chevron-right"></i>
+                                    </Link>
+                                </>
+                            }
                         </div>
                     }
                 </div>

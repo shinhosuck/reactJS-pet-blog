@@ -934,7 +934,7 @@ SEARCH FORM
 .search-form-container {
   position: absolute;
   z-index: 99;
-  top: 70px;
+  top: 65px;
   width:100%;
   left: 0;
   padding: 1rem; 
@@ -999,11 +999,11 @@ SEARCH FORM
   }
 }
 
-@media (min-width: 800px) {
+/* @media (min-width: 800px) {
   .search-form-container {
-    top: 70px;
+    top: 65px;
   }
-}
+} */
 
 /* ===========
 NAVIGATION BAR

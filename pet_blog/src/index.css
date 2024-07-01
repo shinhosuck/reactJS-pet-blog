@@ -323,7 +323,7 @@ Landing Page
   display: grid;
   align-items: start;
   row-gap: 4rem;
-  column-gap: 2rem;
+  column-gap: 2.5rem;
 }
 
 .landing-page-featured-post{
@@ -3144,7 +3144,7 @@ USER REGISTER
   letter-spacing: 0.05rem;
   color: var(--black-95);
   font-weight: 600;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -3161,20 +3161,20 @@ USER REGISTER
   font-size: 1rem;
   letter-spacing: 0.05rem;
   border-radius: 5px;
-  background: var(--brown-80);
+  background: white;
   
 }
 
 .user-register__input:focus {
-  outline: 2px solid var(--focus);
+  outline: 3px solid var(--focus);
   border: 1px solid transparent
 }
 
 .user-register__btn {
   padding: 0.8rem 1rem;
-  background: hsl(16, 100%, 50%);
+  background: var(--cta);
   color: var(--black-95);
-  font-size: 1.1rem;
+  font-size: 1rem;
   border-radius: 25px;
   border: none;
   letter-spacing: 0.05rem;
@@ -3218,18 +3218,16 @@ USER REGISTER
 
 .user-register__already-registered > p {
   letter-spacing: 0.07rem;
-  color: var(--black-95);
-  font-weight: 500;
+  color: var(--black-80);
 }
 
 .user-register__already-registered > a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: rgb(255, 114, 95);
+  color: var(--black-95);
   letter-spacing: 0.05rem;
   font-weight: 500;
-  text-transform: uppercase;
 }
 
 .user-register__error {
@@ -3308,7 +3306,7 @@ USER LOGIN
   letter-spacing: 0.05rem;
   color: var(--black-95);
   font-weight: 600;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -3325,19 +3323,19 @@ USER LOGIN
   font-size: 1rem;
   letter-spacing: 0.05rem;
   border-radius: 5px;
-  background: var(--brown-80);
+  background: white;
 }
 
 .user-login__input:focus {
-  outline: 2px solid var(--focus);
+  outline: 3px solid var(--focus);
   border: 1px solid transparent
 }
 
 .user-login__btn {
   padding: 0.8rem 1rem;
-  background: hsl(16, 100%, 50%);
+  background: var(--cta);
   color: var(--black-95);
-  font-size: 1.1rem;
+  font-size: 1rem;
   border-radius: 25px;
   border: none;
   letter-spacing: 0.05rem;
@@ -3359,8 +3357,7 @@ USER LOGIN
 
 .user-login__not-yet-registered > p {
   letter-spacing: 0.07rem;
-  color: var(--black-95);
-  font-weight: 500;
+  color: var(--black-80);
 }
 
 .user-login__not-yet-registered > a {
@@ -3369,8 +3366,7 @@ USER LOGIN
   gap: 0.5rem;
   letter-spacing: 0.05rem;
   font-weight: 500;
-  text-transform: uppercase;
-  color: rgb(255, 114, 95);
+  color: var(--black-95);
 }
 
 @media screen and (min-width: 600px) {

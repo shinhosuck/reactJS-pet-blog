@@ -2810,18 +2810,18 @@ Create & Update Post
  */
 .create-post-container {
   display: grid;
-  gap: 2rem;
+  gap: 3rem;
   align-content: start;
   width: 90%;
-  max-width: 700px;
-  margin: 2rem auto;
+  max-width: 500px;
+  margin: 3rem auto;
 }
 
 .create-post-container > 
 .navbar-brand-link {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-self: center;
   gap: 0.6rem;
 }
 
@@ -2891,7 +2891,7 @@ input[type="file"]::file-selector-button {
 .create-post__img-input-label,
 .create-post__label {
   font-size: 1rem;
-  color: var(--black-15);
+  color: var(--black-20);
   font-weight: 500;
 }
 
@@ -3137,29 +3137,34 @@ styling.
 USER REGISTER
 ============= */
 .user-register-container {
-  position: relative;
-  min-height: calc(100dvh - 57.19px);
-  background:  linear-gradient(to top,rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url('images/bg_img.webp');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   display: grid;
-  align-items: stretch;
-  
+  align-content: start;
+  min-height: 80dvh;
+  gap: 3rem;
+  width: 90%;
+  max-width: 500px;
+  margin: 3rem auto;
+}
+
+.user-register-container > 
+.navbar-brand-link {
+  justify-self: center;
+}
+
+.user-register-container > 
+.navbar-brand-link > h2 {
+  color: var(--black-20)
 }
 
 .user-register {
   display: grid;
-  align-content: center;
+  align-content: start;
   gap: 1rem;
-  background: linear-gradient(to top,hsl(10, 29%, 5%),rgba(99, 61, 54, 0.1));
-  padding: 1.3rem;
-  padding-top: 5rem;
 }
 
 .user-register__header {
   letter-spacing: 0.05rem;
-  color: var(--black-95);
+  color: var(--black-20);
   font-weight: 600;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
@@ -3167,19 +3172,30 @@ USER REGISTER
 
 .user-register__form {
   display: grid;
+  align-content: start;
   gap: 1rem
+}
+
+.user-register-input-container {
+  display: grid;
+  gap: 0.5rem
+}
+
+.user-register-input-container > label {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--black-20)
 }
 
 .user-register__input {
   width: 100%;
   box-sizing: border-box;
   padding: 0.7rem 1rem;
-  border: none;
+  border: 1px solid var(--black-80);
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  border-radius: 5px;
+  border-radius: 8px;
   background: white;
-  
 }
 
 .user-register__input:focus {
@@ -3235,14 +3251,14 @@ USER REGISTER
 
 .user-register__already-registered > p {
   letter-spacing: 0.07rem;
-  color: var(--black-80);
+  color: var(--black-30);
 }
 
 .user-register__already-registered > a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--black-95);
+  color: var(--black-20);
   letter-spacing: 0.05rem;
   font-weight: 500;
 }
@@ -3254,29 +3270,9 @@ USER REGISTER
   font-size: 0.95rem;
 }
 
-@media screen and (min-width: 600px) {
-  .user-register-main-container {
-    position: relative;
-    min-height: calc(100dvh - 57.19px);
-    background:  linear-gradient(to top,rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('images/bg_img.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  
+@media (min-width: 700px) {
   .user-register-container {
-    width: 90%;
-    max-width: 1000px;
-    margin: 0 auto;
-    align-items: center;
-    background: none;
-  }
-
-  .user-register {
-    max-width: 450px;
-    padding: 1.3rem;
-    border-radius: 15px;
-    background: linear-gradient(to top,rgba(20, 13, 12, 0.85), rgba(20, 13, 12, 0.85));
+    margin: 4rem auto;
   }
 }
 
@@ -3299,32 +3295,32 @@ USER LOGIN
 }
 
 .user-login-container {
-  position: relative;
-  min-height: calc(100dvh - 57.19px);
-  background:  linear-gradient(to top,rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url('images/bg_img.webp');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  min-height: 80dvh;
+  width: 90%;
+  margin: 3rem auto;
+  max-width: 500px;
   display: grid;
-  align-items: stretch;
+  align-content: start;
+  gap: 1rem;
 }
 
-.user-login {
-  display: grid;
-  align-content: center;
-  gap: 1rem;
-  background: linear-gradient(to top,hsl(10, 29%, 5%),rgba(99, 61, 54, 0.1)
-  );
-  padding: 1.3rem;
-  padding-top: 5rem;
+.user-login-container >
+.navbar-brand-link {
+  justify-self: center;
+}
+
+.user-login-container >
+.navbar-brand-link > h2 {
+  color: var(--black-20)
 }
 
 .user-login__header {
   letter-spacing: 0.05rem;
-  color: var(--black-95);
+  color: var(--black-20);
   font-weight: 600;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
+  margin-top: 2rem;
 }
 
 .user-login__form {
@@ -3332,14 +3328,26 @@ USER LOGIN
   gap: 1rem;
 }
 
+.login-input-container {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+}
+
+.login-input-container > label {
+  color: var(--black-20);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
 .user-login__input {
   width: 100%;
   box-sizing: border-box;
   padding: 0.8rem 1rem;
-  border: none;
+  border: 1px solid var(--black-80);
   font-size: 1rem;
   letter-spacing: 0.05rem;
-  border-radius: 5px;
+  border-radius: 8px;
   background: white;
 }
 
@@ -3374,7 +3382,7 @@ USER LOGIN
 
 .user-login__not-yet-registered > p {
   letter-spacing: 0.07rem;
-  color: var(--black-80);
+  color: var(--black-30);
 }
 
 .user-login__not-yet-registered > a {
@@ -3383,33 +3391,12 @@ USER LOGIN
   gap: 0.5rem;
   letter-spacing: 0.05rem;
   font-weight: 500;
-  color: var(--black-95);
+  color: var(--black-20);
 }
 
-@media screen and (min-width: 600px) {
-
-  .user-login-main-container {
-    position: relative;
-    min-height: calc(100dvh - 57.19px);
-    background:  linear-gradient(to top,rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('images/bg_img.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  
+@media (min-width:700px) {
   .user-login-container {
-    width: 90%;
-    max-width: 1000px;
-    margin: 0 auto;
-    align-items: center;
-    background: none;
-  }
-  
-  .user-login {
-    max-width: 450px;
-    padding: 1.3rem;
-    border-radius: 15px;
-    background: linear-gradient(to top,rgba(20, 13, 12, 0.85), rgba(20, 13, 12, 0.85));
+    margin: 4rem auto;
   }
 }
 

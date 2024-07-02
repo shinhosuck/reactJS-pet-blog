@@ -10,6 +10,7 @@ import { loginInfoValidation  } from '../utils/validators'
 import { login } from '../utils/api'
 import { url } from '../utils/urls'
 import LoadingPage from './LoadingPage'
+import paw from '../images/paw.webp'
 
 
 function Login() {
@@ -75,12 +76,7 @@ function Login() {
 
     useEffect(()=> {
         document.title = 'Login'
-        const timeoutId = setTimeout(()=> {
-            if(document.readyState === 'complete') {
-                setIsLoading(false)
-            }
-            clearTimeout(timeoutId)
-        }, 100)
+        setIsLoading(false)
     }, [])
 
     if(isAuthenticated) {
@@ -96,47 +92,56 @@ function Login() {
     }
 
     return (
-        <div className="user-login-main-container">
-            <div className="user-login-container">
-                <div className='user-login'>
-                    {state &&
-                        <p className={state.error && 'user-login__error' || state.message && 'user-login__message' }>
-                            {state.error && state.error || state.message && state.message}
-                        </p>
-                    }
-                    <h2 className='user-login__header'>Sign In</h2>
-                    {backendAuthError && <p className='user-register__error'>{backendAuthError}</p>}
-                    <form className='user-login__form' onSubmit={handleForm}>
-                        {frontendErrorMessage && frontendErrorMessage.username === 'null' && <p className='user-register__error'>This field is required.</p>}
-                        <input 
-                            onChange={handleChange} 
-                            value={user.username} 
-                            className='user-login__input' 
-                            name='username' 
-                            type="text" 
-                            placeholder='Username'
-                        />
-                        {frontendErrorMessage && frontendErrorMessage.password === 'null' && <p className='user-register__error'>This field is required.</p>}
-                        <input 
-                            onChange={handleChange} 
-                            value={user.password} 
-                            className='user-login__input' 
-                            name='password' 
-                            type="password" 
-                            placeholder='Password'
-                        />
-                        <button className='user-login__btn' type='submit'>
-                            {isLogingin ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Logging in...<p className='registering-animation'></p></div> : 'Login'}
-                        </button>
-                    </form>
-                    <div className="user-login__not-yet-registered">
-                        <p>Not yet registered? </p>
-                        <Link to='/register'>
-                            <span>Register</span>
-                            <i className="fa fa-chevron-right"></i>
-                        </Link>
-                    </div>
+        <div className="user-login-container">
+            <Link to='/' className='navbar-brand-link'>
+                <img className='navbar-brand-logo' src={paw} alt="paw" />
+                <h2 className='navbar-brand-name'>
+                    <span>Canine</span>
+                    <span>Blog</span>
+                </h2>
+            </Link>
+            {state &&
+                <p className={state.error && 'user-login__error' || state.message && 'user-login__message' }>
+                    {state.error && state.error || state.message && state.message}
+                </p>
+            }
+            <h2 className='user-login__header'>Sign In</h2>
+            {backendAuthError && <p className='user-register__error'>{backendAuthError}</p>}
+            <form className='user-login__form' onSubmit={handleForm}>
+                <div className='login-input-container'>
+                    <label htmlFor="username">Username</label>
+                    {frontendErrorMessage && frontendErrorMessage.username === 'null' && <p className='user-register__error'>This field is required.</p>}
+                    <input 
+                        onChange={handleChange} 
+                        value={user.username} 
+                        className='user-login__input' 
+                        name='username' 
+                        type="text" 
+                        id='username'
+                    />
                 </div>
+                <div className="login-input-container">
+                    <label htmlFor="password">Password</label>
+                    {frontendErrorMessage && frontendErrorMessage.password === 'null' && <p className='user-register__error'>This field is required.</p>}
+                    <input 
+                        onChange={handleChange} 
+                        value={user.password} 
+                        className='user-login__input' 
+                        name='password' 
+                        type="password" 
+                        id='password'
+                    />
+                </div>
+                <button className='user-login__btn' type='submit'>
+                    {isLogingin ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Logging in...<p className='registering-animation'></p></div> : 'Login'}
+                </button>
+            </form>
+            <div className="user-login__not-yet-registered">
+                <p>Not yet registered? </p>
+                <Link to='/register'>
+                    <span>Register</span>
+                    <i className="fa fa-chevron-right"></i>
+                </Link>
             </div>
         </div>
     )

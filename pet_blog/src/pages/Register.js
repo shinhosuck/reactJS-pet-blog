@@ -5,13 +5,14 @@ import { passwordCheck, newUserInfoCheck } from '../utils/validators'
 import LoadingPage from './LoadingPage'
 import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout' 
+import paw from '../images/paw.webp'
 
 
 
 function Register() {
     const [windowLoaded, setWindowLoaded] = useState(document.readyState === 'interactive')
     const [isLoading, setIsLoading] = useState(true)
-    const [newUser, setNewUser] = useState({username:'', password:'', passwordConfirmation:''})
+    const [newUser, setNewUser] = useState({username:'', email:'', password:'', passwordConfirmation:''})
     const [userInfoError, setUserInfoError] = useState(null)
     const [passwordValidated, setPasswordValidated] = useState(true)
     const [backendAuthError, setBackendAuthError] = useState(null)
@@ -27,6 +28,8 @@ function Register() {
         setBackendAuthError(null)
     
         const userInfo = newUserInfoCheck(newUser)
+
+        console.log(userInfo)
 
         if(userInfo !== 'validated') {
             setUserInfoError(userInfo)
@@ -75,13 +78,21 @@ function Register() {
     }
     
     return (
-        <div className="user-register-main-container">
-            <div className="user-register-container">
-                <div className='user-register'>
-                    <h2 className='user-register__header'>Register</h2>
-                    <form className='user-register__form' onSubmit={handleForm}>
-                        {backendAuthError && <p className='user-register__error'>{backendAuthError.error}</p>}
-                        {!passwordValidated && <p className='user-register__error'>Password must contain number, upper and lower case characters. </p>}
+        <div className="user-register-container">
+            <Link to='/' className='navbar-brand-link'>
+                <img className='navbar-brand-logo' src={paw} alt="paw" />
+                <h2 className='navbar-brand-name'>
+                    <span>Canine</span>
+                    <span>Blog</span>
+                </h2>
+            </Link>
+            <div className='user-register'>
+                <h2 className='user-register__header'>Register</h2>
+                <form className='user-register__form' onSubmit={handleForm}>
+                    {backendAuthError && <p className='user-register__error'>{backendAuthError.error}</p>}
+                    {!passwordValidated && <p className='user-register__error'>Password must contain number, upper and lower case characters. </p>}
+                    <div className="user-register-input-container">
+                        <label htmlFor="username">Username</label>
                         {userInfoError && Object.keys(userInfoError).includes('username') &&
                             <p className='user-register__error'>{userInfoError.username}</p>
                         }
@@ -91,8 +102,25 @@ function Register() {
                             name='username' 
                             value={newUser.username.replaceAll(' ', '')} 
                             type="text" 
-                            placeholder='Username'
+                            id='username'
                         />
+                    </div>
+                    <div className="user-register-input-container">
+                        <label htmlFor="email">Email</label>
+                        {userInfoError && Object.keys(userInfoError).includes('email') &&
+                            <p className='user-register__error'>{userInfoError.username}</p>
+                        }
+                        <input
+                            className='user-register__input' 
+                            onChange={handleChange} 
+                            name='email' 
+                            value={newUser.email} 
+                            type="email" 
+                            id='email'
+                        />
+                    </div>
+                    <div className="user-register-input-container">
+                        <label htmlFor="password">Password</label>
                         {userInfoError && Object.keys(userInfoError).includes('password') &&
                             <p className='user-register__error'>{userInfoError.password}</p>
                         }
@@ -102,8 +130,11 @@ function Register() {
                             name='password' 
                             value={newUser.password} 
                             type="password" 
-                            placeholder='Password'
+                            id='password'
                         />
+                    </div>
+                    <div className="user-register-input-container">
+                        <label htmlFor="confirm password">Confirm password</label>
                         {userInfoError && 
                             <div>
                                 {userInfoError && Object.keys(userInfoError).includes('passwordConfirmation') &&
@@ -120,19 +151,19 @@ function Register() {
                             name='passwordConfirmation' 
                             value={newUser.passwordConfirmation} 
                             type="password" 
-                            placeholder='Confirm password'
+                            id='confirm password'
                         />
-                        <button className='user-register__btn' type='submit'>
-                            {isRegistering ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Registering...<p className='registering-animation'></p></div> : 'Register'}
-                        </button>
-                    </form>
-                    <div className="user-register__already-registered">
-                        <p>Already registered? </p>
-                        <Link to='/login'>
-                            <span>Login</span>
-                            <i className="fa fa-chevron-right"></i>
-                        </Link>
                     </div>
+                    <button className='user-register__btn' type='submit'>
+                        {isRegistering ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Registering...<p className='registering-animation'></p></div> : 'Register'}
+                    </button>
+                </form>
+                <div className="user-register__already-registered">
+                    <p>Already registered? </p>
+                    <Link to='/login'>
+                        <span>Login</span>
+                        <i className="fa fa-chevron-right"></i>
+                    </Link>
                 </div>
             </div>
         </div>

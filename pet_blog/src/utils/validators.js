@@ -41,22 +41,27 @@ export const passwordCheck = (password) => {
 // Checks if register form is valid
 export const newUserInfoCheck = (newUser)=> {
     let invalid = {}
-    const {username, password, passwordConfirmation} = newUser
+    const {username, email, password, passwordConfirmation} = newUser
     
     if(!Object.values(newUser).includes('')
         &&newUser.password===newUser.passwordConfirmation){
             return 'validated'
-
-    }if(!username) {
+    }
+    if(!username) {
         invalid['username'] = 'This field is required.'
-
-    }if(!password) {
+    }
+    if(!email) {
+        invalid['email'] = 'This field is required.'
+    }
+    if(!password) {
         invalid['password'] = 'This field is required.'
 
-    }if(!passwordConfirmation) {
+    }
+    if(!passwordConfirmation) {
         invalid['passwordConfirmation'] = 'This field is required.'
 
-    }if(password !== passwordConfirmation) {
+    }
+    if(password !== passwordConfirmation) {
         invalid['passwordMismatch'] = 'Password confirmation failed.'
         
     }

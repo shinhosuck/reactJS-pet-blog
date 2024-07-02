@@ -3167,7 +3167,6 @@ USER REGISTER
   color: var(--black-20);
   font-weight: 600;
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .user-register__form {
@@ -3285,6 +3284,7 @@ USER LOGIN
   font-weight: 500;
   font-size: 1.1rem;
   letter-spacing: 0.05rem;
+  margin-top: 1rem
 }
 
 .user-login__error {
@@ -3292,6 +3292,7 @@ USER LOGIN
   font-weight: 500;
   font-size: 1.1rem;
   letter-spacing: 0.05rem;
+  margin-top: 1rem
 }
 
 .user-login-container {
@@ -3319,7 +3320,6 @@ USER LOGIN
   color: var(--black-20);
   font-weight: 600;
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
   margin-top: 1rem;
 }
 

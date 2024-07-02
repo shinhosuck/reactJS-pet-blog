@@ -3140,7 +3140,7 @@ USER REGISTER
   display: grid;
   align-content: start;
   min-height: 80dvh;
-  gap: 3rem;
+  gap: 2rem;
   width: 90%;
   max-width: 500px;
   margin: 3rem auto;
@@ -3320,7 +3320,7 @@ USER LOGIN
   font-weight: 600;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .user-login__form {
@@ -3397,6 +3397,7 @@ USER LOGIN
 @media (min-width:700px) {
   .user-login-container {
     margin: 4rem auto;
+    margin-top: 6rem;
   }
 }
 

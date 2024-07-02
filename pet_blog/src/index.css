@@ -3140,7 +3140,7 @@ USER REGISTER
   display: grid;
   align-content: start;
   min-height: 80dvh;
-  gap: 2rem;
+  gap: 3rem;
   width: 90%;
   max-width: 500px;
   margin: 3rem auto;
@@ -3302,7 +3302,7 @@ USER LOGIN
   max-width: 500px;
   display: grid;
   align-content: start;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .user-login-container >

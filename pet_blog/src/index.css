@@ -2812,64 +2812,85 @@ Create Post
   display: grid;
   gap: 0.5rem;
   align-content: start;
-  width: 95%;
+  width: 90%;
   max-width: 700px;
   margin: 2rem auto;
 }
 
-.create-post-bg-img {
-  display: grid;
-  align-items: start;
-}
-.create-post-bg-img-text-container {
-  align-self: center;
-  width: 95%;
-  max-width: 1000px;
-  margin: 0 auto;
-  display: grid;
-  gap: 1rem;
-}
-
-.create-post-bg-img-text-container > 
-.bg-img-text {
-  max-width: 400px;
-}
-
- .create-post-container__redirect-btn {
+.create-post-container > 
+.navbar-brand-link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-  justify-self: start;
-  border-bottom: 2px solid var(--black-30);
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
 }
 
-.create-post-container__redirect-btn > i,
-.create-post-container__redirect-btn > a {
-  color: var(--black-30);
-  font-size: 1rem;
-}
-
- .create-post__header {
-  letter-spacing: 0.05rem;
-  color: rgb(39, 39, 39);
-  font-weight: 600;
-  font-size: 1.4rem;
-}
-
-.create-post__form-container {
-  display: grid;
-  align-self: start;
-  gap: 1.5rem;
-  padding: 1.3rem;
-  background: var(--brown-90);
-  border-radius: 8px;
+.create-post-container > 
+.navbar-brand-link > h2 {
+  color: var(--black-15)
 }
 
 .create-post__form {
   display: grid;
-  gap: 0.8rem;
+  gap: 1.3rem;
   align-content: start;
+}
+
+.create-post__form > div {
+  display: grid;
+  gap: 0.5rem
+}
+
+.create-post-img-input-container {
+  display: grid;
+  gap: 0.5rem
+}
+
+input[type='text'], 
+input[type='file'] {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+input[type='file'] {
+  max-width: 200px;
+}
+
+input[type="file"]::file-selector-button {
+  padding:0.4rem 0.5rem;
+  border-radius: 5px;
+  background: var(--cta);
+  color: white;
+  border: none;
+}
+
+.create-post__img-input-label,
+.create-post__label {
+  font-size: 1rem;
+  color: var(--black-15);
+  font-weight: 500;
+}
+
+.create-post__select {
+  padding: 0.8rem 1rem;
+  border-radius:8px;
+  letter-spacing: 0.05rem;
+  background: white;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid var(--black-80)
+}
+
+.create-post__input,
+.create-post__textarea {
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  letter-spacing: 0.05rem;
+  border-radius: 8px;
+  letter-spacing: 0.05rem;
+  resize: vertical;
+  border: 1px solid var(--black-80)
 }
 
 .create-post__error {
@@ -2879,56 +2900,9 @@ Create Post
   font-size: 0.95rem;
 }
 
-.create-post__img-input-label {
-  justify-self: start;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  font-size: 0.9rem;
-  padding: 0.7rem;
-  line-height: 1;
-  border-radius: 5px;
-  color: white;
-  letter-spacing: 0.05rem;
-  background: var(--orange-30);
-  cursor: pointer;
-}
-
-.create-post__label {
-  font-size: 1rem;
-  letter-spacing: 0.05rem;
-  margin-top: 0.5rem;
-  color: var(--brown-10);
-  line-height: 1;
-  font-weight: 500;
-}
-
-.create-post__select {
-  padding: 0.8rem 1rem;
-  border-radius: 5px;
-  background: none;
-  letter-spacing: 0.05rem;
-  border: none;
-  background: white;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
 .create-post__option[value=""] {
   letter-spacing: 0.05rem;
   font-size: 1rem;
-}
-
-.create-post__input,
-.create-post__textarea {
-  font-size: 1rem;
-  padding: 0.8rem 1rem;
-  border: none;
-  letter-spacing: 0.05rem;
-  border-radius: 5px;
-  letter-spacing: 0.05rem;
-  resize: none;
 }
 
 .create-post__textarea {
@@ -2943,11 +2917,10 @@ Create Post
 }
 
 .create-post-btns {
-  display: flex;
-  align-items: center;
-  justify-content: end;
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
   gap: 0.5rem;
-  margin-top: 0.5rem;
 }
 
 .create-post__btn {
@@ -2972,19 +2945,27 @@ Create Post
   font-size: 1rem;
   font-weight: 500;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .create-post__select:focus,
 .create-post__input:focus,
 .create-post__textarea:focus {
-  outline: 2px solid var(--focus);
+  outline: 3px solid var(--focus);
+}
+
+@media (min-width: 450px) {
+  .create-post-btns {
+    flex-direction: row;
+    align-items: start;
+    justify-content: end;
+    gap: 0.5rem;
+  }
 }
 
 @media (min-width:700px) {
   .create-post-container {
-    margin: 3rem auto;
-    margin-bottom: 10rem;
-    width: 90%;
+    margin: 4rem auto;
   }
 }
 /*
@@ -3415,20 +3396,20 @@ LOGOUT
   gap: 1rem;
   text-align: center;
   padding: 1.5rem;
-  border-radius: 5px;
-  background: var(--black-95);
+  border-radius: 15px;
+  background: var(--black-90);
 }
 
 .logout-content > h1 {
   letter-spacing: 0.05rem;
-  color: var(--brown-10);
+  color: var(--brown-15);
   font-weight: 600;
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
-.logout-content > h3 {
+.logout-content > p {
   font-weight: 400;
-  color: var(--brown-30);
+  color: var(--black-20);
   text-wrap: pretty;
   letter-spacing: 0.05rem;
   font-size: 1.1rem;

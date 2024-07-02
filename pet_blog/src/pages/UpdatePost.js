@@ -5,6 +5,7 @@ import { url } from '../utils/urls'
 import CreatePost from './CreatePost'
 import { validatePost } from '../utils/validators'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
+import paw from '../images/paw.webp'
 
 
 const UpdatePost= ()=> {
@@ -12,7 +13,7 @@ const UpdatePost= ()=> {
     const [error, setError] = useState(null)
     const [updatePost, setUpdatePost] = useState({
         id:'', image:'', topic:'', 
-        title:'', content:''
+        title:'', content:'', currentImage:'',
     })
     const [missingValue, setMissingValue] = useState(null)
     const {state} = useLocation()
@@ -31,7 +32,7 @@ const UpdatePost= ()=> {
             setMissingValue(result)
 
         }else {
-            const keys = Object.keys(updatePost)
+            const keys = Object.keys(updatePost).filter((obj)=>obj !=='currentImage')
             keys.forEach((key)=>{
                 if(key === 'image'){
                     if (updatePost[key] instanceof Object) {
@@ -50,7 +51,8 @@ const UpdatePost= ()=> {
                 setUpdatePost(
                     {
                         id:data.id,
-                        image:data.image,
+                        currentImage:data.image,
+                        image:'',
                         topic:data.topic,
                         title:data.title,
                         content:data.content
@@ -84,10 +86,11 @@ const UpdatePost= ()=> {
     useEffect(()=> {
         fetchTopics()
         setUpdatePost((prev)=> {
+            const image = state.update.image.split('/').filter((obj)=>obj !== '').slice(-1).join()
             const post = {
                 ...prev,
                 id:state.update.id,
-                image:state.update.image,
+                currentImage:image,
                 topic:state.update.topic,
                 title:state.update.title,
                 content:state.update.content
@@ -95,39 +98,30 @@ const UpdatePost= ()=> {
             return post
         })
     }, [state])
-    console.log(updatePost)
+
     return (
-        <div className="create-post-wrapper">
-            <div className="bg-img create-post-bg-img">
-               <div className='create-post-bg-img-text-container'>
-                    <h1 className='my-posts-hero-header'>Post Update</h1>
-                    <p className='bg-img-text'>Update your existing post to continue the conversation.</p>
-               </div>
-            </div>
-            <div className='create-post-container'>
-                {/* {state && state.redirect && 
-                    <div className="create-post-container__redirect-btn">
-                        <i className="fa fa-arrow-left"></i>
-                        <Link to={`${state.redirect}`}>
-                            Back to {state.name}
-                        </Link>
+        <div className='create-post-container'>
+            <Link to='/' className='navbar-brand-link'>
+                <img className='navbar-brand-logo' src={paw} alt="paw" />
+                <h2 className='navbar-brand-name'>
+                    <span>Canine</span>
+                    <span>Blog</span>
+                </h2>
+            </Link>
+            <div className="create-post__form-container">
+                <form className="create-post__form" onSubmit={handleSubmit}>
+                    <div style={{display:'flex', alignItems:'center', gap:'2rem', rowGap:'1rem', flexWrap:'wrap'}}>
+                        <div className='create-post-img-input-container'>
+                            {missingValue && missingValue.image === '' && <p className='create-post__error'>This field is required.</p>}
+                            <label className='create-post__img-input-label' htmlFor="image">Image</label>
+                            <input onChange={handleChange} type="file" accept='image/*' name='image' className='create-post__img-input' id='image' value=''/>
+                        </div>
+                        <div className="current-image" style={{display:'grid',gap:'0.5rem'}}>
+                            <label htmlFor="current-image">Current Image</label>
+                            <input style={{border:'none',background:'none'}} onChange={handleChange} id='current-image' value={updatePost.currentImage} type="text" />
+                        </div>
                     </div>
-                } */}
-                <div className="create-post__form-container">
-                    <form className="create-post__form" onSubmit={handleSubmit}>
-                        {missingValue && missingValue.image === '' && <p className='create-post__error'>This field is required.</p>}
-                        <label className='create-post__img-input-label' htmlFor="image">
-                            Image
-                            <input
-                                onChange={handleChange}
-                                type="file" 
-                                accept='image/*'
-                                name='image'
-                                hidden
-                                className='create-post__img-input' 
-                                id='image'
-                            />
-                        </label>
+                    <div className="create-post-select-topic-container">
                         <label className='create-post__label' htmlFor="topic">Topic</label>
                         {missingValue && missingValue.topic === '' && <p className='create-post__error'>This field is required.</p>}
                         <select
@@ -145,6 +139,8 @@ const UpdatePost= ()=> {
                                 )
                             })}
                         </select>
+                    </div>
+                    <div className='create-post-title-input-container'>
                         <label className='create-post__label' htmlFor="title">Title</label>
                         {missingValue && missingValue.title === '' && <p className='create-post__error'>This field is required.</p>}
                         <input
@@ -155,6 +151,8 @@ const UpdatePost= ()=> {
                             value= {updatePost && updatePost.title}
                             name='title'
                         />
+                    </div>
+                    <div className="create-post-textarea-container">
                         <label className='create-post__label' htmlFor="content">Content</label>
                         {missingValue && missingValue.content === '' && <p className='create-post__error'>This field is required.</p>}
                         <textarea
@@ -166,12 +164,12 @@ const UpdatePost= ()=> {
                             rows="5"
                             value= {updatePost && updatePost.content}
                         />
-                        <div className='create-post-btns'>
-                            <button className='create-post__btn' type='submit'>Submit</button>
-                            <NavLink to={`/user/${isAuthenticated.username}/dashboard/posts/`} className='create-post-cancel-btn'>Cancel</NavLink>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div className='create-post-btns'>
+                        <button className='create-post__btn' type='submit'>Submit</button>
+                        <NavLink to={`/user/${isAuthenticated.username}/dashboard/posts/`} className='create-post-cancel-btn'>Cancel</NavLink>
+                    </div>
+                </form>
             </div>
         </div>
     )

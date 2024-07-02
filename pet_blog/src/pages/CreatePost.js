@@ -5,6 +5,7 @@ import { getTopicData, createPost, updatePost } from '../utils/api'
 import { validatePost } from '../utils/validators'
 import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
+import paw from '../images/paw.webp'
 
 
 function CreatePost() {
@@ -94,46 +95,25 @@ function CreatePost() {
         )
     }
     return (
-        <div className="create-post-wrapper">
-            <div className="bg-img create-post-bg-img">
-               <div className='create-post-bg-img-text-container'>
-                    <h1 className='my-posts-hero-header'>Create Post</h1>
-                    <p className='bg-img-text'>Create a post to start a new conversation.</p>
-               </div>
-            </div>
-            <div className='create-post-container'>
-                {state && state.redirect && 
-                    <div className="create-post-container__redirect-btn">
-                        <i className="fa fa-arrow-left"></i>
-                        <Link to={`${state.redirect}`}>
-                            Back to {state.redirect.split('/').filter((obj)=>obj!=='').join('')}
-                        </Link>
-                    </div>
-                }
-                <div className="create-post__form-container">
-                    <form className="create-post__form" onSubmit={handleSubmit}>
+        <div className='create-post-container'>
+            <Link to='/' className='navbar-brand-link'>
+                <img className='navbar-brand-logo' src={paw} alt="paw" />
+                <h2 className='navbar-brand-name'>
+                    <span>Canine</span>
+                    <span>Blog</span>
+                </h2>
+            </Link>
+            <div className="create-post__form-container">
+                <form className="create-post__form" onSubmit={handleSubmit}>
+                    <div className='create-post-img-input-container'>
+                        <label className='create-post__img-input-label' htmlFor="image">Image</label>
                         {missingValue && missingValue.image === '' && <p className='create-post__error'>This field is required.</p>}
-                        <label className='create-post__img-input-label' htmlFor="image">
-                            Image
-                            <input
-                                onChange={handleChange}
-                                type="file" 
-                                accept='image/*'
-                                name='image'
-                                hidden
-                                className='create-post__img-input' 
-                                id='image'
-                            />
-                        </label>
+                        <input id='image' onChange={handleChange} type="file" accept='image/*' name='image' className='create-post__img-input'/>
+                    </div>
+                    <div className="create-post-select-topic-container">
                         <label className='create-post__label' htmlFor="topic">Topic</label>
                         {missingValue && missingValue.topic === '' && <p className='create-post__error'>This field is required.</p>}
-                        <select
-                            id='topic'
-                            onChange={handleChange} 
-                            className='create-post__select' 
-                            name="topic"
-                            value={post.topic}
-                        >
+                        <select id='topic' onChange={handleChange} className='create-post__select' name="topic" value={post.topic}>
                         <option className='create-post__option' value=''>--------</option>
                             {topics.map((topic)=>{
                                 return (
@@ -143,33 +123,22 @@ function CreatePost() {
                                 )
                             })}
                         </select>
+                    </div>
+                    <div className='create-post-title-input-container'>
                         <label className='create-post__label' htmlFor="title">Title</label>
                         {missingValue && missingValue.title === '' && <p className='create-post__error'>This field is required.</p>}
-                        <input
-                            id='title'
-                            onChange={handleChange}
-                            className='create-post__input' 
-                            type="text"
-                            value= {post.title}
-                            name='title'
-                        />
+                        <input id='title' onChange={handleChange} className='create-post__input' type="text" value= {post.title} name='title'/>
+                    </div>
+                    <div className="create-post-textarea-container">
                         <label className='create-post__label' htmlFor="content">Content</label>
                         {missingValue && missingValue.content === '' && <p className='create-post__error'>This field is required.</p>}
-                        <textarea
-                            id='content'
-                            onChange={handleChange}
-                            name="content" 
-                            className='create-post__textarea'
-                            cols="30" 
-                            rows="5"
-                            value= {post.content}
-                        />
-                        <div className='create-post-btns'>
-                            <button className='create-post__btn' type='submit'>Submit</button>
-                            <Link to='/posts' className='create-post-cancel-btn'>Cancel</Link>
-                        </div>
-                    </form>
-                </div>
+                        <textarea id='content' onChange={handleChange} name="content" className='create-post__textarea' cols="30" rows="5" value= {post.content}/>
+                    </div>
+                    <div className='create-post-btns'>
+                        <button className='create-post__btn' type='submit'>Submit</button>
+                        <Link to='/posts' className='create-post-cancel-btn'>Cancel</Link>
+                    </div>
+                </form>
             </div>
         </div>
     )

@@ -2805,12 +2805,12 @@ My Comments
 
 /* 
 ===========
-Create Post
+Create & Update Post
 ===========
  */
 .create-post-container {
   display: grid;
-  gap: 0.5rem;
+  gap: 2rem;
   align-content: start;
   width: 90%;
   max-width: 700px;
@@ -2823,7 +2823,6 @@ Create Post
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  margin-bottom: 1.5rem;
 }
 
 .create-post-container > 
@@ -2831,15 +2830,39 @@ Create Post
   color: var(--black-15)
 }
 
+.create-post__form > div {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.update-post-image-and-current-image-container {
+  align-content: start;
+  gap: 0.3rem !important;
+}
+
+.current-image {
+  display: grid;
+  row-gap: 0rem;
+  column-gap: 0.5rem;
+}
+
+.current-image > label {
+  text-wrap: nowrap;
+  color: var(--black-20);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.current-image > input[type='text'] {
+  width: 100%;
+  box-sizing: border-box;
+  color: var(--black-30);
+}
+
 .create-post__form {
   display: grid;
   gap: 1.3rem;
   align-content: start;
-}
-
-.create-post__form > div {
-  display: grid;
-  gap: 0.5rem
 }
 
 .create-post-img-input-container {
@@ -2955,6 +2978,9 @@ input[type="file"]::file-selector-button {
 }
 
 @media (min-width: 450px) {
+  .current-image {
+    grid-template-columns: auto 1fr;
+  }
   .create-post-btns {
     flex-direction: row;
     align-items: start;
@@ -2966,6 +2992,16 @@ input[type="file"]::file-selector-button {
 @media (min-width:700px) {
   .create-post-container {
     margin: 4rem auto;
+  }
+
+  .update-post-image-and-current-image-container {
+    grid-template-columns: auto 1fr;
+    align-items: end;
+    column-gap: 2rem !important;
+  }
+
+  .current-image {
+    padding-bottom: 0.2rem;
   }
 }
 /*

@@ -21,7 +21,8 @@ function CommentForm(props) {
     const handleCommentSubmit = async(e)=> {
         e.preventDefault()
         if(isAuthenticated) {
-            const commentURL = `${url}/api/post/${post.id}/create/comment/`
+            const URLpath = window.location.href
+            const commentURL = `${url}/api/post/${post.id}/create/comment/?url=${URLpath}`
             const newComment = commentContent.current.value
             const body = {content:newComment}
             const data = await createComment(commentURL, body, isAuthenticated.token)

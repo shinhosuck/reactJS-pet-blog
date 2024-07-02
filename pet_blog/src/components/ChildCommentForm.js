@@ -21,7 +21,8 @@ function ChildCommentForm(props) {
     const handleCommentSubmit = async(e)=> {
         e.preventDefault()
         if(isAuthenticated) {
-            const commentURL = `${url}/api/comments/${comment.id}/comment/`
+            const URLpath = window.location.href
+            const commentURL = `${url}/api/comments/${comment.id}/comment/?url=${URLpath}`
             const newComment = commentContent.current.value
             const body = {content:newComment}
             const data = await createChildComment(commentURL, {...body, postId:post.id}, isAuthenticated.token)

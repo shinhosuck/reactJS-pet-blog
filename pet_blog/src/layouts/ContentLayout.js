@@ -50,6 +50,7 @@ function ContentLayout() {
     getPosts()
   }, [])
 
+
   return (
     <ContentLayoutContext.Provider value={
         {

@@ -110,14 +110,14 @@ const UpdatePost= ()=> {
             </Link>
             <div className="create-post__form-container">
                 <form className="create-post__form" onSubmit={handleSubmit}>
-                    <div style={{display:'flex', alignItems:'center', gap:'2rem', rowGap:'1rem', flexWrap:'wrap'}}>
+                    <div class='update-post-image-and-current-image-container'>
                         <div className='create-post-img-input-container'>
                             {missingValue && missingValue.image === '' && <p className='create-post__error'>This field is required.</p>}
                             <label className='create-post__img-input-label' htmlFor="image">Image</label>
                             <input onChange={handleChange} type="file" accept='image/*' name='image' className='create-post__img-input' id='image' value=''/>
                         </div>
-                        <div className="current-image" style={{display:'grid',gap:'0.5rem'}}>
-                            <label htmlFor="current-image">Current Image</label>
+                        <div className="current-image">
+                            <label htmlFor="current-image">Current Image:</label>
                             <input style={{border:'none',background:'none'}} onChange={handleChange} id='current-image' value={updatePost.currentImage} type="text" />
                         </div>
                     </div>

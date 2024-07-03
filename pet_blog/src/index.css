@@ -3377,7 +3377,6 @@ USER LOGIN
   flex-wrap: wrap;
   gap: 1rem;
   row-gap: 0.5rem;
-  margin-top: 1rem
 }
 
 .user-login__not-yet-registered > p {
@@ -3800,6 +3799,7 @@ PROFILE
   border-radius: none;
   font-size: initial;
   align-self: start;
+  max-width: initial;
 }
 
 .profile-form-input > .image-input:focus {
@@ -3832,3 +3832,4 @@ PROFILE
   gap: 0.3rem;
   font-size: 0.9rem;
 }
+

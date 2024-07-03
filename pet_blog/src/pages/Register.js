@@ -41,7 +41,7 @@ function Register() {
 
             }else {
                 setIsregistering(true)
-                const body = {username:newUser.username, password:newUser.password}
+                const body = {username:newUser.username, email:newUser.email, password:newUser.password}
                 const data = await register(`${url}/api/auth/register/`, body)
                 if(data.error){
                     setBackendAuthError(data)

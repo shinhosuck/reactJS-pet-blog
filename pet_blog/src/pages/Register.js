@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link, useNavigate, Navigate } from 'react-router-dom'
 import { register } from '../utils/api'
-import { passwordCheck, newUserInfoCheck } from '../utils/validators'
+import { passwordCheck, newUserInfoCheck, checkEmail } from '../utils/validators'
 import LoadingPage from './LoadingPage'
 import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout' 
@@ -15,6 +15,7 @@ function Register() {
     const [newUser, setNewUser] = useState({username:'', email:'', password:'', passwordConfirmation:''})
     const [userInfoError, setUserInfoError] = useState(null)
     const [passwordValidated, setPasswordValidated] = useState(true)
+    const [emailValidated, setEmailValidated] = useState(true)
     const [backendAuthError, setBackendAuthError] = useState(null)
     const [isRegistering, setIsregistering] = useState(false)
     const {isAuthenticated} = useContext(ContentLayoutContext)
@@ -26,20 +27,27 @@ function Register() {
         setUserInfoError(null)
         setPasswordValidated(true)
         setBackendAuthError(null)
+        setEmailValidated(true)
     
         const userInfo = newUserInfoCheck(newUser)
-
-        console.log(userInfo)
-
+        
         if(userInfo !== 'validated') {
             setUserInfoError(userInfo)
+        }else {
+            const emailValid = checkEmail(newUser.email)
+            const passwordValid = passwordCheck(newUser.password)
 
-        }else{
-            const isValid = passwordCheck(newUser.password)
-            if(!isValid) {
+            if(!emailValid && !passwordValid) {
                 setPasswordValidated(false)
-
-            }else {
+                setEmailValidated(false)
+            }
+            else if(!passwordValid) {
+                setPasswordValidated(false)
+            }
+            else if(!emailValid) {
+                setEmailValidated(false)
+            }
+            else {
                 setIsregistering(true)
                 const body = {username:newUser.username, email:newUser.email, password:newUser.password}
                 const data = await register(`${url}/api/auth/register/`, body)
@@ -53,6 +61,7 @@ function Register() {
                 }
             }
         }
+    
     }
 
     const handleChange = function(e) {
@@ -90,7 +99,6 @@ function Register() {
                 <h2 className='user-register__header'>Sign Up</h2>
                 <form className='user-register__form' onSubmit={handleForm}>
                     {backendAuthError && <p className='user-register__error'>{backendAuthError.error}</p>}
-                    {!passwordValidated && <p className='user-register__error'>Password must contain number, upper and lower case characters. </p>}
                     <div className="user-register-input-container">
                         <label htmlFor="username">Username</label>
                         {userInfoError && Object.keys(userInfoError).includes('username') &&
@@ -108,7 +116,12 @@ function Register() {
                     <div className="user-register-input-container">
                         <label htmlFor="email">Email</label>
                         {userInfoError && Object.keys(userInfoError).includes('email') &&
-                            <p className='user-register__error'>{userInfoError.username}</p>
+                            <p className='user-register__error'>{userInfoError.email}</p>
+                        }
+                        {!emailValidated && 
+                            <p className='user-register__error'>
+                                Invalid email.
+                            </p>
                         }
                         <input
                             className='user-register__input' 
@@ -123,6 +136,11 @@ function Register() {
                         <label htmlFor="password">Password</label>
                         {userInfoError && Object.keys(userInfoError).includes('password') &&
                             <p className='user-register__error'>{userInfoError.password}</p>
+                        }
+                        {!passwordValidated && 
+                            <p className='user-register__error'>
+                                Password must contain number, upper and lower case characters. 
+                            </p>
                         }
                         <input
                             className='user-register__input' 

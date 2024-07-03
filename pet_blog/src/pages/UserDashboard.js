@@ -27,6 +27,32 @@ function UserDashboard() {
                     <div className="dashboard-user-info">
                         <p>{isAuthenticated.username}</p>
                         <p>{isAuthenticated.email}</p>
+                        <div className='dashboard-following-follower'>
+                            {isAuthenticated.follow.length > 1 ?
+                                <p>Following {isAuthenticated.follow.length} users</p>
+                            :
+                                <p>Following {isAuthenticated.follow.length} user</p>
+                            }
+                            <div className='dashboard-divider'></div>
+                            {isAuthenticated.follower.length > 1 ?
+                                <p>{isAuthenticated.follower.length} followers</p>
+                            :
+                                <p>{isAuthenticated.follower.length} follower</p>
+                            }
+                        </div>
+                        <div className='dashboard-post-comment-count'>
+                            {isAuthenticated.qs_count.comment_count > 1 ?
+                                <p>{isAuthenticated.qs_count.comment_count} comments</p>
+                            :
+                                <p>{isAuthenticated.qs_count.comment_count} comment</p>
+                            }
+                            <div className='dashboard-divider'></div>
+                            {isAuthenticated.qs_count.post_count > 1 ? 
+                                <p>{isAuthenticated.qs_count.post_count} posts</p>
+                            :
+                                <p>{isAuthenticated.qs_count.post_count} post</p>
+                            }
+                        </div>
                     </div>
                 </div>
                 <div className="dashboard-links">

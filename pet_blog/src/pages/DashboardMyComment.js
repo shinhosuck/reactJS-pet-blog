@@ -3,7 +3,6 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { url } from '../utils/urls'
 import LoadingPage from './LoadingPage'
 import { fetchComments, removeComment, editComment } from '../utils/api'
-import dogImg from '../images/cartoon_dog.png'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
 import { formatDate } from '../utils/formatDate'
 
@@ -143,13 +142,15 @@ function DashboardMyComment() {
         </div>
       :
         <div className="no-topic-post-container my-comment-no-comment">
-          <img src={dogImg} alt="" />
           <div className="no-topic-post-text-container">
-              <h3>You do not have any coment!</h3>
-              <p>
+              <h3 style={{fontSize:'1.7rem', color:'var(--black-20)'}}>You do not have any coment!</h3>
+              <p className='no-topic-post-text'>
                   Please pick a post and comment.
               </p>
-              <Link to='/posts'>Back to posts</Link>
+              <Link className='no-topic-post-create-btn' to='/posts'>
+                <span>Back to posts</span>
+                <i className="fa fa-chevron-right"></i>
+              </Link>
           </div>
         </div>
       }

@@ -38,6 +38,12 @@ export const passwordCheck = (password) => {
     return false
 }
 
+// Validate email 
+export function checkEmail(email) {
+    const pattern = /^[A-Za-z0-9._%+-]+@([A-Za-z0-9-]+\.)+([A-Za-z0-9]{2,4}|museum)$/;
+    return pattern.test(email)
+}
+
 // Checks if register form is valid
 export const newUserInfoCheck = (newUser)=> {
     let invalid = {}
@@ -65,6 +71,7 @@ export const newUserInfoCheck = (newUser)=> {
         invalid['passwordMismatch'] = 'Password confirmation failed.'
         
     }
+
     return invalid
 }
 

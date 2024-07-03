@@ -58,7 +58,7 @@ const UpdatePost= ()=> {
                         content:data.content
                     }
                 )
-                navigate(`/user/${isAuthenticated.username}/dashboard/posts/`, {state:{message:data.message}})
+                navigate(`/user/${isAuthenticated.username}/dashboard/`, {state:{message:data.message}})
             }
         }
     }
@@ -110,7 +110,7 @@ const UpdatePost= ()=> {
             </Link>
             <div className="create-post__form-container">
                 <form className="create-post__form" onSubmit={handleSubmit}>
-                    <div class='update-post-image-and-current-image-container'>
+                    <div className='update-post-image-and-current-image-container'>
                         <div className='create-post-img-input-container'>
                             {missingValue && missingValue.image === '' && <p className='create-post__error'>This field is required.</p>}
                             <label className='create-post__img-input-label' htmlFor="image">Image</label>
@@ -167,7 +167,7 @@ const UpdatePost= ()=> {
                     </div>
                     <div className='create-post-btns'>
                         <button className='create-post__btn' type='submit'>Submit</button>
-                        <NavLink to={`/user/${isAuthenticated.username}/dashboard/posts/`} className='create-post-cancel-btn'>Cancel</NavLink>
+                        <NavLink to={`/user/${isAuthenticated.username}/dashboard/`} className='create-post-cancel-btn'>Cancel</NavLink>
                     </div>
                 </form>
             </div>

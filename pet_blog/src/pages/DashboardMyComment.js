@@ -8,7 +8,7 @@ import { ContentLayoutContext } from '../layouts/ContentLayout'
 import { formatDate } from '../utils/formatDate'
 
 
-function MyComment() {
+function DashboardMyComment() {
   const [comments, setComments] = useState(null)
   const [update, setUpdate] = useState(null)
   const [isError, setIsError] = useState(false)
@@ -49,7 +49,6 @@ function MyComment() {
     try {
       const data = await editComment(`${url}/api/comment/${id}/update/`, body, isAuthenticated.token)
       if(!data.error) {
-        console.log(data)
         const newComments = comments.map((comment)=> {
           if(comment.id === data.id){
             return data
@@ -158,4 +157,4 @@ function MyComment() {
   )
 }
 
-export default MyComment
+export default DashboardMyComment

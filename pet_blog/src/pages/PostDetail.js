@@ -144,6 +144,7 @@ function PostDetail() {
                                     post={post} 
                                     showUpdatePostForm={setShowUpdatePostForm}
                                     authenticated={isAuthenticated}
+                                    getPost={getPost}
                                 />
                             }
                         </div>

@@ -4,7 +4,7 @@ import { ContentLayoutContext } from '../layouts/ContentLayout'
 import { updateProfile } from '../utils/api'
 import { url } from '../utils/urls'
 
-function Profile() {
+function DashboardProfile() {
   const [isUpdating, setIsUpdating] = useState(false)
   const { isAuthenticated, setIsAuthenticated } = useContext(ContentLayoutContext)
   const [profile, setProfile] = useState(
@@ -121,4 +121,4 @@ function Profile() {
   )
 }
 
-export default Profile
+export default DashboardProfile

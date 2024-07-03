@@ -100,48 +100,50 @@ function Login() {
                     <span>Blog</span>
                 </h2>
             </Link>
-            {state &&
-                <p className={state.error && 'user-login__error' || state.message && 'user-login__message' }>
-                    {state.error && state.error || state.message && state.message}
-                </p>
-            }
-            <h2 className='user-login__header'>Sign In</h2>
-            {backendAuthError && <p className='user-register__error'>{backendAuthError}</p>}
-            <form className='user-login__form' onSubmit={handleForm}>
-                <div className='login-input-container'>
-                    <label htmlFor="username">Username</label>
-                    {frontendErrorMessage && frontendErrorMessage.username === 'null' && <p className='user-register__error'>This field is required.</p>}
-                    <input 
-                        onChange={handleChange} 
-                        value={user.username} 
-                        className='user-login__input' 
-                        name='username' 
-                        type="text" 
-                        id='username'
-                    />
+            <div className="user-login-form-wrapper">
+                {state &&
+                    <p className={state.error && 'user-login__error' || state.message && 'user-login__message' }>
+                        {state.error && state.error || state.message && state.message}
+                    </p>
+                }
+                <h2 className='user-login__header'>Sign In</h2>
+                {backendAuthError && <p className='user-register__error'>{backendAuthError}</p>}
+                <form className='user-login__form' onSubmit={handleForm}>
+                    <div className='login-input-container'>
+                        <label htmlFor="username">Username</label>
+                        {frontendErrorMessage && frontendErrorMessage.username === 'null' && <p className='user-register__error'>This field is required.</p>}
+                        <input 
+                            onChange={handleChange} 
+                            value={user.username} 
+                            className='user-login__input' 
+                            name='username' 
+                            type="text" 
+                            id='username'
+                        />
+                    </div>
+                    <div className="login-input-container">
+                        <label htmlFor="password">Password</label>
+                        {frontendErrorMessage && frontendErrorMessage.password === 'null' && <p className='user-register__error'>This field is required.</p>}
+                        <input 
+                            onChange={handleChange} 
+                            value={user.password} 
+                            className='user-login__input' 
+                            name='password' 
+                            type="password" 
+                            id='password'
+                        />
+                    </div>
+                    <button className='user-login__btn' type='submit'>
+                        {isLogingin ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Logging in...<p className='registering-animation'></p></div> : 'Login'}
+                    </button>
+                </form>
+                <div className="user-login__not-yet-registered">
+                    <p>Don't have an account? </p>
+                    <Link to='/register'>
+                        <span>Sign Up</span>
+                        <i className="fa fa-chevron-right"></i>
+                    </Link>
                 </div>
-                <div className="login-input-container">
-                    <label htmlFor="password">Password</label>
-                    {frontendErrorMessage && frontendErrorMessage.password === 'null' && <p className='user-register__error'>This field is required.</p>}
-                    <input 
-                        onChange={handleChange} 
-                        value={user.password} 
-                        className='user-login__input' 
-                        name='password' 
-                        type="password" 
-                        id='password'
-                    />
-                </div>
-                <button className='user-login__btn' type='submit'>
-                    {isLogingin ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Logging in...<p className='registering-animation'></p></div> : 'Login'}
-                </button>
-            </form>
-            <div className="user-login__not-yet-registered">
-                <p>Not yet registered? </p>
-                <Link to='/register'>
-                    <span>Register</span>
-                    <i className="fa fa-chevron-right"></i>
-                </Link>
             </div>
         </div>
     )

@@ -87,7 +87,7 @@ function Register() {
                 </h2>
             </Link>
             <div className='user-register'>
-                <h2 className='user-register__header'>Register</h2>
+                <h2 className='user-register__header'>Sign Up</h2>
                 <form className='user-register__form' onSubmit={handleForm}>
                     {backendAuthError && <p className='user-register__error'>{backendAuthError.error}</p>}
                     {!passwordValidated && <p className='user-register__error'>Password must contain number, upper and lower case characters. </p>}
@@ -159,9 +159,9 @@ function Register() {
                     </button>
                 </form>
                 <div className="user-register__already-registered">
-                    <p>Already registered? </p>
+                    <p>Already a member? </p>
                     <Link to='/login'>
-                        <span>Login</span>
+                        <span>Sign In</span>
                         <i className="fa fa-chevron-right"></i>
                     </Link>
                 </div>

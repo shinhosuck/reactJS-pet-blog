@@ -18,8 +18,8 @@ import LandingPage from './pages/LandingPage';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Error from './pages/Error';
-import MyPost from './pages/MyPost';
-import MyComment from './pages/MyComment';
+import DashboardMyPost from './pages/DashboardMyPost';
+import DashboardMyComment from './pages/DashboardMyComment';
 import TopicPosts from './pages/TopicPosts';
 import UpdatePost from './pages/UpdatePost';
 import ScrollToTop from './components/ScrollToTop';
@@ -27,9 +27,8 @@ import PageNotFound from './pages/PageNotFound';
 import Logout from './pages/Logout';
 import SearchResults from './pages/SearchResults';
 import UserDashboard from './pages/UserDashboard';
-import Contact from './pages/Contact';
-import Profile from './pages/Profile';
-import DashboardHome from './pages/DashboardHome';
+import DashboardContact from './pages/DashboardContact';
+import DashboardProfile from './pages/DashboardProfile';
 
 
 const router = createBrowserRouter(
@@ -47,11 +46,10 @@ const router = createBrowserRouter(
           <Route path='logout' element={<Logout />}/>
           <Route path='search/result' element={<SearchResults />}/>
           <Route path='user/:username/dashboard' element={<UserDashboard />} >
-            <Route index element={<DashboardHome />} />
-            <Route path='posts' element={<MyPost />}/>
-            <Route path='comments' element={<MyComment />}/>
-            <Route path='contact' element={<Contact />}/>
-            <Route path='profile' element={<Profile />}/>
+            <Route index element={<DashboardMyPost />}/>
+            <Route path='comments' element={<DashboardMyComment />}/>
+            <Route path='contact' element={<DashboardContact />}/>
+            <Route path='profile' element={<DashboardProfile />}/>
           </Route>
           <Route path='error' element={<Error />}/>
           <Route path='*' element={<PageNotFound />}/>

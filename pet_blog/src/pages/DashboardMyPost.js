@@ -8,7 +8,7 @@ import { formatDate } from '../utils/formatDate'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
 
 
-function MyPost() {
+function DashboardMyPost() {
   const [posts, setPosts] = useState(null)
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -142,4 +142,4 @@ function MyPost() {
   )
 }
 
-export default MyPost
+export default DashboardMyPost

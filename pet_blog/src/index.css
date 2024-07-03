@@ -26,7 +26,7 @@
   --hover: hsl(16, 100%, 65%);
   --focus: hsl(12, 100%, 70%);
   --form-input-textarea: hsl(14, 100%, 95%);
-  --body-background: hsl(14, 100%, 98%);
+  --body-background: hsl(18, 100%, 98%);
   
 
   
@@ -1055,7 +1055,7 @@ NAVIGATION BAR
 
 .navbar-brand-name {
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
   color: white;
   line-height: 1;
   display: flex;
@@ -1399,6 +1399,12 @@ NAVIGATION BAR
     color: var(--black-95);
     cursor: pointer;
     font-size: 1.1rem;
+  }
+
+  @media (hover) {
+    .search-btn:hover {
+      color: var(--hover)
+    }
   }
 }
 
@@ -2575,7 +2581,7 @@ My Posts
 }
 
 .my-posts-container__post-title {
-  color: var(--black-15);
+  color: var(--black-20);
   line-height: 1.2;
   font-size: clamp(1.1rem, 1vw + 1rem , 1.7rem);
   font-weight: 600;
@@ -2586,7 +2592,7 @@ My Posts
 .my-posts-container__post-content {
   letter-spacing: 0.05rem;
   color: var(--black-30);
-  line-height: 1.4;
+  line-height: 1.5;
   text-wrap: pretty;
   margin-top: 0.5rem
 }
@@ -2595,6 +2601,7 @@ My Posts
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 .my-post-container__num-of-replies,
@@ -2603,7 +2610,8 @@ My Posts
   align-items: center;
   gap: 0.4rem !important;
   grid-template-columns: repeat(2, 1fr);
-  color: var(--brown-50)
+  color: var(--black-50);
+  font-weight: 500;
 }
 
 .my-post-container__num-of-replies > span,
@@ -2618,8 +2626,9 @@ My Posts
   align-items: center;
   gap: 0.4rem !important;
   grid-template-columns: repeat(2, 1fr);
-  color: var(--brown-50);
+  color: var(--black-50);
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .my-posts-container__post-delete {
@@ -2627,11 +2636,12 @@ My Posts
   align-items: center;
   gap: 0.4rem !important;
   grid-template-columns: repeat(2, 1fr);
-  color: var(--brown-50);
+  color: var(--black-50);
   font-size: 0.9rem;
   background: none;
   border: none;
   margin-left: 0.2rem;
+  font-weight: 500;
 }
 
 
@@ -2685,8 +2695,9 @@ My Comments
 
 .my-comments__post-name-link {
   text-decoration: underline;
-  color: #AD1400;
+  color: var(--cta);
   font-weight: 500;
+  font-size: 1.1rem;
 }
 
 .my-comments__content {
@@ -2708,7 +2719,7 @@ My Comments
 .my-comments__update-button,
 .my-comments__delete-button {
   font-size: 0.9rem;
-  color: var(--brown-50);
+  color: var(--black-50);
   border: none;
   background: none;
   cursor: pointer;
@@ -2727,26 +2738,28 @@ My Comments
 .update-comment-form {
   display: grid;
   gap: 1rem;
-  padding: 1rem;
-  border-radius: 8px;
-  background: var(--brown-95);
+  border: 2px solid var(--black-80);
+  /* padding: 1rem; */
+  border-radius: 15px;
+  /* background: var(--black-95); */
 }
 
 .update-comment-textarea {
   width: 100%;
-  resize: none;
-  border-radius: 8px;
-  padding: 1.3rem;
-  font-size: clamp(0.9rem, 1vw + 0.5rem, 1rem);
+  resize: vertical;
+  /* border-radius: 8px; */
+  /* padding: 1.3rem; */
+  font-size: 1rem;
   letter-spacing: 0.07rem;
   line-height: 1.5;
-  color: var(--brown-10);
+  color: var(--black-30);
   border: none;
+  background: transparent;
   text-wrap: pretty;
 }
 
 .update-comment-textarea:focus {
-  outline: 2px solid var(--focus);
+  outline: none;
 }
 
 .update-comment-form-buttons-container {
@@ -3140,7 +3153,7 @@ USER REGISTER
   display: grid;
   align-content: start;
   min-height: 80dvh;
-  gap: 3rem;
+  gap: 4rem;
   width: 90%;
   max-width: 500px;
   margin: 3rem auto;
@@ -3153,8 +3166,14 @@ USER REGISTER
 
 .user-register-container > 
 .navbar-brand-link > h2 {
-  color: var(--black-20)
+  color: var(--black-20);
+  font-size: 2rem;
 }
+
+.user-register-container > 
+.navbar-brand-link > img {
+  width: 45px;
+} 
 
 .user-register {
   display: grid;
@@ -3262,6 +3281,13 @@ USER REGISTER
   font-weight: 500;
 }
 
+@media (hover) {
+  .user-register__already-registered > a:hover {
+    font-weight: bold;
+    color: var(--hover)
+  }
+}
+
 .user-register__error {
   color: rgb(255, 17, 0);
   letter-spacing: 0.07rem;
@@ -3284,7 +3310,6 @@ USER LOGIN
   font-weight: 500;
   font-size: 1.1rem;
   letter-spacing: 0.05rem;
-  margin-top: 1rem
 }
 
 .user-login__error {
@@ -3292,7 +3317,6 @@ USER LOGIN
   font-weight: 500;
   font-size: 1.1rem;
   letter-spacing: 0.05rem;
-  margin-top: 1rem
 }
 
 .user-login-container {
@@ -3302,7 +3326,7 @@ USER LOGIN
   max-width: 500px;
   display: grid;
   align-content: start;
-  gap: 2rem;
+  gap: 4rem;
 }
 
 .user-login-container >
@@ -3312,7 +3336,19 @@ USER LOGIN
 
 .user-login-container >
 .navbar-brand-link > h2 {
-  color: var(--black-20)
+  color: var(--black-20);
+  font-size: 2rem;
+}
+
+.user-login-container >
+.navbar-brand-link > img {
+  width: 45px;
+}
+
+.user-login-form-wrapper {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
 }
 
 .user-login__header {
@@ -3320,7 +3356,6 @@ USER LOGIN
   color: var(--black-20);
   font-weight: 600;
   font-size: 1.5rem;
-  margin-top: 1rem;
 }
 
 .user-login__form {
@@ -3377,6 +3412,7 @@ USER LOGIN
   flex-wrap: wrap;
   gap: 1rem;
   row-gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .user-login__not-yet-registered > p {
@@ -3391,6 +3427,11 @@ USER LOGIN
   letter-spacing: 0.05rem;
   font-weight: 500;
   color: var(--black-20);
+}
+
+.user-login__not-yet-registered > a:hover {
+  color: var(--hover);
+  font-weight: bold !important;
 }
 
 @media (min-width:700px) {
@@ -3511,7 +3552,7 @@ FOOTER
 
 .footer-container__brand-name {
   font-size: 2rem;
-  font-weight: 500;
+  font-weight: 600;
   color: white;
   line-height: 1;
 }
@@ -3684,85 +3725,94 @@ DASHBOARD
 ========= */
 
 .dashboard-container {
+  min-height: 70dvh;
   width: 90%;
-  max-width: 1400px;
+  max-width: 1000px;
   margin: 4rem auto;
   display: grid;
+  align-content: start;
+}
+
+.dashboard {
+  display: grid;
+  align-content: start;
   gap: 1rem;
-  align-content: start;
-  border-radius: 15px;
 }
 
-.dashboard-contents {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  align-items: stretch;
-  border-radius: 15px;
-}
-
-.left-side-menu {
-  display: grid;
-  align-content: start;
-  background: var(--brown-40);
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
+.dashboard-user-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 1rem;
 }
 
 .dashboard-user-img {
-  width: 100px;
+  width: 70px;
   aspect-ratio: 1/1;
   border-radius: 50%;
   display: block;
-  justify-self: center;
-  margin: 1rem 0;
-  margin-top: 1.5rem;
+}
+
+.dashboard-user-info {
+  overflow-x: auto;
+}
+
+.dashboard-user-info > p:first-child {
+  font-weight: 600;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  color: var(--black-20);
+  line-height: 1;
+}
+
+.dashboard-user-info > p:last-child {
+  color: var(--black-30);
+}
+
+.dashboard-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  row-gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.dashboard-content-header {
+  letter-spacing: 0.05rem;
+  color: var(--header);
+  margin-top: 2rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
 }
 
 .dashboard-link {
-  padding: 1rem 0;
-  color: white;
-  font-size: 1rem;
+  color: var(--black-20);
+  font-size: 1.1rem;
   text-align: center;
+  font-weight: 500;
   letter-spacing: 0.05rem;
 }
 
 .active-dashboar-link {
-  background: var(--brown-20);
+  color: var(--active-navlink);
+  font-weight: 600;
 }
 
-.right-side-contents {
-  position: relative;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+.dashboard-contents {
+  border-top: 1px solid var(--black-80);
+  padding-top: 3rem
 }
 
-.right-side-menu {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  padding: 1rem 2rem;
-  background: var(--brown-30);
-  color: white;
-  font-size: 1.1rem;
-  border-top-right-radius: 15px;
-}
-
-.right-side-content {
-  max-height: 90dvh;
-  min-height: 90dvh;
-  padding: 2rem;
-  overflow-y: auto;
-  border-right: 3px solid var(--brown-80);
-  border-bottom: 3px solid var(--brown-80);
-  border-bottom-right-radius: 15px;
-}
-
-.right-side-content > p {
-  border: 1px solid lightgray;
-  padding: 1rem;
-  line-height: 1.5;
-  letter-spacing: 0.05rem;
-  background: white;
+@media (min-width: 388px) {
+  .dashboard-user-container {
+    text-align: start;
+  }
 }
 
 /* 
@@ -3786,9 +3836,10 @@ PROFILE
   width: 100%;
   box-sizing: border-box;
   padding: 0.8rem 1rem;
-  border: none;
-  border-radius: 5px;
+  border: 1px solid var(--black-80);
+  border-radius: 8px;
   font-size: 1rem;
+  color: var(--black-30)
 }
 
 .profile-form-input > .image-input {
@@ -3811,18 +3862,22 @@ PROFILE
 }
 
 .profile-form-input > label {
-  color: var(--black-15);
+  color: var(--black-20);
+  font-weight: 500;
 }
 
 .profile-update-btn {
   justify-self: start;
-  padding: 0.6rem 1.5rem;
+  padding: 0.7rem 1.4rem;
   color: white;
-  background: var(--orange-50);
+  background: var(--cta);
   border: none;
   font-size: 1rem;
   border-radius: 25px;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
   cursor: pointer;
+  font-weight: 500;
 }
 
 .btn-animation-container {

@@ -3819,7 +3819,8 @@ DASHBOARD
 
 .dashboard-contents {
   border-top: 1px solid var(--black-80);
-  padding-top: 2rem
+  padding-top: 2rem;
+  min-height: 50dvh;
 }
 
 @media (min-width: 600px) {

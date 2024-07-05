@@ -3786,30 +3786,36 @@ DASHBOARD
 }
 
 .dashboard-links {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  column-gap: 1rem;
-  margin-top: 2rem;
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  overflow-x: auto;
+
+  display: grid;
+  grid-auto-flow: column;
+  gap: 0.5rem
 }
 
 .dashboard-link {
   color: var(--black-15);
-  font-size: 1rem;
   letter-spacing: 0.05rem;
-  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-align: center;
+  background: var(--black-40);
+  color: white;
+  font-size: clamp(0.85rem, 1vw + 0.5rem, 1rem);
 }
 
 .active-dashboar-link {
-  color: var(--cta);
-  font-weight: 600;
+  background: var(--cta);
+  color: white;
+  font-weight: 500;
 }
 
 .dashboard-content-header {
   letter-spacing: 0.05rem;
   color: var(--header);
-  margin-top: 2.5rem;
+  margin-top: 3rem;
   padding-bottom: 1rem;
   font-size: clamp(1.3rem, 1dvw + 1rem, 1.8rem);
   font-weight: 700;
@@ -3823,10 +3829,37 @@ DASHBOARD
   min-height: 50dvh;
 }
 
+@media (min-width: 460px) {
+  .dashboard-links {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0;
+    gap: 1rem;
+  }
+}
+
 @media (min-width: 600px) {
   .dashboard-container {
     margin: 3rem auto;
   }
+}
+
+.dashboard-links::-webkit-scrollbar {
+  width: 1rem;
+  height: 0.8rem;
+}
+
+.dashboard-links::-webkit-scrollbar-track {
+  background: var(--black-80);
+  border-radius: 20px;
+  margin-inline: 0.2rem;
+}
+
+.dashboard-links::-webkit-scrollbar-thumb {
+  background: var(--cta);
+  background-clip: content-box;
+  border-radius: 20px;
+  border: 3px solid var(--black-80)
 }
 
 

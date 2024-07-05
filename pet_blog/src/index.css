@@ -3140,8 +3140,8 @@ USER REGISTER
 .user-register-container {
   display: grid;
   align-content: start;
-  min-height: 80dvh;
-  gap: 4rem;
+  min-height: 100svh;
+  gap: 3rem;
   width: 90%;
   max-width: 500px;
   margin: 3rem auto;
@@ -3309,13 +3309,13 @@ USER LOGIN
 }
 
 .user-login-container {
-  min-height: 80dvh;
+  min-height: 100svh;
   width: 90%;
   margin: 3rem auto;
   max-width: 500px;
   display: grid;
   align-content: start;
-  gap: 4rem;
+  gap: 3rem;
 }
 
 .user-login-container >

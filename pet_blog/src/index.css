@@ -3846,7 +3846,7 @@ DASHBOARD
 
 .dashboard-links::-webkit-scrollbar {
   width: 1rem;
-  height: 0.8rem;
+  height: 0.6rem;
 }
 
 .dashboard-links::-webkit-scrollbar-track {
@@ -3856,7 +3856,7 @@ DASHBOARD
 }
 
 .dashboard-links::-webkit-scrollbar-thumb {
-  background: var(--cta);
+  background: var(--black-40);
   background-clip: content-box;
   border-radius: 20px;
   border: 3px solid var(--black-80)

@@ -31,9 +31,7 @@ function LatestPostsSidebar() {
                             >
                                 {post.topic}
                             </Link>
-                            <h4
-                                className='right-sidebar-post-title'
-                                >
+                            <h4 className='right-sidebar-post-title'>
                                 {post.title}
                             </h4>
                             <p className='right-sidebar-post-content'>{post.content.substring(0, 60)}...</p>
@@ -41,10 +39,10 @@ function LatestPostsSidebar() {
                                 to={`/post/${post.id}/detail/`} 
                                 state={{redirect:pathname}} 
                                 className='landing-page-featured-post-read-post-btn'
-                                style={{fontSize:'0.85rem'}}
+                                style={{fontSize:'0.9rem'}}
                             >
-                                <span>Read more</span>
-                                <i className="fa fa-chevron-right" style={{fontSize:'0.9rem'}}></i>
+                                <span>Read More</span>
+                                <i className="fa fa-chevron-right" style={{fontSize:'0.9rem', paddingTop:'0'}}></i>
                             </Link>
                         </div>
                     )

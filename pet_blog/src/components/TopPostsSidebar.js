@@ -41,10 +41,10 @@ function TopPostsSidebar() {
                                 to={`/post/${post.id}/detail/`} 
                                 state={{redirect:pathname}} 
                                 className='landing-page-featured-post-read-post-btn'
-                                style={{fontSize:'0.85rem'}}
+                                style={{fontSize:'0.9rem'}}
                             >
-                                <span>Read more</span>
-                                <i className="fa fa-chevron-right" style={{fontSize:'0.9rem'}}></i>
+                                <span>Read More</span>
+                                <i className="fa fa-chevron-right" style={{fontSize:'0.9rem', paddingTop:'0'}}></i>
                             </Link>
                         </div>
                     )

@@ -44,6 +44,7 @@ function DesktopNavLinks(props) {
             
             <NavLink
                 to='/posts' 
+                end={true}
                 className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
             >
                 Posts

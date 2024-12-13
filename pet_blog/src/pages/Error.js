@@ -4,7 +4,7 @@ import { useLocation, Link, useRouteError } from 'react-router-dom'
 
 
 
-const error = {
+const errorContainer = {
     minHeight: '100dvh',
     display: 'flex',
     justifyContent: 'center',
@@ -22,7 +22,7 @@ const errorContent = {
 function Error() {
     const {state} = useLocation()
     return (
-        <div style={error} className="error">
+        <div style={errorContainer} className="error_">
             <div style={errorContent} className='error__content'>
                 <h2 className='error__header'>There was an error!</h2>
                 <h3 className='error__text'>{state.error}</h3>

@@ -103,7 +103,7 @@ function SearchResults() {
                                         to={`/post/${post.id}/detail/`}
                                         state={{redirect:pathname}} 
                                     >
-                                        <span>Read more</span>
+                                        <span>Read More</span>
                                         <i className="fa fa-chevron-right"></i>
                                     </Link>
                                 </div>

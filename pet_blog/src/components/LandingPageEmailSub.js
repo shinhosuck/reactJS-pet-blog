@@ -40,7 +40,6 @@ function LandingPageEmailSub() {
         }, 7000)
     },[isError, successMessage])
 
-
     return (
         <div className="landing-page-email-form-contents">
             <div className="landing-page-email-header-container">
@@ -53,7 +52,6 @@ function LandingPageEmailSub() {
                     favorite furry friends! 
                 </p>
             </div>
-           
             <form className='landing-page-email-sub-form' onSubmit={handleSubmit}>
                 {successMessage && <p className='success-message'>{successMessage}</p> || isError && <p className='error-message'>{isError}</p>}
                 <div className='landing-page-email-sub-form-input-container'>
@@ -69,7 +67,12 @@ function LandingPageEmailSub() {
                     <input required id='email' onChange={handleChange} value={subscriber.email} name='email' type="email"/>
                 </div>
                 <button className='landing-page-email-sub-btn' type='submit'>
-                    {submiting ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Submiting...<p className='registering-animation'></p></div> : 'Subscribe'}
+                    {submiting ?
+                        <div style={{display:'flex',gap:'0.3rem',alignItems:'center', fontSize:'1.1rem'}}>
+                            Submit...<p className='registering-animation'></p>
+                        </div>
+                        : 'Subscribe'
+                    }
                 </button>
             </form>
         </div>

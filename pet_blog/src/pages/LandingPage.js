@@ -76,23 +76,27 @@ function LandingPage() {
 
             <div className='mobile-landing-page-hero-wrapper'>
                 <div className="mobile-landing-page-hero-text-wrapper">
-                    <h1 className='mobile-landing-page-hero-header'>We are Canine Blog Site</h1>
+                    <h1 className='mobile-landing-page-hero-header'>
+                        {isAuthenticated?'Welcome Back to Canine Blog':'Welcome to Canine Blog'}
+                    </h1>
                     <p className='mobile-landing-page-hero-paragraph'>
-                        Request suggestions and share your experience and 
-                        expertise on various canines's health issues.
+                        Request suggestions and share your experience and expertise 
+                        on various canines' health issues.
                     </p>
-                    <Link to={!isAuthenticated ? '/register':'/posts'} className='mobile-landing-page-join-btn'>{isAuthenticated?'Explore':'Join now'}</Link>
+                    <Link to={!isAuthenticated ? '/register':'/posts'} className='mobile-landing-page-join-btn'>{isAuthenticated?'Explore Posts':'Join Now'}</Link>
                 </div>
             </div>
             <div className='lg-landing-page-hero-wrapper'>
                 <div className="landing-page-hero-container">
                     <div className="landing-page-hero-text-wrapper">
-                        <h1 className='landing-page-hero-header'>We are Canine Blog Site</h1>
+                        <h1 className='landing-page-hero-header'>
+                            {isAuthenticated?'Welcome Back to Canine Blog':'Welcome to Canine Blog'}
+                        </h1>
                         <p className='landing-page-hero-paragraph'>
-                            Request suggestions and share your experience 
-                            and expertise on various canines's health issues.
+                            Request suggestions and share your experience and expertise 
+                            on various canines' health issues.
                         </p>
-                        <Link to={!isAuthenticated ? '/register':'/posts'} className='landing-page-join-btn'>{isAuthenticated?'Explore':'Join now'}</Link>
+                        <Link to={!isAuthenticated ? '/register':'/posts'} className='landing-page-join-btn'>{isAuthenticated?'Explore Posts':'Join Now'}</Link>
                     </div>
                 </div>
             </div>

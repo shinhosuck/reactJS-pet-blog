@@ -64,7 +64,7 @@ function Footer(prop) {
             <h3 className='quick-links-header'>Quick Links</h3>
             <div className='quick-links'>
               <NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/'>Home</NavLink>
-              <NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/posts'>Posts</NavLink>
+              <NavLink end={true} className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/posts'>Posts</NavLink>
               {!isAuthenticated ?
               <>
                 <NavLink className={({isActive})=>isActive?'active-quick-link quick-link' : 'quick-link'} to='/login'>Login</NavLink>

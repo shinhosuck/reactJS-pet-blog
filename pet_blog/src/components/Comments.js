@@ -5,6 +5,8 @@ import UpdateCommentForm from './UpdateCommentForm'
 import ChildCommentForm from './ChildCommentForm'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
 
+import DOMPurify from 'dompurify';
+
 
 function Comments(props) {
     const [isFollowing, setIsFollowing] = useState(null)
@@ -33,30 +35,30 @@ function Comments(props) {
         }
     }
 
-    const followOrUnfollow = async(e, choice, user)=> {
-        const followURL = `${url}/api/auth/follow/user/${user}/?choice=${choice}`
-        try {
-            const data = await handleFollow(followURL, isAuthenticated.token)
-            if(data.error) {
-                console.log(data.error)
+    // const followOrUnfollow = async(e, choice, user)=> {
+    //     const followURL = `${url}/api/auth/follow/user/${user}/?choice=${choice}`
+    //     try {
+    //         const data = await handleFollow(followURL, isAuthenticated.token)
+    //         if(data.error) {
+    //             console.log(data.error)
 
-            }else {
-                setIsFollowing((prev)=> {
-                    const obj = {
-                        ...prev, 
-                        follow:data.data.follow, 
-                        follower:data.data.follower
-                    }
-                    return obj
-                })
-                localStorage.removeItem('auth')
-                localStorage.setItem('auth', JSON.stringify(data.data))
-                window.location.reload()
-            }
-        } catch (error) {
-            console.log(error.message, error.type)
-        }
-    }
+    //         }else {
+    //             setIsFollowing((prev)=> {
+    //                 const obj = {
+    //                     ...prev, 
+    //                     follow:data.data.follow, 
+    //                     follower:data.data.follower
+    //                 }
+    //                 return obj
+    //             })
+    //             localStorage.removeItem('auth')
+    //             localStorage.setItem('auth', JSON.stringify(data.data))
+    //             window.location.reload()
+    //         }
+    //     } catch (error) {
+    //         console.log(error.message, error.type)
+    //     }
+    // }
 
     const deleteComment = async(id, comment)=> {
         if(!comment.parent_id) {
@@ -124,7 +126,13 @@ function Comments(props) {
                 </div>
             </div>
             <div className="post-detail-comment-content-container">
-                <p id={`comment-${comment.id}`} className='post-detail-comments__content'>{comment.content}</p>
+                <div 
+                    id={`comment-${comment.id}`} 
+                    className='post-detail-comments__content'
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(comment.content) }}
+                >
+
+                </div>
                 <div className='post-comment-btns'>
                     <button className='post-detail-comment-reply-btn'
                         onClick={()=> {

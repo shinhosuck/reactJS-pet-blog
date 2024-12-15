@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom'
 import { deletePost, handleFollow } from '../utils/api'
 import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
+import DOMPurify from 'dompurify';
 
 
 function PostDetailPost(props) {
@@ -82,7 +83,11 @@ function PostDetailPost(props) {
                 <div className='landing-page-post-image-background-overlay'>
                 </div>
             </div>
-            <p id='post-content' className='post-detail-container__post-content'>{post.content}</p>
+            <div 
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+                id='post-content' 
+                className='post-detail-container__post-content'
+            />
             <div className="post-detail-container__like-and-reply">
                 <button 
                     onClick={()=>updateLike()} 

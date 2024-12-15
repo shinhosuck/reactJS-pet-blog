@@ -66,7 +66,7 @@ function DesktopNavLinks(props) {
                                 to={`/user/${isAuthenticated.username}/dashboard/`}
                                 className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                             >
-                                Dashboard
+                                Profile
                             </NavLink>
                             <NavLink 
                                 to='/create/post'

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useParams, useNavigate, Navigate, Link } from 'react-router-dom'
+import { useParams, useNavigate, Navigate, Link, useLocation } from 'react-router-dom'
 import CommentForm from '../components/CommentForm'
 import LoadingPage from './LoadingPage'
 import UpdatePostForm from '../components/UpdatePostForm'
@@ -24,6 +24,7 @@ function PostDetail() {
     const { isAuthenticated } = useContext(ContentLayoutContext)
     const { id } = useParams()
     const navigate = useNavigate()
+    const {state} = useLocation()
 
 
     const updateLike = async()=> {
@@ -77,6 +78,12 @@ function PostDetail() {
         }
     }
 
+    function removeMessage() {
+        const postDetailMessageContainer = document.querySelector('.post-detail-message-container')
+        window.history.replaceState({state:null}, '', `/post/${id}/detail/`)
+        postDetailMessageContainer.style.display = 'none'
+    }
+
     useEffect(()=>{
         getPost()
     }, [id])
@@ -115,6 +122,28 @@ function PostDetail() {
                     </div>
                 </div>
             </div>
+            {state?.message &&
+                <p style={{
+                        display:'flex',
+                        alignItems:'center',
+                        justifyContent:'center',
+                        gap: '2rem',
+                        color:'var(--success-text)', 
+                        fontSize:'1.1rem', 
+                        letterSpacing:'0.03rem',
+                        width:'90%',
+                        maxWidth:'1400px',
+                        margin: '0 auto',
+                        marginTop: '1rem',
+                    }}
+                    className='post-detail-message-container'
+                >
+                    <span>{state.message}</span>
+                    <span onClick={removeMessage} style={{color:'var(--black-40)', fontSize:'1rem'}}>
+                        <i className='fas fa-close'></i>
+                    </span>
+                </p>
+             }
             <div className="post-detail-main-container">
                 <div className='post-detail-container'>
                     <div className='post-detail-container-contents'>
@@ -173,13 +202,18 @@ function PostDetail() {
                                 Add your thoughts and get the conversation going.
                             </p>
                             {!isAuthenticated && 
-                             <>
-                                <p className='no-comment-login-to-create-post'>Please login to comment on this post.</p>
-                                <Link to='/login'>
+                             <div style={{
+                                display:'flex',
+                                alignItems:'center',
+                                gap: '1rem',
+                                marginTop: '1rem'
+                             }}>
+                                <p className='no-comment-login-to-create-post'>Please login to comment.</p>
+                                <Link to='/login' state={{redirect:`/post/${id}/detail/`}} className='no-comment-login-btn'>
                                     <span>Login</span>
                                     <i className="fa fa-chevron-right"></i>
                                 </Link>
-                             </>
+                             </div>
                             }
                         </div>
                     }

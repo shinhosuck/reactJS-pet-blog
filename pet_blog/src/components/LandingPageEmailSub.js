@@ -31,7 +31,6 @@ function LandingPageEmailSub() {
         setSubscriber((prev)=> ({...prev, [name]:value}))
     }
 
-
     useEffect(()=> {
         const timeoutID = setTimeout(()=> {
         setSuccessMessage(null)

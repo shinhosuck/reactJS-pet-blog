@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { editComment } from '../utils/api'
 import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
-
+import DOMPurify from 'dompurify';
+import ReactQuill from 'react-quill'
 
 
 function UpdateCommentForm(props) {
@@ -11,8 +12,8 @@ function UpdateCommentForm(props) {
     const [isError, setIsError] =  useState(false)
     const {setShowCommentEditForm, setComments, getPost} = props
     const { isAuthenticated } = useContext(ContentLayoutContext)
+    const [showTextEditor, setShowTextEditor] = useState(false)
     
-
     const handleSubmit = async(e)=> {
         e.preventDefault()
         try {
@@ -35,18 +36,38 @@ function UpdateCommentForm(props) {
         }
     }
     
-    const handleChange = (e)=> {
-        const {name, value} = e.target
-        setComment((prev)=> ({...prev, [name]:value}))
+    const handleChange = (value)=> {
+        setComment((prev)=> ({...prev, content:value}))
+    }
+
+    function showFormatTools(className) {
+        setShowTextEditor(!showTextEditor)
+        const qlToolbar = document.querySelector(`.${className} .ql-toolbar`)
+
+        if (!showTextEditor) {
+            qlToolbar.style.display = 'block'
+        }else {
+            qlToolbar.style.display = 'none'
+        }
     }
 
     return (
         <form className='post-detail-update-comment-form' onSubmit={handleSubmit}>
-             {isError && <p style={{color:'orangered'}}>{isError}</p>}
-            <textarea required className='post-detail-update-comment-textarea' onChange={handleChange} name="content" value={comment.content} rows="4"></textarea>
+            {isError && <p style={{color:'orangered'}}>{isError}</p>}
+             <div>
+                <ReactQuill
+                    required 
+                    onChange={handleChange} 
+                    name="content" 
+                    value={DOMPurify.sanitize(comment.content)} 
+                />
+            </div>
             <div className="post-detail-update-comment-form-btns">
-                <button className='post-detail-update-comment-update-btn' type='submit'>Update</button>
+                <button className='comment-btn-toggle-editor' type='button' onClick={(e)=> showFormatTools(e.target.parentElement.parentElement.className)}>
+                    {showTextEditor? 'Hide Editor':'Show Editor'}
+                </button>
                 <button className='post-detail-update-comment-cancel-btn' onClick={()=>setShowCommentEditForm(false)} type='button'>Cancel</button>
+                <button className='post-detail-update-comment-update-btn' type='submit'>Update</button>
             </div>
         </form>
     )

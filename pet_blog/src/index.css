@@ -23,10 +23,10 @@
   
   /* Orange */
   --header: hsl(16, 100%, 25%);
-  --cta: hsl(16, 100%, 50%);
+  --cta: #ff4400;
   --active-navlink: hsl(16, 100%, 55%);
-  --hover: hsl(0, 100%, 36%);;
-  --focus: hsl(12, 100%, 70%);
+  --hover: #c50000;
+  --focus: hsl(12, 100%, 75%);
   --form-input-textarea: hsl(14, 100%, 95%);
   --body-background: hsl(18, 100%, 98%);
   
@@ -133,7 +133,7 @@ textarea {
 /* Hero image */
 .bg-img {
   min-height: 50dvh;
-  background: linear-gradient(to right, rgba(0, 0, 0),rgba(0, 0, 0, 0.3)),
+  background: linear-gradient(to right, rgba(0, 0, 0),rgba(0, 0, 0, 0.4)),
               url('./images/hero_img.webp');
   background-position: center;
   background-repeat: no-repeat;
@@ -142,7 +142,6 @@ textarea {
 }
 
 .bg-img-header-container {
-  position: relative;
   display: grid;
   width: 90%;
   margin: 0 auto;
@@ -152,40 +151,23 @@ textarea {
 .bg-img-contents {
   display: grid;
   align-self: center;
-  gap: 0.5rem;
-  max-width: 450px;
+  gap: 1rem;
+  max-width: 500px;
 }
 
 .bg-img-header {
   color: white;
-  font-size: clamp(1.5rem, 5vw + 1rem, 3rem);
-  line-height: 1.2;
-  width: 70%;
+  font-size: clamp(1.2rem, 5vw + 1rem, 3rem);
+  line-height: 1.1;
 }
 
 .bg-img-text {
-  color: var(--black-80);
-  letter-spacing: 0.07rem;
-  line-height: 1.5;
-  width: 70%;
+  color: var(--black-70);
+  letter-spacing: 0.05rem;
+  line-height: 1.4;
   text-wrap: pretty;
-  font-size: clamp(0.95rem, 1vw + 0.8rem, 1.1rem);
-}
-
-@media screen and (min-width: 700px) {
-  .bg-img-text {
-    width: 80%;
-  }
-}
-
-@media screen and (min-width: 1000px) {
-  .bg-img-header {
-    width: 100%;
-  }
-
-  .bg-img-text {
-    width: 90%;
-  }
+  max-width: 450px;
+  font-size: clamp(0.8rem, 1vw + 0.8rem, 1.1rem);
 }
 /* end */
 
@@ -219,6 +201,12 @@ textarea {
   font-size: 1.3rem;
   padding-top: 0.2rem;
   color: var(--black-95);
+}
+
+@media (hover) {
+  .scroll-up-container:hover {
+    background: var(--hover)
+  }
 }
 /* end */
 
@@ -561,10 +549,11 @@ Landing Page
 }
 
 .landing-page-post-content {
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
   color: var(--black-30);
   line-height: 1.4;
   text-wrap: pretty;
+  margin-top: 0.3rem;
 }
 
 .landing-page-post-read-more-btn {
@@ -573,7 +562,7 @@ Landing Page
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
   font-weight: 500;
   font-size: 1rem;
   transition: color 100ms linear;
@@ -587,7 +576,7 @@ Landing Page
 
 @media (hover) {
   .landing-page-post-read-more-btn:hover {
-    color: hsl(0, 100%, 36%);
+    color: var(--hover);
   }
 }
 
@@ -626,8 +615,10 @@ Landing Page
   justify-content: center;
   gap: 3.5rem;
   padding: 3rem 0rem;
-  background: var(--black-30);
+  /* background: var(--black-20); */
+  background: white;
   border-radius: 30px;
+  border: 1px solid var(--black-80)
 }
 
 .landing-page-email-header-container {
@@ -643,7 +634,7 @@ Landing Page
 .landing-page-email-form-header {
   max-width: 500px;
   margin: 0 auto;
-  color: white;
+  color: var(--black-15);
   line-height: 1.2;
   text-wrap: balance;
   font-weight: 600;
@@ -651,7 +642,7 @@ Landing Page
 }
 
 .landing-page-email-form-text {
-  color: var(--black-80);
+  color: var(--black-30);
   letter-spacing: 0.03rem;
   line-height: 1.4;
   text-wrap: balance;
@@ -674,7 +665,7 @@ Landing Page
 .landing-page-email-sub-form-input-container > 
 label {
   font-size: 1rem;
-  color: white;
+  color: var(--black-15);
   font-weight: 500;
   letter-spacing: 0.03rem;
 }
@@ -687,6 +678,7 @@ input {
   border: none;
   color: var(--black-20);
   letter-spacing: 0.03rem;
+  border: 1px solid var(--black-80)
 }
 
 .landing-page-email-sub-form-input-container > 
@@ -933,14 +925,9 @@ input:focus {
   }
 
   .landing-page-email-form-contents {
-    display: grid;
     grid-template-columns: 1fr 1fr;
-    align-content: start;
-    justify-content: center;
     gap: 3rem;
     padding: 3rem;
-    background: var(--black-30);
-    border-radius: 30px;
   }
 
   .landing-page-email-header-container {
@@ -1388,23 +1375,24 @@ NAVIGATION BAR
     overflow: hidden;
     display: grid;
     align-content: start;
-    gap: 1rem;
-    border-radius: 15px;
+    gap: 0.8rem;
+    border-radius: 10px;
     opacity: 0;
     transition: max-height 100ms linear;
   }
 
   .show-lg-authenticated-user{
-    background: var(--black-90);
-    max-height: 250px;
+    background: white;;
+    max-height: 500px;
     opacity: 1;
-    padding: 1rem 0;
-    /* overflow-y: auto; */
+    padding: 1.2rem 0;
+    background: var(--black-90);
+    border: 1px solid var(--black-80);
   }
 
   .lg-authenticated-user > 
   .navbar-navlink {
-    color: var(--black-20);
+    color: var(--black-15);
     padding: 0 1rem;
     height: initial;
     font-size: 1rem;
@@ -1498,7 +1486,6 @@ NAVIGATION BAR
     display: grid;
     align-content: start;
     border-radius: 5px;
-    background: var(--black-90);
     transition: max-height 200ms linear;
   }
 
@@ -1507,13 +1494,14 @@ NAVIGATION BAR
     opacity: 1;
     overflow-y: auto;
     margin-top: 0;
-    border:none;
     padding: 1.5rem;
-    border-radius: 15px;
+    border-radius: 10px;
+    background: var(--black-90);
+    border: 1px solid var(--black-80);
   }
 
   .navbar-topic-link {
-    color: var(--black-20);
+    color: var(--black-15);
     overflow-x: auto;
   }
 }
@@ -1609,15 +1597,14 @@ Posts
   font-size: clamp(1.1rem, 1vw + 1.2rem , 2rem);
   font-weight: 600;
   text-wrap: pretty;
-  margin-top: 0.5rem
 }
 
 .post-container__post-content {
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
   color: var(--black-30);
-  line-height: 1.5;
+  line-height: 1.4;
   text-wrap: pretty;
-  margin-top: 0.7rem
+  margin-top: 0.3rem;
 }
 
 .post-container__post-read-more-btn {
@@ -1648,7 +1635,8 @@ Posts
 @media (min-width: 1000px) {
   .post-container {
     grid-template-columns: 3fr 1fr;
-    margin-bottom: 5rem;
+    margin-top: 4rem;
+    margin-bottom: 7rem;
   }
 
   .post-container__posts {
@@ -1690,8 +1678,8 @@ Post Detail
 .post-detail-post-title {
   color: var(--black-95);
   text-wrap: pretty;
-  font-size: clamp(1.5rem, 5vw + 1rem, 3rem);
-  line-height: 1.3;
+  font-size: clamp(1.2rem, 5vw + 1rem, 3rem);
+  line-height: 1;
 }
 
 .post-detail-post-topic-name {
@@ -1787,7 +1775,7 @@ Post Detail
   text-wrap: pretty;
   margin: 0.5rem 0;
   margin-bottom: 1rem;
-  font-size: clamp(1.1rem, 1vw + 1.5rem, 2rem);
+  font-size: clamp(1.1rem, 1vw + 1.5rem, 1.8rem);
 }
 
 .post-detail-container__post-image{
@@ -1798,10 +1786,10 @@ Post Detail
 }
 
 .post-detail-container__post-content {
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
   line-height: 1.5;
   text-wrap: pretty;
-  color: var(--black-30);
+  color: var(--black-20);
   margin-top: 1rem;
 }
 
@@ -1939,14 +1927,15 @@ Post Detail
 }
 
 .show-post-detail-edit-and-delete-btns {
-  max-height: 100px;
+  max-height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: start;
-  gap: 1rem;
-  padding: 1rem;
-  border-radius: 10px;
-  background: var(--black-90)
+  gap: 1.1rem;
+  padding: 1.2rem;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid var(--black-90)
 }
 
 .post-detail-edit {
@@ -2014,77 +2003,67 @@ Post Detail
 
 /* post edit */
 .post-detail-post-edit-form {
+  width: 100%;
   display: grid;
-  gap: 0.5rem;
-  /* padding: 1rem; */
-  border-radius: 8px;
-  /* margin: 3rem 0; */
-  margin-top: 3rem;
-  margin-bottom: 2rem;
-  /* border: 1px solid lightgray; */
+  margin: 2.5rem 0;
+  overflow: hidden;
+  gap: 1rem
 }
 
 .post-detail-post-edit-form > input{
   padding: 1rem;
   border-radius: 8px;
-  letter-spacing: 0.05rem;
-  color: var(--brown-10);
+  letter-spacing: 0.03rem;
+  color: var(--black-15);
   font-size: 1rem;
-  border: none;
-  font-weight: 500;
   background: transparent;
-  border: 2px solid var(--black-80);
+  border: 1px solid var(--black-80);
+  background: white;
 }
 
-.post-detail-post-edit-form > textarea {
-  resize: vertical;
+.post-edit-react-quill {
   border-radius: 8px;
-  font-size: 1rem;
-  letter-spacing: 0.05rem;
-  line-height: 1.5;
-  overflow-y: auto;
-  padding: 0.8rem 1rem;
-  color: var(--brown-10);
-  background: transparent;
-  border: 2px solid var(--black-80);
+  padding: 1rem;
+  border: 1px solid var(--black-80);
+  background: white
 }
 
 .post-detail-post-edit-btns {
-  justify-self: end;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-self: end;
 }
 
+.post-detail-post-edit-btn-cancel,
 .post-detail-post-edit-btn-submit {
-  padding: 0.7rem 1.4rem;
+  padding: 0.4rem 0.8rem;
   background: var(--cta);
   color: white;
   border-radius: 25px;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
   border: none;
   cursor: pointer;
   font-weight: 500;
-  font-size: 1rem;
-  text-transform: uppercase;
+  font-size: clamp(0.7rem, 1vw + 0.6rem, 0.9rem);
+  transition: background 100ms linear;
 }
 
 .post-detail-post-edit-btn-cancel {
-  padding: 0.7rem 1.4rem;
-  background: none;
-  color: white;
   background: var(--black-30);
-  border-radius: 25px;
-  letter-spacing: 0.05rem;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 1rem;
-  text-transform: uppercase;
 }
 
-.post-detail-post-edit-form > textarea:focus,
+@media (hover) {
+  .post-detail-post-edit-btn-cancel:hover {
+    background: var(--black-15);
+    color: white
+  }
+  .post-detail-post-edit-btn-submit:hover {
+    background: var(--hover)
+  }
+}
+
 .post-detail-post-edit-form > input:focus{
   outline: 2px solid var(--focus);
   border: 1px solid transparent
@@ -2094,75 +2073,148 @@ Post Detail
 .comment-form {
   width: 100%;
   display: grid;
-  gap: 0.5rem;
   border-radius: 15px;
   margin: 2.5rem 0;
-  border: 2px solid var(--black-85);
+  border: 1px solid var(--black-80);
+  overflow: hidden;
+  padding: 1rem;
+  padding-bottom: 0;
+  gap: 1rem;
+  background: white;
 }
 
 .child-comment-form {
   margin-left: 0.5rem !important;
 }
 
-.comment-form-textarea {
-  min-height: 150px;
-  max-height: 200px;
-  resize: vertical;
+/* React Quill */
+.quill {
+  display: grid;
+  align-self: start;
+  gap: 1.5rem;
+}
+
+.ql-toolbar.ql-snow {
+  padding: 0 !important;
+}
+
+.ql-toolbar, 
+.ql-snow {
+  border: none !important;
+  display: none;
+}
+
+.ql-toolbar {
+  justify-self: start;
+}
+
+.ql-editor.ql-blank::before {
+  left: 0 !important;
+}
+
+.ql-editor {
+  padding: 0 !important;
+  font-family: 'Poppins', sans-serif;
+}
+
+@media (hover) {
+  .ql-clean:hover,
+  .ql-list:hover,
+  .ql-link:hover,
+  .ql-underline:hover,
+  .ql-italic:hover,
+  .ql-bold:hover,
+  .ql-header:hover {
+    outline: 1px solid var(--black-70) !important;
+    border-radius: 3px;
+  }
+}
+
+.ql-container {
+  display: grid;
+  align-content: start;
+  align-items: start;
+}
+
+.ql-editor, 
+.ql-blank {
+  display: grid;
+  align-content: start;
+  align-items: start;
+  overflow: hidden;
   font-size: 1rem;
-  letter-spacing: 0.05rem;
+} 
+
+.ql-editor > *, 
+.ql-blank > * {
+  overflow: hidden;
+}
+
+.ql-editor > p, 
+.ql-blank > p {
+  font-size: 1rem !important;
+  color: var(--black-20);
+  letter-spacing: 0.03rem;
   line-height: 1.4;
-  overflow-y: auto;
-  color: var(--black-15);
-  border: none;
-  padding: 1rem;
-  padding-right: 0;
-  border-radius: 15px;
-  background: transparent;
 }
-
-.comment-form-textarea::placeholder {
-  font-weight: 500;
-  color: hsl(0, 0%, 30%);
-  letter-spacing: 0.05rem;
-}
-
-.comment-form-textarea:focus {
-  outline: none;
-}
+/* End */
 
 .comment-btns {
-  justify-self: end;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.3rem;
-  padding: 0.5rem;
+  gap: 0.6rem;
+  padding-bottom: 0.5rem;
+  margin-top: 1rem;
+  justify-self: end;
 }
 
+
+.comment-btn-toggle-editor,
 .comment-btn-submit {
-  padding: 0.7rem 1.4rem;
+  padding: 0.4rem 0.8rem;
   background: var(--cta);
   color: white;
   border-radius: 25px;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
   border: none;
   cursor: pointer;
   font-weight: 500;
-  font-size: 1rem;
-  text-transform: uppercase;
+  font-size: clamp(0.7rem, 1vw + 0.6rem, 0.9rem);
+  transition: background 100ms linear;
+}
+
+.comment-btn-toggle-editor {
+  background: white;
+  border: 1px solid var(--black-70);
+  color: var(--black-30)
+}
+
+@media (hover) {
+  .comment-btn-toggle-editor:hover {
+    background: var(--black-40);
+    color: white
+  }
+
+  .comment-btn-submit:hover {
+    background: var(--hover)
+  }
+
+  .comment-btn-cancel:hover {
+    background: var(--black-15)
+  }
 }
 
 .comment-btn-cancel {
-  padding: 0.7rem 1.4rem;
+  padding: 0.4rem 0.8rem;
   color: white;
   background: var(--black-30);
   border-radius: 25px;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
   border: none;
   cursor: pointer;
   font-weight: 500;
-  font-size: 1rem;
-  text-transform: uppercase;
+  font-size: clamp(0.7rem, 1vw + 0.6rem, 0.9rem);
 }
 
 /* comments */
@@ -2231,11 +2283,11 @@ Post Detail
 
 .post-detail-comments__content {
   line-height: 1.4;
-  letter-spacing: 0.05rem;
-  color: var(--black-30);
+  letter-spacing: 0.03rem;
+  color: var(--black-20);
   text-wrap: balance;
   margin-top: 0.5rem;
-  font-size: clamp(0.85rem, 1dvw + 0.5rem, 1rem);
+  font-size: clamp(0.8rem, 1dvw + 0.5rem, 0.95rem);
 }
 
 .post-comment-btns {
@@ -2295,7 +2347,7 @@ Post Detail
   align-content: start;
   justify-items: center;
   text-align: center;
-  gap: 1rem;
+  gap: 0.8rem;
   max-width: 500px;
   margin: 0 auto;
   margin-top: 1rem;
@@ -2303,106 +2355,108 @@ Post Detail
 
 .no-comments-container > h3 {
   color: var(--bkack-20);
-  letter-spacing: 0.05rem;
   text-wrap: balance;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
 }
 
 .no-comment-text {
-  letter-spacing: 0.05rem;
-  line-height: 1.5;
+  letter-spacing: 0.03rem;
+  line-height: 1.3;
   color: var(--black-30);
   text-wrap: balance;
 }
 
 .no-comment-login-to-create-post{
-  letter-spacing: 0.05rem;
-  line-height: 1.5;
-  font-weight: 700;
-  color: var(--black-20);
+  font-weight: 500;
+  color: var(--black-30);
   text-wrap: balance;
   font-size: 1.1rem;
 }
 
-.no-comments-container > a {
-  color: white;
-  background: var(--cta);
-  letter-spacing: 0.05rem;
-  border-radius: 25px;
+.no-comment-login-btn{
+  color: var(--cta);
   display: flex;
   align-items: center;
-  padding: 0.7rem 1.4rem;
-  gap: 0.5rem;
   font-weight: 500;
-  text-transform: uppercase;
+  gap: 0.3rem
 }
 
-.no-comments-container > a > i {
-  font-size: 1.2rem;
+.no-comment-login-btn > i {
+  font-size: 0.9rem;
+  margin-top: 0.2rem
 }
 
 /* Update comment form */
 .post-detail-update-comment-form {
   width: 100%;
   display: grid;
-  gap: 0.5rem;
-  align-content: start;
   border-radius: 15px;
-  margin: 1.5rem 0rem 1.5rem 0.7rem;
-  border: 2px solid var(--black-80);
-}
-
-.post-detail-update-comment-textarea {
-  border: none;
-  resize: vertical;
-  font-size: 1rem;
-  letter-spacing: 0.05rem;
-  line-height: 1.4;
-  color: var(--brown-10);
-  border-radius: 15px;
+  margin: 2.5rem 0;
+  border: 1px solid var(--black-80);
+  overflow: hidden;
   padding: 1rem;
-  background: transparent;
-}
-
-.post-detail-update-comment-textarea:focus {
-  outline: none
+  padding-bottom: 0;
+  gap: 1rem;
+  background: white;
 }
 
 .post-detail-update-comment-form-btns {
-  justify-self: end;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.3rem;
-  padding: 0.5rem
+  gap: 0.6rem;
+  padding-bottom: 0.5rem;
+  margin-top: 1rem;
+  justify-self: end;
 }
 
+.post-detail-update-comment-cancel-btn,
 .post-detail-update-comment-update-btn {
-  padding: 0.7rem 1.4rem;
+  padding: 0.4rem 0.8rem;
   background: var(--cta);
   color: white;
-  text-align: center;
   border-radius: 25px;
+  letter-spacing: 0.03rem;
   border: none;
   cursor: pointer;
   font-weight: 500;
-  text-transform: uppercase;
-  font-size: 1rem;
+  font-size: clamp(0.7rem, 1vw + 0.6rem, 0.9rem);
+  transition: background 100ms linear;
 }
 
 .post-detail-update-comment-cancel-btn {
-  padding: 0.7rem 1.4rem;
   background: var(--black-30);
-  color: white;
-  text-align: center;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  text-transform: uppercase;
-  font-size: 1rem;
+}
+
+@media (hover) {
+
+  .post-detail-update-comment-cancel-btn:hover {
+    background: var(--black-15);
+  }
+
+  .post-detail-update-comment-update-btn:hover {
+    background: var(--hover)
+  }
 }
 /* end */
+
+@media screen and (min-width: 700px) {
+  .post-detail-update-comment-form-btns,
+  .comment-btns {
+    margin-top: 0.5rem;
+  }
+
+  .post-detail-post-edit-btn-cancel,
+  .post-detail-post-edit-btn-submit,
+  .post-detail-update-comment-cancel-btn,
+  .post-detail-update-comment-update-btn,
+  .comment-btn-toggle-editor,
+  .comment-btn-submit,
+  .comment-btn-cancel {
+    padding: 0.5rem 1rem;
+  }
+}
 
 @media screen and (min-width: 800px) {
   .post-detail-main-container {
@@ -2414,7 +2468,8 @@ Post Detail
 
 @media screen and (min-width: 1000px) {
   .post-detail-main-container {
-    margin-bottom: 5rem;
+    margin-top: 4rem;
+    margin-bottom: 7rem;
   }
 
   .post-detail-container__post-image{
@@ -2428,11 +2483,6 @@ Post Detail
   .post-detail-container__post-title {
     font-size: clamp(1.1rem, 1vw + 2rem, 2.2rem);
   }
-
-  .post-detail-container__post-content {
-    font-size: 1.15rem;
-  }
-
 }
 
 /* ===============
@@ -2444,8 +2494,6 @@ RIGHT SIDE BAR
 ============== */
 .right-side-bar {
   display: none;
-  /* overflow-y: auto;
-  max-height: 500dvh; */
 }
 
 @media screen and (min-width: 800px) {
@@ -2479,11 +2527,12 @@ RIGHT SIDE BAR
 
   .side-bar-latest-post {
     display: grid;
-    gap: 0.8rem;
+    gap: 0.6rem;
     text-wrap: pretty;
-    border: 1px solid var(--black-80);
+    border: 1px solid var(--black-90);
     padding: 1rem;
     border-radius: 15px;
+    background: white;
   }
 
   .right-sidebar-post-title {
@@ -2498,6 +2547,7 @@ RIGHT SIDE BAR
   .right-sidebar-post-content {
     color: var(--black-30);
     letter-spacing: 0.03rem;
+    font-size: 0.9rem;
     line-height: 1.4;
   }
 }
@@ -3132,7 +3182,8 @@ styling.
 @media screen and (min-width: 1000px) {
    .topic-posts-wrapper {
     grid-template-columns: 3fr 1fr;
-    margin-bottom: 5rem;
+    margin-bottom: 7rem;
+    margin-top: 4rem;
   }
 
   .topic-posts-container__posts {
@@ -3685,6 +3736,12 @@ FOOTER
   cursor: pointer;
   font-size: 1.1rem;
   margin-top: 0.5rem;
+}
+
+@media (hover) {
+  .contact-form > button:hover {
+    background: var(--hover)
+  }
 }
 
 .social-links {

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { formatDate } from '../utils/formatDate'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
+import DOMPurify from 'dompurify';
 
 
 function TopPostsSidebar() {
@@ -36,7 +37,10 @@ function TopPostsSidebar() {
                             >
                                 {post.title}
                             </h4>
-                            <p className='right-sidebar-post-content'>{post.content.substring(0, 60)}...</p>
+                            {/* <div 
+                                className='right-sidebar-post-content'
+                                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content.substring(0, 60)+'...') }}
+                            /> */}
                             <Link 
                                 to={`/post/${post.id}/detail/`} 
                                 state={{redirect:pathname}} 

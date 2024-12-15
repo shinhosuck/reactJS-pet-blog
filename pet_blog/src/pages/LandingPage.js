@@ -73,7 +73,6 @@ function LandingPage() {
 
     return (
         <React.Fragment>
-
             <div className='mobile-landing-page-hero-wrapper'>
                 <div className="mobile-landing-page-hero-text-wrapper">
                     <h1 className='mobile-landing-page-hero-header'>
@@ -112,7 +111,6 @@ function LandingPage() {
                     <LatestPostsSidebar />
                 </div>
             </div>
-            
         </React.Fragment>
     )
 }

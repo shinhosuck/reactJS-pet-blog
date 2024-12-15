@@ -8,6 +8,7 @@ import { formatDate } from '../utils/formatDate'
 import TopPostsSidebar from '../components/TopPostsSidebar'
 import LatestPostsSidebar from '../components/LatestPostsSidebar'
 import { handleRightColumnContent } from '../utils/handleEvents'
+import DOMPurify from 'dompurify';
 
 
 function TopicPosts() {
@@ -152,9 +153,10 @@ function TopicPosts() {
                                                 <p className='post-container__post-date-posted'>{formatDate(post.date_posted)}</p>
                                             </div>
                                             <h3 className='post-container__post-title'>{post.title}</h3>
-                                            <p className='post-container__post-content'>
-                                                {post.content.substring(0, 150)}...
-                                            </p>
+                                            <div
+                                                className='post-container__post-content'
+                                                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content.substring(0, 150)+'...') }}
+                                            />
                                             <Link 
                                                 className='landing-page-post-read-more-btn'
                                                 to={`/post/${post.id}/detail/`}

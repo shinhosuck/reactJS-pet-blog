@@ -79,7 +79,7 @@ function DesktopNavLinks(props) {
                                 className='navbar-navlink navbar-button auth-user' 
                                 style={{border:'none',background:'none'}}
                             >
-                                Logout
+                                Sign Out
                             </button>
                         </div>
                     </div>
@@ -90,13 +90,13 @@ function DesktopNavLinks(props) {
                         to='/login' 
                         className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
-                        Login
+                        Sign In
                     </NavLink>
                     <NavLink
                         to='/register' 
                         className={({isActive})=>isActive?'navbar-active-navlink navbar-navlink':'navbar-navlink'}
                     >
-                        Register
+                        Sign Up
                     </NavLink>
                 </>
             }

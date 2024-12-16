@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { 
     Link, 
     useLocation, 
@@ -22,6 +22,7 @@ function Login() {
     const {isAuthenticated, setIsAuthenticated} = useOutletContext()
     const {state} = useLocation()
     const navigate = useNavigate()
+    const focusRef = useRef()
     window.history.replaceState({state:null}, '', '/login')
 
     const handleForm = async function(e) {
@@ -75,8 +76,10 @@ function Login() {
 
 
     useEffect(()=> {
-        document.title = 'Login'
+        document.title = 'Sign In'
         setIsLoading(false)
+        // focusRef.current.focus()
+        console.log(focusRef)
     }, [])
 
     if(isAuthenticated) {
@@ -119,6 +122,7 @@ function Login() {
                             name='username' 
                             type="text" 
                             id='username'
+                            autoFocus={true}
                         />
                     </div>
                     <div className="login-input-container">
@@ -134,7 +138,7 @@ function Login() {
                         />
                     </div>
                     <button className='user-login__btn' type='submit'>
-                        {isLogingin ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Logging in...<p className='registering-animation'></p></div> : 'Login'}
+                        {isLogingin ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Logging in...<p className='registering-animation'></p></div> : 'Sign In'}
                     </button>
                 </form>
                 <div className="user-login__not-yet-registered">

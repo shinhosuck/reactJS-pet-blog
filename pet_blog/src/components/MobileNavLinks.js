@@ -31,7 +31,7 @@ function MobileNavLinks(props) {
                             to={`/user/${isAuthenticated.username}/dashboard/`}
                             className={({isActive})=>isActive?'mobile-active-navlink mobile-navlink':'mobile-navlink'}
                         >
-                            Dashboard
+                            Profile
                         </NavLink>
                         <NavLink 
                             onClick={()=> {
@@ -87,7 +87,7 @@ function MobileNavLinks(props) {
             {isAuthenticated ?
                 <div className='mobile-logout-btn-container'>
                     <button onClick={logout} className='mobile-logout-btn'>
-                        Logout
+                        Sign Out
                     </button>
                 </div>
             :
@@ -101,7 +101,7 @@ function MobileNavLinks(props) {
                         to='/login' 
                         className={({isActive})=>isActive?'mobile-active-navlink mobile-navlink':'mobile-navlink'}
                     >
-                        Login
+                        Sign In
                     </NavLink>
                     <NavLink 
                         onClick={()=> {
@@ -112,7 +112,7 @@ function MobileNavLinks(props) {
                         to='/register' 
                         className={({isActive})=>isActive?'mobile-active-navlink mobile-navlink':'mobile-navlink'}
                     >
-                        Register
+                        Sign Up
                     </NavLink>
                 </>   
             }

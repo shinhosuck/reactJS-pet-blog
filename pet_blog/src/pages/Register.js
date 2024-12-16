@@ -111,6 +111,7 @@ function Register() {
                             value={newUser.username.replaceAll(' ', '')} 
                             type="text" 
                             id='username'
+                            autoFocus={true}
                         />
                     </div>
                     <div className="user-register-input-container">
@@ -173,7 +174,7 @@ function Register() {
                         />
                     </div>
                     <button className='user-register__btn' type='submit'>
-                        {isRegistering ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Registering...<p className='registering-animation'></p></div> : 'Register'}
+                        {isRegistering ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Registering...<p className='registering-animation'></p></div> : 'Sign Up'}
                     </button>
                 </form>
                 <div className="user-register__already-registered">

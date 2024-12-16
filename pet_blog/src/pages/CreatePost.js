@@ -15,6 +15,7 @@ function CreatePost() {
     const [isLoading, setIsLoading] = useState(true)
     const [missingValue, setMissingValue] = useState(null)
     const {isAuthenticated} = useContext(ContentLayoutContext)
+    const [selected, setSelected ] = useState(null)
     const {state, pathname} = useLocation()
     const navigate = useNavigate()
 
@@ -53,10 +54,20 @@ function CreatePost() {
 
     function handleChange(e) {
         const {name, value} = e.target 
-        name === 'image' ? 
+        if (name === 'image') {
             setPost((prev)=>({...prev, [name]:e.target.files})) 
-        : 
-            setPost((prev)=>({...prev, [name]:value}))
+            const  imgName = e.target.files[0].name
+            setSelected(imgName)
+        }
+        else {
+            setPost((prev)=>({...prev, [name]:value})) 
+        }
+    }
+
+    function removeSelectedImage(ele) {
+        setSelected(null)
+        setPost((prev)=>({...prev, image:''}))
+        ele.value = ''
     }
 
     const getData = async()=> {
@@ -64,19 +75,17 @@ function CreatePost() {
             const data = await getTopicData(`${url}/api/topics/`)
             const topicArray = data.map((topic)=>topic.name)
             setTopics(topicArray)
-            const timeoutID = setTimeout(()=>{
-                setIsLoading(false)
-                clearTimeout(timeoutID)
-            }, 500)
-        } catch ({message}) {
+            setIsLoading(false)
+        } 
+        catch ({message}) {
             setIsLoading(false)
             setIsError(true)
         }
     }
 
     useEffect(()=>{
-        document.title = 'Create Post'
         getData()
+        document.title = 'Create Post'
     }, [])
 
     if(!isAuthenticated) {
@@ -104,17 +113,13 @@ function CreatePost() {
                 </h2>
             </Link>
             <div className="create-post__form-container">
+                <h2 className='user-login__header'>Create Post</h2>
                 <form className="create-post__form" onSubmit={handleSubmit}>
-                    <div className='create-post-img-input-container'>
-                        <label className='create-post__img-input-label' htmlFor="image">Image</label>
-                        {missingValue && missingValue.image === '' && <p className='create-post__error'>This field is required.</p>}
-                        <input id='image' onChange={handleChange} type="file" accept='image/*' name='image' className='create-post__img-input'/>
-                    </div>
                     <div className="create-post-select-topic-container">
                         <label className='create-post__label' htmlFor="topic">Topic</label>
                         {missingValue && missingValue.topic === '' && <p className='create-post__error'>This field is required.</p>}
-                        <select id='topic' onChange={handleChange} className='create-post__select' name="topic" value={post.topic}>
-                        <option className='create-post__option' value=''>--------</option>
+                        <select autoFocus={true} id='topic' onChange={handleChange} className='create-post__select' name="topic" value={post.topic}>
+                            <option className='create-post__option' value=''>Please choose a topic</option>
                             {topics.map((topic)=>{
                                 return (
                                     <option className='create-post__option' key={topic} value={topic}>
@@ -124,6 +129,44 @@ function CreatePost() {
                             })}
                         </select>
                     </div>
+                    <div className='create-post-img-input-container'>
+                        <label className='create-post__img-input-label' htmlFor="image">Image</label>
+                        {missingValue && missingValue.image === '' && <p className='create-post__error'>This field is required.</p>}
+                        <div className='create-post-image-input-container' autoFocus={true}>
+                            <label className='create-post-hidden-input-label'>
+                                <div className='create-post-upload-btn'>
+                                    <i className="fa-solid fa-upload"></i>
+                                    <span>Upload</span>
+                                </div>
+                                <input 
+                                    style={{display:'none'}}
+                                    id='image' 
+                                    onChange={handleChange} 
+                                    type="file" 
+                                    accept='image/*' 
+                                    name='image' 
+                                    className='create-post__img-input'
+                                />
+                            </label>
+                            {selected &&
+                                <div className='create-post-selected-image'>
+                                    <span>{selected}</span>
+                                    <button 
+                                        className='create-post-remove-btn'
+                                        type='button' 
+                                        onClick={(e)=>{
+                                            const ele = e.currentTarget.parentElement
+                                            .previousElementSibling.lastElementChild
+                                            removeSelectedImage(ele)
+                                        }}
+                                    >
+                                        <i className='fas fa-close'></i>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    
                     <div className='create-post-title-input-container'>
                         <label className='create-post__label' htmlFor="title">Title</label>
                         {missingValue && missingValue.title === '' && <p className='create-post__error'>This field is required.</p>}

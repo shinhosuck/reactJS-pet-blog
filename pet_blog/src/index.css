@@ -230,7 +230,7 @@ Landing Page
 .landing-page-contents {
   display: grid;
   align-items: start;
-  gap: 4rem 
+  gap: 3rem 
 }
 
 .mobile-landing-page-hero-wrapper {
@@ -287,7 +287,6 @@ Landing Page
 }
 
 /* Featured posts */
-
  .landing-page-featured-posts-wrapper {
   display: grid;
   align-items: start;
@@ -297,25 +296,25 @@ Landing Page
   text-wrap: pretty;
   line-height: 1;
   text-transform: uppercase;
-  margin-bottom: 3rem;
-  padding-bottom: 1rem;
   font-weight: 700;
-  border-bottom: 1px solid var(--black-80);
   color: var(--header);
   font-size: 1.6rem;
+  margin-bottom: 1rem;
 }
 
 .landing-page-featured-posts {
   display: grid;
   align-items: start;
-  row-gap: 3rem;
-  column-gap: 2.5rem;
+  row-gap: 1.5rem;
 }
 
 .landing-page-featured-post{
   display: grid;
   align-content: start;
   gap: 0.5rem;
+  border: 1px solid var(--black-85);
+  padding: 1.3rem;
+  border-radius: 15px;
 }
 
 .landing-page-featured-post-topic-container {
@@ -385,17 +384,20 @@ Landing Page
   color: var(--header);
   line-height: 1.1;
   text-transform: uppercase;
-  margin-bottom: 3rem;
-  padding-bottom: 1rem;
+  /* margin-bottom: 3rem;
+  padding-bottom: 1rem; */
   font-weight: 700;
-  border-bottom: 1px solid var(--black-80);
+  /* border-bottom: 1px solid var(--black-80); */
   font-size: 1.6rem;
+
+  margin-bottom: 1rem;
 }
 
 .landing-page-topics {
   display: grid;
   align-content: start;
-  gap: 2rem;
+  /* gap: 2rem; */
+  gap: 1.5rem
 }
 
 .landing-page-topic {
@@ -458,24 +460,25 @@ Landing Page
   color: var(--header);
   line-height: 1.1;
   text-transform: uppercase;
-  margin-bottom: 3rem;
-  padding-bottom: 1rem;
   font-weight: 700;
-  border-bottom: 1px solid var(--black-80);
   font-size: 1.6rem;
+
+  margin-bottom: 1rem;
 }
 
 .landing-page-posts {
   display: grid;
   align-items: start;
-  column-gap: 2rem;
-  row-gap: 3rem;
+  row-gap: 1.5rem;
 }
 
 .landing-page-post {
   display: grid;
   align-items: start;
   gap: 1rem;
+  border: 1px solid var(--black-85);
+  padding: 1.3rem;
+  border-radius: 15px;
 }
 
 .landing-page-post-image-container {
@@ -591,10 +594,10 @@ Landing Page
   background: var(--cta);
   color: white;
   font-weight: 500;
-  margin-top: 5rem;
   font-size: 1.1rem;
   letter-spacing: 0.03rem;
   transition: background 100ms linear;
+  margin-top: 2rem;
 }
 
 .landing-page-post-see-all-posts > i {
@@ -615,7 +618,6 @@ Landing Page
   justify-content: center;
   gap: 3.5rem;
   padding: 3rem 0rem;
-  /* background: var(--black-20); */
   background: white;
   border-radius: 30px;
   border: 1px solid var(--black-80)
@@ -755,7 +757,6 @@ input:focus {
 @media screen and (min-width: 700px) {
   .landing-page-post-see-all-posts {
     justify-self: center;
-    margin-top: 5rem;
   }
 }
 
@@ -785,11 +786,6 @@ input:focus {
 }
 
 @media screen and (min-width: 900px) {
-
-  .landing-page-contents {
-    gap: 7rem 
-  }
-
   .landing-page-hero-wrapper {
     padding-bottom: 0;
   }
@@ -863,18 +859,55 @@ input:focus {
 }
 
 @media screen and (min-width: 1000px) {
+  .landing-page-contents {
+    gap: 7rem 
+  }
+
+  .landing-page-topic-header {
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--black-80);
+  }
 
   .landing-page-content-container {
     grid-template-columns: 3fr 1fr;
     margin-bottom: 7rem;
   }
 
+  .landing-page-featured-posts-header {
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--black-80);
+  }
+
   .landing-page-featured-posts {
     grid-template-columns: repeat(2, 1fr);
+    row-gap: 3rem;
+    column-gap: 2.5rem;
+  }
+
+  .landing-page-featured-post{
+    border: none;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .landing-page-posts-header {
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--black-80);
   }
 
   .landing-page-posts {
     grid-template-columns: repeat(2, 1fr);
+    column-gap: 2rem;
+    row-gap: 3rem;
+  }
+
+  .landing-page-post {
+    border: none;
+    padding: 0;
+    border-radius: 0;
   }
 
   .landing-page-post:nth-child(1),
@@ -905,8 +938,8 @@ input:focus {
     font-size: clamp(1.1rem, 1vw + 0.5rem , 1.7rem);
   }
 
-  .landing-page-post-line {
-    display: none;
+  .landing-page-post-see-all-posts {
+    margin-top: 5rem;
   }
 
   .landing-page-email-form-header {
@@ -1538,8 +1571,7 @@ Posts
 .post-container__posts {
   display: grid;
   align-content: start;
-  column-gap: 2rem;
-  row-gap: 3rem;
+  row-gap: 1.5rem;
 }
 
 .post-search-no-result {
@@ -1554,6 +1586,9 @@ Posts
   display: grid;
   align-content: start;
   gap: 0.5rem;
+  padding: 1.3rem;
+  border-radius: 15px;
+  border: 1px solid var(--black-85)
 }
 
 .post-container__post-date-posted {
@@ -1625,11 +1660,6 @@ Posts
   .post-container__post-title {
     font-size: clamp(1.1rem, 1vw + 1.02rem , 2rem);
   }
-
-  .post-container__post:last-child {
-    padding-bottom: 0 !important;
-    border-bottom: none !important;
-  }
 }
 
 @media (min-width: 1000px) {
@@ -1641,6 +1671,14 @@ Posts
 
   .post-container__posts {
     grid-template-columns: repeat(2, 1fr);
+    column-gap: 2rem;
+    row-gap: 3rem;
+  }
+
+  .post-container__post {
+    padding: 0;
+    border-radius: 0;
+    border: none;
   }
 
   .post-container__post:nth-child(3n + 1) {
@@ -2974,8 +3012,15 @@ Create & Update Post
   overflow: hidden;
 }
 
-.create-post-image-input-container:focus {
-  outline: 3px solid var(--focus)
+.create-post-react-quill-textarea {
+  background: white;
+  border: 1px solid var(--black-80);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.create-post-react-quill-textarea .ql-editor {
+  min-height: 200px;
 }
 
 .create-post-hidden-input-label {
@@ -3037,17 +3082,12 @@ Create & Update Post
   border: 1px solid var(--black-80)
 }
 
-.create-post__input,
-.create-post__textarea {
+.create-post__input{
   font-size: 1rem;
   padding: 1rem;
   letter-spacing: 0.03rem;
   border-radius: 8px;
   border: 1px solid var(--black-80)
-}
-
-.create-post__textarea {
-  resize: vertical;
 }
 
 .create-post__error {
@@ -3060,11 +3100,6 @@ Create & Update Post
 .create-post__option[value=""] {
   letter-spacing: 0.05rem;
   font-size: 1rem;
-}
-
-.create-post__textarea {
-  letter-spacing: 0.07rem;
-  line-height: 1.6;
 }
 
 .create-post__img-input,
@@ -3080,55 +3115,74 @@ Create & Update Post
   gap: 0.5rem;
 }
 
+.create-post-btns >
+.comment-btn-toggle-editor {
+  padding: 1rem !important;
+  border-radius: 25rem;
+  font-weight: 500 !important;
+  font-size: clamp(0.9rem, 1dvw + 0.7rem, 1.1rem);
+}
+
+.create-post-cancel-btn,
 .create-post__btn {
-  padding: 0.7rem 1.4rem;
-  letter-spacing: 0.05rem;
+  padding: 1rem;
+  letter-spacing: 0.03rem;
   color: white;
   background: var(--cta);
-  border-radius: 20rem;
+  border-radius: 25rem;
   border: none;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 1dvw + 0.7rem, 1.1rem);
   font-weight: 500;
-  text-transform: uppercase;
+  transition: background 100ms linear;
 }
 
 .create-post-cancel-btn {
-  padding: 0.7rem 1.4rem;
-  letter-spacing: 0.05rem;
-  color: white;
   background: var(--black-30);
-  border-radius: 20rem;
-  border: none;
-  font-size: 1rem;
-  font-weight: 500;
-  text-transform: uppercase;
   text-align: center;
 }
 
+@media (hover) {
+  .create-post-cancel-btn:hover {
+    background: var(--black-15)
+  }
+
+  .create-post__btn:hover {
+    background: var(--hover)
+  }
+}
+
 .create-post__select:focus,
-.create-post__input:focus,
-.create-post__textarea:focus {
+.create-post__input:focus {
   outline: 3px solid var(--focus);
   border: none;
 }
 
-@media (min-width: 450px) {
+@media (min-width: 500px) {
   .current-image {
     grid-template-columns: auto 1fr;
   }
+
   .create-post-btns {
     flex-direction: row;
     align-items: start;
     justify-content: end;
     gap: 0.5rem;
   }
+
+  .create-post-btns >
+  .comment-btn-toggle-editor {
+    padding: 0.6rem 1.2rem !important;
+    font-size: 1rem;
+  }
+
+  .create-post-cancel-btn,
+  .create-post__btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+  }
 }
 
 @media (min-width:700px) {
-  .create-post-container {
-    margin: 4rem auto;
-  }
-
   .update-post-image-and-current-image-container {
     grid-template-columns: auto 1fr;
     align-items: end;
@@ -3137,6 +3191,13 @@ Create & Update Post
 
   .current-image {
     padding-bottom: 0.2rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .create-post-container {
+    margin: 4rem auto;
+    margin-bottom: 7rem;
   }
 }
 /*
@@ -3160,8 +3221,7 @@ TOPIC POSTS
 .topic-posts-container__posts {
   display: grid;
   align-content: start;
-  row-gap: 3rem;
-  column-gap: 2rem;
+  row-gap: 1.5rem;
 }
 
 /* 
@@ -3244,6 +3304,8 @@ styling.
 
   .topic-posts-container__posts {
     grid-template-columns: repeat(2, 1fr);
+    row-gap: 3rem;
+    column-gap: 2rem;
   }
 
   .topic-posts-container__posts >

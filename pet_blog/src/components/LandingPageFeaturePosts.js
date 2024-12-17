@@ -16,11 +16,11 @@ function LandingPageFeaturePosts(props) {
                 {featuredPosts.slice(0, 4).map((post, index)=> {
                     return (
                         <div key={post.id} className="landing-page-featured-post">
-                             <div className='landing-page-featured-post-topic-container'>
+                            <div className='landing-page-featured-post-topic-container'>
                                 <Link
-                                 to={`/topic/${post.topic}/posts/?filter=${post.topic}`}
-                                 state={{topic:post.topic, redirect:pathname}} 
-                                 className='post-topic-btn'
+                                to={`/topic/${post.topic}/posts/?filter=${post.topic}`}
+                                state={{topic:post.topic, redirect:pathname}} 
+                                className='post-topic-btn'
                                 >
                                     {post.topic}
                                 </Link>

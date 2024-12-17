@@ -210,7 +210,7 @@ function PostDetail() {
                              }}>
                                 <p className='no-comment-login-to-create-post'>Please login to comment.</p>
                                 <Link to='/login' state={{redirect:`/post/${id}/detail/`}} className='no-comment-login-btn'>
-                                    <span>Login</span>
+                                    <span>Sign In</span>
                                     <i className="fa fa-chevron-right"></i>
                                 </Link>
                              </div>

@@ -6,6 +6,7 @@ import { validatePost } from '../utils/validators'
 import { url } from '../utils/urls'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
 import paw from '../images/paw.webp'
+import ReactQuill from 'react-quill'
 
 
 function CreatePost() {
@@ -18,6 +19,8 @@ function CreatePost() {
     const [selected, setSelected ] = useState(null)
     const {state, pathname} = useLocation()
     const navigate = useNavigate()
+    const [showTextEditor, setShowTextEditor] = useState(false)
+    const [submiting, setSubmiting] = useState(false)
 
     
     const handleSubmit = async(e)=> {
@@ -30,6 +33,7 @@ function CreatePost() {
             setMissingValue(obj)
 
         }else {
+            setSubmiting(true)
             const keys = Object.keys(post)
             keys.forEach((key)=>{
                 if(key === 'image'){
@@ -46,8 +50,13 @@ function CreatePost() {
             const data = await createPost(`${url}/api/create/`, form, isAuthenticated.token)
             
             if(data.message === 'Successfully created'){
+                setSubmiting(false)
                 setPost({image:'',topic:'',title:'',content:''})
                 navigate(`/post/${data.id}/detail`, {state:{message:data.message}})
+            }
+            else if (data.error) {
+                setSubmiting(false)
+                console.log(data.error)
             }
         }
     }
@@ -64,12 +73,57 @@ function CreatePost() {
         }
     }
 
+    function handleReactQuillContent(value) {
+        setPost((prev) => ({...prev, content:value}))
+    }
+
     function removeSelectedImage(ele) {
         setSelected(null)
         setPost((prev)=>({...prev, image:''}))
         ele.value = ''
     }
 
+    function removeDivImageInputContainerFocus(e) {
+        const createPostImageInputContainer = document
+            .querySelector('.create-post-img-input-container')
+        const createPostTextareaContainer = document
+            .querySelector('.create-post-textarea-container')
+        const imageInputContainer = document
+            .querySelector('.create-post-image-input-container')
+        const quillTextarea = document
+            .querySelector('.create-post-react-quill-textarea')
+
+        if (createPostImageInputContainer || createPostTextareaContainer) {
+
+            if (createPostImageInputContainer.contains(e.target)) {
+                imageInputContainer.style.outline = '3px solid var(--focus)'
+            }
+            if (createPostTextareaContainer.contains(e.target)) {
+                quillTextarea.style.outline = '3px solid var(--focus)'
+            }
+
+            if(!createPostTextareaContainer.contains(e.target)) {
+                quillTextarea.style.outline = 'none'
+                quillTextarea.style.border = '1px solid var(--black-80)'
+            }
+            if (!createPostImageInputContainer.contains(e.target)) {
+                imageInputContainer.style.outline = 'none'
+                imageInputContainer.style.border = '1px solid var(--black-80)'
+            }
+        }
+    }
+
+    function showFormatTools() {
+        setShowTextEditor(!showTextEditor)
+        const qlToolbar = document.querySelector('.ql-toolbar')
+
+        if (!showTextEditor) {
+            qlToolbar.style.display = 'block'
+        }else {
+            qlToolbar.style.display = 'none'
+        }
+    }
+ 
     const getData = async()=> {
         try {
             const data = await getTopicData(`${url}/api/topics/`)
@@ -88,6 +142,15 @@ function CreatePost() {
         document.title = 'Create Post'
     }, [])
 
+    useEffect(() => {
+        window.addEventListener(
+            'click', removeDivImageInputContainerFocus
+        )
+        return () => window.removeEventListener(
+            'click', removeDivImageInputContainerFocus
+        )
+    }, [])
+
     if(!isAuthenticated) {
         return (
             <Navigate to='/login' replace={true} state={{error:'Please login first!', redirect:pathname}}/>
@@ -100,7 +163,7 @@ function CreatePost() {
     }
     if(isError) {
         return (
-            <h2>There was an error!</h2>
+            <h2>There was an unknown server error!</h2>
         )
     }
     return (
@@ -132,7 +195,7 @@ function CreatePost() {
                     <div className='create-post-img-input-container'>
                         <label className='create-post__img-input-label' htmlFor="image">Image</label>
                         {missingValue && missingValue.image === '' && <p className='create-post__error'>This field is required.</p>}
-                        <div className='create-post-image-input-container' autoFocus={true}>
+                        <div className='create-post-image-input-container'>
                             <label className='create-post-hidden-input-label'>
                                 <div className='create-post-upload-btn'>
                                     <i className="fa-solid fa-upload"></i>
@@ -172,13 +235,31 @@ function CreatePost() {
                         {missingValue && missingValue.title === '' && <p className='create-post__error'>This field is required.</p>}
                         <input id='title' onChange={handleChange} className='create-post__input' type="text" value= {post.title} name='title'/>
                     </div>
-                    <div className="create-post-textarea-container">
+                    <div className="create-post-textarea-container" >
                         <label className='create-post__label' htmlFor="content">Content</label>
                         {missingValue && missingValue.content === '' && <p className='create-post__error'>This field is required.</p>}
-                        <textarea id='content' onChange={handleChange} name="content" className='create-post__textarea' cols="30" rows="5" value= {post.content}/>
+                        <div className='create-post-react-quill-textarea'>
+                            <ReactQuill
+                                id='content' 
+                                onChange={handleReactQuillContent} 
+                                name="content" 
+                                className='create-post__textarea' 
+                                value= {post.content}
+                            />
+                        </div>
                     </div>
                     <div className='create-post-btns'>
-                        <button className='create-post__btn' type='submit'>Submit</button>
+                        <button className='comment-btn-toggle-editor' type='button' onClick={showFormatTools}>
+                            {showTextEditor? 'Hide Editor':'Show Editor'}
+                        </button>
+                        <button className='create-post__btn' type='submit'>
+                            {submiting ?
+                                <div style={{display:'flex',gap:'0.3rem',alignItems:'center', fontSize:'0.85rem'}}>
+                                    Submit...<p style={{width:'20px'}} className='registering-animation'></p>
+                                </div>
+                                : 'Comment'
+                            }
+                        </button>
                         <Link to='/posts' className='create-post-cancel-btn'>Cancel</Link>
                     </div>
                 </form>

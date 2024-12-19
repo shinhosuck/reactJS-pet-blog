@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useNavigate, useOutletContext } from 'react-router-dom'
-
+import paw from '../images/paw.webp'
 
 
 function Logout() {
@@ -19,13 +19,16 @@ function Logout() {
 
     return (
         <div className='logout-container'>
+             <Link to='/' className='navbar-brand-link'>
+                <img className='navbar-brand-logo' src={paw} alt="paw" />
+                <h2 className='navbar-brand-name'>
+                    <span>Canine</span>
+                    <span>Blog</span>
+                </h2>
+            </Link>
             <div className="logout-content">
-                <h1>Logout</h1>
-                <p>Are you sure you would like to logout?</p>
-                <div className="logout-container-btns">
-                    <Link to='/posts'>Cancel</Link>
-                    <button onClick={logout}>Logout</button>
-                </div>
+                <h2>Are you sure you want to sign out?</h2>
+                <button className="logout-message-logout-btn" onClick={logout}>Sign Out</button>
             </div>
         </div>
     )

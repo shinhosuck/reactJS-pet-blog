@@ -37,18 +37,21 @@ function DashboardContact() {
   },[isError, successMessage])
 
   return (
-    <div className="contact-us-container">
+    <div 
+      className="contact-us-container"
+      style={{maxWidth:'700px',margin:'0 auto'}}
+    >
       <form className='contact-form' onSubmit={handleSubmit}>
         {successMessage && <p className='success-message'>{successMessage}</p> || isError && <p className='error-message'>{isError}</p>}
         <div className='contact-us-input-container'>
           <label style={{color:'hsl(0, 0%, 20%)'}} htmlFor="contactEmail">Email</label>
-          <input style={{border:'1px solid hsl(0, 0%, 80%)'}} onChange={handleChange} value={message.email} type="email" id='contactEmail' name='email' required/>
+          <input autoFocus={true} style={{border:'1px solid var(--black-80)'}} onChange={handleChange} value={message.email} type="email" id='contactEmail' name='email' required/>
         </div>
         <div className='contact-us-input-container'>
           <label style={{color:'hsl(0, 0%, 20%)'}} htmlFor="contactMessage">Message</label>
-          <textarea style={{border:'1px solid hsl(0, 0%, 80%)'}} onChange={handleChange} value={message.content} name="content" id="contactMessage" required></textarea>
+          <textarea style={{border:'1px solid var(--black-80)'}} onChange={handleChange} value={message.content} name="content" id="contactMessage" required></textarea>
         </div>
-        <button style={{justifySelf:'start', padding:'0.7rem 1.4rem'}} type='submit'>Submit</button>
+        <button style={{justifySelf:'end', padding:'0.7rem 1.4rem'}} type='submit'>Submit</button>
       </form>
     </div>
   )

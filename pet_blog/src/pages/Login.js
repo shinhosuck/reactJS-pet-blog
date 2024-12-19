@@ -40,7 +40,7 @@ function Login() {
                 setIsLogingin(false)
                 setBackendAuthError(data.error)
             }else {
-                setIsLogingin(false)
+                // setIsLogingin(false)
                 localStorage.setItem('auth', JSON.stringify(data))
                 setIsAuthenticated(data)
                 const username = JSON.parse(localStorage.getItem('auth')).username
@@ -78,8 +78,6 @@ function Login() {
     useEffect(()=> {
         document.title = 'Sign In'
         setIsLoading(false)
-        // focusRef.current.focus()
-        console.log(focusRef)
     }, [])
 
     if(isAuthenticated) {
@@ -138,7 +136,17 @@ function Login() {
                         />
                     </div>
                     <button className='user-login__btn' type='submit'>
-                        {isLogingin ? <div style={{display:'flex',gap:'0.3rem',alignItems:'center'}}>Logging in...<p className='registering-animation'></p></div> : 'Sign In'}
+                        {isLogingin ? 
+                            <div style={{
+                                    display:'flex',
+                                    alignItems:'center',
+                                    gap:'0.3rem',
+                                    alignItems:'center',
+                                }}
+                            >
+                                Signing...<p className='registering-animation'></p>
+                            </div> : 'Sign In'
+                        }
                     </button>
                 </form>
                 <div className="user-login__not-yet-registered">

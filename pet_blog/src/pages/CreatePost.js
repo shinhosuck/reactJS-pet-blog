@@ -88,15 +88,15 @@ function CreatePost() {
             .querySelector('.create-post-img-input-container')
         const createPostTextareaContainer = document
             .querySelector('.create-post-textarea-container')
-        const imageInputContainer = document
-            .querySelector('.create-post-image-input-container')
+        const imageInputWrapper = document
+            .querySelector('.create-post-image-input-wrapper')
         const quillTextarea = document
             .querySelector('.create-post-react-quill-textarea')
 
         if (createPostImageInputContainer || createPostTextareaContainer) {
 
             if (createPostImageInputContainer.contains(e.target)) {
-                imageInputContainer.style.outline = '3px solid var(--focus)'
+                imageInputWrapper.style.outline = '3px solid var(--focus)'
             }
             if (createPostTextareaContainer.contains(e.target)) {
                 quillTextarea.style.outline = '3px solid var(--focus)'
@@ -107,8 +107,8 @@ function CreatePost() {
                 quillTextarea.style.border = '1px solid var(--black-80)'
             }
             if (!createPostImageInputContainer.contains(e.target)) {
-                imageInputContainer.style.outline = 'none'
-                imageInputContainer.style.border = '1px solid var(--black-80)'
+                imageInputWrapper.style.outline = 'none'
+                imageInputWrapper.style.border = '1px solid var(--black-80)'
             }
         }
     }
@@ -195,7 +195,7 @@ function CreatePost() {
                     <div className='create-post-img-input-container'>
                         <label className='create-post__img-input-label' htmlFor="image">Image</label>
                         {missingValue && missingValue.image === '' && <p className='create-post__error'>This field is required.</p>}
-                        <div className='create-post-image-input-container'>
+                        <div className='create-post-image-input-wrapper'>
                             <label className='create-post-hidden-input-label'>
                                 <div className='create-post-upload-btn'>
                                     <i className="fa-solid fa-upload"></i>
@@ -229,7 +229,6 @@ function CreatePost() {
                             }
                         </div>
                     </div>
-                    
                     <div className='create-post-title-input-container'>
                         <label className='create-post__label' htmlFor="title">Title</label>
                         {missingValue && missingValue.title === '' && <p className='create-post__error'>This field is required.</p>}
@@ -252,6 +251,7 @@ function CreatePost() {
                         <button className='comment-btn-toggle-editor' type='button' onClick={showFormatTools}>
                             {showTextEditor? 'Hide Editor':'Show Editor'}
                         </button>
+                        <Link to='/posts' className='create-post-cancel-btn'>Cancel</Link>
                         <button className='create-post__btn' type='submit'>
                             {submiting ?
                                 <div style={{display:'flex',gap:'0.3rem',alignItems:'center', fontSize:'0.85rem'}}>
@@ -260,7 +260,6 @@ function CreatePost() {
                                 : 'Comment'
                             }
                         </button>
-                        <Link to='/posts' className='create-post-cancel-btn'>Cancel</Link>
                     </div>
                 </form>
             </div>

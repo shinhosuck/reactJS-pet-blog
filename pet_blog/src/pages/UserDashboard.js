@@ -18,7 +18,7 @@ function UserDashboard() {
             <Navigate to='/login' state={{error:'You are not logged in.'}}/>
         )
     }
-  
+    
     return (
         <div className='dashboard-container'>
             <div className='dashboard'>
@@ -86,7 +86,11 @@ function UserDashboard() {
                         Contact
                     </NavLink>
                 </div>
-                <h2 className='dashboard-content-header'>{!state || state && !state.name ? 'Posts':state.name }</h2>
+                {/* <h2 className='dashboard-content-header'>{!state || state && !state.name ? 'Posts':state.name }</h2> */}
+                {!state || state && !state.name ?
+                    <h2 className='dashboard-content-header'>Posts</h2> :
+                    <h2 className={`dashboard-${state.name.toLowerCase()}-header dashboard-content-header`}>{state.name}</h2> 
+                }
                 <div className="dashboard-contents">
                     {isAuthenticated && 
                         <Outlet />

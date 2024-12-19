@@ -1409,7 +1409,7 @@ NAVIGATION BAR
     display: grid;
     align-content: start;
     gap: 0.8rem;
-    border-radius: 10px;
+    border-radius: 15px;
     opacity: 0;
     transition: max-height 100ms linear;
   }
@@ -2600,7 +2600,7 @@ END OF RIGHT SIDE BAR
 My Posts
 ======== */
 
-.my-posts-hero-container {
+/* .my-posts-hero-container {
   display: grid;
   width: 90%;
   margin: 0 auto;
@@ -2658,7 +2658,7 @@ My Posts
   color: white;
   font-size: clamp(1.5rem, 5vw + 1rem, 3rem);
   line-height: 1.2;
-}
+} */
 
 .my-posts-container {
   display: grid;
@@ -2698,9 +2698,10 @@ My Posts
   border-radius: 15px;
 }
 
-.my-posts-container__date-posted {
-  color: var(--black-40);
-  font-size: 0.9rem;
+.my-posts-container__post-contents  {
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
 }
 
 .my-posts-container__post-title {
@@ -2712,19 +2713,44 @@ My Posts
   margin-top: 0.5rem;
 }
 
+.my-posts-container__date-posted {
+  color: var(--black-40);
+  font-size: 0.9rem;
+}
+
 .my-posts-container__post-content {
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
   color: var(--black-30);
-  line-height: 1.5;
+  line-height: 1.4;
   text-wrap: pretty;
-  margin-top: 0.5rem
+  display: flex;
+  align-items: start;
+  padding: 0.2rem 0;
+}
+
+.my-post-content-show-or-hide {
+  justify-self: start;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--cta);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+@media (hover) {
+  .my-post-content-show-or-hide:hover {
+    color: var(--hover)
+  }
 }
 
 .my-post-container__btns {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-top: 0.5rem;
+  gap: 0.8rem;
 }
 
 .my-post-container__num-of-replies,
@@ -2741,7 +2767,7 @@ My Posts
 .my-post-container__post-like > span {
   font-weight: 500;
   padding-top: 0.3rem;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .my-posts-container__post-update {
@@ -2767,11 +2793,33 @@ My Posts
   font-weight: 500;
 }
 
+@media (hover) {
+  .my-post-container__btns > *:hover {
+    color: var(--hover)
+  }
+}
 
+@media screen and (min-width: 700px) {
+  .my-posts-container__post {
+    display: grid;
+    align-content: start;
+    align-items: start;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
 
-@media screen and (min-width: 663px) {
-  .my-posts-container__posts {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  .my-posts-container__post-image-container {
+    border-radius: 15px;
+    position: relative;
+  }
+  
+  .my-posts-container__post-image{
+    width: 100%;
+    height: auto;
+    aspect-ratio: initial;
+    object-fit: initial;
+    display: block;
+    border-radius: 15px;
   }
 }
 
@@ -3001,7 +3049,7 @@ Create & Update Post
   letter-spacing: 0.03rem;
 }
 
-.create-post-image-input-container {
+.create-post-image-input-wrapper {
   border: 1px solid var(--black-80);
   border-radius: 8px;
   padding: 0.8rem;
@@ -3020,7 +3068,7 @@ Create & Update Post
 }
 
 .create-post-react-quill-textarea .ql-editor {
-  min-height: 200px;
+  min-height: 150px;
 }
 
 .create-post-hidden-input-label {
@@ -3052,17 +3100,18 @@ Create & Update Post
 .create-post-selected-image {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   overflow: hidden;
+  color: var(--black-40);
 }
 
 .create-post-remove-btn {
   border: none;
   line-height: 1;
-  color: var(--black-30);
   font-size: 1rem;
   background: none;
-  margin-top: 0.3rem;
+  margin-top: 0.1rem;
+  color: var(--black-40);
 }
 
 .create-post-selected-image > span {
@@ -3171,14 +3220,14 @@ Create & Update Post
 
   .create-post-btns >
   .comment-btn-toggle-editor {
-    padding: 0.6rem 1.2rem !important;
-    font-size: 1rem;
+    padding: 0.6rem 1rem !important;
+    font-size: 0.9rem;
   }
 
   .create-post-cancel-btn,
   .create-post__btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -3241,16 +3290,16 @@ styling.
 
 .no-topic-post-header {
   color: var(--black-20);
-  letter-spacing: 0.05rem;
-  font-size: 1.7rem;
-  text-wrap: balance;
-  line-height: 1.3;
+  font-size: 1.4rem;
+  text-wrap: pretty;
+  line-height: 1.2;
+  font-weight: 600;
 }
 
 .no-topic-post-text {
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
   line-height: 1.4;
-  text-wrap: balance;
+  text-wrap: pretty;
   color: var(--black-30);
   max-width: 400px;
 }
@@ -3261,20 +3310,21 @@ styling.
   color: white;
   border: none;
   padding: 0.7rem 1.4rem;
-  font-size: 1rem;
-  letter-spacing: 0.05rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.03rem;
   margin-top: 0.3rem;
   border-radius: 25px;
   justify-self: center;
   font-weight: 500;
-  text-transform: uppercase;
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
 
-.no-topic-post-create-btn {
-  padding: 0.8rem 1.4rem;
+.no-topic-post-create-btn > i {
+  margin-top: 0.2rem;
+  line-height: 1;
+  font-size: 1rem;
 }
 
 .login-to-create-post {
@@ -3583,9 +3633,9 @@ USER LOGIN
 }
 
 .user-login__btn {
-  padding: 0.8rem 1rem;
+  padding: 1rem;
   background: var(--cta);
-  color: var(--black-95);
+  color: white;
   font-size: 1.1rem;
   border-radius: 25px;
   border: none;
@@ -3643,69 +3693,63 @@ LOGOUT
 ======*/
 .logout-container {
   min-height: 90dvh; 
-  margin: 3rem 0;
-  
+  margin: 5rem 0;
+  display: grid;
+  gap: 3rem;
+  align-content: start;
+}
+
+.logout-container > 
+.navbar-brand-link {
+  justify-self: center;
+}
+
+.logout-container > 
+.navbar-brand-link > 
+.navbar-brand-name {
+  color: var(--black-20);
+  font-size: 1.8rem;
+}
+
+.logout-container >
+.navbar-brand-link > img {
+  width: 43px;
 }
 
 .logout-content {
   width:90%; 
-  max-width:450px; 
+  max-width:300px; 
   margin: 0 auto;
   display: grid;
   align-content: start;
-  gap: 1rem;
+  gap: 2rem;
   text-align: center;
-  padding: 1.5rem;
+  padding: 1.2rem;
   border-radius: 15px;
-  background: var(--black-90);
+  background: white;
+  border: 1px solid var(--black-85)
 }
 
-.logout-content > h1 {
-  letter-spacing: 0.05rem;
-  color: var(--brown-15);
-  font-weight: 600;
-  font-size: 2rem;
-}
-
-.logout-content > p {
-  font-weight: 400;
+.logout-content > h2 {
   color: var(--black-20);
-  text-wrap: pretty;
-  letter-spacing: 0.05rem;
-  font-size: 1.1rem;
-}
-
-.logout-container-btns {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem
-}
-
-.logout-container-btns > button {
-  padding: 0.7rem 1.4rem;
-  background: var(--black-30);
-  border-radius: 25px;
-  color: white;
-  letter-spacing: 0.05rem;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
   font-weight: 500;
-  text-transform: uppercase;
+  text-wrap: pretty;
+  line-height: 1.3;
+  font-size: 1.4rem;
 }
 
-.logout-container-btns > a {
+.logout-message-logout-btn {
   padding: 0.7rem 1.4rem;
   background: var(--cta);
   border-radius: 25px;
   color: white;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
+  border: none;
   font-size: 1rem;
+  cursor: pointer;
   font-weight: 500;
-  text-transform: uppercase;
 }
+
 /* 
 ======
 FOOTER
@@ -3810,11 +3854,12 @@ FOOTER
 .contact-form {
   display: grid;
   align-content: start;
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
 .contact-us-input-container {
   display: grid;
+  align-content: start;
   gap: 0.5rem;
 }
 
@@ -3827,7 +3872,7 @@ FOOTER
 .contact-us-input-container > input {
   padding: 1rem;
   font-size: 1rem;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
   color: var(--black-20);
   border: none;
   border-radius: 8px;
@@ -3856,12 +3901,10 @@ FOOTER
   border: none;
   color: var(--black-95);
   background: var(--cta);
-  text-transform: uppercase;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
   font-weight: 500;
   cursor: pointer;
   font-size: 1.1rem;
-  margin-top: 0.5rem;
 }
 
 @media (hover) {
@@ -3943,7 +3986,7 @@ DASHBOARD
 .dashboard-container {
   min-height: 70dvh;
   width: 90%;
-  max-width: 1000px;
+  max-width: 900px;
   margin: 2rem auto;
   display: grid;
   align-content: start;
@@ -3980,7 +4023,6 @@ DASHBOARD
 .dashboard-user-info > p:first-child {
   font-weight: 600;
   font-size: 1.8rem;
-  text-transform: capitalize;
   line-height: 1;
   color: var(--black-20);
 }
@@ -4013,45 +4055,47 @@ DASHBOARD
 
 .dashboard-links {
   padding-top: 3rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
   overflow-x: auto;
 
   display: grid;
   grid-auto-flow: column;
-  gap: 0.5rem
 }
 
 .dashboard-link {
   color: var(--black-15);
-  letter-spacing: 0.05rem;
-  padding: 0.5rem 1rem;
+  font-weight: 600;
+  letter-spacing: 0.03rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 20px;
   text-align: center;
-  background: var(--black-40);
-  color: white;
-  font-size: clamp(0.85rem, 1vw + 0.5rem, 1rem);
+  font-size: clamp(0.9rem, 1vw + 0.5rem, 1rem);
 }
 
 .active-dashboar-link {
   background: var(--cta);
-  color: white;
-  font-weight: 500;
+  color: white; 
 }
 
 .dashboard-content-header {
-  letter-spacing: 0.05rem;
   color: var(--header);
-  margin-top: 3rem;
+  margin: 3rem 0;
   padding-bottom: 1rem;
-  font-size: clamp(1.3rem, 1dvw + 1rem, 1.8rem);
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1;
+  font-size: clamp(1.3rem, 1vw + 1rem, 1.6rem);
+  border-bottom: 1px solid var(--black-80);
+}
+
+.dashboard-profile-header,
+.dashboard-contact-header {
+  width: 700px;
+  margin: 3rem auto;
+  margin-bottom: 2rem;
 }
 
 .dashboard-contents {
-  border-top: 1px solid var(--black-80);
-  padding-top: 2rem;
   min-height: 50dvh;
 }
 
@@ -4060,7 +4104,6 @@ DASHBOARD
     display: flex;
     justify-content: center;
     padding-bottom: 0;
-    gap: 1rem;
   }
 }
 
@@ -4088,16 +4131,27 @@ DASHBOARD
   border: 3px solid var(--black-80)
 }
 
+@media screen and (min-width: 1000px) {
+  .dashboard-container {
+    margin: 4rem auto;
+    margin-bottom: 7rem;
+  }
+}
 
 /* 
 =======
 PROFILE
 ======= */
 
+.profile-form-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 .profile-form {
   display: grid;
   align-content: start;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 .profile-form-input {
@@ -4109,7 +4163,7 @@ PROFILE
 .profile-form-input > input {
   width: 100%;
   box-sizing: border-box;
-  padding: 0.8rem 1rem;
+  padding: 1rem;
   border: 1px solid var(--black-80);
   border-radius: 8px;
   font-size: 1rem;
@@ -4141,15 +4195,14 @@ PROFILE
 }
 
 .profile-update-btn {
-  justify-self: start;
+  justify-self: end;
   padding: 0.7rem 1.4rem;
   color: white;
   background: var(--cta);
   border: none;
   font-size: 1rem;
   border-radius: 25px;
-  letter-spacing: 0.05rem;
-  text-transform: uppercase;
+  letter-spacing: 0.03rem;
   cursor: pointer;
   font-weight: 500;
 }

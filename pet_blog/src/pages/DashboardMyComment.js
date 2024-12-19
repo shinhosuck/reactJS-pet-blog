@@ -143,12 +143,12 @@ function DashboardMyComment() {
       :
         <div className="no-topic-post-container my-comment-no-comment">
           <div className="no-topic-post-text-container">
-              <h3 style={{fontSize:'1.7rem', color:'var(--black-20)'}}>You do not have any coment!</h3>
+              <h3 className="no-topic-post-header">Comments not available!</h3>
               <p className='no-topic-post-text'>
                   Please pick a post and comment.
               </p>
               <Link className='no-topic-post-create-btn' to='/posts'>
-                <span>Back to posts</span>
+                <span>See posts</span>
                 <i className="fa fa-chevron-right"></i>
               </Link>
           </div>

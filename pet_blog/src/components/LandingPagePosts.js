@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { formatDate } from '../utils/formatDate'
-
+import DOMPurify from 'dompurify'
 
 
 function LandingPagePosts(props) {
@@ -30,9 +30,8 @@ function LandingPagePosts(props) {
                                     <p className='landing-page-post-date-posted'>{formatDate(post.date_posted)}</p>
                                 </div>
                                 <h3 className='landing-page-post-title'>{post.title}</h3>
-                                <p className='landing-page-post-content'>
-                                    {post.content.substring(0, 150)}...
-                                </p>
+                                <div className='landing-page-post-content' 
+                                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content.substring(0, 150)+'...')}}/>
                                 <Link 
                                     to={`/post/${post.id}/detail/`} 
                                     state={{redirect:pathname}} 

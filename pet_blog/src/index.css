@@ -344,6 +344,16 @@ Landing Page
   color: var(--black-30);
   line-height: 1.4;
   text-wrap: pretty;
+  display: flex;
+  align-items: end;
+  justify-content: start;
+  text-align: start;
+  flex-wrap: wrap;
+}
+
+.landing-page-featured-post-content > * {
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .landing-page-featured-post-read-post-btn {
@@ -557,6 +567,9 @@ Landing Page
   line-height: 1.4;
   text-wrap: pretty;
   margin-top: 0.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
 }
 
 .landing-page-post-read-more-btn {
@@ -1640,6 +1653,14 @@ Posts
   line-height: 1.4;
   text-wrap: pretty;
   margin-top: 0.3rem;
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+.post-container__post-content > * {
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .post-container__post-read-more-btn {
@@ -1713,13 +1734,6 @@ Posts
 ===========
 Post Detail
 =========== */
-.post-detail-post-title {
-  color: var(--black-95);
-  text-wrap: pretty;
-  font-size: clamp(1.2rem, 5vw + 1rem, 3rem);
-  line-height: 1;
-}
-
 .post-detail-post-topic-name {
   color: var(--black-80);
   justify-self: start;
@@ -1727,6 +1741,13 @@ Post Detail
   border-radius: 20px;
   background: var(--black-30);
   font-size: clamp(0.7rem, 1dvw + 0.5rem, 1rem);
+}
+
+.post-detail-post-title {
+  color: var(--black-95);
+  text-wrap: pretty;
+  font-size: clamp(1.2rem, 5vw + 1rem, 3rem);
+  line-height: 1;
 }
 
 .post-detail-main-container {
@@ -1756,21 +1777,11 @@ Post Detail
   gap: 1rem;
 }
 
-/* .post-detail-container__post-detail > * {
-  border: 1px solid red;
-} */
-
 .post-detail-image-and-author-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: start;
   gap: 0.5rem;
-}
-
-.post-detail-author-info-container {
-  display: grid;
-  align-content: start;
-  gap: 1rem;
 }
 
 .post-detail-author-and-date-wrapper {
@@ -1825,18 +1836,39 @@ Post Detail
 
 .post-detail-container__post-content {
   letter-spacing: 0.03rem;
-  line-height: 1.5;
+  line-height: 1.4;
   text-wrap: pretty;
   color: var(--black-20);
   margin-top: 1rem;
   font-size: 1.06rem;
+
+  display: grid;
+  align-self: start;
+}
+
+.post-detail-container__post-content strong {
+  font-weight: 600;
+}
+
+.post-detail-container__post-content > p {
+  color: var(--black-30)
+}
+
+.post-detail-container__post-content > strong
+.post-detail-container__post-content > h1,
+.post-detail-container__post-content > h2,
+.post-detail-container__post-content > h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: var(--black-15)
 }
 
 .post-detail-container__like-and-reply {
   display: flex;
   align-items: end;
   gap: 1rem;
-  margin-top: 0.8rem;
+  margin-top: 1rem;
 }
 
 .post-detail-container__post-like {
@@ -2062,7 +2094,7 @@ Post Detail
 
 .post-edit-react-quill {
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1.4rem;
   border: 1px solid var(--black-80);
   background: white
 }
@@ -2154,6 +2186,25 @@ Post Detail
 .ql-editor {
   padding: 0 !important;
   font-family: 'Poppins', sans-serif;
+}
+
+.ql-editor strong {
+  font-weight: 600;
+}
+
+.ql-editor > strong,
+.ql-editor > h3,
+.ql-editor > h4 {
+  color: var(--black-15);
+  font-weight: 600;
+  margin-top: 1rem !important;
+}
+
+.ql-editor > h1,
+.ql-editor > h2 {
+  color: var(--black-15);
+  font-weight: 600;
+  margin-top: 1rem 0 !important;
 }
 
 @media (hover) {
@@ -2481,11 +2532,6 @@ Post Detail
 /* end */
 
 @media screen and (min-width: 700px) {
-  .post-detail-update-comment-form-btns,
-  .comment-btns {
-    margin-top: 0.5rem;
-  }
-
   .post-detail-post-edit-btn-cancel,
   .post-detail-post-edit-btn-submit,
   .post-detail-update-comment-cancel-btn,
@@ -2723,9 +2769,23 @@ My Posts
   color: var(--black-30);
   line-height: 1.4;
   text-wrap: pretty;
-  display: flex;
-  align-items: start;
+  display: grid;
+  align-content: start;
   padding: 0.2rem 0;
+}
+
+.my-posts-container__post-content strong {
+  font-weight: 500;
+}
+
+.my-posts-container__post-content > strong,
+.my-posts-container__post-content > h2,
+.my-posts-container__post-content > h1,
+.my-posts-container__post-content > h3,
+.my-posts-container__post-content > h4 {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: var(--black-20)
 }
 
 .my-post-content-show-or-hide {
@@ -2835,8 +2895,6 @@ My Comments
 =========== */
 .my-comments-container {
   display: grid;
-  /* column-gap: 2rem;
-  row-gap: 4rem; */
   align-items: start;
 }
 
@@ -2844,19 +2902,9 @@ My Comments
   display: grid;
   gap: 0.5rem;
   align-content: start;
-}
-
-.my-comment-border-bottom {
-  height: 1px;
-  margin: 2rem 0;
-  background: var(--black-80)
-}
-
-.my-comments-container__my-comment:last-child >
-.my-comment-border-bottom {
-  height: 0;
-  margin: 0;
-  background: transparent;
+  border: 1px solid var(--black-80);
+  padding: 1.4rem;
+  border-radius: 15px;
 }
 
 .my-comments__date-replied {
@@ -2866,9 +2914,15 @@ My Comments
 
 .my-comments__post-name-link {
   text-decoration: underline;
-  color: var(--cta);
+  color: var(--black-20);
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 1rem;
+}
+
+@media (hover) {
+  .my-comments__post-name-link:hover {
+    color: var(--hover);
+  }
 }
 
 .my-comments__content {
@@ -2901,16 +2955,26 @@ My Comments
   font-weight: 500;
 }
 
+@media (hover) {
+  .my-comments-container__buttons > *:hover {
+    color: var(--hover)
+  }
+}
+
 .update-comment-form-container {
   display: grid;
-  margin-top: 0.2rem;
+  align-content: start;
+  margin-top: 1rem;
 }
 
 .update-comment-form {
   display: grid;
   gap: 1rem;
-  border: 2px solid var(--black-80);
+  border: 1px solid var(--black-90);
+  background: white;
   border-radius: 15px;
+  padding: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .update-comment-textarea {
@@ -2932,23 +2996,54 @@ My Comments
 .update-comment-form-buttons-container {
   justify-self: end;
   display: flex;
+  align-items: center;
   gap: 0.5rem;
+  margin-top: 1rem;
 }
 
+.update-comment-form-buttons-container >
+.comment-btn-toggle-editor,
 .update-comment-submit-btn,
 .update-comment-cancel-btn{
-  padding: 0.7rem 1.4rem;
-  letter-spacing: 0.05rem;
-  font-size: 1rem;
+  padding: 0.4rem 0.8rem;
   background: var(--cta);
-  border-radius: 30px;
   color: white;
+  border-radius: 25px;
+  letter-spacing: 0.03rem;
   border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: clamp(0.7rem, 1vw + 0.6rem, 0.9rem);
+  transition: background 100ms linear;
+}
+
+.update-comment-form-buttons-container >
+.comment-btn-toggle-editor {
+  background: white;
+  border: 1px solid var(--black-70);
+  color: var(--black-30);
   cursor: pointer;
 }
 
 .update-comment-cancel-btn {
   background: var(--black-30);
+  cursor: pointer;
+}
+
+@media (hover) {
+  .update-comment-form-buttons-container >
+  .comment-btn-toggle-editor:hover {
+    background: var(--black-40);
+    color: white
+  }
+
+  .update-comment-submit-btn:hover {
+    background: var(--hover)
+  }
+
+  .update-comment-cancel-btn:hover {
+    background: var(--black-15)
+  }
 }
 
 .my-comment-no-comment {
@@ -2962,6 +3057,7 @@ My Comments
 @media screen and (min-width: 600px) {
   .update-comment-form {
     padding: 1.5rem;
+    padding-bottom: 0.8rem;
   }
 }
 
@@ -4057,7 +4153,6 @@ DASHBOARD
   padding-top: 3rem;
   padding-bottom: 1rem;
   overflow-x: auto;
-
   display: grid;
   grid-auto-flow: column;
 }
@@ -4070,11 +4165,19 @@ DASHBOARD
   border-radius: 20px;
   text-align: center;
   font-size: clamp(0.9rem, 1vw + 0.5rem, 1rem);
+  transition: color 100ms linear;
+}
+
+@media (hover) {
+  .dashboard-link:hover {
+    color: var(--hover)
+  }
 }
 
 .active-dashboar-link {
   background: var(--cta);
-  color: white; 
+  color: white !important; 
+  font-weight: 500;
 }
 
 .dashboard-content-header {

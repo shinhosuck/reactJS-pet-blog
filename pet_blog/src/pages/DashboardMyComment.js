@@ -5,6 +5,8 @@ import LoadingPage from './LoadingPage'
 import { fetchComments, removeComment, editComment } from '../utils/api'
 import { ContentLayoutContext } from '../layouts/ContentLayout'
 import { formatDate } from '../utils/formatDate'
+import DOMPurify from 'dompurify'
+import ReactQuill from 'react-quill'
 
 
 function DashboardMyComment() {
@@ -15,6 +17,7 @@ function DashboardMyComment() {
   const navigate = useNavigate()
   const {state, pathname} = useLocation()
   const { isAuthenticated } = useContext(ContentLayoutContext)
+  const [showTextEditor, setShowTextEditor] = useState(false)
 
 
   const deleteComment = async(id)=> {
@@ -68,10 +71,22 @@ function DashboardMyComment() {
     }
   }
 
-  const handleChange = (e)=> {
-    const {name, value} = e.target
-    setUpdate((preve)=>({...preve, [name]:value}))
+  const handleChange = (value)=> {
+    // const {name, value} = e.target
+    setUpdate((prev)=>({...prev, content:value}))
   }
+
+  function showFormatTools(className) {
+	setShowTextEditor(!showTextEditor)
+	const qlToolbar = document.querySelector(`.${className} .ql-toolbar`)
+
+	if (!showTextEditor) {
+		qlToolbar.style.display = 'block'
+	}else {
+		qlToolbar.style.display = 'none'
+	}
+}
+
 
   useEffect(()=> {
     const getComments = async()=> {
@@ -107,7 +122,8 @@ function DashboardMyComment() {
                   {formatDate(comment.date_posted)}
                 </p>
                 <Link className='my-comments__post-name-link' to={`/post/${comment.post_id}/detail/`}>{comment.post}</Link>
-                <p className='my-comments__content'>{comment.content}</p>
+                <div className='my-comments__content'
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(comment.content)}}/>
                 <div className="my-comments-container__buttons">
                   <button
                     onClick={()=>setUpdate({content:comment.content, id:comment.id})} 
@@ -127,15 +143,24 @@ function DashboardMyComment() {
                 {update && update.id === comment.id &&
                   <div className="update-comment-form-container">
                     <form action="" className="update-comment-form" onSubmit={(e)=>updateComment(e,comment.id)}>
-                      <textarea onChange={handleChange} className='update-comment-textarea' value={update.content} name="content" rows="6"></textarea>
+						<div className='update-comment-textarea'>
+							<ReactQuill
+								onChange={handleChange} 
+								name="content" 
+								value={DOMPurify.sanitize(update.content)} 
+							/>
+						</div>
+
                       <div className="update-comment-form-buttons-container">
-                        <button type='submit' className='update-comment-submit-btn'>Submit</button>
-                        <button onClick={()=>setUpdate(null)} type='button' className='update-comment-cancel-btn'>Cancel</button>
+					  	<button className='comment-btn-toggle-editor' type='button' onClick={(e)=> showFormatTools(e.target.parentElement.parentElement.className)}>
+							{showTextEditor? 'Hide Editor':'Show Editor'}
+						</button>
+						<button onClick={()=>setUpdate(null)} type='button' className='update-comment-cancel-btn'>Cancel</button>
+                        <button type='submit' className='update-comment-submit-btn'>Update</button>
                       </div>
                     </form>
                   </div>
                 }
-                <div className="my-comment-border-bottom"></div>
               </div>
             )
           })}

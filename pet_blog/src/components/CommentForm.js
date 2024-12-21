@@ -72,6 +72,24 @@ function CommentForm(props) {
         }
     }
 
+    function handleFormInputFocus(e) {
+        const form = document.querySelector('.comment-form')
+        if (form) {
+            if (form.contains(e.target)) {
+                form.style.outline = '3px solid var(--focus)'
+                form.style.border = '1px solid transparent'
+            }else {
+                form.style.outline = 'none'
+                form.style.border = '1px solid var(--black-80)'
+            }
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('click', handleFormInputFocus)
+        return () => window.removeEventListener('click', handleFormInputFocus)
+    }, [])
+
     // useEffect(()=> {
     //     const id = setTimeout(()=> {
     //         setIsError(false)

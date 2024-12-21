@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { updatePost } from '../utils/api'
 import { url } from '../utils/urls'
@@ -55,10 +55,31 @@ function UpdatePostForm(props) {
         }
     }
 
+    function handleFormInputFocus(e) {
+        const textArea = document.querySelector('.post-edit-react-quill')
+        if (textArea) {
+            if (textArea.contains(e.target)) {
+                textArea.style.outline = '3px solid var(--focus)'
+                textArea.style.border = '1px solid transparent'
+            }else {
+                textArea.style.outline = 'none'
+                textArea.style.border = '1px solid var(--black-80)'
+            }
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('click', handleFormInputFocus)
+        return () => window.removeEventListener('click', handleFormInputFocus)
+    }, [])
 
     return (
         <form id='post-edit-form' action="" className="post-detail-post-edit-form" onSubmit={handleSubmit}>
-            <input id='post-edit-form-input' name='title' onChange={handleChange} value={post.title} type="text" />
+            <input 
+                id='post-edit-form-input' 
+                name='title' onChange={handleChange} 
+                value={post.title} type="text"
+            />
              <div className='post-edit-react-quill'>
                 <ReactQuill
                     required 
@@ -71,7 +92,18 @@ function UpdatePostForm(props) {
                 <button className='comment-btn-toggle-editor' type='button' onClick={(e)=> showFormatTools(e.target.parentElement.parentElement.className)}>
                     {showTextEditor? 'Hide Editor':'Show Editor'}
                 </button>
-                <button onClick={()=>showUpdatePostForm(false)} className='post-detail-post-edit-btn-cancel' type='button'>Cancel</button>
+                <button 
+                    onClick={()=> {
+                        showUpdatePostForm(false)
+                        const ele = document
+                            .querySelector('.post-detail-main-container')
+                        ele.scrollIntoView()
+                    }} 
+                    className='post-detail-post-edit-btn-cancel' 
+                    type='button'
+                >
+                    Cancel
+                </button>
                 <button className='post-detail-post-edit-btn-submit' type='submit'>Update</button>
             </div>
         </form>

@@ -53,6 +53,21 @@ function PostDetailPost(props) {
         }
     }
 
+    function removeEllipsisBtns(e) {
+        const ele = document.querySelector('.post-detail-edit-follow-btns')
+        if (ele) {
+            if (!ele.contains(e.target)) {
+                setShowEditDeleteBtns(false)
+            }
+        }
+    }
+
+    function ellipsisBtnClickEvent(e) {
+        setShowEditDeleteBtns(!showEditDeleteBtns)
+        window.addEventListener('click', removeEllipsisBtns)
+        return () => window.removeEventListener('click', removeEllipsisBtns)
+    }
+
     useEffect(()=> {
         if(isAuthenticated){
             setIsFollowing((prev)=> {
@@ -88,7 +103,7 @@ function PostDetailPost(props) {
                 id='post-content' 
                 className='post-detail-container__post-content'
             />
-            <div className="post-detail-container__like-and-reply">
+            <div id="post-detail-contents-btns" className="post-detail-container__like-and-reply">
                 <button 
                     onClick={()=>updateLike()} 
                     className={authenticated ?
@@ -121,7 +136,10 @@ function PostDetailPost(props) {
                 <div className="post-detail-edit-delete-btns-container post-edit">
                     {isAuthenticated && isAuthenticated.username === post.author &&
                         <>
-                            <button className='post-detail-ellipsis post-edit' onClick={()=>setShowEditDeleteBtns(!showEditDeleteBtns)}>
+                            <button 
+                                className='post-detail-ellipsis post-edit' 
+                                onClick={() => ellipsisBtnClickEvent()}
+                            >
                                 <i className="fas fa-ellipsis post-edit"></i>
                             </button>
                             {showEditDeleteBtns && 
@@ -135,7 +153,7 @@ function PostDetailPost(props) {
                                         }}
                                     >
                                         <i className="fa-solid fa-pen post-detail-edit-btn post-edit"></i>
-                                        <HashLink to='#post-content' className='post-detail-edit-text post-edit'>Update</HashLink>
+                                        <HashLink to='#post-detail-contents-btns' className='post-detail-edit-text post-edit'>Update</HashLink>
                                     </button> 
                                     <button
                                         onClick={()=> {

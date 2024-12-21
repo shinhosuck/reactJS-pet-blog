@@ -2077,8 +2077,7 @@ Post Detail
   width: 100%;
   display: grid;
   margin: 2.5rem 0;
-  overflow: hidden;
-  gap: 1rem
+  gap: 1rem;
 }
 
 .post-detail-post-edit-form > input{
@@ -2087,7 +2086,6 @@ Post Detail
   letter-spacing: 0.03rem;
   color: var(--black-15);
   font-size: 1rem;
-  background: transparent;
   border: 1px solid var(--black-80);
   background: white;
 }
@@ -2136,7 +2134,7 @@ Post Detail
 }
 
 .post-detail-post-edit-form > input:focus{
-  outline: 2px solid var(--focus);
+  outline: 3px solid var(--focus);
   border: 1px solid transparent
 }
 /* end */
@@ -3733,7 +3731,7 @@ USER LOGIN
   background: var(--cta);
   color: white;
   font-size: 1.1rem;
-  border-radius: 25px;
+  border-radius: 30px;
   border: none;
   letter-spacing: 0.05rem;
   display: flex;
